@@ -1,0 +1,110 @@
+/* CONTENEDOR RELATVIE */
+.contenedor_orden_compra{
+    width: 650px;
+    height: 620px;
+    border-radius: 15px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #275f42;
+    font-family: 'Kanit', sans-serif;
+    position: relative;
+}
+
+.contenedor_pcs_compra{
+    background-color: #FB8C00;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 70px;
+    border-radius: 10px 10px 0 0;
+    height: 70px;
+}
+
+.titulo_dts_productos{
+    height: 50px;
+    line-height: 50px;
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    float: left;
+}
+.titulo_dts_precio{
+    text-align: right;
+    padding-right: 60px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/*  ============================
+        CSS - CONTENEDOR COMPRAS
+    ============================*/
+.contenedor_dts_compra{
+    margin-top: 10px;
+    margin-left: 20px;
+    height: 70px;
+}
+.contenedor_dts_compra img{
+    height: 50px;
+}
+.contenedor_dts_compra_img {
+    float: left;
+    height: 50px;
+}
+.contenedor_dts_compra_descp{
+    height: 70px;
+    width: 45%;
+    float: left;
+    padding-left: 60px;
+    padding-right: 10px;
+    text-align: justify;
+}
+.contenedor_dts_precio{
+    float: right;
+    width: 30%;
+    height: 70px;
+    color: #275f42;
+}
+
+/* ========================
+    DATOS DEL FORMULARIO
+===========================*/
+.contenedor_dts_form{
+    float: left;
+    width: 45%;
+    padding-left: 60px;
+    padding-right: 10px;
+    margin-bottom: 10px
+}
+.contenedor_dts_input{
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.ubi_db, .tel_db{
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+}
+/* CENTRAR UN CONTENEDOR ABSOLUTE EN UN CONTENEDOR RELATIVE */
+.contenedor_realizar_compra{
+    text-align: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0 auto;
+}
+
+.btn_realizar_compra{
+    color: #000;
+    background-color:  #fff;
+    border: 2px solid #008cba;
+}
+.btn_realizar_compra:hover{
+    color: #fff;
+    background-color: #35a6a0;
+}
+
+

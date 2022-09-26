@@ -1,0 +1,38 @@
+.contenedor_menu{
+
+    position: sticky;
+    top: 0;
+}
+
+.contenedor_titulo{
+    margin-left: 5%;
+    margin-top: 110px;
+    text-align: center;
+}
+.span1{
+    color: #FB8C00;
+}
+.span2{
+    color: #256040;
+}
+.contenedor_img{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+.contenedor1{
+    align-items: center;
+    width: 400px;
+    height: 450px;
+    /* background-color: aqua; */
+    text-align: center;
+    box-shadow: 5px 5px 15px #000;
+    border-radius: 15px;
+}
+.descripcion{
+    margin-top: 40px;
+}
+.contenedor1 img{
+    width: 250px;
+    height: 250px;
+}

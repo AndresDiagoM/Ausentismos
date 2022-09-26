@@ -1,0 +1,22 @@
+.contenedor_form{
+    margin-top: 110px;
+    text-align: center;
+}
+.contenedor_select_dts{
+    background-color: #BAD0EF;
+    margin: 0 auto;
+    width: 520px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 15px;
+}
+
+.btn_guardar{
+    margin-top: 50px;
+    color: #000;
+    border: 2px solid #008CBA;
+    background-color: #ffff;
+}
+.btn_guardar:hover{
+    background-color: #35A6A0;
+    color: white;
+}

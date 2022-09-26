@@ -1,0 +1,57 @@
+
+ /* INCIO DE SESION CON CSS */
+.contenedor_form{
+    font-family: 'kanit', sans-serif;
+    width: 25%;
+    margin: 0 auto;
+}
+
+ .login-box {
+    border-radius: 15px;
+    border: 1px solid rgb(229, 229, 237);
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top:  110px;
+    background: #BAD0EF;
+    padding: 20px 50px;
+}
+
+.item{
+    padding: 10px;
+}
+
+.login-box .form .item input {
+    text-align: center;
+    width: 180px;
+    font-size: 18px;
+    border: 0;
+    border-bottom: 3px solid #BAD0EF;
+    font-family: 'kanit', sans-serif;
+    background: white;
+    color: #251e1e;
+    margin-right: 30px;
+
+
+}
+
+.contenedor_form .login-box .item i{
+    color: #275f42;
+    font-size: 25px;
+ }
+.btn-login{
+   color: black;
+   background-color: white;
+   border: 2px solid #008CBA;
+   font-size: 20px;
+
+}
+.btn-login:hover{
+    background-color: #35A6A0;
+    color: white;
+}
+.label_mensaje{
+    color: red;
+    font-weight: bold;
+}
+

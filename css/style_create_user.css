@@ -1,0 +1,16 @@
+.form{
+    font-size: 17px;
+}
+.contenedor_form2{
+    width: 500px;
+    height: 690px;
+    background: #BAD0EF;
+    border-radius: 15px;
+    margin-top:400px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50% );
+    box-sizing: border-box;
+    font-family: 'kanit', sans-serif;
+    text-align: center;
+}

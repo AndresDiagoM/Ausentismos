@@ -1,0 +1,21 @@
+.contenedor_grafico{
+    margin-top: 110px;
+    text-align: center;
+}
+
+#container{
+    margin: 0 auto;
+    height: 400px;
+    width: 80%;
+}
+
+.btn_guardar{
+    margin-top: 50px;
+    color: #000;
+    border: 2px solid #008CBA;
+    background-color: #ffff;
+}
+.btn_guardar:hover{
+    background-color: #35A6A0;
+    color: white;
+}

@@ -1,0 +1,49 @@
+.contenedor_rango{
+    margin-top: 110px;
+    text-align: center;
+    height: 400px;
+}
+.contenedor_formR{
+    width: 500px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.contenedor_opciones{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    border-radius: 15px;
+    background-color: #BAD0EF;
+    box-shadow: 5px 5px 15px #000;
+}
+.contenedor_temp, .contenedor_hum{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+h3{
+    color: #256040;
+    font-weight: bold;
+}
+.btn_guardar{
+    color: #000;
+    border: 2px solid #008CBA;
+    background-color: #ffff;
+}
+.btn_guardar:hover{
+    background-color: #35A6A0;
+    color: white;
+}
+.contenedor_select_dts{
+    margin-bottom: 40px;
+}
+.contenedor_tabla{
+    font-size: 13px;
+}
+.tabla_dts th {
+    background-color: #35A6A0;
+}
+.tabla_dts td, th{
+    border: 1px solid;
+    border-radius: 5px;
+}

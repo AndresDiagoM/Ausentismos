@@ -1,0 +1,120 @@
+/*=======================
+    ESTILOS CATALOGO
+=========================*/
+.contenedor_planes{
+    /* background-color: brown; */
+    margin-top: 110px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.contendor_basic, .contenedor_premium{
+    width: 395px;
+    height: 500px;
+    border-radius: 15px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #275f42;
+    text-align: center;
+}
+.img_plan{
+    text-align: center;
+    margin-top: 10px;
+}
+.contenedor_letras{
+    margin-top: 10px;
+    font-size: 32px;
+    font-family: 'IM Fell French Canon SC', sans-serif;
+    margin-bottom: 10%;
+}
+.contenedor_precio span{
+    font-size: 34px;
+    font-family: 'IM Fell French Canon SC', sans-serif;
+}
+
+.contenedor_caracteristicas{
+    font-family: 'Kanit', sans-serif;
+    background-color: #9291917e;
+    border-radius: 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #275f42;
+    margin:  auto;
+    margin-top: 5%;
+    padding: 2%;
+    width: 70%;
+    height: 32%;
+}.contenedor_caracteristicas:hover{
+    background:rgba(0, 128, 128, 0.6);
+    color: white;
+}
+.contenedor_caracteristicas ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contenedor_caracteristicas li{
+    background: url(../images/check.png) no-repeat left center;
+    padding-left: 25px;
+    margin-top: 10px;
+}
+.contenedor_compras{
+    margin-top: 2%;
+}
+.contenedor_compras button{
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    border: 2px solid #008cba;
+}
+
+.contenedor_compras button:hover{
+    background-color: #35a6a0;
+    color: white;
+}
+/*=================================
+ESTILOS DE CABECERA SI EL USUARIO ESTA REGISTRADO
+===================================*/
+.contenedor_clt{
+    text-align: center;
+    margin-left: 1%;
+    width: 18%;
+    height: 175px;
+    font-family: 'Kanit', sans-serif;
+}
+.contenedor_nombre_clt{
+    text-shadow: 0 0 0px #275f42;
+    margin-left: 20px;
+    width: 50%;
+    height: 145px;
+    line-height: 180px;
+    text-align: center;
+    font-family: "Kanit", sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: #fb8c00;
+}
+.info_clt{
+    color: #275f42;
+}
+.btn-cierre-sesion{
+    margin: auto;
+    display: block;
+    background-color: white;
+    color: black;
+    border: 2px solid #008cba;
+
+}
+.btn-cierre-sesion:hover {
+    background-color: #35a6a0;
+    color: white;
+}
+
+.contenedor_cerrar_sesion{
+    margin-top: 6%;
+}
+
+
+

@@ -1,0 +1,215 @@
+:root{
+    --width: 300px;
+    --padding: 10px;
+    --bgcolor: rgba(10, 14, 13, 0.95);
+    --hovercolor: rgb(251,139,2);
+    --width-collapsed: 50px;
+}
+body{
+    font-family: 'Kanit', sans-serif;
+    width: 100%;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+
+
+.body-expanded{
+    margin-left: var(--width);
+}
+
+#slide-menu{
+
+    display: inline-block;
+    background-color: var(--bgcolor);
+    color: white;
+    position: absolute;
+    top: 190px;
+    left: 0%;
+    border-radius: 10px;
+    z-index: 100;
+}
+#slide-menu a{
+    color: white;
+    text-decoration: none;
+}
+
+/* HEADER */
+#slide-menu #header{
+    box-sizing: border-box;
+    border-bottom: solid 1px var(--hovercolor);
+}
+#slide-menu #header #title{
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#slide-menu #header #title, #slide-menu #header #menu-btn{
+    vertical-align: middle;
+}
+#slide-menu #header #menu-btn{
+    display: inline-block;
+}
+#slide-menu #header #menu-btn{
+    cursor: pointer;
+    padding: 10px;
+    width: var(--width-collapsed);
+    box-sizing: border-box;
+}
+#slide-menu #header #menu-btn:hover{
+    border-radius: 10px;
+    background-color: var(--hovercolor);
+}
+#slide-menu #header #menu-btn .btn-logo{
+    background-color: white;
+    width: 100%;
+    height: 2px;
+    margin: 5px 0;;
+}
+
+/* PROFILE */
+#slide-menu #profile{
+    border-bottom: solid 1px var(--hovercolor);
+    padding: var(--padding) 0;
+    text-align: center;
+}
+#slide-menu #profile #photo{
+    box-sizing: border-box;
+    padding: var(--padding);
+    margin: 0 auto;
+
+}
+#slide-menu #profile #photo img{
+    border-radius: 50%;
+    width: 60%;
+}
+
+#slide-menu #profile #photo, #slide-menu #profile #name{
+    font-size: 24px;
+    padding: var(--padding) 0;
+    overflow: hidden;
+}
+
+/* ITEMS */
+#slide-menu #menu-items{
+    overflow: hidden;
+}
+#slide-menu #menu-items .item{
+    width: var(--width);
+}
+#slide-menu #menu-items .item .icon{
+    display: inline-block;
+}
+#slide-menu #menu-items .item .icon,
+#slide-menu #menu-items .item .title{
+    font-size: 14px;
+    vertical-align: middle;
+    overflow: hidden;
+    display: inline-block;
+}
+
+#slide-menu #menu-items .item a{
+    display: block;
+}
+
+#slide-menu #menu-items .item a:hover{
+    background-color: var(--hovercolor);
+}
+#slide-menu #menu-items .item .icon{
+    box-sizing: border-box;
+    padding: var(--padding);
+    width: var(--width-collapsed);
+}
+#slide-menu #menu-items .item .icon img{
+    width: 100%;
+}
+#slide-menu #menu-items .item .title {
+    padding: var(--padding) 0;
+}
+#slide-menu #menu-items .item.separator{
+    height: 1px;
+    border-bottom: solid 1px var(--hovercolor);
+}
+#slide-menu .footer a{
+    display: block;
+}
+#slide-menu .footer .btn_carga img{
+    width: 100%;
+}
+/*
+    ==============================
+    PRUEBA CONTENEDOR INF
+    ==============================
+*/
+.btn_carga{
+    position: fixed;
+    bottom: 0;
+    border-radius: 50%;
+    background-color: #275f42;
+    width: 50px;
+    height: 50px;
+
+}
+
+
+
+
+/* MENU EXPANDED */
+.menu-expanded{
+    width: var(--width);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+.menu-expanded #header #title{
+    display: inline-block;
+    width: calc(100% - 50px);
+    margin-right: -5px;
+    padding: var(--padding);
+}
+.menu-expanded #header #title span {
+    /* width: calc(var(--width) - var(--width-collapsed)- 5px); */
+    margin-left: 70%;
+    overflow: hidden;
+}
+.menu-expanded #profile #photo{
+    width: 200px;
+}
+.menu-expanded #profile #name{
+    width: 100%;
+}
+.menu-expanded .btn_carga{
+    display: none;
+}
+
+
+
+
+
+/* MENU COLLAPSED */
+
+.menu-collapsed{
+    width: var(--width-collapsed);
+}
+.menu-collapsed #header #title{
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+.menu-collapsed #profile #name{
+    display: none;
+}
+.menu-collapsed .item{
+    width: 100px;
+}
+
+.menu-collapsed .btn_carga{
+    z-index: 1;
+}
+
+.prueba{
+    margin-top: 110px;
+    margin-left: 5%;
+
+}
+

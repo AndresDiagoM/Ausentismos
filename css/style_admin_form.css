@@ -1,0 +1,105 @@
+.contenedor_formularios{
+    margin-top: 110px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.contenedor_formulario1, .contenedor_formulario2{
+    width: 420px;
+    height: 600px;
+    border-radius: 15px;
+    border-width: 2px;
+    border-color: #275f42;
+    text-align: center;
+    box-shadow: 5px 5px 15px #275f42;
+    /* SE AGREGA UNA POSICION RELATIVA PARA EL BOTON DE GUARDAR */
+    position: relative;
+}
+
+
+.encabezado{
+    border-radius: 15px 15px 0 0;
+    height: 60px;
+    line-height: 70px;
+    color: #ffff;
+    font-weight: bold;
+    background-color: rgba(251, 140, 0, 0.7);
+}
+
+
+.contenedor_perfil img{
+    border-radius: 50%;
+    height: 160px;
+    margin-top: 5px;
+}
+
+.contenedor_datos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 16px;
+}
+.contenedor_datos > div {
+    width: 50%;
+}
+.contenedor_datos_col1{
+    font-weight: bold;
+    width: 50%;
+    text-align: justify;
+}
+.contenedor_datos_col1 p{
+    padding-left: 30px;
+}
+.contenedor_datos_col2 p{
+    padding-left: 10px;
+    font-weight: bold;
+    color: #275f42;
+}
+.contenedor_datos_col2{
+    width: 50%;
+    text-align: center;
+}
+.contenedor_formulario{
+    margin-left: 30px;
+    margin-top: 10px;
+    text-align: justify;
+}
+
+/* ESTILOS DEL FORMULARIO DE ACTUALIZACION */
+label{
+    text-align: left;
+    display: inline-block;
+    width: 50%;
+}
+
+.input_decor{
+    width: 40%;
+    text-align: center;
+    font-family: 'kanit', sans-serif;
+}
+.form_container{
+    font-weight: bold;
+    margin-top: 1em;
+    font-size: 18px;
+}
+
+/* ESTILOS BOTON GUARDAR */
+.contenedor_guardar{
+    color: black;
+    text-align: center;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0 auto;
+    /* SE AGREGA UNA POSICION ABSOLUTA PARA EL UBICAR EL BOTON AL FINAL */
+    position: absolute;
+}
+.btn_guardar{
+    color: #000;
+    background-color:  #fff;
+    border: 2px solid #008cba;
+}
+.btn_guardar:hover{
+    color: #fff;
+    background-color: #35a6a0;
+}

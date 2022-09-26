@@ -1,0 +1,57 @@
+.contenedor_integrantes{
+    margin-top: 110px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.integrantes_group{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 15px;
+    height: 250px;
+    margin-bottom: 60px;
+    /* ALINEAR CONTENEDOR DENTRO DE OTRO DIV VERTICALMENTE */
+    display: flex;
+    align-items: center;
+}
+.integrantes_group2{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 15px;
+    height: 250px;
+    margin-bottom: 60px;
+    /* ALINEAR CONTENEDOR DENTRO DE OTRO DIV VERTICALMENTE */
+    display: flex;
+    align-items: center;
+    /*  ALINEAR ELEMENTOS DE DERECHA A IZQUIERDA*/
+    flex-direction: row-reverse;
+}
+.contenedor_foto{
+    margin-left: 20px;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+.contenedor_foto2{
+    margin-right: 20px;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+.contenedor_foto img, .contenedor_foto2 img{
+    height: 200px;
+    border-radius: 50%;
+    width: 200px;
+}
+
+.contenedor_descripcion{
+    font-family: 'kanit', sans-serif;
+    margin-left: 40px;
+    font-size: 25px;
+
+}
+.contenedor_descripcion2{
+    font-family: 'kanit', sans-serif;
+    margin-right: 40px;
+    font-size: 25px;
+    padding-left: 30px;
+
+}
