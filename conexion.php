@@ -1,18 +1,18 @@
 <?php
-    $host = "localhost";
+    /*$host = "localhost";
     $user = "root";//"u715763332_admin";
     $pw   = "";//"Lab4unicauca";
     $db   = "ausentismos_v1";// "u715763332_db_biodigester";  "db_biodigester"
 
-    $conectar = mysqli_connect($host, $user, $pw, $db);
+    $conectar = mysqli_connect($host, $user, $pw, $db);*/
 
     //HEROKU: 
-    //mysql://b72abce5b070f7:a7e4abc3@us-cdbr-east-06.cleardb.net/heroku_74472d3d099aefc?reconnect=true
+    //mysql://bd5b665eca0324:a57ba49d@us-cdbr-east-06.cleardb.net/heroku_0ede410b33699d1?reconnect=true
 
-    /*$host = "us-cdbr-east-06.cleardb.net";
-    $user = "b72abce5b070f7";//"u715763332_admin";
-    $pw   = "a7e4abc3";//"Lab4unicauca";
-    $db   = "heroku_74472d3d099aefc";//"u715763332_db_biodigester";
+    $host = "us-cdbr-east-06.cleardb.net";
+    $user = "bd5b665eca0324";//"u715763332_admin";
+    $pw   = "a57ba49d";//"Lab4unicauca";
+    $db   = "heroku_0ede410b33699d1";
 
-    $conectar = mysqli_connect($host, $user, $pw, $db);*/
+    $conectar = mysqli_connect($host, $user, $pw, $db);
 ?>
