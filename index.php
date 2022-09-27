@@ -285,7 +285,7 @@
                         </div>
 
                     <div class="item">
-                        <a href="#">
+                        <a href="pages/admin_consultar.php">
                             <div class="icon"><img src="images/stadistics.png" alt=""></div>
                             <div class="title"><span>Consultar Ausentismos</span></div>
                         </a>
@@ -296,7 +296,7 @@
                         </div>
 
                     <div class="item">
-                        <a href="admin_edition_client.php">
+                        <a href="pages/admin_edition_client.php">
                             <div class="icon"><img src="images/users_admin.png" alt=""></div>
                             <div class="title"><span>Gestionar Usuario</span></div>
                         </a>

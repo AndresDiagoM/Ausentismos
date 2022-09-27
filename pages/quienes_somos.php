@@ -366,15 +366,18 @@
         
         <div class="integrantes_group">
             <div class="contenedor_foto">
-                    <img src="../images/diago.png" alt="Error al cargar la imagen">
+                    <img src="../images/icon.png" alt="Error al cargar la imagen">
             </div>
             <div class="contenedor_descripcion">
-                    Andrés Felipe Diago, estudiante de octavo semestre de Ingeniería Electrónica y Telecomunicaciones de la Universidad del Cauca
+                División de Gestión del Talento Humano. </br>
+                Es una dependencia adscrita a la Vicerrectoría Administrativa, regida mediante el Acuerdo 105 de 1.993, en el cual se fija la Estructura Orgánica de la Universidad del Cauca y se determinan las funciones de sus dependencias.
             </div>
+            
         </div>
         
 
     </div>
+    
 
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="../js/app.js"></script>

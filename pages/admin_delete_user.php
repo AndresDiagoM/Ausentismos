@@ -65,9 +65,9 @@
 
 
 
-           <div class="contenedor_cerrar_sesion" >
+            <div class="contenedor_cerrar_sesion" >
                 <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-           </div>
+            </div>
     </div>
 </header>
 
@@ -111,29 +111,6 @@
                 </div>
 
             <div class="item">
-                <a href="admin_estadisticas.php">
-                    <div class="icon"><img src="../images/stadistics.png" alt=""></div>
-                    <div class="title"><span>Estadísticas</span></div>
-
-                </a>
-            </div>
-
-                <!-- SEPARADOR -->
-                <div class="item separator">
-                </div>
-
-            <div class="item">
-                <a href="#">
-                    <div class="icon"><img src="../images/users_admin.png" alt=""></div>
-                    <div class="title"><span>Gestión de usuarios</span></div>
-
-                </a>
-            </div>
-                <!-- SEPARADOR -->
-                <div class="item separator">
-                </div>
-
-            <div class="item">
                 <a href="admin_edition_client.php">
                     <div class="icon"><img src="../images/edit_user.png" alt=""></div>
                     <div class="title"><span>Editar usuario</span></div>
@@ -141,20 +118,20 @@
                 </a>
             </div>
 
-                 <!-- SEPARADOR -->
-                 <div class="item separator">
+                <!-- SEPARADOR -->
+                <div class="item separator">
                 </div>
 
             <div class="item">
-                <a href="#">
+                <a href="admin_delete_user.php">
                     <div class="icon"><img src="../images/delete_user.png" alt=""></div>
                     <div class="title"><span>Eliminar usuario</span></div>
 
                 </a>
             </div>
 
-                 <!-- SEPARADOR -->
-                 <div class="item separator">
+                <!-- SEPARADOR -->
+                <div class="item separator">
                 </div>
 
             <div class="item">
@@ -180,9 +157,6 @@
         </div>
 
 
-
-
-
     </div>
 
 </div>
@@ -193,12 +167,7 @@
     <div class="contenedor_listas">
         <ul>
             <a href="../index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-            <a href="suscription.php"><li>Suscripciones<i class="fa fa-angle-down"></i></a>
-                <ul>
-                    <a href="compras.php?suscp=Prem"><li> Premiun</li></a>
-                    <a href="compras.php?suscp=Basic"><li> Básico</li></a>
-                </ul>
-            </li>
+            
             <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
             <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
     </div>
@@ -216,11 +185,6 @@
     </div>
 
 </section>
-
-
-
-
-
 
 
 

@@ -4,7 +4,7 @@
     $bandera = false;
     $autentication = $_SESSION['TIPO_USUARIO'];
 
-    if ($autentication == 'Cliente'){
+    if ($autentication == 'Consulta'){
         echo    "<script>
                     alert('Ya se ha iniciado sesión previamente.');
                     location.href='../pages/client_menu.php';

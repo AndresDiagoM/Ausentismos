@@ -157,29 +157,6 @@
                 </div>
 
             <div class="item">
-                <a href="admin_estadisticas.php">
-                    <div class="icon"><img src="../images/stadistics.png" alt=""></div>
-                    <div class="title"><span>Estadísticas</span></div>
-
-                </a>
-            </div>
-
-                <!-- SEPARADOR -->
-                <div class="item separator">
-                </div>
-
-            <div class="item">
-                <a href="#">
-                    <div class="icon"><img src="../images/users_admin.png" alt=""></div>
-                    <div class="title"><span>Gestión de usuarios</span></div>
-
-                </a>
-            </div>
-                <!-- SEPARADOR -->
-                <div class="item separator">
-                </div>
-
-            <div class="item">
                 <a href="admin_edition_client.php">
                     <div class="icon"><img src="../images/edit_user.png" alt=""></div>
                     <div class="title"><span>Editar usuario</span></div>
@@ -204,7 +181,7 @@
                 </div>
 
             <div class="item">
-                <a href="#">
+                <a href="admin_create_user.php">
                     <div class="icon"><img src="../images/add-admin.png" alt=""></div>
                     <div class="title"><span>Creación de usuarios</span></div>
 
@@ -234,12 +211,7 @@
     <div class="contenedor_listas">
         <ul>
             <a href="../index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-            <a href="suscription.php"><li>Suscripciones<i class="fa fa-angle-down"></i></a>
-                <ul>
-                    <a href="compras.php?suscp=Prem"><li> Premiun</li></a>
-                    <a href="compras.php?suscp=Basic"><li> Básico</li></a>
-                </ul>
-            </li>
+            
             <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
             <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
     </div>
@@ -248,7 +220,7 @@
 <!-- CONTENEDOR DE FORMULARIO -->
 <div class="contenedor_form2">
     <h2>REGISTRO DE USUARIOS</h2>
-    <h5>(ASESOR DE VENTAS, ASESOR TÉCNICO Y ADMIN)</h5>
+    <h5>(CONSULTA Y ADMINISTRADOR)</h5>
     <form action="../logic/admin_create_userLogic.php" method="POST" class="form" name="formulario" onsubmit="return comprobarPSW()">
         <!-- INPUT DE NOMBRES DE USUARIO -->
         <div class="form_container">
@@ -257,25 +229,8 @@
             <span class="form_line"></span>
 
         </div>
-        <!-- INPUT DE FECHA DE NACIMIENTO -->
-        <div class="form_container">
-            <label for="fecha_nac">Fecha de nacimiento</label>
-            <input type="date" name="fecha_nac" class="input_decor" min="1950-01-01" max="2004-12-31"  required>
-            <span class="form_line"></span>
-
-        </div>
-        <!-- SELECT DEL TIPO DE DOCUMENTO -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="tipo_doc">Tipo de documento</label>
-                <select class="input_decor" name="tipo_doc" required>
-                    <option value="">Seleccione</option>
-                    <option value="CC">CEDULA DE CIUDADANIA</option>
-                    <option value="PST">PASAPORTE</option>
-                </select>
-                <span class="form_line"></span>
-        </div>
-         <!-- INPUT DEL NUMERO DE IDENTIFICACION -->
+        
+        <!-- INPUT DEL NUMERO DE IDENTIFICACION -->
         <div class="form_container">
             <div class="form_group">
                 <label for="numero_id"> Número de identificación </label>
@@ -283,61 +238,46 @@
                 <span class="form_line"></span>
             </div>
         </div>
-        <!-- SELECT DEL TIPO DE ASESOR -->
+
+        <!-- INPUT DEL CORREO -->
         <div class="form_container">
             <div class="form_group">
-                <label for="tipo_us">Tipo de usuario</label>
+                <label for="correo"> Correo </label>
+                <input type="text" name="correo" class="input_decor" placeholder="Digite su correo"  required>
+                <span class="form_line"></span>
+            </div>
+        </div>
+        <!-- INPUT DEL CORREO -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="dependencia"> Dependencia </label>
+                <input type="text" name="dependencia" class="input_decor" placeholder="Digite su dependencia"  required>
+                <span class="form_line"></span>
+            </div>
+        </div>
+        <!-- SELECT DEL TIPO DE USUARIO -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="tipo_us"> Tipo de usuario</label>
                 <select class="input_decor" name="tipo_us">
                     <option value="">Seleccione</option>
-                    <option value="AS_V">ASESOR DE VENTAS</option>
-                    <option value="AS_T">ASESOR TÉCNICO</option>
+                    <option value="CON">CONSULTA</option>
                     <option value="ADM">ADMINISTRADOR</option>
                 </select>
                 <span class="form_line"></span>
         </div>
-        <!-- INPUT DE LA DIRECCION  -->
+        
+        <!-- INPUT DEL LOGIN -->
         <div class="form_container">
             <div class="form_group">
-                <label for="direccion"> Dirección </label>
-                <input type="text" name="direccion" class="input_decor" placeholder="Número de dirección">
+                <label for="login"> Login </label>
+                <input type="text" name="login" class="input_decor" placeholder="Digite su login"  required>
                 <span class="form_line"></span>
             </div>
         </div>
-        <!-- SELECT DE DEPARTAMENTO -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="depart"> Departamento </label>
-                <select class="input_decor" name="depart" onclick="mostrarSelect(this.value)">
-                    <!-- <option >Departamento</option> -->
 
-                    <?php
-                        include "../logic/departamentosLogic.php";
-                    ?>
-
-                </select>
-                <span class="form_line"></span>
-            </div>
-        </div>
-        <!-- SELECT DE MUNICIPIO -->
+        <!-- INPUT DE LA CONTRASEÑA -->
         <div class="form_container">
-            <div class="form_group" id="div">
-                <label for="munic"> Municipio </label>
-                <select class="input_decor" name="munic">
-                    <option>MUNICIPIO</option>
-                </select>
-                <span class="form_line"></span>
-            </div>
-        </div>
-        <!-- INPUT NUMERO DE CELULAR -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="tel"> Teléfono / Celular </label>
-                <input type="tel" name="tel" class="input_decor" placeholder="Número de teléfono" pattern="[0-9]{7,10}" title="Error. El número de teléfono debe contener únicamente dígitos y deben coincidir con el formato nacional">
-                <span class="form_line"></span>
-            </div>
-        </div>
-         <!-- INPUT DE LA CONTRASEÑA -->
-         <div class="form_container">
             <div class="form_group">
                 <label for="pasw"> Contraseña </label>
                 <input type="password" name="pasw" class="input_decor" placeholder="Digite una contraseña" id="passw" required>

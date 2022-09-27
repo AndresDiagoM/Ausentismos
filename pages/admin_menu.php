@@ -1,5 +1,5 @@
 <?php
-
+    //MENU DEL ADMIN, CON DASHBOARD
     include "../conexion.php";
     include "../logic/admin_securityLogic.php";
 
@@ -70,9 +70,9 @@
 
 
 
-           <div class="contenedor_cerrar_sesion" >
+            <div class="contenedor_cerrar_sesion" >
                 <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-           </div>
+            </div>
     </div>
 </header>
 
@@ -136,7 +136,7 @@
                 </div>
 
             <div class="item">
-                <a href="#">
+                <a href="admin_consultar.php">
                     <div class="icon"><img src="../images/stadistics.png" alt=""></div>
                     <div class="title"><span>Consultar Ausentismos</span></div>
                 </a>
@@ -184,6 +184,7 @@
                 </ul>
             </li> -->
             <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
+            <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
 
         </ul>
     </div>
@@ -194,39 +195,28 @@
 <div class="contenedor_tabla">
 <table class="users_table">
     <tr>
-        <th>NÚMERO DE REGISTRO</th>
-        <th>ID</th>
+        <th>CEDULA</th>
         <th>NOMBRE</th>
-        <th>FECHA</th>
-        <th>TIPO ID</th>
-        <th>DIRECCIÓN</th>
-        <th>DEPARTAMENTO</th>
-        <th>MUNICIPIO</th>
-        <th>CELULAR</th>
-        <th>TIPO DE USUARIO</th>
+        <th>CORREO</th>
+        <th>DEPENDENCIA</th>
+        <th>TIPO USUARIO</th>
+        <th>LOGIN</th>
 
     </tr>
     <?php
-        $sqli = "SELECT * FROM users";
+        $sqli = "SELECT * FROM usuarios";
         $result = mysqli_query($conectar, $sqli);
         while($mostrar = mysqli_fetch_array($result)){
     ?>
     <tr>
 
-
-
-        <td><?php echo $mostrar['NUM_REGISTRO']?></td>
-        <td><?php echo $mostrar['ID']?></td>
-        <td><?php echo $mostrar['NAME_LASTNAME']?></td>
-        <td><?php echo $mostrar['DATE']?></td>
-        <td><?php echo $mostrar['TYPE_ID']?></td>
-        <td><?php echo $mostrar['ADDRESS']?></td>
-        <td><?php echo $mostrar['DEPARTAMENTO']?></td>
-        <td><?php echo $mostrar['MUNICIPIO']?></td>
-        <td><?php echo $mostrar['CELLPHONE']?></td>
-        <td><?php echo $mostrar['TIPO_USUARIO']?></td>
-
-
+        <td><?php echo $mostrar['Cedula']?></td>
+        <td><?php echo $mostrar['Nombre']?></td>
+        <td><?php echo $mostrar['Correo']?></td>
+        <td><?php echo $mostrar['Dependencia']?></td>
+        <td><?php echo $mostrar['TipoUsuario']?></td>
+        <td><?php echo $mostrar['login']?></td>
+        
     </tr>
     <?php
         }

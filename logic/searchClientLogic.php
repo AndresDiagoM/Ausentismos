@@ -1,4 +1,7 @@
 <?php
+    include "../conexion.php";
+    //$mysqli = new mysqli("localhost", "root", "","db_biodigester");
+    $mysqli=$conectar;
 
     session_start();
     $bandera = false;
@@ -13,14 +16,13 @@
     }
 
 
-    $mysqli = new mysqli("localhost", "root", "","db_biodigester");
     $salida     = "";
-    $query      = "SELECT * FROM users EXCEPT SELECT * FROM users WHERE TIPO_USUARIO = 'Admin'  ORDER BY NUM_REGISTRO";
+    $query      = "SELECT * FROM usuarios EXCEPT SELECT * FROM usuarios  WHERE TipoUsuario = '%' ORDER BY Cedula";
 
     if (isset($_POST['consulta'])){
 
         $q      = $mysqli->real_escape_string($_POST['consulta']);
-        $query  =  "SELECT NUM_REGISTRO, ID, NAME_LASTNAME, DATE, TYPE_ID, ADDRESS, DEPARTAMENTO, MUNICIPIO, CELLPHONE, TIPO_USUARIO FROM users WHERE ID LIKE '%".$q."%'";
+        $query  =  "SELECT * FROM usuarios WHERE Cedula LIKE '%".$q."%'";
     }
     $resultado = $mysqli->query($query);
     if($resultado->num_rows > 0){
@@ -28,32 +30,25 @@
             $salida.="<table class='users_table2'>
 
                             <tr>
-                                <th>NUM_REGISTRO        </th>
-                                <th>ID                  </th>
-                                <th>NOMBRE              </th>
-                                <th>FECHA NACIMIENTO    </th>
-                                <th>TIPO_ID             </th>
-                                <th>DIRECCION           </th>
-                                <th>DEPARTAMENTO        </th>
-                                <th>MUNICIPIO           </th>
-                                <th>CELULAR             </th>
-                                <th>TIPO USUARIO        </th>
-                                <th>MODIFICAR           </th>
+                                <th>CEDULA        </th>
+                                <th>NOMBRE        </th>
+                                <th>CORREO        </th>
+                                <th>DEPENDENCIA   </th>
+                                <th>TIPO USUARIO  </th>
+                                <th>LOGIN         </th>
+                                <th>CONTRASEÑA    </th>
                             </tr>";
 
         while($fila = $resultado ->fetch_assoc()){
-            $Id_fila = $fila['ID'];
+            $Id_fila = $fila['Cedula'];
             $salida.="<tr>
-                        <td>".$fila['NUM_REGISTRO']."   </td>
-                        <td>".$fila['ID']."             </td>
-                        <td>".$fila['NAME_LASTNAME']."  </td>
-                        <td>".$fila['DATE']."           </td>
-                        <td>".$fila['TYPE_ID']."        </td>
-                        <td>".$fila['ADDRESS']."        </td>
-                        <td>".$fila['DEPARTAMENTO']."   </td>
-                        <td>".$fila['MUNICIPIO']."      </td>
-                        <td>".$fila['CELLPHONE']."      </td>
-                        <td>".$fila['TIPO_USUARIO']."   </td>
+                        <td>".$fila['Cedula']."      </td>
+                        <td>".$fila['Nombre']."      </td>
+                        <td>".$fila['Correo']."      </td>
+                        <td>".$fila['Dependencia']."       </td>
+                        <td>".$fila['TipoUsuario']."       </td>
+                        <td>".$fila['login']."        </td>
+                        <td>".$fila['contraseña']."   </td>
                         <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png'></a></td>
                     </tr>";
         }

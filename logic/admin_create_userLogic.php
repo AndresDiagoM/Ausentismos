@@ -2,32 +2,26 @@
     require '../conexion.php';
 
     $nombre_usuario     =   strtoupper($_POST['nomb_usuario']);
-    $fecha_nacimiento   =   strtoupper($_POST['fecha_nac']);
-    $tipo_documento     =   strtoupper($_POST['tipo_doc']);
     $numero_id          =   strtoupper($_POST['numero_id']);
-    $tipo_usuario       =   strtoupper($_POST['tipo_us']);
-    $direccion          =   strtoupper($_POST['direccion']);
-    $departamento       =   strtoupper($_POST['depart']);
-    $municipio          =   strtoupper($_POST['munic']);
-    $telefono           =   strtoupper($_POST['tel']);
-    $password           =   strtoupper($_POST['pasw']);
+    $correo       =   strtoupper($_POST['correo']);
+    $dependencia          =   strtoupper($_POST['dependencia']);
+    $tipo_us       =   strtoupper($_POST['tipo_us']);
+    $login          =   strtoupper($_POST['login']);
+    $pasw           =   strtoupper($_POST['pasw']);
 
     if($numero_id==''){
         header('Location: ../pages/inicio_sesion.php');
     }
 
-    if($tipo_usuario == 'AS_V'){
-        $tipo_usuario = 'Asesor de ventas';
-    }
-    elseif($tipo_usuario == 'AS_T'){
-        $tipo_usuario = 'Asesor Técnico';
+    if($tipo_usuario == 'CON'){
+        $tipo_usuario = 'Consulta';
     }
     else{
         $tipo_usuario = 'Admin';
     }
 
     // Verificacion de ID NO repetido
-    $consulta_id = "SELECT * FROM users WHERE ID='$numero_id'";
+    $consulta_id = "SELECT * FROM usuarios WHERE Cedula='$numero_id'";
     $verificar_id = mysqli_query($conectar, $consulta_id);
     if(mysqli_num_rows($verificar_id)>0){
 
@@ -40,13 +34,13 @@
         exit();
     }
 
-    // Verificacion de telefono
-    $consulta_tel = "SELECT * FROM users WHERE CELLPHONE='$telefono'";
-    $verificar_tel = mysqli_query($conectar, $consulta_tel);
-    if(mysqli_num_rows($verificar_tel)>0){
+    // Verificacion de correo
+    $consulta_correo = "SELECT * FROM usuarios WHERE Correo='$correo'";
+    $verificar_correo = mysqli_query($conectar, $consulta_correo);
+    if(mysqli_num_rows($verificar_correo)>0){
 
         echo "<script>
-            alert('Registro Incorrecto. El numero de telefono ya se encuentra registrado');
+            alert('Registro Incorrecto. El numero de correo ya se encuentra registrado');
             location.href = '../pages/form_register.php';
         </script>";
 
@@ -59,13 +53,8 @@
     //              REGISTRO EXITOSO
     // ===========================================
 
-    // SENTENCIAS SQL PARA LA CONSULTA DEL NOMBRE DEL DEPARTAMENTO
-    $consulta_depart    = "SELECT * FROM departamentos WHERE ID_Depart = '$departamento'";
-    $rslt_depart        = mysqli_query($conectar, $consulta_depart);
-    $row1               = $rslt_depart->fetch_array(MYSQLI_NUM);
-    $nomb_depart        = $row1[1] ;
-
-    $registrar = "INSERT INTO users (ID, NAME_LASTNAME, DATE, TYPE_ID, ADDRESS, DEPARTAMENTO, MUNICIPIO, CELLPHONE, PASSWORD, TIPO_USUARIO  ) VALUES ('$numero_id','$nombre_usuario', '$fecha_nacimiento', '$tipo_documento', '$direccion', '$nomb_depart', '$municipio', '$telefono', '$password', '$tipo_usuario')";
+    $registrar = "INSERT INTO usuarios (Cedula, Nombre, Correo, Dependencia, TipoUsuario, login, contraseña) 
+                        VALUES ('$numero_id','$nombre_usuario', '$correo', '$dependencia', '$tipo_us', '$login', '$pasw')";
     $prueba = mysqli_query($conectar, $registrar);
     if($prueba){
         echo "<script> alert('Registro existoso');

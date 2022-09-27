@@ -1,13 +1,12 @@
 <?php
+    //CONSULTAR AUSENTISMOS
     include "../conexion.php";
     include "../logic/admin_securityLogic.php";
 
-      // Inicio o reanudacion de una sesion
+    // Inicio o reanudacion de una sesion
     $nombre_admin   = $_SESSION['NOM_USUARIO'];
     $id_admin       = $_SESSION['ID_USUARIO'];
     $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
-
-
 
 ?>
 
@@ -26,8 +25,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
-    <link rel="stylesheet" href="../css/style_admin_edit_client.css">
-    <title>Editar Usuario</title>
+    <title>Admin</title>
 </head>
 <body>
 
@@ -40,8 +38,7 @@
             <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
         </div>
         <div class="contenedor_nombre_adm">
-            <span> EDICIÓN DE CLIENTES </span>
-
+            <span> Consultar Ausentismos </span>            
         </div>
         <div class="contenedor_admin">
             Nombre de usuario:
@@ -66,10 +63,9 @@
             </span>
 
 
-
-           <div class="contenedor_cerrar_sesion" >
+            <div class="contenedor_cerrar_sesion" >
                 <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-           </div>
+            </div>
     </div>
 </header>
 
@@ -104,47 +100,51 @@
                 <a href="../index.php">
                     <div class="icon"><img src="../images/home.png" alt=""></div>
                     <div class="title"><span>Menú Principal</span></div>
-
                 </a>
             </div>
 
-                
+                <!-- SEPARADOR -->
+                <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="#">
+                    <div class="icon"><img src="../images/upload.png" alt=""></div>
+                    <div class="title"><span>Cargar Datos</span></div>
+                </a>
+            </div>
+
+                <!-- SEPARADOR -->
+                <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="#">
+                    <div class="icon"><img src="../images/add.png" alt=""></div>
+                    <div class="title"><span>Agregar Registro</span></div>
+                </a>
+            </div>
+                <!-- SEPARADOR -->
+                <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="admin_consultar.php">
+                    <div class="icon"><img src="../images/stadistics.png" alt=""></div>
+                    <div class="title"><span>Consultar Ausentismos</span></div>
+                </a>
+            </div>
+
                 <!-- SEPARADOR -->
                 <div class="item separator">
                 </div>
 
             <div class="item">
                 <a href="admin_edition_client.php">
-                    <div class="icon"><img src="../images/edit_user.png" alt=""></div>
-                    <div class="title"><span>Editar usuario</span></div>
-
+                    <div class="icon"><img src="../images/users_admin.png" alt=""></div>
+                    <div class="title"><span>Gestionar Usuario</span></div>
                 </a>
             </div>
-
-                <!-- SEPARADOR -->
-                <div class="item separator">
-                </div>
-
-            <div class="item">
-                <a href="admin_delete_user.php">
-                    <div class="icon"><img src="../images/delete_user.png" alt=""></div>
-                    <div class="title"><span>Eliminar usuario</span></div>
-
-                </a>
-            </div>
-
-                <!-- SEPARADOR -->
-                <div class="item separator">
-                </div>
-
-            <div class="item">
-                <a href="admin_create_user.php">
-                    <div class="icon"><img src="../images/add-admin.png" alt=""></div>
-                    <div class="title"><span>Creación de usuarios</span></div>
-
-                </a>
-            </div>
-
 
         </div>
 
@@ -159,7 +159,6 @@
             </a>
         </div>
     </div>
-
 </div>
 
 
@@ -170,8 +169,7 @@
 
     <div class="contenedor_listas">
         <ul>
-            <a href="../index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-            
+            <a href="../index.php"><li class="btn-inicio-go_home">Menu Principal</li></a>
             <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
             <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
 
@@ -180,26 +178,62 @@
 </div>
 
 
-<!-- CONTENEDORES DE BUSQUEDAS -->
-<div class="contendor_busqueda">
-        <label for="caja_busqueda">Buscar: </label>
-        <input type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
+<!-- CONTENEDOR CON TABLA DE USUARIOS -->
+<div class="contenedor_tabla">
+<table class="users_table">
+    <tr>
+        <th>ID</th>
+        <th>CEDULA </th>
+        <th>FECHA INICIO</th>
+        <th>FECHA FIN</th>
+        <th>TIEMPO</th>
+        <th>OBSERVACIÓN</th>
+        <th>Seguridad_Trabajo</th>
+        <th>ID_USUARIO</th>
+        <th>TIPO AUSENTISMO</th>
+
+    </tr>
+    <?php
+        $sqli = "SELECT * FROM ausentismos";
+        $result = mysqli_query($conectar, $sqli);
+        while($mostrar = mysqli_fetch_array($result)){
+    ?>
+    <tr>
+
+        <td><?php echo $mostrar['ID']?></td>
+        <td><?php echo $mostrar['Cedula_F']?></td>
+        <td><?php echo $mostrar['Fecha_Inicio']?></td>
+        <td><?php echo $mostrar['Fecha_Fin']?></td>
+        <td><?php echo $mostrar['Tiempo']?></td>
+        <td><?php echo $mostrar['Observacion']?></td>
+        <td><?php echo $mostrar['Seguridad_Trabajo']?></td>
+        <td><?php echo $mostrar['ID_Usuario']?></td>
+        <?php 
+            $tipo="";
+            if($mostrar['Tipo_Ausentismo']==1){
+                $tipo="INCAPACIDAD";
+            }elseif($mostrar['Tipo_Ausentismo']==2){
+                $tipo="COMPENSATORIO";
+            }elseif($mostrar['Tipo_Ausentismo']==3){
+                $tipo="PERMISO";
+            }else{
+                $tipo="LICENCIA";
+            }
+        ?>
+        <td><?php echo $tipo ?></td>
+
+
+    </tr>
+    <?php
+        }
+    ?>
+    </table>
 </div>
-<section class="section_principal">
-    <div id="datos">
-
-    </div>
-
-</section>
 
 
 <!-- SCRIPT DE PARTICULAS -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="../js/app.js"></script>
-<!-- INSTALACION DE JQUERY -->
-<script src="../js/jquery.min.js"></script>
-<!--    JAVASCRIPT QUE REALIZA LA BUSQUEDA DINAMICA -->
-<script src="../js/search_client_edit.js"></script>
 
 
 <!-- SCRIPT MENU LATERAL-->
@@ -215,6 +249,7 @@
     });
 
 </script>
+
 
 </body>
 </html>
