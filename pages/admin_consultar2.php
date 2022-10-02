@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
+    
+    <!-- Bootstrap - STILE FOR CHECKBOXES -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
     <title>Admin</title>
 </head>
 <body>
@@ -70,7 +74,6 @@
 </header>
 
 <!-- INICIO DE SLIDE MENU -->
-
 <div class = "contenedor_pr_menu">
     <div id="slide-menu" class="menu-collapsed">
 
@@ -162,8 +165,6 @@
 </div>
 
 
-
-
 <!-- BARRA DE NAVEGACION -->
 <div class="contenedor_menu">
 
@@ -177,9 +178,98 @@
     </div>
 </div>
 
+<!-- CONTENEDOR DE CHECKBOXES PARA LOS FILTROS -->
+<div class="container offset-md-2 col-md-8">
+    <br>
+    <header class="main-header">
+        <h4>
+            <span class="icon-title">
+                <i class="fas fa-filter"></i>
+            </span>
+            Filtros M&uacute;ltiples con Checkboxes
+        </h4>
+    </header>
+    <br>
+
+
+    <form class="row" id="multi-filters">
+        <div class="col-3">
+            <h6>Tipo Ausentismo</h6>
+            <?php
+                $sqli = "SELECT * FROM tipoausentismo";
+                $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
+        
+                $ausen_list = [];
+        
+                while($tipo = $tipoAusentismos->fetch_assoc()){
+                    $ausen_list[$tipo["ID"]]=$tipo;
+                    $ID = $tipo["ID"];
+                    $Nombre=$tipo["TipoAusentismo"];
+                    /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
+            ?>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id=<?php echo "\""."type_".$ID."\""; ?>  name="Tipo_Ausentismno[]" value=<?php echo "\"$Nombre\""; ?> >
+                <label class="form-check-label" for=<?php echo "\""."type_".$ID."\""; ?> > <?php echo $Nombre; ?> </label>
+            </div>
+            <?php
+                }
+            ?>
+            <!-- <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="type_2" name="Tipo_Ausentismno[]" value="Licencia">
+                <label class="form-check-label" for="type_2">Licencia</label>
+            </div> -->
+        </div>
+
+
+        <div class="col-3">
+            <h6>Dependencia</h6>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="country_1" name="UserCountry[]" value="México">
+                <label class="form-check-label" for="country_1">M&eacute;xico</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="country_2" name="UserCountry[]" value="Venezuela">
+                <label class="form-check-label" for="country_2">Venezuela</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="country_3" name="UserCountry[]" value="España">
+                <label class="form-check-label" for="country_3">España</label>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <h6>G&eacute;nero</h6>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gender_1" name="UserGender[]" value="Hombre">
+                <label class="form-check-label" for="gender_1">Hombre</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gender_2" name="UserGender[]" value="Mujer">
+                <label class="form-check-label" for="gender_2">Mujer</label>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <h6>C&eacute;dula</h6>
+            <div class="form-input">
+                <input type="text" class="form-input" id="caja_busqueda" name="Cedula[]" size="20" placeholder="Ingrese la cédula">
+            </div>
+        </div>
+        
+        
+        <div class="col-3">
+            <h6>Fecha Inicio</h6>
+            <div class="form-date">
+                <input type="date" class="form-check-input" id="fecha_inicio" name="Fecha_Inicio[]" value="2018-07-22" min="2018-01-01">
+            </div>
+        </div>
+
+    </form>
+    <br><br>
+</div>
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
-<div class="contenedor_tabla">
+<div class="table table-bordered table-hover">
 <table class="users_table">
     <tr>
         <th>ID</th>
@@ -191,42 +281,11 @@
         <th>Seguridad_Trabajo</th>
         <th>ID_USUARIO</th>
         <th>TIPO AUSENTISMO</th>
-
     </tr>
-    <?php
-        $sqli = "SELECT * FROM ausentismos";
-        $ausentismos = mysqli_query($conectar, $sqli);  //print_r($ausentismos);
-        while($mostrar = mysqli_fetch_array($ausentismos)){
-    ?>
-    <tr>
+    <tbody id="filters-result" class="bg-white">
+            <!-- Aquí se inserta los datos desde el script ../js/consultar.js -->
+    </tbody>
 
-        <td><?php echo $mostrar['ID']?></td>
-        <td><?php echo $mostrar['Cedula_F']?></td>
-        <td><?php echo $mostrar['Fecha_Inicio']?></td>
-        <td><?php echo $mostrar['Fecha_Fin']?></td>
-        <td><?php echo $mostrar['Tiempo']?></td>
-        <td><?php echo $mostrar['Observacion']?></td>
-        <td><?php echo $mostrar['Seguridad_Trabajo']?></td>
-        <td><?php echo $mostrar['ID_Usuario']?></td>
-        <?php 
-            $tipo="";
-            if($mostrar['Tipo_Ausentismo']==1){
-                $tipo="INCAPACIDAD";
-            }elseif($mostrar['Tipo_Ausentismo']==2){
-                $tipo="COMPENSATORIO";
-            }elseif($mostrar['Tipo_Ausentismo']==3){
-                $tipo="PERMISO";
-            }else{
-                $tipo="LICENCIA";
-            }
-        ?>
-        <td><?php echo $tipo ?></td>
-
-
-    </tr>
-    <?php
-        }
-    ?>
 </table>
 </div>
 
@@ -234,7 +293,17 @@
 <!-- SCRIPT DE PARTICULAS -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="../js/app.js"></script>
+<!-- INSTALACION DE JQUERY -->
+<script src="../js/jquery.min.js"></script>
 
+
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<script src="../js/consultar.js"></script>
 
 <!-- SCRIPT MENU LATERAL-->
 <script>
