@@ -1,7 +1,43 @@
 <?php
     require("../conexion.php");
 
-        $sqli = "SELECT * FROM ausentismos";
+        //print_r($_POST); exit; para observar en el navegador con inspeccionar elemento
+
+        $query_values = $_POST;
+        $extra_query = " WHERE 1 "; //"WHERE Cancelled = 0";
+
+        if($query_values)
+        {
+            $extra_query.= " AND ";
+            $values = [];
+            $queries = [];
+
+            foreach($query_values as $field_name => $field_value)
+            {
+                foreach($field_value as $value)
+                {
+                    if($field_name=="Cedula_F"){  //Cedula_F LIKE '%5%'--> '%".$VAR."%'"
+                        $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                    }elseif($field_name=="Fecha_Inicio"){
+                        $values[$field_name][] = " {$field_name} > '{$value}'";
+                    }else{
+                        $values[$field_name][] = " {$field_name} = '{$value}'";
+                    }                     
+                }
+            }
+            //print_r($values); //exit;
+            foreach($values as $field_name => $field_values)
+            {
+                $queries[$field_name] = "(".implode(" OR ", $field_values).")";
+            }
+
+            $extra_query.= " ".implode( " AND ", $queries );
+
+            //print_r($extra_query); exit;
+        }
+
+
+        $sqli = "SELECT * FROM ausentismos ".$extra_query;
         $ausentismos = $conectar->query($sqli);  //print_r($ausentismos);
 
         $ausen_list = [];

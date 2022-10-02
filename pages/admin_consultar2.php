@@ -208,7 +208,7 @@
                     /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
             ?>
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id=<?php echo "\""."type_".$ID."\""; ?>  name="Tipo_Ausentismno[]" value=<?php echo "\"$Nombre\""; ?> >
+                <input type="checkbox" class="form-check-input" id=<?php echo "\""."type_".$ID."\""; ?>  name="Tipo_Ausentismo[]" value=<?php echo $ID; ?> >
                 <label class="form-check-label" for=<?php echo "\""."type_".$ID."\""; ?> > <?php echo $Nombre; ?> </label>
             </div>
             <?php
@@ -221,18 +221,18 @@
         </div>
 
 
-        <div class="col-3">
+        <!-- <div class="col-3">
             <h6>Dependencia</h6>
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="country_1" name="UserCountry[]" value="México">
+                <input type="checkbox" class="form-check-input" id="country_1" name="Dependencia[]" value="México">
                 <label class="form-check-label" for="country_1">M&eacute;xico</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="country_2" name="UserCountry[]" value="Venezuela">
+                <input type="checkbox" class="form-check-input" id="country_2" name="Dependencia[]" value="Venezuela">
                 <label class="form-check-label" for="country_2">Venezuela</label>
             </div>
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="country_3" name="UserCountry[]" value="España">
+                <input type="checkbox" class="form-check-input" id="country_3" name="Dependencia[]" value="España">
                 <label class="form-check-label" for="country_3">España</label>
             </div>
         </div>
@@ -247,12 +247,12 @@
                 <input type="checkbox" class="form-check-input" id="gender_2" name="UserGender[]" value="Mujer">
                 <label class="form-check-label" for="gender_2">Mujer</label>
             </div>
-        </div>
+        </div> -->
 
         <div class="col-3">
             <h6>C&eacute;dula</h6>
             <div class="form-input">
-                <input type="text" class="form-input" id="caja_busqueda" name="Cedula[]" size="20" placeholder="Ingrese la cédula">
+                <input type="text" class="form-input" id="cedula" name="Cedula_F[]" size="20" placeholder="Ingrese la cédula">
             </div>
         </div>
         

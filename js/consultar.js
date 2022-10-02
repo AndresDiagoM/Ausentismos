@@ -6,17 +6,40 @@
 $(function()
 {
     get_ausentismos();
+
+    //se necesita hacer algo cuando se utilice los checkboxes, la búsqueda de cedula y la fecha
+    $(".form-check-input").on("click", function ()  //la funcion onClick de JQUERY, todos los checkbox inputs en el HTML tienen la clase "form-check-input"
+    {
+        get_ausentismos(); //cuando se de click en el checkbox que se ejecute get_ausentismos();
+    }); 
+
+    $(document).on('keyup', '#cedula', function()  //para el cuadro de busqueda de cedula
+    {
+        var valor = $(this).val();
+
+        if(valor != "" && !isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            //get_ausentismos();
+        }
+        //get_ausentismos();
+    });
 });
 
 function get_ausentismos()
 {
+    let form = $("#multi-filters");  //el id del formulario HTML es "multi-filters"
+
     $.ajax(
         {
             type:"POST",
             url:"../logic/consultarAusen.php",  //es necesario especificar exactamente la ruta
-            data:"",
+            data:form.serialize(), //aqui se pasa información de los inputs que están en el formulario HTML. serialize pasa los datos en arrays a PHP
             success: function (data)
             {
+
+                $("#filters-result").html(""); //limpiar la tabla que se muestra en HTML para borrar las busqeudas anteriores
+
                 $.each(JSON.parse(data), function(key,Ausen)
                 {
                     let row = ""+
