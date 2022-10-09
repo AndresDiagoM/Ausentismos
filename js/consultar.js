@@ -24,6 +24,11 @@ $(function()
         }
         //get_ausentismos();
     });
+
+    $(".form-date").on("click", function () 
+    {
+        get_ausentismos(); 
+    }); 
 });
 
 function get_ausentismos()

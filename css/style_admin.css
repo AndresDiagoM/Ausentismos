@@ -1,3 +1,10 @@
+:root{
+    --width: 20%;
+    --padding: 10px;
+    --bgcolor: rgba(53, 166, 160, 1);
+    --hovercolor: rgb(251,139,2);
+}
+
 .contenedor_admin{
     text-align: center;
     margin-left: 1%;
@@ -7,7 +14,7 @@
 }
 .contenedor_nombre_adm{
     text-shadow: 0 0 0px #275f42;
-    margin-left: 20px;
+    margin-left: 10px;
     width: 50%;
     height: 145px;
     line-height: 180px;
@@ -15,7 +22,7 @@
     font-family: "Kanit", sans-serif;
     font-weight: bold;
     font-size: 30px;
-    color: #fb8c00;
+    color: #000000;
 }
 .info_admin{
     color: #275f42;
@@ -42,8 +49,8 @@ ESTILOS CONTENEDRO TABLA
 ===================================== */
 
 .contenedor_tabla{
-    margin-top: 150px;
-    margin-left: 5%;
+    margin-top: 100px;
+    margin-left: var(--width);
 }
 
 .users_table {
@@ -54,9 +61,16 @@ ESTILOS CONTENEDRO TABLA
     border-radius: 2px;
     text-align: center;
     font-family: 'Kanit', sans-serif;
+    width: 95%;
 }
 .users_table th, td{
     border: 1px solid black;
+}
+.users_table tbody{
+    border: 1px solid black;
+}
+.icon {
+    max-width: 35px; /*Para que la imagen del perfil sea pequeña*/
 }
 
 

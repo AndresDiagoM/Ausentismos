@@ -1,7 +1,7 @@
 :root{
-    --width: 300px;
+    --width: 250px;
     --padding: 10px;
-    --bgcolor: rgba(10, 14, 13, 0.95);
+    --bgcolor: rgba(53, 166, 160, 1);
     --hovercolor: rgb(251,139,2);
     --width-collapsed: 50px;
 }
@@ -25,10 +25,11 @@ body{
     background-color: var(--bgcolor);
     color: white;
     position: absolute;
-    top: 190px;
+    top: 192px;  /*Posicion del menu slide*/
     left: 0%;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     z-index: 100;
+    min-height: 110vh;
 }
 #slide-menu a{
     color: white;
@@ -85,7 +86,7 @@ body{
 }
 
 #slide-menu #profile #photo, #slide-menu #profile #name{
-    font-size: 24px;
+    font-size: 20px;
     padding: var(--padding) 0;
     overflow: hidden;
 }
@@ -211,5 +212,5 @@ body{
     margin-top: 110px;
     margin-left: 5%;
 
-}
+} 
 

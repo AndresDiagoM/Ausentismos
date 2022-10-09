@@ -7,8 +7,6 @@
     $id_admin       = $_SESSION['ID_USUARIO'];
     $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +21,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../images/icon.png">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
@@ -43,7 +43,7 @@
             <span> EDICIÓN DE CLIENTES </span>
 
         </div>
-        <div class="contenedor_admin">
+        <!-- <div class="contenedor_admin">
             Nombre de usuario:
             <span class="info_admin">
                 <?php
@@ -69,16 +69,16 @@
 
            <div class="contenedor_cerrar_sesion" >
                 <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-           </div>
+           </div>  -->
     </div>
 </header>
 
 <!-- INICIO DE SLIDE MENU -->
 
 <div class = "contenedor_pr_menu">
-    <div id="slide-menu" class="menu-collapsed">
+    <div id="slide-menu" class="menu-expanded">
 
-        <!-- HEADER -->
+        <!-- HEADER 
         <div id="header">
 
             <div id="menu-btn">
@@ -88,7 +88,7 @@
             </div>
             <div id="title"><span>PERFIL</span></div>
 
-        </div>
+        </div> -->
 
         <!-- PROFILE -->
         <div id="profile">
@@ -101,7 +101,7 @@
         <div id="menu-items">
 
             <div class="item">
-                <a href="../index.php">
+                <a href="admin_menu.php">
                     <div class="icon"><img src="../images/home.png" alt=""></div>
                     <div class="title"><span>Menú Principal</span></div>
 
@@ -145,6 +145,18 @@
                 </a>
             </div>
 
+                <!-- SEPARADOR -->
+                <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="admin_edition_client.php">
+                <a href="../logic/cerrar_sesion.php">
+                    <div class="icon"><img src="../images/cerrar-sesion.png" alt=""></div>
+                    <div class="title"><span>Cerrar Sesión</span></div>
+                </a>
+            </div>
+
 
         </div>
 
@@ -165,7 +177,7 @@
 
 
 
-<!-- BARRA DE NAVEGACION -->
+<!-- BARRA DE NAVEGACION 
 <div class="contenedor_menu">
 
     <div class="contenedor_listas">
@@ -177,7 +189,7 @@
 
         </ul>
     </div>
-</div>
+</div>  -->
 
 
 <!-- CONTENEDORES DE BUSQUEDAS -->
@@ -185,12 +197,12 @@
         <label for="caja_busqueda">Buscar: </label>
         <input type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
 </div>
-<section class="section_principal">
-    <div id="datos">
+<div class="contenedor_tabla">
+    <table class="users_table" id="datos">
 
-    </div>
+    </table>
 
-</section>
+</div>
 
 
 <!-- SCRIPT DE PARTICULAS -->
@@ -202,7 +214,7 @@
 <script src="../js/search_client_edit.js"></script>
 
 
-<!-- SCRIPT MENU LATERAL-->
+<!-- SCRIPT MENU LATERAL
 <script>
     const btn = document.querySelector('#menu-btn');
     const menu = document.querySelector('#slide-menu');
@@ -214,7 +226,7 @@
         menu.classList.toggle("menu-collapsed");
     });
 
-</script>
+</script> -->
 
 </body>
 </html>

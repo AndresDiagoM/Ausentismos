@@ -49,7 +49,7 @@
                         <td>".$fila['TipoUsuario']."       </td>
                         <td>".$fila['login']."        </td>
                         <td>".$fila['contraseña']."   </td>
-                        <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png'></a></td>
+                        <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'></a></td>
                     </tr>";
         }
         $salida.="</table>";

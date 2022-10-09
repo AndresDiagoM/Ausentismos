@@ -22,6 +22,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../images/icon.png">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
@@ -44,7 +46,7 @@
         <div class="contenedor_nombre_adm">
             <span> Consultar Ausentismos </span>            
         </div>
-        <div class="contenedor_admin">
+        <!-- <div class="contenedor_admin">
             Nombre de usuario:
             <span class="info_admin">
                 <?php
@@ -69,15 +71,15 @@
 
             <div class="contenedor_cerrar_sesion" >
                 <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-            </div>
+            </div> -->
     </div>
 </header>
 
 <!-- INICIO DE SLIDE MENU -->
 <div class = "contenedor_pr_menu">
-    <div id="slide-menu" class="menu-collapsed">
+    <div id="slide-menu" class="menu-expanded">
 
-        <!-- HEADER -->
+        <!-- HEADER 
         <div id="header">
 
             <div id="menu-btn">
@@ -87,7 +89,7 @@
             </div>
             <div id="title"><span>PERFIL</span></div>
 
-        </div>
+        </div>  -->
 
         <!-- PROFILE -->
         <div id="profile">
@@ -100,7 +102,7 @@
         <div id="menu-items">
 
             <div class="item">
-                <a href="../index.php">
+                <a href="admin_menu.php">
                     <div class="icon"><img src="../images/home.png" alt=""></div>
                     <div class="title"><span>Menú Principal</span></div>
                 </a>
@@ -149,6 +151,17 @@
                 </a>
             </div>
 
+            <!-- SEPARADOR -->
+            <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="../logic/cerrar_sesion.php">
+                    <div class="icon"><img src="../images/cerrar-sesion.png" alt=""></div>
+                    <div class="title"><span>Cerrar Sesión</span></div>
+                </a>
+            </div>
+
         </div>
 
         <!--
@@ -165,7 +178,7 @@
 </div>
 
 
-<!-- BARRA DE NAVEGACION -->
+<!-- BARRA DE NAVEGACION 
 <div class="contenedor_menu">
 
     <div class="contenedor_listas">
@@ -176,7 +189,7 @@
 
         </ul>
     </div>
-</div>
+</div> -->
 
 <!-- CONTENEDOR DE CHECKBOXES PARA LOS FILTROS -->
 <div class="container offset-md-2 col-md-8">
@@ -260,7 +273,7 @@
         <div class="col-3">
             <h6>Fecha Inicio</h6>
             <div class="form-date">
-                <input type="date" class="form-check-input" id="fecha_inicio" name="Fecha_Inicio[]" value="2018-07-22" min="2018-01-01">
+                <input type="date" class="form-check-input" id="fecha_inicio"  name="Fecha_Inicio[]"  min="2018-01-01"> <!-- //value="2019-07-22" -->
             </div>
         </div>
 
@@ -269,24 +282,83 @@
 </div>
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
-<div class="table table-bordered table-hover">
-<table class="users_table">
-    <tr>
-        <th>ID</th>
-        <th>CEDULA </th>
-        <th>FECHA INICIO</th>
-        <th>FECHA FIN</th>
-        <th>TIEMPO</th>
-        <th>OBSERVACIÓN</th>
-        <th>Seguridad_Trabajo</th>
-        <th>ID_USUARIO</th>
-        <th>TIPO AUSENTISMO</th>
-    </tr>
-    <tbody id="filters-result" class="bg-white">
-            <!-- Aquí se inserta los datos desde el script ../js/consultar.js -->
-    </tbody>
+<!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
+<div class="contenedor_tabla">
+    <table class="users_table">
+        
+        <tr>
+            <form class="row" id="multi-filters">
 
-</table>
+            <th>#</th>
+            <th>
+                    <ul class="navbar-nav ml-auto">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            CEDULA
+                            </a>
+                            <div class="dropdown-menu">
+                                <input type="text" class="form-input" id="cedula" name="Cedula_F[]" size="20" placeholder="Ingrese la cédula">
+                            </div>
+                        </li>
+                    </ul>
+            </th>
+            <th>
+                    <ul class="navbar-nav ml-auto">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            FECHA INICIO
+                            </a>
+                            <div class="dropdown-menu">
+                                <input type="date" class="form-check-input" id="fecha_inicio"  name="Fecha_Inicio[]"  min="2018-01-01"> <!-- //value="2019-07-22" -->
+                            </div>
+                        </li>
+                    </ul>
+            </th>
+            <th>FECHA FIN</th>
+            <th>TIEMPO</th>
+            <th>OBSERVACIÓN</th>
+            <th>Seguridad_Trabajo</th>
+            <th>ID_USUARIO</th>
+            <th>
+                    <ul class="navbar-nav ml-auto">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            
+                            TIPO AUSENTISMO
+                            </a>
+                            <div class="dropdown-menu">
+                                <?php
+                                    $sqli = "SELECT * FROM tipoausentismo";
+                                    $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
+                            
+                                    $ausen_list = [];
+                            
+                                    while($tipo = $tipoAusentismos->fetch_assoc()){
+                                        $ausen_list[$tipo["ID"]]=$tipo;
+                                        $ID = $tipo["ID"];
+                                        $Nombre=$tipo["TipoAusentismo"];
+                                        /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
+                                ?>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id=<?php echo "\""."type_".$ID."\""; ?>  name="Tipo_Ausentismo[]" value=<?php echo $ID; ?> >
+                                    <label class="form-check-label" for=<?php echo "\""."type_".$ID."\""; ?> > <?php echo $Nombre; ?> </label>
+                                </div>
+                                <?php
+                                    }
+                                ?>
+                                
+                            </div>
+                        </li>
+                    </ul>
+            </th>
+
+            </form>
+        </tr>
+
+        <tbody id="filters-result" class="bg-white">
+                <!-- Aquí se inserta los datos desde el script ../js/consultar.js -->
+        </tbody>
+    </table>
 </div>
 
 
@@ -305,7 +377,24 @@
 
 <script src="../js/consultar.js"></script>
 
-<!-- SCRIPT MENU LATERAL-->
+<script>
+    //SCRIPT para colocar en fecha inicial, la fecha con mes actual
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    //var today = year + "-" + month + "-" + day;
+    //var today = year + "-" + month + "-0" + 1 ;  
+    var today = "2019-07-22";
+    document.getElementById("fecha_inicio").value = today; 
+</script>
+
+<!-- SCRIPT MENU LATERAL
 <script>
     const btn = document.querySelector('#menu-btn');
     const menu = document.querySelector('#slide-menu');
@@ -317,7 +406,7 @@
         menu.classList.toggle("menu-collapsed");
     });
 
-</script>
+</script>-->
 
 
 </body>

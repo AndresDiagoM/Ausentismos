@@ -22,9 +22,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../images/icon.png">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
+
     <title>Admin</title>
 </head>
 <body>
@@ -46,7 +49,7 @@
 
             </span>
         </div>
-        <div class="contenedor_admin">
+        <!--  <div class="contenedor_admin">
             Nombre de usuario:
             <span class="info_admin">
                 <?php
@@ -68,21 +71,34 @@
                 ?>
             </span>
 
-
-
             <div class="contenedor_cerrar_sesion" >
                 <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-            </div>
+            </div> 
+        </div> -->
     </div>
 </header>
 
-<!-- INICIO DE SLIDE MENU -->
+<!-- BARRA DE NAVEGACION 
+<div class="contenedor_menu">
 
+    <div class="contenedor_listas">
+        <ul>
+            <a href="../index.php"><li class="btn-inicio-go_home">Menu Principal</li></a>
+            <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
+            <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
+
+        </ul>
+    </div>
+</div> -->
+
+
+
+<!-- INICIO DE SLIDE MENU -->
 <div class = "contenedor_pr_menu">
-    <div id="slide-menu" class="menu-collapsed">
+    <div id="slide-menu" class="menu-expanded">
 
         <!-- HEADER -->
-        <div id="header">
+        <!--<div id="header">
 
             <div id="menu-btn">
                 <div class="btn-logo"></div>
@@ -91,7 +107,7 @@
             </div>
             <div id="title"><span>PERFIL</span></div>
 
-        </div>
+        </div>  -->
 
         <!-- PROFILE -->
         <div id="profile">
@@ -104,7 +120,7 @@
         <div id="menu-items">
 
             <div class="item">
-                <a href="../index.php">
+                <a href="admin_menu.php">
                     <div class="icon"><img src="../images/home.png" alt=""></div>
                     <div class="title"><span>Menú Principal</span></div>
                 </a>
@@ -153,7 +169,18 @@
                 </a>
             </div>
 
-        </div>
+            <!-- SEPARADOR -->
+            <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="../logic/cerrar_sesion.php">
+                    <div class="icon"><img src="../images/cerrar-sesion.png" alt=""></div>
+                    <div class="title"><span>Cerrar Sesión</span></div>
+                </a>
+            </div>
+
+        </div> 
 
         <!--
             =================================
@@ -169,60 +196,39 @@
 </div>
 
 
-
-
-<!-- BARRA DE NAVEGACION -->
-<div class="contenedor_menu">
-
-    <div class="contenedor_listas">
-        <ul>
-            <a href="../index.php"><li class="btn-inicio-go_home">Menu Principal</li></a>
-            <!--<a href="suscription.php"><li>Suscripciones<i class="fa fa-angle-down"></i></a>
-                <ul>
-                    <a href="compras.php?suscp=Prem"><li> Premiun</li></a>
-                    <a href="compras.php?suscp=Basic"><li> Básico</li></a>
-                </ul>
-            </li> -->
-            <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
-            <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
-
-        </ul>
-    </div>
-</div>
-
-
 <!-- CONTENEDOR CON TABLA DE USUARIOS -->
 <div class="contenedor_tabla">
-<table class="users_table">
-    <tr>
-        <th>CEDULA</th>
-        <th>NOMBRE</th>
-        <th>CORREO</th>
-        <th>DEPENDENCIA</th>
-        <th>TIPO USUARIO</th>
-        <th>LOGIN</th>
+    <table class="users_table">
+        <tr>
+            <th>CEDULA</th>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>DEPENDENCIA</th>
+            <th>TIPO USUARIO</th>
+            <th>LOGIN</th>
 
-    </tr>
-    <?php
-        $sqli = "SELECT * FROM usuarios";
-        $result = mysqli_query($conectar, $sqli);
-        while($mostrar = mysqli_fetch_array($result)){
-    ?>
-    <tr>
+        </tr>
+        <?php
+            $sqli = "SELECT * FROM usuarios";
+            $result = mysqli_query($conectar, $sqli);
+            while($mostrar = mysqli_fetch_array($result)){
+        ?>
+        <tr>
 
-        <td><?php echo $mostrar['Cedula']?></td>
-        <td><?php echo $mostrar['Nombre']?></td>
-        <td><?php echo $mostrar['Correo']?></td>
-        <td><?php echo $mostrar['Dependencia']?></td>
-        <td><?php echo $mostrar['TipoUsuario']?></td>
-        <td><?php echo $mostrar['login']?></td>
-        
-    </tr>
-    <?php
-        }
-    ?>
+            <td><?php echo $mostrar['Cedula']?></td>
+            <td><?php echo $mostrar['Nombre']?></td>
+            <td><?php echo $mostrar['Correo']?></td>
+            <td><?php echo $mostrar['Dependencia']?></td>
+            <td><?php echo $mostrar['TipoUsuario']?></td>
+            <td><?php echo $mostrar['login']?></td>
+            
+        </tr>
+        <?php
+            }
+        ?>
     </table>
 </div>
+
 
 
 <!-- SCRIPT DE PARTICULAS -->
@@ -230,7 +236,7 @@
 <script src="../js/app.js"></script>
 
 
-<!-- SCRIPT MENU LATERAL-->
+<!-- SCRIPT MENU LATERAL
 <script>
     const btn = document.querySelector('#menu-btn');
     const menu = document.querySelector('#slide-menu');
@@ -242,7 +248,7 @@
         menu.classList.toggle("menu-collapsed");
     });
 
-</script>
+</script>  -->
 
 
 </body>

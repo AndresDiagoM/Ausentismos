@@ -48,24 +48,6 @@
 
     </header>
 
-     <!-- BARRA DE NAVEGACION -->
-     <div class="contenedor_menu">
-        <div class="contenedor_listas">
-            <ul>
-
-                <a href="../index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-                <!-- <a href="suscription.php"><li>Suscripciones <i class="fa fa-angle-down"></i></a>
-                    <ul>
-                        <a href="compras.php?suscp=Prem"><li> Premiun</li></a>
-                        <a href="compras.php?suscp=Basic"><li> Básico</li></a>
-                    </ul>
-                </li>-->
-                <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
-
-            </ul>
-        </div>
-    </div>
-
 
     <!-- DISEÑO DE INICIO SESION-->
 
