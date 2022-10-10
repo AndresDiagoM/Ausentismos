@@ -191,6 +191,95 @@
     </div>
 </div> -->
 
+<!-- CONTENEDOR DE CHECKBOXES PARA LOS FILTROS -->
+<div class="container offset-md-2 col-md-8">
+    <br>
+    <header class="main-header">
+        <h4>
+            <span class="icon-title">
+                <i class="fas fa-filter"></i>
+            </span>
+            Filtros M&uacute;ltiples con Checkboxes
+        </h4>
+    </header>
+    <br>
+
+
+    <form class="row" id="multi-filters">
+        <div class="col-3">
+            <h6>Tipo Ausentismo</h6>
+            <?php
+                $sqli = "SELECT * FROM tipoausentismo";
+                $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
+        
+                $ausen_list = [];
+        
+                while($tipo = $tipoAusentismos->fetch_assoc()){
+                    $ausen_list[$tipo["ID"]]=$tipo;
+                    $ID = $tipo["ID"];
+                    $Nombre=$tipo["TipoAusentismo"];
+                    /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
+            ?>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id=<?php echo "\""."type_".$ID."\""; ?>  name="Tipo_Ausentismo[]" value=<?php echo $ID; ?> >
+                <label class="form-check-label" for=<?php echo "\""."type_".$ID."\""; ?> > <?php echo $Nombre; ?> </label>
+            </div>
+            <?php
+                }
+            ?>
+            <!-- <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="type_2" name="Tipo_Ausentismno[]" value="Licencia">
+                <label class="form-check-label" for="type_2">Licencia</label>
+            </div> -->
+        </div>
+
+
+        <!-- <div class="col-3">
+            <h6>Dependencia</h6>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="country_1" name="Dependencia[]" value="México">
+                <label class="form-check-label" for="country_1">M&eacute;xico</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="country_2" name="Dependencia[]" value="Venezuela">
+                <label class="form-check-label" for="country_2">Venezuela</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="country_3" name="Dependencia[]" value="España">
+                <label class="form-check-label" for="country_3">España</label>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <h6>G&eacute;nero</h6>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gender_1" name="UserGender[]" value="Hombre">
+                <label class="form-check-label" for="gender_1">Hombre</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="gender_2" name="UserGender[]" value="Mujer">
+                <label class="form-check-label" for="gender_2">Mujer</label>
+            </div>
+        </div> -->
+
+        <div class="col-3">
+            <h6>C&eacute;dula</h6>
+            <div class="form-input">
+                <input type="text" class="form-input" id="cedula" name="Cedula_F[]" size="20" placeholder="Ingrese la cédula">
+            </div>
+        </div>
+        
+        
+        <div class="col-3">
+            <h6>Fecha Inicio</h6>
+            <div class="form-date">
+                <input type="date" class="form-check-input" id="fecha_inicio"  name="Fecha_Inicio[]"  min="2018-01-01"> <!-- //value="2019-07-22" -->
+            </div>
+        </div>
+
+    </form>
+    <br><br>
+</div>
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
 <!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
