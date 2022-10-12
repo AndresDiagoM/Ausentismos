@@ -3,15 +3,16 @@
 .contenedor_form{
     font-family: 'kanit', sans-serif;
     width: 25%;
-    margin: 0 auto;
+    margin: auto;
 }
 
  .login-box {
+    font-family: 'kanit', sans-serif;
     border-radius: 15px;
     border: 1px solid rgb(229, 229, 237);
-    width: 100%;
+    width: 30%;
     text-align: center;
-    margin: 0 auto;
+    margin: auto;
     margin-top:  110px;
     background: rgba(53, 166, 160, 1);
     padding: 20px 50px;

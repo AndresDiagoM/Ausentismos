@@ -124,7 +124,7 @@
                 </div>
 
             <div class="item">
-                <a href="#">
+                <a href="admin_agregar.php">
                     <div class="icon"><img src="../images/add.png" alt=""></div>
                     <div class="title"><span>Agregar Registro</span></div>
                 </a>
@@ -194,8 +194,8 @@
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
 <!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
-<div class="contenedor_tabla">
-    <table class="users_table">
+<div class="col-md-9 contenedor_tabla"> 
+    <table class="table table-bordered ">
         
         <tr>
             <form class="row" id="multi-filters">
@@ -270,6 +270,21 @@
                 <!-- Aquí se inserta los datos desde el script ../js/consultar.js -->
         </tbody>
     </table>
+</div>
+
+<!-- BOTON PARA GENERAR REPORTE -->
+<div class="container">    
+    <br/>
+    <div class="row">
+        <div class="col-md-5">
+        
+        </div>
+        <div class="col-md-3">
+            <a name="reporte" id="" class="btn btn-primary" href="admin_menu.php" role="button"> 
+                Reporte
+            </a>
+        </div>
+    </div>
 </div>
 
 

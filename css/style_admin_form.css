@@ -6,7 +6,7 @@
 }
 .contenedor_formulario1, .contenedor_formulario2{
     width: 420px;
-    height: 600px;
+    height: 680px;
     border-radius: 15px;
     border-width: 2px;
     border-color: #275f42;
@@ -14,6 +14,7 @@
     box-shadow: 5px 5px 15px #275f42;
     /* SE AGREGA UNA POSICION RELATIVA PARA EL BOTON DE GUARDAR */
     position: relative;
+    margin-left: 20%;
 }
 
 
@@ -89,8 +90,8 @@ label{
     text-align: center;
     right: 0;
     left: 0;
-    bottom: 0;
-    margin: 0 auto;
+    bottom: 3%;
+    margin:  auto;
     /* SE AGREGA UNA POSICION ABSOLUTA PARA EL UBICAR EL BOTON AL FINAL */
     position: absolute;
 }

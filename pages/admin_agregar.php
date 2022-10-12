@@ -1,5 +1,5 @@
 <?php
-    //MENU DEL ADMIN, CON DASHBOARD
+    //CONSULTAR AUSENTISMOS
     include "../conexion.php";
     include "../logic/admin_securityLogic.php";
 
@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
+    
+    <!-- Bootstrap - STILE FOR CHECKBOXES -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <title>Admin</title>
 </head>
@@ -41,15 +44,9 @@
             <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
         </div>
         <div class="contenedor_nombre_adm">
-            <span> BIENVENIDO </span>
-            <span>
-                <?php
-                    echo $nombre_admin;
-                ?>
-
-            </span>
+            <span> Agregar Ausentismo </span>            
         </div>
-        <!--  <div class="contenedor_admin">
+        <!-- <div class="contenedor_admin">
             Nombre de usuario:
             <span class="info_admin">
                 <?php
@@ -71,34 +68,19 @@
                 ?>
             </span>
 
+
             <div class="contenedor_cerrar_sesion" >
                 <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-            </div> 
-        </div> -->
+            </div> -->
     </div>
 </header>
-
-<!-- BARRA DE NAVEGACION 
-<div class="contenedor_menu">
-
-    <div class="contenedor_listas">
-        <ul>
-            <a href="../index.php"><li class="btn-inicio-go_home">Menu Principal</li></a>
-            <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
-            <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
-
-        </ul>
-    </div>
-</div> -->
-
-
 
 <!-- INICIO DE SLIDE MENU -->
 <div class = "contenedor_pr_menu">
     <div id="slide-menu" class="menu-expanded">
 
-        <!-- HEADER -->
-        <!--<div id="header">
+        <!-- HEADER 
+        <div id="header">
 
             <div id="menu-btn">
                 <div class="btn-logo"></div>
@@ -180,7 +162,7 @@
                 </a>
             </div>
 
-        </div> 
+        </div>
 
         <!--
             =================================
@@ -196,59 +178,41 @@
 </div>
 
 
-<!-- CONTENEDOR CON TABLA DE USUARIOS -->
-<div class="contenedor_tabla">
-    <table class="users_table">
-        <tr>
-            <th>CEDULA</th>
-            <th>NOMBRE</th>
-            <th>CORREO</th>
-            <th>DEPENDENCIA</th>
-            <th>TIPO USUARIO</th>
-            <th>LOGIN</th>
 
-        </tr>
-        <?php
-            $sqli = "SELECT * FROM usuarios";
-            $result = mysqli_query($conectar, $sqli);
-            while($mostrar = mysqli_fetch_array($result)){
-        ?>
-        <tr>
 
-            <td><?php echo $mostrar['Cedula']?></td>
-            <td><?php echo $mostrar['Nombre']?></td>
-            <td><?php echo $mostrar['Correo']?></td>
-            <td><?php echo $mostrar['Dependencia']?></td>
-            <td><?php echo $mostrar['TipoUsuario']?></td>
-            <td><?php echo $mostrar['login']?></td>
-            
-        </tr>
-        <?php
-            }
-        ?>
-    </table>
+
+<!-- BOTON PARA AGREGAR REGISTRO -->
+<div class="container">    
+    <br/>
+    <div class="row">
+        <div class="col-md-5">
+        
+        </div>
+        <div class="col-md-3">
+            <a name="reporte" id="" class="btn btn-primary" href="admin_menu.php" role="button"> 
+                Agregar
+            </a>
+        </div>
+    </div>
 </div>
-
 
 
 <!-- SCRIPT DE PARTICULAS -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="../js/app.js"></script>
+<!-- INSTALACION DE JQUERY -->
+<script src="../js/jquery.min.js"></script>
 
 
-<!-- SCRIPT MENU LATERAL
-<script>
-    const btn = document.querySelector('#menu-btn');
-    const menu = document.querySelector('#slide-menu');
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<script src="../js/consultar.js"></script>
 
 
-    btn.addEventListener('click', e => {
-        menu.classList.toggle("menu-expanded");
-        window.scrollTo(150,150);
-        menu.classList.toggle("menu-collapsed");
-    });
-
-</script>  -->
 
 
 </body>

@@ -50,7 +50,7 @@
             Nombre de usuario:
             <span class="info_admin">
                 <?php
-                    echo " $nombre_admin";
+                    //echo " $nombre_admin";
                 ?>
             </span><br>
             <span>
@@ -58,13 +58,13 @@
             </span>
             <span class="info_admin">
                 <?php
-                    echo " $id_admin";
+                    //echo " $id_admin";
                 ?>
             </span><br>
                 Tipo de usuario:
             <span>
                 <?php
-                    echo $tipo_usuario;
+                    //echo $tipo_usuario;
                 ?>
             </span>
 
@@ -177,19 +177,6 @@
     </div>
 </div>
 
-
-<!-- BARRA DE NAVEGACION 
-<div class="contenedor_menu">
-
-    <div class="contenedor_listas">
-        <ul>
-            <a href="../index.php"><li class="btn-inicio-go_home">Menu Principal</li></a>
-            <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
-            <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
-
-        </ul>
-    </div>
-</div> -->
 
 <!-- CONTENEDOR DE CHECKBOXES PARA LOS FILTROS -->
 <div class="container offset-md-2 col-md-8">

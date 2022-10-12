@@ -50,10 +50,16 @@ ESTILOS CONTENEDRO TABLA
 
 .contenedor_tabla{
     margin-top: 50px;
-    margin-left: var(--width);
+    margin-left: 270px; /*var(--width)*/
+    position: relative;
+    width: 80%;
+
+    /* PARA QUE LA TABLA DE PRODUCTOS TENGA SCROLL */
+    height: 80vh;
+    overflow-y: auto;
 }
 
-.users_table {
+.users_table { 
     font-size: 18px;
     margin: auto;
     margin-top: 1em;
@@ -61,7 +67,6 @@ ESTILOS CONTENEDRO TABLA
     border-radius: 2px;
     text-align: center;
     font-family: 'Kanit', sans-serif;
-    width: 95%;
 }
 .users_table th, td{
     border: 1px solid black;

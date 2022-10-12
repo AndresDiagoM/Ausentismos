@@ -1,5 +1,6 @@
 <?php
     include ("conexion.php");
+    //include "./logic/validate_sessionLogic.php";
 
     session_start();
     error_reporting(0);
@@ -75,11 +76,11 @@
 
                     </span>
                 </div>
-                <div class="contenedor_clt">
+                <!-- <div class="contenedor_clt">
                     Nombre de usuario:
                     <span class="info_clt">
                         <?php
-                            echo " $nombre_cliente";
+                            //echo " $nombre_cliente";
                         ?>
                     </span><br>
                     <span>
@@ -87,20 +88,20 @@
                     </span>
                     <span class="info_admin">
                         <?php
-                            echo " $id_cliente";
+                            //echo " $id_cliente";
                         ?>
                     </span><br>
                     Tipo de usuario:
                     <span>
                         <?php
-                            echo $autentication;
+                            //echo $autentication;
                         ?>
                     </span>
 
 
                     <div class="contenedor_cerrar_sesion" >
                         <a href="logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-                    </div>
+                    </div> -->
                 </div>
             <?php
                 }
@@ -119,7 +120,7 @@
         <div class = "contenedor_pr_menu">
             <div id="slide-menu" class="menu-collapsed">
 
-                <!-- HEADER -->
+                <!-- HEADER 
                 <div id="header">
 
                     <div id="menu-btn">
@@ -129,7 +130,7 @@
                     </div>
                     <div id="title"><span>PERFIL</span></div>
 
-                </div>
+                </div> -->
 
                 <!-- PROFILE -->
                 <div id="profile">
@@ -332,18 +333,18 @@
     ?>
 
 
-    <!-- BARRA DE NAVEGACION -->
+    <!-- BARRA DE NAVEGACION 
     <div class="contenedor_menu">
 
         <div class="contenedor_listas">
             <ul>
                 <a href="index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-                <!--<a href="pages/suscription.php"><li>Suscripciones</a><i class="fa fa-angle-down"></i>
+                <a href="pages/suscription.php"><li>Suscripciones</a><i class="fa fa-angle-down"></i>
                     <ul>
                         <a href="pages/compras.php?suscp=Prem"><li> Premiun</li></a>
                         <a href="pages/compras.php?suscp=Basic"><li> Básico</li></a>
                     </ul>
-                </li> -->
+                </li> 
                 <a href="pages/quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
 
                 <?php
@@ -365,13 +366,13 @@
 
             </ul>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- DISEÑO DE INICIO SESION-->
 
     <div id="particles-js"></div>
-    <div class="contenedor_form">
+    <!-- <div class="contenedor_form"> -->
         <form action="logic/inicio_sesionLogic.php" method="POST" >
             <div class="login-box">
                 <h1>INICIO DE SESIÓN</h1> <!-- El título de Inicio de sesión -->
@@ -438,13 +439,13 @@
                 <button type="submit" class="btn-login">ACCEDER</button> <!-- Botón de inicio de sesión implementado con el botón -->
             </div>
         </form>
-    </div>
+    <!--</div> -->
 
 <!-- Insercion de particulas -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="js/app.js"></script>
 
-<!-- SCRIPT MENU LATERAL-->
+<!-- SCRIPT MENU LATERAL
 <script>
     const btn = document.querySelector('#menu-btn');
     const menu = document.querySelector('#slide-menu');
@@ -456,7 +457,7 @@
         menu.classList.toggle("menu-collapsed");
     });
 
-</script>
+</script> -->
 
 </body>
 </html>
