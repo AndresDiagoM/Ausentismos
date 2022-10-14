@@ -280,7 +280,7 @@
         
         </div>
         <div class="col-md-3">
-            <a name="reporte" id="" class="btn btn-primary" href="admin_menu.php" role="button"> 
+            <a name="reporte" id="" class="btn btn-primary" href="../logic/ausen_excel.php" role="button"> 
                 Reporte
             </a>
         </div>

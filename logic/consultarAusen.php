@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require("../conexion.php");
 
         //print_r($_POST); exit; para observar en el navegador con inspeccionar elemento
@@ -38,7 +39,7 @@
 
 
         $sqli = "SELECT * FROM ausentismos ".$extra_query;
-        $ausentismos = $conectar->query($sqli);  //print_r($ausentismos);
+        $ausentismos = $conectar->query($sqli);  print_r($sqli); exit;
 
         $ausen_list = [];
 
@@ -62,5 +63,7 @@
         }
 
         //print_r($ausen_list);  //en chrome hacer CTRL+U para ver mejor el arreglo
+        
+        $_SESSION['ausen_list'] = $sqli;
         echo json_encode($ausen_list);
 ?>

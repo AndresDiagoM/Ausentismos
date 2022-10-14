@@ -1,6 +1,6 @@
 /*!
  * Se comunica con el archivo consultarAusen.php donde se realiza la busqueda o query MySQL
- * Se realiza un filtrado dináico mediante checkboxes
+ * Se realiza un filtrado dinámico mediante checkboxes
  */
 
 $(function()
