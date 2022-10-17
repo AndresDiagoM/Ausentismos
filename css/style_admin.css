@@ -49,24 +49,40 @@ ESTILOS CONTENEDRO TABLA
 ===================================== */
 
 .contenedor_tabla{
-    margin-top: 50px;
+    margin-top: 1cm;
     margin-left: 270px; /*var(--width)*/
     position: relative;
     width: 80%;
 
     /* PARA QUE LA TABLA DE PRODUCTOS TENGA SCROLL */
     height: 80vh;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .users_table { 
-    font-size: 18px;
+    
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 2px;
+    /*font-size: 18px;
     margin: auto;
     margin-top: 1em;
     border: 1px solid black;
     border-radius: 2px;
     text-align: center;
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Kanit', sans-serif; */
+}
+.users_table td:nth-child(3) { /* ANCHO DE COLUMNAS 3 = columna de nombre */
+    width: 15%;
+}
+.users_table td:nth-child(5) { /* 5 = columna de fecha_fin */
+    width: 10%;
+}
+.users_table td:nth-child(7) { /* 7 es OBSERVACION*/
+    width: 10%;
+}
+.users_table td:nth-child(8) { /* 8 es SEGURIDAD*/
+    width: 10%;
 }
 .users_table th, td{
     border: 1px solid black;
@@ -74,7 +90,6 @@ ESTILOS CONTENEDRO TABLA
 .users_table tbody{
     border: 1px solid black;
 }
-
 
 
 /*  =================================================

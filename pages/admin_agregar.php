@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
+    <link rel="stylesheet" href="../css/style_form.css">
     
     <!-- Bootstrap - STILE FOR CHECKBOXES -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -46,32 +47,6 @@
         <div class="contenedor_nombre_adm">
             <span> Agregar Ausentismo </span>            
         </div>
-        <!-- <div class="contenedor_admin">
-            Nombre de usuario:
-            <span class="info_admin">
-                <?php
-                    echo " $nombre_admin";
-                ?>
-            </span><br>
-            <span>
-                ID usuario:
-            </span>
-            <span class="info_admin">
-                <?php
-                    echo " $id_admin";
-                ?>
-            </span><br>
-                Tipo de usuario:
-            <span>
-                <?php
-                    echo $tipo_usuario;
-                ?>
-            </span>
-
-
-            <div class="contenedor_cerrar_sesion" >
-                <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-            </div> -->
     </div>
 </header>
 
@@ -178,23 +153,168 @@
 </div>
 
 
-
-
-
-<!-- BOTON PARA AGREGAR REGISTRO -->
-<div class="container">    
-    <br/>
-    <div class="row">
-        <div class="col-md-5">
-        
-        </div>
-        <div class="col-md-3">
-            <a name="reporte" id="" class="btn btn-primary" href="admin_menu.php" role="button"> 
-                Agregar
-            </a>
-        </div>
+<!-- CONTENEDOR DE CUADROS DE BÚSQUEDA -->
+<div class="container offset-md-5 col-md-8">
+    <br>
+    
+    <div class="col-md-7">
+        <header class="main-header">
+            <h4>
+                <span class="icon-title">
+                    <i class="fas fa-filter"></i>
+                </span>
+                BUSCAR
+            </h4>
+        </header>
     </div>
+    
+    <form class="row" id="auto_llenar">
+
+        <div class="col-3">
+                <h6>C&eacute;dula</h6>
+                <div class="form-input">
+                    <input type="text" class="form-input" id="cedula1" name="Cedula[]" size="20" placeholder="Ingrese la cédula">
+                </div>
+        </div>
+
+        <div class="col-3">
+                <h6>Nombre</h6>
+                <div class="form-input">
+                    <input type="text" class="form-input" id="nombre1" name="Nombre[]" size="20" placeholder="Ingrese el nombre">
+                </div>
+        </div>
+
+    </form>
+    
+    <br>
 </div>
+
+<!-- CONTENEDOR DE FORMULARIO // ESTILO: ../css/style_form.css -->
+<div class="contenedor_form">
+    <h2>Agregar Ausentismo</h2>
+
+    <form class="form" name="formulario" id="form_register" action="../logic/registrarAusen_form.php" method="POST" >
+
+        <!-- INPUT DE NOMBRES DE USUARIO -->
+        <div class="form_container">
+            <label for="Nombre[]"> NOMBRE </label>
+            <input type="text" name="Nombre[]" class="input_decor" id="nombre" placeholder="Nombres y apellidos" value="" required>
+            <span class="form_line"></span>
+        </div>
+        
+        <!-- INPUT DE CÉDULA -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="Cedula[]"> CÉDULA </label>
+                <input type="text" name="Cedula_F[]" class="input_decor" id="cedula" placeholder="Número de identificación"  title="La identifiación solo debe contener carácteres numéricos" required>
+                <span class="form_line"></span>
+            </div>
+        </div>
+
+
+        <!-- INPUT DEL cargo -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="Cargo[]"> CARGO </label>
+                <input type="text" name="Cargo[]" class="input_decor" id="cargo" value="" placeholder="Cargo del funcionario"  required>
+                <span class="form_line"></span>
+            </div>
+        </div>
+
+        <!-- INPUT DEL departamento -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="Departamento[]"> DEPARTAMENTO </label>
+                <input type="text" name="Departamento[]" id="departamento" class="input_decor" placeholder="Digite el departamento"  required>
+                <span class="form_line"></span>
+            </div>
+        </div>
+
+        <!-- INPUT DEL facultad -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="Facultad[]"> FACULTAD </label>
+                <input type="text" name="Facultad[]" id="facultad" class="input_decor" placeholder="Digite la facultad"  required>
+                <span class="form_line"></span>
+            </div>
+        </div>
+
+        <!-- INPUT FECHA INICIO -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="Fecha_Inicio[]"> FECHA DE INICIO </label>
+                <input type="date" class="input_decor" id="fecha_inicio"  name="Fecha_Inicio[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
+                <span class="form_line"></span>
+            </div>
+        </div>
+
+        <!-- INPUT FECHA FIN -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="Fecha_Fin[]"> FECHA FIN </label>
+                <input type="date" class="input_decor" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
+                <span class="form_line"></span>
+            </div>
+        </div>
+
+        <!-- INPUT DE TIEMPO -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="Tiempo[]"> TIEMPO </label>
+                <input type="number" name="Tiempo[]" class="input_decor" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="200" required>
+                <span class="form_line"></span>
+            </div>
+        </div>
+
+        <!-- INPUT DE LA OBSERVACIÓN -->
+        <div class="form_container">
+            <div class="form_group">
+                <label for="Observacion[]"> OBSERVACIÓN </label>
+                <input type="text" name="Observacion[]" class="input_decor" id="observacion" placeholder="Observaciones" required>
+                <span class="form_line"></span>
+            </div>
+        </div>
+
+        <!-- INPUT DEL TIPO DE AUSENTISMO -->
+        <div class="form_container">
+            <div class="form-group">
+                <label for="Tipo_Ausentismo[]">TIPO DE AUSENTIMO</label>
+                <select class="input_decor" name="Tipo_Ausentismo[]" id="tipo_ausen">
+                    <option value="">Seleccione</option>
+                        <?php
+                            $sqli = "SELECT * FROM tipoausentismo";
+                            $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
+                    
+                            $ausen_list = [];
+                    
+                            while($tipo = $tipoAusentismos->fetch_assoc()){
+                                //$ausen_list[$tipo["ID"]]=$tipo;
+                                $ID = $tipo["ID"];
+                                $Nombre=$tipo["TipoAusentismo"];
+                                /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
+                        ?>
+                        <option value=<?php echo $ID; ?> > 
+                            <?php echo $Nombre; ?>  
+                        </option>  
+
+                        <?php
+                            }
+                        ?>
+                </select>
+            </div>
+        </div>
+
+        <input type="hidden" name="ID_Usuario[]"  id="id_usuario" value=<?php echo $id_admin; ?> >
+        
+        <!-- BOTON DE REGISTRO-->
+        <div class="contenedor_guardar">
+            <button type="submit" class="btn_registrar">REGISTRAR</button>
+        </div>
+
+    </form>
+</div>
+
+
 
 
 <!-- SCRIPT DE PARTICULAS -->
@@ -210,10 +330,29 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-<script src="../js/consultar.js"></script>
+<script src="../js/registrar.js"></script>
 
+<script>
+    //SCRIPT para colocar en fecha inicial, la fecha con mes actual
+    //function DateNow()
+    //{        
+        var date = new Date();
 
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
 
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+        //var today = year + "-" + month + "-0" + 1 ;  
+        //var today = "2019-07-22";
+        document.getElementById("fecha_inicio").value = today; 
+        document.getElementById("fecha_fin").value = today; 
+        //return today;
+    //}
+</script>
 
 </body>
 </html>

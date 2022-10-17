@@ -41,8 +41,16 @@
         $hojaActiva->setCellValue('E'.$fila, $ausentismo['Observacion']);
         $hojaActiva->setCellValue('F'.$fila, $ausentismo['Seguridad_Trabajo']);
         $hojaActiva->setCellValue('G'.$fila, $ausentismo['ID_Usuario']);
-
-        $hojaActiva->setCellValue('H'.$fila, $ausentismo['Tipo_Ausentismo']);
+            
+        if($ausentismo['Tipo_Ausentismo'] == 1){
+                $hojaActiva->setCellValue('H'.$fila, 'INCAPACIDAD');
+        }elseif ($ausentismo['Tipo_Ausentismo'] == 2){
+                $hojaActiva->setCellValue('H'.$fila, 'COMPENSATORIO');
+        }elseif ($ausentismo['Tipo_Ausentismo'] == 3){
+                $hojaActiva->setCellValue('H'.$fila, 'PERMISO');
+        }elseif ($ausentismo['Tipo_Ausentismo'] == 4){
+                $hojaActiva->setCellValue('H'.$fila, 'LICENCIA');
+        }
 
         $fila++;
     }

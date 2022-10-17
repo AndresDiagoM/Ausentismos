@@ -51,6 +51,7 @@ function get_ausentismos()
                     "<tr>"+
                     "<td>"+key+"</td>"+
                     "<td>"+Ausen.Cedula_F+"</td>"+
+                    "<td>"+Ausen.Nombre+"</td>"+
                     "<td>"+Ausen.Fecha_Inicio+"</td>"+
                     "<td>"+Ausen.Fecha_Fin+"</td>"+
                     "<td>"+Ausen.Tiempo+"</td>"+

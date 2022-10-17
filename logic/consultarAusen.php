@@ -38,8 +38,8 @@
         }
 
 
-        $sqli = "SELECT * FROM ausentismos ".$extra_query;
-        $ausentismos = $conectar->query($sqli);  print_r($sqli); exit;
+        $sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query;
+        $ausentismos = $conectar->query($sqli);  //print_r($sqli); exit;
 
         $ausen_list = [];
 
@@ -64,6 +64,6 @@
 
         //print_r($ausen_list);  //en chrome hacer CTRL+U para ver mejor el arreglo
         
-        $_SESSION['ausen_list'] = $sqli;
+        $_SESSION['ausen_list'] = $sqli; //Para guardar el SQL query y usarlo con el boton de reporte para generar archivo excel 
         echo json_encode($ausen_list);
 ?>

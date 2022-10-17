@@ -194,8 +194,8 @@
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
 <!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
-<div class="col-md-9 contenedor_tabla"> 
-    <table class="table table-bordered ">
+<div class="contenedor_tabla"> 
+    <table class="users_table"> <!-- BOOSTRAP4: table table-bordered -->
         
         <tr>
             <form class="row" id="multi-filters">
@@ -213,6 +213,7 @@
                         </li>
                     </ul>
             </th>
+            <th>NOMBRE</th>
             <th>
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
@@ -220,7 +221,7 @@
                             FECHA INICIO
                             </a>
                             <div class="dropdown-menu">
-                                <input type="date" class="form-check-input" id="fecha_inicio"  name="Fecha_Inicio[]"  min="2018-01-01"> <!-- //value="2019-07-22" -->
+                                <input type="date" class="form-date" id="fecha_inicio"  name="Fecha_Inicio[]" value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
                             </div>
                         </li>
                     </ul>
@@ -228,7 +229,7 @@
             <th>FECHA FIN</th>
             <th>TIEMPO</th>
             <th>OBSERVACIÓN</th>
-            <th>Seguridad_Trabajo</th>
+            <th>Seguridad Trabajo</th>
             <th>ID_USUARIO</th>
             <th>
                     <ul class="navbar-nav ml-auto">                    
@@ -315,7 +316,7 @@
     if (day < 10) day = "0" + day;
 
     //var today = year + "-" + month + "-" + day;
-    //var today = year + "-" + month + "-0" + 1 ;  
+    //var today =  +year + "-" + month + "-" + (day+1-day) ;  
     var today = "2019-07-22";
     document.getElementById("fecha_inicio").value = today; 
 </script>
