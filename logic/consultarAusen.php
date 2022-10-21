@@ -39,12 +39,16 @@
 
 
         $sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query;
+        $sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
+        INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario ".$extra_query;
         $ausentismos = $conectar->query($sqli);  //print_r($sqli); exit;
 
         $ausen_list = [];
 
         while($ausentismo = $ausentismos->fetch_assoc()){
             $ausen_list[$ausentismo["ID"]]=$ausentismo;
+            
+            
 
             if($ausentismo["Tipo_Ausentismo"]==1){
                 $replacement = array("Tipo_Ausentismo" => "INCAPACIDAD");

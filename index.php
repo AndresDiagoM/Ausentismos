@@ -2,6 +2,7 @@
     include ("conexion.php");
     //include "./logic/validate_sessionLogic.php";
 
+    session_set_cookie_params(0);
     session_start();
     error_reporting(0);
     $bandera = false;

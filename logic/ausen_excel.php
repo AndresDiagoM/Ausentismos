@@ -1,20 +1,26 @@
 <?php
     //Generar un archivo excel con la tabla de ausentismos
     require '../vendor/autoload.php';
+    //use PhpOffice\PhpSpreadsheet\{SpreadSheet, IOFactory};
+    use PhpOffice\PhpSpreadsheet\SpreadSheet;
+    use PhpOffice\PhpSpreadsheet\IOFactory;
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx; //Csv, Xls
+
     require("../conexion.php");
 
     session_start();
     $sqli = $_SESSION['ausen_list'];
+    
+        $nombre_admin   = $_SESSION['NOM_USUARIO'];
+        $id_admin       = $_SESSION['ID_USUARIO'];
+        $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
-    //$nombre_admin   = $_SESSION['NOM_USUARIO'];
-    //$id_admin = $_SESSION['ID_USUARIO'];
 
-    use PhpOffice\PhpSpreadsheet\{SpreadSheet, IOFactory};
-    use PhpOffice\PhpSpreadsheet\Writer\Xlsx; //Csv, Xls
+    
 
     //CREAR ARCHIVO EXCEL
     $excel = new SpreadSheet();
-    $excel -> getProperties()->setCreator("Andres")->setTitle("Mi excel"); //metadatos
+    $excel -> getProperties()->setCreator($nombre_admin)->setTitle("Mi excel"); //metadatos
     $excel->setActiveSheetIndex(0);  //trabajar con la primera hoja del excel
     $hojaActiva = $excel->getActiveSheet();
     $hojaActiva->setTitle("Funcionarios");

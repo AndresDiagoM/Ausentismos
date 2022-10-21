@@ -99,3 +99,9 @@ ESTILOS CONTENEDRO TABLA
 .contenido{
     margin-left: 5%;
 }
+.contenedor_tabla2{
+    margin-top: 1cm;
+    margin-left: 270px; /*var(--width)*/
+    position: relative;
+    width: 80%;
+}

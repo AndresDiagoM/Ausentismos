@@ -41,37 +41,12 @@
 
     <div class="contenedor_principal">
         <div class="contenedor_logo">
-            <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
+            <a href="admin_menu.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
         </div>
         <div class="contenedor_nombre_adm">
             <span> Consultar Ausentismos </span>            
         </div>
-        <!-- <div class="contenedor_admin">
-            Nombre de usuario:
-            <span class="info_admin">
-                <?php
-                    echo " $nombre_admin";
-                ?>
-            </span><br>
-            <span>
-                ID usuario:
-            </span>
-            <span class="info_admin">
-                <?php
-                    echo " $id_admin";
-                ?>
-            </span><br>
-                Tipo de usuario:
-            <span>
-                <?php
-                    echo $tipo_usuario;
-                ?>
-            </span>
-
-
-            <div class="contenedor_cerrar_sesion" >
-                <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-            </div> -->
+        
     </div>
 </header>
 
@@ -230,7 +205,7 @@
             <th>TIEMPO</th>
             <th>OBSERVACIÓN</th>
             <th>Seguridad Trabajo</th>
-            <th>ID_USUARIO</th>
+            <th>NOMBRE USUARIO</th>
             <th>
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">

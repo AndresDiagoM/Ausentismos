@@ -8,7 +8,7 @@ h5{
 
 /*Contenerdor <div> del formulario*/
 .contenedor_form{
-    width: 50vw;
+    width: 50%;
     height: 90vh;
     background: #3ca7a1;
     border-radius: 15px;
@@ -34,6 +34,7 @@ h5{
 .form_container{
     margin-top: 1em;
     width: 100%;
+    display: inline-block;
 }
 .form_group{
     position: relative;
@@ -51,7 +52,7 @@ label{
     text-decoration: none;
     font-family: 'kanit', sans-serif;
     text-align: center;
-    width: 20vw;
+    width: 300px;
 }
 .contenedor_img {
     width: 100px;
@@ -81,4 +82,19 @@ label{
 .btn_registrar:hover{
     background-color: #35A6A0;
     color: white;
+}
+
+
+/*Sobre escribir la clase de boostrap*/
+.contenedor_form_agregar{
+    width: 75%;
+    /*height: 90vh;*/    
+    margin-top: 50vh; 
+    /*left: 50vw;*/
+    margin-left: 55vw;
+    position: relative;
+    transform: translate(-35vw, -50vh );
+    /*box-sizing: border-box;*/
+    font-family: 'kanit', sans-serif;
+    text-align: center;
 }

@@ -29,8 +29,10 @@
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
     <link rel="stylesheet" href="../css/style_form.css">
     
-    <!-- Bootstrap - STILE FOR CHECKBOXES -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Admin</title>
 </head>
@@ -42,7 +44,7 @@
 
     <div class="contenedor_principal">
         <div class="contenedor_logo">
-            <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
+            <a href="admin_menu.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
         </div>
         <div class="contenedor_nombre_adm">
             <span> Agregar Ausentismo </span>            
@@ -189,132 +191,150 @@
     <br>
 </div>
 
-<!-- CONTENEDOR DE FORMULARIO // ESTILO: ../css/style_form.css -->
-<div class="contenedor_form">
-    <h2>Agregar Ausentismo</h2>
 
-    <form class="form" name="formulario" id="form_register" action="../logic/registrarAusen_form.php" method="POST" >
+<!-- ESPACIO PARA EL FORMULARIO -->
+<div class="contenedor_form_agregar card-group">
 
-        <!-- INPUT DE NOMBRES DE USUARIO -->
-        <div class="form_container">
-            <label for="Nombre[]"> NOMBRE </label>
-            <input type="text" name="Nombre[]" class="input_decor" id="nombre" placeholder="Nombres y apellidos" value="" required>
-            <span class="form_line"></span>
-        </div>
-        
-        <!-- INPUT DE CÉDULA -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="Cedula[]"> CÉDULA </label>
-                <input type="text" name="Cedula_F[]" class="input_decor" id="cedula" placeholder="Número de identificación"  title="La identifiación solo debe contener carácteres numéricos" required>
-                <span class="form_line"></span>
+    
+        <div class="card"  >
+            <div class="card-header">
+                Datos del funcionario
+            </div>
+            <div class="card-body">
+                
+                <form name="formulario" id="form_register" action="../logic/registrarAusen_form.php" method="POST" >
+                    <!-- INPUT DE NOMBRES DE USUARIO -->
+                    <div class="form_container">
+                        <label for="Nombre[]"> NOMBRE </label>
+                        <input type="text" name="Nombre[]" class="input_decor" id="nombre" placeholder="Nombres y apellidos" value="" required>
+                        <span class="form_line"></span>
+                    </div>
+
+                    <!-- INPUT DE CÉDULA -->
+                    <div class="form_container">
+                        <div class="form_group">
+                            <label for="Cedula[]"> CÉDULA </label>
+                            <input type="text" name="Cedula_F[]" class="input_decor" id="cedula" placeholder="Número de identificación"  title="La identifiación solo debe contener carácteres numéricos" required>
+                            <span class="form_line"></span>
+                        </div>
+                    </div>
+
+                    <!-- INPUT DEL cargo -->
+                    <div class="form_container">
+                        <div class="form_group">
+                            <label for="Cargo[]"> CARGO </label>
+                            <input type="text" name="Cargo[]" class="input_decor" id="cargo" value="" placeholder="Cargo del funcionario"  required>
+                            <span class="form_line"></span>
+                        </div>
+                    </div>
+
+                    <!-- INPUT DEL departamento -->
+                    <div class="form_container">
+                        <div class="form_group">
+                            <label for="Departamento[]"> DEPARTAMENTO </label>
+                            <input type="text" name="Departamento[]" id="departamento" class="input_decor" placeholder="Digite el departamento"  required>
+                            <span class="form_line"></span>
+                        </div>
+                    </div>
+
+                    <!-- INPUT DEL facultad -->
+                    <div class="form_container">
+                        <div class="form_group">
+                            <label for="Facultad[]"> FACULTAD </label>
+                            <input type="text" name="Facultad[]" id="facultad" class="input_decor" placeholder="Digite la facultad"  required>
+                            <span class="form_line"></span>
+                        </div>
+                    </div>
             </div>
         </div>
+    
 
-
-        <!-- INPUT DEL cargo -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="Cargo[]"> CARGO </label>
-                <input type="text" name="Cargo[]" class="input_decor" id="cargo" value="" placeholder="Cargo del funcionario"  required>
-                <span class="form_line"></span>
+    
+        <div class="card">
+        <div class="card-header">
+            Datos del ausentismo
+        </div>
+        <div class="card-body">
+            
+            <!-- INPUT FECHA INICIO -->
+            <div class="form_container">
+                <div class="form_group">
+                    <label for="Fecha_Inicio[]"> FECHA DE INICIO </label>
+                    <input type="date" class="input_decor" id="fecha_inicio"  name="Fecha_Inicio[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
+                    <span class="form_line"></span>
+                </div>
             </div>
-        </div>
 
-        <!-- INPUT DEL departamento -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="Departamento[]"> DEPARTAMENTO </label>
-                <input type="text" name="Departamento[]" id="departamento" class="input_decor" placeholder="Digite el departamento"  required>
-                <span class="form_line"></span>
+            <!-- INPUT FECHA FIN -->
+            <div class="form_container">
+                <div class="form_group">
+                    <label for="Fecha_Fin[]"> FECHA FIN </label>
+                    <input type="date" class="input_decor" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
+                    <span class="form_line"></span>
+                </div>
             </div>
-        </div>
 
-        <!-- INPUT DEL facultad -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="Facultad[]"> FACULTAD </label>
-                <input type="text" name="Facultad[]" id="facultad" class="input_decor" placeholder="Digite la facultad"  required>
-                <span class="form_line"></span>
+            <!-- INPUT DE TIEMPO -->
+            <div class="form_container">
+                <div class="form_group">
+                    <label for="Tiempo[]"> TIEMPO </label>
+                    <input type="number" name="Tiempo[]" class="input_decor" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="200" required>
+                    <span class="form_line"></span>
+                </div>
             </div>
-        </div>
 
-        <!-- INPUT FECHA INICIO -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="Fecha_Inicio[]"> FECHA DE INICIO </label>
-                <input type="date" class="input_decor" id="fecha_inicio"  name="Fecha_Inicio[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
-                <span class="form_line"></span>
+            <!-- INPUT DE LA OBSERVACIÓN -->
+            <div class="form_container">
+                <div class="form_group">
+                    <label for="Observacion[]"> OBSERVACIÓN </label>
+                    <input type="text" name="Observacion[]" class="input_decor" id="observacion" placeholder="Observaciones" required>
+                    <span class="form_line"></span>
+                </div>
             </div>
-        </div>
 
-        <!-- INPUT FECHA FIN -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="Fecha_Fin[]"> FECHA FIN </label>
-                <input type="date" class="input_decor" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
-                <span class="form_line"></span>
+            <!-- INPUT DEL TIPO DE AUSENTISMO -->
+            <div class="form_container">
+                <div class="form-group">
+                    <label for="Tipo_Ausentismo[]">TIPO DE AUSENTIMO</label>
+                    <select class="input_decor" name="Tipo_Ausentismo[]" id="tipo_ausen">
+                        <option value="">Seleccione</option>
+                            <?php
+                                $sqli = "SELECT * FROM tipoausentismo";
+                                $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
+                        
+                                $ausen_list = [];
+                        
+                                while($tipo = $tipoAusentismos->fetch_assoc()){
+                                    //$ausen_list[$tipo["ID"]]=$tipo;
+                                    $ID = $tipo["ID"];
+                                    $Nombre=$tipo["TipoAusentismo"];
+                                    /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
+                            ?>
+                            <option value=<?php echo $ID; ?> > 
+                                <?php echo $Nombre; ?>  
+                            </option>  
+
+                            <?php
+                                }
+                            ?>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <!-- INPUT DE TIEMPO -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="Tiempo[]"> TIEMPO </label>
-                <input type="number" name="Tiempo[]" class="input_decor" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="200" required>
-                <span class="form_line"></span>
+            <input type="hidden" name="ID_Usuario[]"  id="id_usuario" value=<?php echo $id_admin; ?> >
+
+            <!-- BOTON DE REGISTRO-->
+            <div class="contenedor_guardar">
+                <button type="submit" class="btn_registrar">REGISTRAR</button>
             </div>
+
+            </form>
+
+
         </div>
-
-        <!-- INPUT DE LA OBSERVACIÓN -->
-        <div class="form_container">
-            <div class="form_group">
-                <label for="Observacion[]"> OBSERVACIÓN </label>
-                <input type="text" name="Observacion[]" class="input_decor" id="observacion" placeholder="Observaciones" required>
-                <span class="form_line"></span>
-            </div>
         </div>
-
-        <!-- INPUT DEL TIPO DE AUSENTISMO -->
-        <div class="form_container">
-            <div class="form-group">
-                <label for="Tipo_Ausentismo[]">TIPO DE AUSENTIMO</label>
-                <select class="input_decor" name="Tipo_Ausentismo[]" id="tipo_ausen">
-                    <option value="">Seleccione</option>
-                        <?php
-                            $sqli = "SELECT * FROM tipoausentismo";
-                            $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
-                    
-                            $ausen_list = [];
-                    
-                            while($tipo = $tipoAusentismos->fetch_assoc()){
-                                //$ausen_list[$tipo["ID"]]=$tipo;
-                                $ID = $tipo["ID"];
-                                $Nombre=$tipo["TipoAusentismo"];
-                                /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
-                        ?>
-                        <option value=<?php echo $ID; ?> > 
-                            <?php echo $Nombre; ?>  
-                        </option>  
-
-                        <?php
-                            }
-                        ?>
-                </select>
-            </div>
-        </div>
-
-        <input type="hidden" name="ID_Usuario[]"  id="id_usuario" value=<?php echo $id_admin; ?> >
-        
-        <!-- BOTON DE REGISTRO-->
-        <div class="contenedor_guardar">
-            <button type="submit" class="btn_registrar">REGISTRAR</button>
-        </div>
-
-    </form>
+    
 </div>
-
-
 
 
 <!-- SCRIPT DE PARTICULAS -->

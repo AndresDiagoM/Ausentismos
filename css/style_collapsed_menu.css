@@ -154,12 +154,12 @@ body{
 
 
 
-
 /* MENU EXPANDED */
 .menu-expanded{
     width: var(--width);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 100;
+    
 }
 .menu-expanded #header #title{
     display: inline-block;

@@ -1,4 +1,19 @@
-$(busqueda());
+$(function()
+{
+    busqueda()
+    
+    $(document).on('keyup', '#caja_busqueda', function(){
+
+        var valor = $(this).val();
+    
+        if(valor != ""){
+            busqueda(valor);
+    
+        }else{
+            busqueda();
+        }
+    });
+});
 
 function busqueda(consulta){
 
@@ -17,16 +32,3 @@ function busqueda(consulta){
     })
 
 }
-
-
-$(document).on('keyup', '#caja_busqueda', function(){
-
-    var valor = $(this).val();
-
-    if(valor != ""){
-        busqueda(valor);
-
-    }else{
-        busqueda();
-    }
-});

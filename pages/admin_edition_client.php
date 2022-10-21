@@ -37,7 +37,7 @@
 
     <div class="contenedor_principal">
         <div class="contenedor_logo">
-            <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
+            <a href="admin_menu.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
         </div>
         <div class="contenedor_nombre_adm">
             <span> EDICIÓN DE CLIENTES </span>

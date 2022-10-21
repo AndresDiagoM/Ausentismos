@@ -20,7 +20,7 @@ $(function()
         if(valor != "" && !isNaN(valor) ){
             get_ausentismos();
         }else{
-            //get_ausentismos();
+            get_ausentismos();
         }
         //get_ausentismos();
     });
@@ -57,7 +57,7 @@ function get_ausentismos()
                     "<td>"+Ausen.Tiempo+"</td>"+
                     "<td>"+Ausen.Observacion+"</td>"+ 
                     "<td>"+Ausen.Seguridad_Trabajo+"</td>"+
-                    "<td>"+Ausen.ID_Usuario+"</td>"+
+                    "<td>"+Ausen.Nombre_U+"</td>"+
                     "<td>"+Ausen.Tipo_Ausentismo+"</td>"+
                     "</tr>";
 
