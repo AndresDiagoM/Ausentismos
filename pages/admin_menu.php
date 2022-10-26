@@ -8,7 +8,7 @@ $nombre_admin   = $_SESSION['NOM_USUARIO'];
 $id_admin       = $_SESSION['ID_USUARIO'];
 $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
-
+    //Obtener numero de ausentismos de cada tipo 
     $sqli = "SELECT Tipo_Ausentismo, COUNT(*) FROM ausentismos GROUP BY Tipo_Ausentismo ORDER BY COUNT(*) DESC;";
     $numeros = $conectar->query($sqli);  //print_r($numeros);
 
@@ -276,12 +276,12 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                                     <!-- contenedor del icono de precio, y texto. D-flex hace que el icono y el texto esten en la mism linea -->
                                     <div class="d-flex mr-3">
                                         <h2 class="align-self-center mb-0">
-                                            <i class="icon ion-md-pricetag"></i>
+                                            <i class="icon ion-md-clipboard"></i>
                                         </h2>
                                     </div>
                                     <div class="align-self-center">
-                                        <h6 class="d-inline-block mb-0">$250</h6> <span class="badge badge-success ml-2"> 10% descuento </span>
-                                        <small class="d-block text-muted"> Permiso</small>
+                                        <h6 class="d-inline-block mb-0">Incapacidad</h6> <span class="badge badge-success ml-2"> Cita médica</span>
+                                        <small class="d-block text-muted"> 1 dia </small>
                                     </div>
                                 </div>
 
@@ -289,11 +289,11 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                                     <!-- contenedor del icono de precio, y texto. D-flex hace que el icono y el texto esten en la mism linea -->
                                     <div class="d-flex mr-3">
                                         <h2 class="align-self-center mb-0">
-                                            <i class="icon ion-md-pricetag"></i>
+                                            <i class="icon ion-md-clipboard"></i>
                                         </h2>
                                     </div>
                                     <div class="align-self-center">
-                                        <h6 class="d-inline-block mb-0">$250</h6> <span class="badge badge-success ml-2"> 10% descuento </span>
+                                        <h6 class="d-inline-block mb-0">Incapacidad</h6> <span class="badge badge-success ml-2"> Cita Médica </span>
                                         <small class="d-block text-muted"> Permiso</small>
                                     </div>
                                 </div>
@@ -302,11 +302,11 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                                     <!-- contenedor del icono de precio, y texto. D-flex hace que el icono y el texto esten en la mism linea -->
                                     <div class="d-flex mr-3">
                                         <h2 class="align-self-center mb-0">
-                                            <i class="icon ion-md-pricetag"></i>
+                                            <i class="icon ion-md-clipboard"></i>
                                         </h2>
                                     </div>
                                     <div class="align-self-center">
-                                        <h6 class="d-inline-block mb-0">$250</h6> <span class="badge badge-success ml-2"> 10% descuento </span>
+                                        <h6 class="d-inline-block mb-0">Incapacidad</h6> <span class="badge badge-success ml-2"> Cita Médica </span>
                                         <small class="d-block text-muted"> Permiso</small>
                                     </div>
                                 </div>

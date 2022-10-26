@@ -41,42 +41,16 @@
         <div class="contenedor_nombre_adm">
             <span> ELIMINACIÓN DE USUARIOS</span>
         </div>
-        <div class="contenedor_admin">
-            Nombre de usuario:
-            <span class="info_admin">
-                <?php
-                    echo " $nombre_admin";
-                ?>
-            </span><br>
-            <span>
-                ID usuario:
-            </span>
-            <span class="info_admin">
-                <?php
-                    echo " $id_admin";
-                ?>
-            </span><br>
-                Tipo de usuario:
-            <span>
-                <?php
-                    echo $tipo_usuario;
-                ?>
-            </span>
-
-
-
-            <div class="contenedor_cerrar_sesion" >
-                <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-            </div>
+        
     </div>
 </header>
 
 <!-- INICIO DE SLIDE MENU -->
 
 <div class = "contenedor_pr_menu">
-    <div id="slide-menu" class="menu-collapsed">
+    <div id="slide-menu" class="menu-expanded">
 
-        <!-- HEADER -->
+        <!-- HEADER 
         <div id="header">
 
             <div id="menu-btn">
@@ -86,7 +60,7 @@
             </div>
             <div id="title"><span>PERFIL</span></div>
 
-        </div>
+        </div> -->
 
         <!-- PROFILE -->
         <div id="profile">
@@ -161,7 +135,7 @@
 
 </div>
 
-<!-- BARRA DE NAVEGACION -->
+<!-- BARRA DE NAVEGACION
 <div class="contenedor_menu">
 
     <div class="contenedor_listas">
@@ -171,7 +145,7 @@
             <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
             <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
     </div>
-</div>
+</div>  -->
 
 
 <!-- CONTENEDORES DE BUSQUEDAS -->
@@ -195,7 +169,7 @@
 <script src="../js/app.js"></script>
 <script src="../js/search.js"></script>
 
-<!-- SCRIPT MENU LATERAL-->
+<!-- SCRIPT MENU LATERAL
 <script>
     const btn = document.querySelector('#menu-btn');
     const menu = document.querySelector('#slide-menu');
@@ -207,7 +181,7 @@
         menu.classList.toggle("menu-collapsed");
     });
 
-</script>
+</script> -->
 
 
 </body>

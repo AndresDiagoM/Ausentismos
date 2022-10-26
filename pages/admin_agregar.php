@@ -193,9 +193,7 @@
 
 
 <!-- ESPACIO PARA EL FORMULARIO -->
-<div class="contenedor_form_agregar card-group">
-
-    
+<div class="contenedor_form_agregar card-group">    
         <div class="card"  >
             <div class="card-header">
                 Datos del funcionario
@@ -247,13 +245,11 @@
                     </div>
             </div>
         </div>
-    
 
-    
         <div class="card">
-        <div class="card-header">
-            Datos del ausentismo
-        </div>
+            <div class="card-header">
+                Datos del ausentismo
+            </div>
         <div class="card-body">
             
             <!-- INPUT FECHA INICIO -->
@@ -325,15 +321,14 @@
 
             <!-- BOTON DE REGISTRO-->
             <div class="contenedor_guardar">
-                <button type="submit" class="btn_registrar">REGISTRAR</button>
+                <button type="submit" class="btn btn-primary">REGISTRAR</button>
             </div>
 
             </form>
 
 
         </div>
-        </div>
-    
+        </div>    
 </div>
 
 

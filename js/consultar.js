@@ -25,10 +25,17 @@ $(function()
         //get_ausentismos();
     });
 
-    $(".form-date").on("click", function () 
+    /*$(".form-date").on("click", function () 
     {
         get_ausentismos(); 
-    }); 
+    }); */
+
+    $(".form-date").on("change",function(){
+        //var selected = $(this).val();
+        get_ausentismos(); 
+        //alert(selected);
+    });
+
 });
 
 function get_ausentismos()

@@ -44,7 +44,7 @@
             $Id_fila = $fila['Cedula_U'];
             $salida.="<tr>
                         <td>".$fila['Cedula_U']."      </td>
-                        <td>".$fila['Nombre']."      </td>
+                        <td>".$fila['Nombre_U']."      </td>
                         <td>".$fila['Correo']."      </td>
                         <td>".$fila['Dependencia']."       </td>
                         <td>".$fila['TipoUsuario']."       </td>

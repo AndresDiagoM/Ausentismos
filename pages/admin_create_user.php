@@ -96,7 +96,7 @@
 
 <!-- INICIO DE SLIDE MENU -->
 <div class = "contenedor_pr_menu">
-    <div id="slide-menu" class="menu-collapsed">
+    <div id="slide-menu" class="menu-expanded">
 
         <!-- HEADER 
         <div id="header">
@@ -194,7 +194,7 @@
 </div> -->
 
 <!-- CONTENEDOR DE FORMULARIO -->
-<div class="contenedor_form2">
+<div class="contenedor_form">
     <h2>REGISTRO DE USUARIOS</h2>
     <h5>(CONSULTA Y ADMINISTRADOR)</h5>
     <form action="../logic/admin_create_userLogic.php" method="POST" class="form" name="formulario" onsubmit="return comprobarPSW()">
