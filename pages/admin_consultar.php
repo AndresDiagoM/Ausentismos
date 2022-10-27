@@ -18,8 +18,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script> -->
     <link rel="icon" href="../images/icon.png">
 
     <!-- CSS -->
@@ -28,7 +28,10 @@
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
     
     <!-- Bootstrap - STILE FOR CHECKBOXES -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+    
+    <!-- Bootstrap local -->
+    <link rel="stylesheet" href="../bootstrap-4.0.0-dist/css/bootstrap.min.css">
 
     <title>Admin</title>
 </head>
@@ -274,18 +277,21 @@
 
 
 <!-- SCRIPT DE PARTICULAS -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> 
 <script src="../js/app.js"></script>
+
 <!-- INSTALACION DE JQUERY -->
 <script src="../js/jquery.min.js"></script>
 
 
-<!-- bootstrap -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<!-- JQuery, AJAX, Bootstrap -->
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
+<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 
+<!-- Script que hace las consultas SQL -->
 <script src="../js/consultar.js"></script>
 
 <script>
