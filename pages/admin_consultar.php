@@ -7,7 +7,6 @@
     $nombre_admin   = $_SESSION['NOM_USUARIO'];
     $id_admin       = $_SESSION['ID_USUARIO'];
     $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
-
 ?>
 
 <!DOCTYPE html>
@@ -169,9 +168,8 @@
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
 <!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
-<div class="contenedor_tabla"> 
-    <table class="users_table"> <!-- BOOSTRAP4: table table-bordered -->
-        
+<div class="contenedor_tabla">         
+    <table class="users_table"> <!-- BOOSTRAP4: table table-bordered -->        
         <tr>
             <form class="row" id="multi-filters">
 
@@ -246,6 +244,17 @@
                 <!-- Aquí se inserta los datos desde el script ../js/consultar.js -->
         </tbody>
     </table>
+        
+    <!-- Contenedor de los botones del paginador de las consultas -->
+    <div class="col-md-12 text-center">
+        <ul class="pagination pagination-lg pager" style="margin-left:25rem" id="myPager">
+
+        </ul>
+    </div>
+
+    <h3 > Resultados: 
+        <span id="total_resultados"> </span>
+    </h3>
 </div>
 
 <!-- BOTON PARA GENERAR REPORTE -->

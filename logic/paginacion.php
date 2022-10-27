@@ -1,7 +1,7 @@
 <?php
     include("../conexion.php");
 
-    $limit=30;
+    $limit=100;
     //$pag=(int)@$_GET['pag'];
     if(isset($_GET['pag'])) {
         $pag = $_GET['pag'];
@@ -15,12 +15,12 @@
     $offset=($pag-1)*$limit;
 
     echo 'BUSQUEDA: '."SELECT * FROM funcionarios LIMIT $offset, $limit".' PAG:'.$pag.' OFFSET:'.$offset.' LIMIT:'.$limit;
-    $busqueda = $conectar->query("SELECT * FROM funcionarios LIMIT $offset, $limit"); //limit 50,20 es mostrar 20 registros desde el registro 50
+    $busqueda = $conectar->query("SELECT * FROM funcionarios ORDER BY Cedula LIMIT $offset, $limit"); //limit 50,20 es mostrar 20 registros desde el registro 50
     
     $busquedaTotal = $conectar->query("SELECT * FROM funcionarios");
     $total=$busquedaTotal->num_rows;
-
-    $tabla = '<table class="table table-striped table-hover">
+    $tabla = '';
+    /*$tabla = '<table class="table table-striped table-hover">
                 <thead>
                     <tr class="bg-primary">
                         <th>CEDULA</th>
@@ -32,7 +32,7 @@
                         <th>Salario</th>
                     </tr>
                 </thead>
-                <tbody>';
+                <tbody>';*/
     while($fila = $busqueda->fetch_assoc()){
         $tabla .= '<tr>
                         <td>'.$fila['Cedula'].'</td>
@@ -44,6 +44,8 @@
                         <td>'.$fila['Salario'].'</td>
                     </tr>';
     }
+
+    //Agregar links de las páginas
     $tabla .= '<tr><td class="text-center" colspan="4">';
         $totalpag = ceil($total/$limit); //ceil redondea el numero
         $links = array(); //creamos un array para guardar los links de las páginas
@@ -53,10 +55,6 @@
 
         $tabla .= implode(" ", $links);
 
-    $tabla .= '     </td>
-                </tr>
-                </tbody>
-            </table>';
-
-    
+    $tabla .= ' </td>
+                </tr>';
 ?>
