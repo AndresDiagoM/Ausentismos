@@ -31,7 +31,7 @@
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
     
     <!-- Bootstrap local -->
-    <link rel="stylesheet" href="../bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-4.4.1-dist/css/bootstrap.min.css">
 
     <title>Admin</title>
 </head>
@@ -286,10 +286,14 @@
 
 <!-- JQuery, AJAX, Bootstrap -->
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
 <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
-<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+
+<!-- LOCAL: JQuery, AJAX, Bootstrap -->
+<script src="../bootstrap-4.4.1-dist/js/jquery-3.6.1.min.js"></script>
+<script src="../bootstrap-4.4.1-dist/js/popper-1.16.0.min.js"></script>
+<script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
 
 <!-- Script que hace las consultas SQL -->
 <script src="../js/consultar.js"></script>
