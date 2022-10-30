@@ -95,6 +95,7 @@
 
 
 <!-- INICIO DE SLIDE MENU -->
+
 <div class = "contenedor_pr_menu">
     <div id="slide-menu" class="menu-expanded">
 
@@ -128,6 +129,7 @@
                 </a>
             </div>
 
+                
                 <!-- SEPARADOR -->
                 <div class="item separator">
                 </div>
@@ -161,6 +163,18 @@
                     <div class="icon"><img src="../images/add-admin.png" alt=""></div>
                     <div class="title"><span>Creación de usuarios</span></div>
 
+                </a>
+            </div>
+
+                <!-- SEPARADOR -->
+                <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="admin_edition_client.php">
+                <a href="../logic/cerrar_sesion.php">
+                    <div class="icon"><img src="../images/cerrar-sesion.png" alt=""></div>
+                    <div class="title"><span>Cerrar Sesión</span></div>
                 </a>
             </div>
 

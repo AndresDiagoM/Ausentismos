@@ -71,7 +71,6 @@ function get_ausentismos(pagina)
             data:$.param(form2),//form.serialize(), //aqui se pasa información de los inputs que están en el formulario HTML. serialize pasa los datos en arrays a PHP
             success: function (data)
             {
-
                 $("#filters-result").html(""); //limpiar la tabla que se muestra en HTML para borrar las busqeudas anteriores
                 $("#total_resultados").html("");
                 $("#myPager").html("");
@@ -96,7 +95,8 @@ function get_ausentismos(pagina)
                     //se hace el append de cada fila al body de la tabla en admin_consultar.php
                     $("#filters-result").append(row);
                 });
-                $("#myPager").append(data.botones);
+                //$("#myPager").append(data.botones);
+                $("#myPager").append(data.slider);
                 $("#total_resultados").append(data.total);
                 
             }

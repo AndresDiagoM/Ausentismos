@@ -28,6 +28,28 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
             $licencia = $numero['COUNT(*)'];
         }
     }
+
+    // 1.GRAFICO 1 : Obtener numero de ausentismos por mes del año, con nombre de mes y numero de ausentismos
+    $sqli2 = "SELECT MONTH(Fecha_Inicio) AS Mes, COUNT(*) AS Ausentismos FROM ausentismos GROUP BY MONTH(Fecha_Inicio) ORDER BY MONTH(Fecha_Inicio) ASC;";
+    $numeros2 = $conectar->query($sqli2);  //print_r($numeros2);
+
+    $NombreMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    $meses = [];
+    $mesesN = "";
+    $monthsArray = array();
+    while ($numero2 = $numeros2->fetch_assoc()) {
+        //echo "['".$numero['Tipo_Ausentismo']."',".$numero['COUNT(*)']."],";
+        $monthsArray[] = $numero2;
+        $meses[$numero2['Mes']] = $numero2['Mes'];
+        $mesesN .= "'".$numero2['Ausentismos']."',";    
+    }
+    //pasar los numeros del arreglo $meses a nombre con array $NombreMeses
+    foreach ($meses as $mes) {
+        $meses[$mes] = $NombreMeses[$mes-1];
+    }
+
+    //print_r( $meses); exit;
+    //echo $mesesN;
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +75,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
 
     <!-- Bootstrap local -->
-    <link rel="stylesheet" href="../bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-4.4.1-dist/css/bootstrap.min.css">
 
     <!-- ICONOS en https://ionic.io/ionicons/v4/usage#md-pricetag -->
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -255,14 +277,36 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
             <div class="container">
                 <div class="row">
 
-                    <!-- grafico 1 -->
-                    <div class="col-lg-8 my-3">
+                    <!-- grafico 1: Años -->                    
+                    <div class="col-lg-12 my-3">
                         <div class="card rounded-0 ">
-                            <div class="card-header bg-light">
-                                <h6 class="font-weight-bold mb-0">Numero de ausentismos año 2022 </h6>
+                            <div class="d-flex card-header bg-light">
+                                <h6 class="font-weight-bold mb-0 mr-3">Numero de ausentismos por mes </h6>
+                                
                             </div>
                             <div class="card-body">
-                                <canvas id="myChart"></canvas>
+                                <canvas id="monthsChart"></canvas>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- grafico 2: Meses -->                    
+                    <div class="col-lg-8 my-3">
+                        <div class="card rounded-0 ">
+                            <div class="d-flex card-header bg-light">
+                                <h6 class="font-weight-bold mb-0 mr-3">Ausentismos por tipo en el mes: </h6>                                
+                                <select class="" id="myChartOptions">
+                                    <?php
+                                        foreach((array) $meses as $key => $mes){        
+                                            echo "<option value='$key'>  $mes </option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="tiposChart"></canvas>
+                                
                             </div>
                         </div>
                     </div>
@@ -328,16 +372,23 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
 
     <!-- SCRIPT DE PARTICULAS -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+    <script src="../js/particles.min.js"></script>
     <script src="../js/app.js"></script>
 
     <!-- CDN: Libreria de chart.js para las gráficas -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Gráfico 1 -->    
+    <!-- INSTALACION DE JQUERY -->
+    <script src="../js/jquery.min.js"></script> 
+
+    <!-- LOCAL: JQuery, AJAX, Bootstrap 
+    <script src="../bootstrap-4.4.1-dist/js/jquery-3.6.1.min.js"></script> -->     
+    <script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+
+
     <?php include 'grafico1.php'; ?>
-    
 
 <!-- SCRIPT MENU LATERAL --> <!--
 <script>

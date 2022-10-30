@@ -65,7 +65,7 @@
         //$sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query;
         $sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
         INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario ".$extra_query;
-        $sqli .= " LIMIT $offset, $limit";
+        $sqli .= " ORDER BY ID ASC LIMIT $offset, $limit";
         $ausentismos = $conectar->query($sqli);  //print_r($sqli); exit;
         //SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario WHERE 1 AND ( Cedula_F LIKE '%%' ) 
         //AND ( Fecha_Inicio > '2019-07-22') LIMIT 0, 100 //que muestre los primeros 100 registros
@@ -101,7 +101,7 @@
         //print_r($ausen_list);  //en chrome hacer CTRL+U para ver mejor el arreglo
 
         //Agregar links de las páginas
-        $botones = '';//'<tr><td class="text-center" colspan="10">';
+        /*$botones = '';//'<tr><td class="text-center" colspan="10">';
         $totalpag = ceil($total/$limit); //ceil redondea el numero
         $links = array(); //creamos un array para guardar los links de las páginas
         for($i=1; $i<=$totalpag; $i++){
@@ -111,7 +111,38 @@
         }
         $botones .= implode(" ", $links);
         //$botones .= ' </td> </tr>';
-        $json['botones'] = $botones;
+        $json['botones'] = $botones; */
+
+
+        //Slider para no mostrar todos los botones de las páginas
+        $totalpag = ceil($total/$limit); //ceil redondea el numero
+        $slider = '<li class="page-item">';
+        if ($pag == "1") {
+            //$_GET["pag"] == "0";
+            //echo  "";
+        } else {
+            if ($pag > 1)
+                $ant = $pag - 1;
+            if($pag != "2"){
+                $slider.= "<input type='button' class='btn btn-primary mr-3' aria-label='Previous' value='1'>  </input>";
+            }            
+            $slider.= "<li class='page-item '><input type='button' class='btn btn-primary mr-3' value='" . ($pag - 1) . "' >  </input></li>";
+        }
+        $slider.= "<li class='page-item active'><input type='button' class='btn btn-primary mr-3' value='$pag' >  </input></li>";
+        $sigui = $pag + 1;
+        $ultima = $total / $limit;
+        if ($ultima == $pag + 1) {
+            $ultima == "";
+        }
+        if ($pag < $totalpag && $totalpag > 1)
+            $slider.= "<li class='page-item'><input type='button' class='btn btn-primary mr-3' value='" . ($pag + 1) . "'> </input></li>";
+        if ($pag < $totalpag && $totalpag > 1 && ceil($ultima) != $pag + 1) 
+            $slider.= "<li class='page-item'>
+                            <input type='button' class='btn btn-primary mr-3' aria-label='Next' value='" . ceil($ultima) . "'>
+                                
+                            </input>
+                        </li>";
+        $json['slider'] = $slider;
         
         $_SESSION['ausen_list'] = $sqli; //Para guardar el SQL query y usarlo con el boton de reporte para generar archivo excel 
         header('Content-Type: application/json; charset=utf-8');

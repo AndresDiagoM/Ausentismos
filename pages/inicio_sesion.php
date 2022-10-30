@@ -116,7 +116,8 @@
     </form>
 
     <!-- Insercion de particulas -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>  -->
+    <script src="../js/particles.min.js"></script>
     <script src="../js/app.js"></script>
 </body>
 

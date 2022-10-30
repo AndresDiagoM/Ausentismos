@@ -73,13 +73,14 @@
         <div id="menu-items">
 
             <div class="item">
-                <a href="../index.php">
+                <a href="admin_menu.php">
                     <div class="icon"><img src="../images/home.png" alt=""></div>
                     <div class="title"><span>Menú Principal</span></div>
 
                 </a>
             </div>
 
+                
                 <!-- SEPARADOR -->
                 <div class="item separator">
                 </div>
@@ -116,6 +117,18 @@
                 </a>
             </div>
 
+                <!-- SEPARADOR -->
+                <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="admin_edition_client.php">
+                <a href="../logic/cerrar_sesion.php">
+                    <div class="icon"><img src="../images/cerrar-sesion.png" alt=""></div>
+                    <div class="title"><span>Cerrar Sesión</span></div>
+                </a>
+            </div>
+
 
         </div>
 
@@ -129,8 +142,6 @@
                 <div class="btn_carga"><img src="../images/pages_up.png" alt=""></div>
             </a>
         </div>
-
-
     </div>
 
 </div>

@@ -56,7 +56,7 @@ include('paginacion.php');
                 } else {
                     if ($pag > 1)
                         $ant = $_GET["pag"] - 1;
-                    echo "<a class='page-link' aria-label='Previous' href='?pag=1'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a>";
+                    echo "<a class='page-link' aria-label='Previous' href='?pag=1'> <span aria-hidden='true'>&laquo;</span> <span class='sr-only'>Previous</span> </a>";
                     echo "<li class='page-item '><a class='page-link' href='?pag=" . ($pag - 1) . "' >" . $ant . "</a></li>";
                 }
                 echo "<li class='page-item active'><a class='page-link' >" . $_GET["pag"] . "</a></li>";

@@ -253,6 +253,11 @@
         <ul class="pagination pagination-lg pager" style="margin-left:25rem" id="myPager">
 
         </ul>
+        <!-- <ul class="pagination pg-dark justify-content-center pb-5 pt-5 mb-0" style="float: none;" id="myPager">
+                <li class="page-item">
+
+                </li>
+        </ul> -->
     </div>
 
     <h3 > Resultados: 
@@ -277,7 +282,8 @@
 
 
 <!-- SCRIPT DE PARTICULAS -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> 
+<!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>  -->
+<script src="../js/particles.min.js"></script>
 <script src="../js/app.js"></script>
 
 <!-- INSTALACION DE JQUERY -->
