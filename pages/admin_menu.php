@@ -8,12 +8,21 @@ $nombre_admin   = $_SESSION['NOM_USUARIO'];
 $id_admin       = $_SESSION['ID_USUARIO'];
 $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
-    //Obtener numero de ausentismos de cada tipo para el año actual
+    // Obtener año actual
+        $todayDate = new DateTime();
+        $todayYear = $todayDate->format('Y');
+        $var = $todayDate->format('d-m-Y');
+        //echo 'Fecha Hoy: '.$today->format('d-m-Y').'<br>';
+        //imprimir año de la fecha
+        //echo 'Año:'.$today->format('Y').'<br>';
+
+    // ESTADISTICAS: Obtener numero de ausentismos de cada tipo para el año actual
     $sqli = "SELECT Tipo_Ausentismo, COUNT(*) as numeros, TipoAusentismo
         FROM ausentismos 
         INNER JOIN tipoausentismo ON ausentismos.Tipo_Ausentismo = tipoausentismo.ID
-        WHERE YEAR(Fecha_Inicio) = YEAR(CURDATE()) AND Tipo_Ausentismo=tipoausentismo.ID
-        GROUP BY Tipo_Ausentismo;";
+        WHERE YEAR(Fecha_Inicio) = $todayYear AND Tipo_Ausentismo=tipoausentismo.ID
+        GROUP BY Tipo_Ausentismo;"; //YEAR(CURDATE())
+        //echo $sqli; exit;
     //$sqli = "SELECT Tipo_Ausentismo, COUNT(*) FROM ausentismos GROUP BY Tipo_Ausentismo ORDER BY COUNT(*) DESC;";
     $numeros = $conectar->query($sqli);  //print_r($numeros);
 
@@ -27,8 +36,9 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     //echo $datos[0]['numeros']; exit;
     
 
-    // 1.GRAFICO 1 : Obtener numero de ausentismos por mes del año, con nombre de mes y numero de ausentismos
-    $sqli2 = "SELECT MONTH(Fecha_Inicio) AS Mes, COUNT(*) AS Ausentismos FROM ausentismos GROUP BY MONTH(Fecha_Inicio) ORDER BY MONTH(Fecha_Inicio) ASC;";
+    // 1.GRAFICO 1 : Obtener numero de ausentismos por mes del año, con nombre de mes y numero de ausentismos, PARA EL AÑO ACTUAL
+    $sqli2 = "SELECT MONTH(Fecha_Inicio) AS Mes, COUNT(*) AS Ausentismos FROM ausentismos WHERE YEAR(Fecha_Inicio) = $todayYear GROUP BY MONTH(Fecha_Inicio) ORDER BY MONTH(Fecha_Inicio) ASC;";
+    //SELECT MONTHNAME(Fecha_Inicio) da el nombre del mes en ingles
     $numeros2 = $conectar->query($sqli2);  //print_r($numeros2);
 
     $NombreMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -95,20 +105,6 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
             
         </div>
     </header>
-
-    <!-- BARRA DE NAVEGACION 
-<div class="contenedor_menu">
-
-    <div class="contenedor_listas">
-        <ul>
-            <a href="../index.php"><li class="btn-inicio-go_home">Menu Principal</li></a>
-            <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
-            <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
-
-        </ul>
-    </div>
-</div> -->
-
 
 
     <!-- INICIO DE SLIDE MENU -->
@@ -230,48 +226,22 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <section class="bg-mix">
             <div class="container">
                 <div class="card rounded-0">
-                    <div class="card-header bg-light">
-                        <h4 class="font-weight-bold mb-0"> Ausentismos por tipo, año 2022 </h4>
+                    <div class="d-flex card-header bg-light">
+                        <h4 class="font-weight-bold mb-0 mr-3"> Ausentismos por tipo, año: </h4>
+                        <select class="" id="statsOptions">
+                            
+                        </select>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
-                                <div class="mx-auto">
-                                    <!-- para centrar el texto junto con d-flex-->
-                                    <h6 class="text-muted"> Incapacidades </h6>
-                                    <h3 class="font-wight-bold"> <?php echo $datosNumeros[0]['numeros']; ?> </h3>
-                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i> <?php echo number_format(($datosNumeros[0]['numeros']/$suma)*100,2).' %'; ?> </h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
-                                <div class="mx-auto">
-                                    <h6 class="text-muted"> Compensatorios </h6>
-                                    <h3 class="font-wight-bold"> <?php echo $datosNumeros[1]['numeros']; ?> </h3>
-                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i> <?php echo number_format(($datosNumeros[1]['numeros']/$suma)*100,2).' %'; ?> </h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
-                                <div class="mx-auto">
-                                    <h6 class="text-muted"> Permisos </h6>
-                                    <h3 class="font-wight-bold"> <?php echo $datosNumeros[2]['numeros']; ?> </h3>
-                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i> <?php echo number_format(($datosNumeros[2]['numeros']/$suma)*100,2).' %'; ?> </h6>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
-                                <div class="mx-auto">
-                                    <h6 class="text-muted"> Licencias </h6>
-                                    <h3 class="font-wight-bold"> <?php echo $datosNumeros[3]['numeros']; ?> </h3>
-                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i> <?php echo number_format(($datosNumeros[3]['numeros']/$suma)*100,2).' %'; ?> </h6>
-                                </div>
-                            </div>
+                        <div class="row" id="estadisticas">
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contenerdor de grafico 1 y tabla de promociones -->
+        <!-- Contenerdor de graficos y tabla -->
         <section class="bg-gray">
 
             <div class="container">
@@ -296,12 +266,8 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                         <div class="card rounded-0 ">
                             <div class="d-flex card-header bg-light">
                                 <h6 class="font-weight-bold mb-0 mr-3">Ausentismos por tipo en el mes: </h6>                                
-                                <select class="" id="myChartOptions">
-                                    <?php
-                                        foreach((array) $meses as $key => $mes){        
-                                            echo "<option value='$key'>  $mes </option>";
-                                        }
-                                    ?>
+                                <select class="" id="tiposChartOptions">
+                                    
                                 </select>
                             </div>
                             <div class="card-body">
@@ -388,7 +354,8 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
 
 
-    <?php include 'grafico1.php'; ?>
+    <?php //include 'grafico1.php'; ?>
+    <script src="../js/graficasCharts.js"></script>
 
 <!-- SCRIPT MENU LATERAL --> <!--
 <script>

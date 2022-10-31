@@ -3,21 +3,71 @@
 */
 const enableEventHandlers = () => {
 
-  document.querySelector('#myChartOptions').onchange = e => {
+  // Slider de años de las estadisticas
+  document.querySelector('#statsOptions').onchange = e => {
+    const {
+        value: number,
+        text: label
+    } = e.target.selectedOptions[0]
+    //console.log(number, label)
+
+    let var1 = {anio: label, value: number}; //anio como año
+
+    $.ajax({
+      method: "POST",
+      url: "../pages/graficos.php",
+      data: $.param(var1),
+      success: function (response) {
+        const Data = JSON.parse(response);
+        //console.log(Data);
+
+        const estadisticas = Data.estadisticas;
+        document.getElementById('estadisticas').innerHTML = "";
+        document.getElementById('estadisticas').innerHTML = estadisticas;
+
+        const grafica1 = Data.grafica1;
+        const grafica2 = Data.grafica2;
+
+        document.getElementById('tiposChartOptions').innerHTML = grafica1.options;
+
+        const newDatos = grafica2.map(valores => valores.numeros);
+        const newLabels = grafica2.map(valores => valores.TipoAusentismo);
+        updateChartDataAndLabels('tiposChart', newDatos, newLabels)
+
+        const array1 = grafica1.monthsArray;
+        var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        //del array monthsArray cambiar los numeros de los meses por los nombres usando la var meses
+        for (var i = 0; i < array1.length; i++) {
+            array1[i].Mes = meses[array1[i].Mes - 1];
+        }
+        const monthsValues = array1.map(months => months.Ausentismos)        
+        //mapear el valor Mes del array1 al mes correspondiente usando el arreglo meses
+        const monthsLabels = array1.map(months => months.Mes)
+        updateChartDataAndLabels('monthsChart', monthsValues, monthsLabels)
+      }
+    })      
+    //const newData = coasters.map(coaster => coaster[property])
+    //updateChartData('featuresChart', newData, label)
+  }
+
+  // Slider de mese de grafico de doughnut
+  document.querySelector('#tiposChartOptions').onchange = e => {
       const {
           value: number,
           text: label
       } = e.target.selectedOptions[0]
       //console.log(number, label)
 
-      /*let form;
-      let form2 = form.serializeArray();
-      form.push({name: label, value: number});*/
-      let var1 = {name: label, value: number};
+      let var1 = {mes: label, value: number};
+      //let var2 = array( 'anio' => document.getElementById('statsOptions').value, "mes" => number);
+      //array with anio and mes:
+      var1.anio = document.getElementById('statsOptions').value;
+      //console.log(var1);
+
 
       $.ajax({
         method: "POST",
-        url: "../pages/grafico2.php",
+        url: "../pages/graficos.php",
         data: $.param(var1),
         success: function (response) {
           //console.log(response);
@@ -28,12 +78,11 @@ const enableEventHandlers = () => {
 
           updateChartDataAndLabels('tiposChart', newDatos, newLabels)
         }
-      })
-      
+      })      
       //const newData = coasters.map(coaster => coaster[property])
-
       //updateChartData('featuresChart', newData, label)
   }
+  
 }
 
 /*

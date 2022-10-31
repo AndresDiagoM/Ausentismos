@@ -315,9 +315,10 @@
     if (month < 10) month = "0" + month;
     if (day < 10) day = "0" + day;
 
-    //var today = year + "-" + month + "-" + day;
-    //var today =  +year + "-" + month + "-" + (day+1-day) ;  
-    var today = "2019-07-22";
+    //var today = year + "-" + month + "-" + day;    
+    var today =  year + "-" + month + "-" + "01" ;  
+    //var today = "2019-07-22";
+    //console.log(today);
     document.getElementById("fecha_inicio").value = today; 
 </script>
 
