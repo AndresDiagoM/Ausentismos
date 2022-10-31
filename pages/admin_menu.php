@@ -8,26 +8,24 @@ $nombre_admin   = $_SESSION['NOM_USUARIO'];
 $id_admin       = $_SESSION['ID_USUARIO'];
 $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
-    //Obtener numero de ausentismos de cada tipo 
-    $sqli = "SELECT Tipo_Ausentismo, COUNT(*) FROM ausentismos GROUP BY Tipo_Ausentismo ORDER BY COUNT(*) DESC;";
+    //Obtener numero de ausentismos de cada tipo para el año actual
+    $sqli = "SELECT Tipo_Ausentismo, COUNT(*) as numeros, TipoAusentismo
+        FROM ausentismos 
+        INNER JOIN tipoausentismo ON ausentismos.Tipo_Ausentismo = tipoausentismo.ID
+        WHERE YEAR(Fecha_Inicio) = YEAR(CURDATE()) AND Tipo_Ausentismo=tipoausentismo.ID
+        GROUP BY Tipo_Ausentismo;";
+    //$sqli = "SELECT Tipo_Ausentismo, COUNT(*) FROM ausentismos GROUP BY Tipo_Ausentismo ORDER BY COUNT(*) DESC;";
     $numeros = $conectar->query($sqli);  //print_r($numeros);
 
-    $incapacidad = 0;
-    $compensatorio = 0;
-    $permiso = 0;
-    $licencia = 0;
-    while ($numero = $numeros->fetch_assoc()) {
-        //echo "['".$numero['Tipo_Ausentismo']."',".$numero['COUNT(*)']."],";
-        if ($numero['Tipo_Ausentismo'] == 1) {
-            $incapacidad = $numero['COUNT(*)'];
-        } elseif ($numero['Tipo_Ausentismo'] == 2) {
-            $compensatorio = $numero['COUNT(*)'];
-        } elseif ($numero['Tipo_Ausentismo'] == 3) {
-            $permiso = $numero['COUNT(*)'];
-        } elseif ($numero['Tipo_Ausentismo'] == 4) {
-            $licencia = $numero['COUNT(*)'];
-        }
+    $datosNumeros = array();
+    $suma = 0;
+    foreach ($numeros as $row) {
+        $datosNumeros[] = $row;
+        $suma += $row['numeros'];
     }
+    //print_r($datos);
+    //echo $datos[0]['numeros']; exit;
+    
 
     // 1.GRAFICO 1 : Obtener numero de ausentismos por mes del año, con nombre de mes y numero de ausentismos
     $sqli2 = "SELECT MONTH(Fecha_Inicio) AS Mes, COUNT(*) AS Ausentismos FROM ausentismos GROUP BY MONTH(Fecha_Inicio) ORDER BY MONTH(Fecha_Inicio) ASC;";
@@ -232,37 +230,39 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <section class="bg-mix">
             <div class="container">
                 <div class="card rounded-0">
-
+                    <div class="card-header bg-light">
+                        <h4 class="font-weight-bold mb-0"> Ausentismos por tipo, año 2022 </h4>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-3 col-md-6 d-flex stat my-3">
                                 <div class="mx-auto">
                                     <!-- para centrar el texto junto con d-flex-->
                                     <h6 class="text-muted"> Incapacidades </h6>
-                                    <h3 class="font-wight-bold"> <?php echo $incapacidad; ?> </h3>
-                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i>50.50% </h6>
+                                    <h3 class="font-wight-bold"> <?php echo $datosNumeros[0]['numeros']; ?> </h3>
+                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i> <?php echo number_format(($datosNumeros[0]['numeros']/$suma)*100,2).' %'; ?> </h6>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 d-flex stat my-3">
                                 <div class="mx-auto">
                                     <h6 class="text-muted"> Compensatorios </h6>
-                                    <h3 class="font-wight-bold"> <?php echo $compensatorio; ?> </h3>
-                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i>50.50% </h6>
+                                    <h3 class="font-wight-bold"> <?php echo $datosNumeros[1]['numeros']; ?> </h3>
+                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i> <?php echo number_format(($datosNumeros[1]['numeros']/$suma)*100,2).' %'; ?> </h6>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6 d-flex stat my-3">
                                 <div class="mx-auto">
                                     <h6 class="text-muted"> Permisos </h6>
-                                    <h3 class="font-wight-bold"> <?php echo $permiso; ?> </h3>
-                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i>50.50% </h6>
+                                    <h3 class="font-wight-bold"> <?php echo $datosNumeros[2]['numeros']; ?> </h3>
+                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i> <?php echo number_format(($datosNumeros[2]['numeros']/$suma)*100,2).' %'; ?> </h6>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-md-6 d-flex stat my-3">
                                 <div class="mx-auto">
                                     <h6 class="text-muted"> Licencias </h6>
-                                    <h3 class="font-wight-bold"> <?php echo $licencia; ?> </h3>
-                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i>50.50% </h6>
+                                    <h3 class="font-wight-bold"> <?php echo $datosNumeros[3]['numeros']; ?> </h3>
+                                    <h6 class="text-success"> <i class="icon ion-md-arrow-dropup-circle"></i> <?php echo number_format(($datosNumeros[3]['numeros']/$suma)*100,2).' %'; ?> </h6>
                                 </div>
                             </div>
                         </div>
@@ -406,5 +406,4 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
 
 </body>
-
 </html>
