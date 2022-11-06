@@ -43,6 +43,18 @@ $(function()
         //get_ausentismos();
     });
 
+    $(document).on('keyup', '#nombre', function()  //para el cuadro de busqueda de cedula
+    {
+        var valor = $(this).val();
+
+        if(valor != "" && isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+        }
+        //get_ausentismos();
+    });
+
     /*$(".form-date").on("click", function () 
     {
         get_ausentismos(); 
@@ -80,14 +92,17 @@ function get_ausentismos(pagina)
                 {
                     let row = ""+
                     "<tr>"+
-                    "<td>"+key+"</td>"+
+                    //"<td>"+key+"</td>"+
                     "<td>"+Ausen.Cedula_F+"</td>"+
                     "<td>"+Ausen.Nombre+"</td>"+
                     "<td>"+Ausen.Fecha_Inicio+"</td>"+
                     "<td>"+Ausen.Fecha_Fin+"</td>"+
                     "<td>"+Ausen.Tiempo+"</td>"+
+                    "<td>"+Ausen.Unidad+"</td>"+
                     "<td>"+Ausen.Observacion+"</td>"+ 
-                    "<td>"+Ausen.Seguridad_Trabajo+"</td>"+
+                    //imprimir unidad en formato de moneda con 2 decimales y el símbolo de $ 
+                    "<td>"+new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Ausen.Seguridad_Trabajo)+"</td>"+
+                    //"<td>"+Ausen.Seguridad_Trabajo+"</td>"+
                     "<td>"+Ausen.Nombre_U+"</td>"+
                     "<td>"+Ausen.Tipo_Ausentismo+"</td>"+
                     "</tr>";

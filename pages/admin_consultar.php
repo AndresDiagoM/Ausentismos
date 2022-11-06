@@ -90,7 +90,7 @@
                 </div>
 
             <div class="item">
-                <a href="#">
+                <a href="admin_cargar.php">
                     <div class="icon"><img src="../images/upload.png" alt=""></div>
                     <div class="title"><span>Cargar Datos</span></div>
                 </a>
@@ -171,12 +171,36 @@
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
 <!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
+<div class="container offset-md-2 col-md-8">
+
+    <section class="py-3">
+            <!-- py-3 es padding en y, como <br> -->
+            <div class="container">
+                <div class="row">
+                    <!-- con 2 columnas -->
+
+                    <div class="col-lg-9">
+                        <h1 class="font-weight-bold mb-0">Resultados</h1> <!-- mb-0 es sin margen inferior -->
+                        <h1 class="lead " id="total_resultados"> </h1>
+                    </div>
+                    <div class="col-lg-3 d-flex">
+                        <!-- sobreescribir clase btn-primary, para poner color morado.  w-100 es para que ocupe el ancho del div -->
+                        
+                        <a name="reporte" id="" class="btn btn-primary w-100 align-self-center" href="../logic/ausen_excel.php" role="button"> 
+                            Reporte
+                        </a>
+                        <!-- align-self-center es para centrar el boton, junto con d-flex -->
+                    </div>
+
+                </div>
+            </div>
+    </section>
+</div>
 <div class="contenedor_tabla">         
     <table class="users_table"> <!-- BOOSTRAP4: table table-bordered -->        
         <tr>
             <form class="row" id="multi-filters">
 
-            <th>#</th>
             <th>
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
@@ -189,7 +213,18 @@
                         </li>
                     </ul>
             </th>
-            <th>NOMBRE</th>
+            <th>
+                    <ul class="navbar-nav ml-auto">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            NOMBRE
+                            </a>
+                            <div class="dropdown-menu">
+                                <input type="text" class="form-input" id="nombre" name="Nombre[]" size="20" placeholder="Ingrese el nombre">
+                            </div>
+                        </li>
+                    </ul>
+            </th>
             <th>
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
@@ -204,8 +239,9 @@
             </th>
             <th>FECHA FIN</th>
             <th>TIEMPO</th>
+            <th>UNIDAD</th>
             <th>OBSERVACIÓN</th>
-            <th>Seguridad Trabajo</th>
+            <th>COSTO</th>
             <th>NOMBRE USUARIO</th>
             <th>
                     <ul class="navbar-nav ml-auto">                    
@@ -259,26 +295,9 @@
                 </li>
         </ul> -->
     </div>
-
-    <h3 > Resultados: 
-        <span id="total_resultados"> </span>
-    </h3>
+    
 </div>
 
-<!-- BOTON PARA GENERAR REPORTE -->
-<div class="container">    
-    <br/>
-    <div class="row">
-        <div class="col-md-5">
-        
-        </div>
-        <div class="col-md-3">
-            <a name="reporte" id="" class="btn btn-primary" href="../logic/ausen_excel.php" role="button"> 
-                Reporte
-            </a>
-        </div>
-    </div>
-</div>
 
 
 <!-- SCRIPT DE PARTICULAS -->
@@ -301,26 +320,10 @@
 <script src="../bootstrap-4.4.1-dist/js/popper-1.16.0.min.js"></script>
 <script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
 
+
 <!-- Script que hace las consultas SQL -->
 <script src="../js/consultar.js"></script>
 
-<script>
-    //SCRIPT para colocar en fecha inicial, la fecha con mes actual
-    var date = new Date();
-
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
-
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
-
-    //var today = year + "-" + month + "-" + day;    
-    var today =  year + "-" + month + "-" + "01" ;  
-    //var today = "2019-07-22";
-    //console.log(today);
-    document.getElementById("fecha_inicio").value = today; 
-</script>
 
 <!-- SCRIPT MENU LATERAL
 <script>

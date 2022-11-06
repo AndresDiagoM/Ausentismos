@@ -8,6 +8,89 @@ $nombre_admin   = $_SESSION['NOM_USUARIO'];
 $id_admin       = $_SESSION['ID_USUARIO'];
 $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
+$tabla1 ="";
+$tabla2 ="";
+$tabla3 ="";
+//Cuando se presiona el boton de cargar
+if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
+    //echo 'BOTON: '.$_POST['accion'];
+    //echo ($_FILES['excelFile']['name']!="");
+    include "../logic/cargarFuncionarios.php";
+
+    //mostrar una tabla si los arreglos no están vacios
+    $tabla1 ="";
+    $tabla2 ="";
+    $tabla3 ="";
+    if($funcionariosExistentes!=null){
+        $tabla1 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
+                    <thead class='thead-light'>
+                        <tr>
+                            <th scope='col'  colspan='3'>Funcionarios que ya existen</th>
+                        </tr>
+                        <tr>
+                            <th scope='col'>Cedula</th>
+                            <th scope='col'>Nombre</th>
+                            <th scope='col'>Cargo</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+        foreach($funcionariosExistentes as $funcionario){
+            $tabla1 .= "<tr>
+                            <th scope='row'>1".$funcionario['CEDULA']."</th>
+                            <td>".$funcionario['NOMBRE']."</td>
+                            <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
+                        </tr>";
+        }
+        $tabla1 .= "</tbody>
+                </table>";
+    }
+    if($funcionariosInsertados!=null){
+        $tabla2 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
+                    <thead class='thead-light'>
+                        <tr>
+                            <th scope='col'  colspan='3'>Funcionarios que se insertaron</th>
+                        </tr>
+                        <tr>
+                            <th scope='col'>Cedula</th>
+                            <th scope='col'>Nombre</th>
+                            <th scope='col'>Cargo</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+        foreach($funcionariosInsertados as $funcionario){
+            $tabla2 .= "<tr>
+                            <th scope='row'>1".$funcionario['CEDULA']."</th>
+                            <td>".$funcionario['NOMBRE']."</td>
+                            <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
+                        </tr>";
+        }
+        $tabla2 .= "</tbody>
+                </table>";
+    }
+    if($funcionariosNoInsertados!=null){
+        $tabla3 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
+                    <thead class='thead-light'>
+                        <tr>
+                            <th scope='col'  colspan='3'>Funcionarios que no se insertaron</th>
+                        </tr>
+                        <tr>
+                            <th scope='col'>Cedula</th>
+                            <th scope='col'>Nombre</th>
+                            <th scope='col'>Cargo</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+        foreach($funcionariosNoInsertados as $funcionario){
+            $tabla3 .= "<tr>
+                            <th scope='row'>".$funcionario['CEDULA']."</th>
+                            <td>".$funcionario['NOMBRE']."</td>
+                            <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
+                        </tr>";
+        }
+        $tabla3 .= "</tbody>
+                </table>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +130,6 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <div id="particles-js"></div>
     <!-- CABECERA DE TRABAJO -->
     <header>
-
         <div class="contenedor_principal">
             <div class="contenedor_logo">
                 <a href="admin_menu.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
@@ -83,7 +165,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                 </div>
 
                 <div class="item">
-                    <a href="admin_cargar.php">
+                    <a href="#">
                         <div class="icon"><img src="../images/upload.png" alt=""></div>
                         <div class="title"><span>Cargar Datos</span></div>
                     </a>
@@ -150,130 +232,57 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
     <!-- Contenerdor del contenido de la página-->
     <div class="contenedor_tabla2">
-
-        <!-- Contenerdor de bienvenida y boton de reporte-->
-        <section class="py-3">
-            <!-- py-3 es padding en y, como <br> -->
-            <div class="container">
-                <div class="row">
-                    <!-- con 2 columnas -->
-
-                    <div class="col-lg-9">
-                        <h1 class="font-weight-bold mb-0">Estadísticas de Ausentismos</h1> <!-- mb-0 es sin margen inferior -->
-                        <p class="lead text-muted">Revisa la última información</p>
-                    </div>
-                    <div class="col-lg-3 d-flex">
-                        <!-- sobreescribir clase btn-primary, para poner color morado.  w-100 es para que ocupe el ancho del div 
-                        <button class="btn btn-primary w-100 align-self-center"> Descargar reporte </button> -->
-                        <!-- align-self-center es para centrar el boton, junto con d-flex -->
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Contenerdor de estadisticas-->
-        <section class="bg-mix">
-            <div class="container">
-                <div class="card rounded-0">
-                    <div class="d-flex card-header bg-light">
-                        <h4 class="font-weight-bold mb-0 mr-3"> Ausentismos por tipo, año: </h4>
-                        <select class="" id="statsOptions">
-                            
-                        </select>
-                    </div>
-                    <div class="card-body">
-                        <div class="row" id="estadisticas">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contenerdor de graficos -->
+        <!-- Contenerdor de cards-->
         <section class="bg-gray">
 
             <div class="container">
                 <div class="row">
-
-                    <!-- grafico 1: Años -->                    
+                    <!-- CARD DE CARGAR FUNCIONARIOS -->                    
                     <div class="col-lg-6 my-3">
+
                         <div class="card rounded-0 ">
-                            <div class="d-flex card-header bg-light">
-                                <h6 class="font-weight-bold mb-0 mr-3">Numero de ausentismos por mes, tipo: </h6>
-                                <select class="" id="tiposMonthsOptions">
-                                    
-                                </select>
-                                
+                            <div class="d-flex card-header bg-light ">
+                                <h6 class="font-weight-bold mb-0 mr-3">Cargar Funcionarios </h6>                                
                             </div>
+                            
                             <div class="card-body">
-                                <canvas id="monthsChart" height="400"></canvas>
-                                
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                    <input type="file" class="form-control mb-3" name="excelFile" required id="excelFile" placeholder="Imagen">
+                                    <!--- input type file that just allows excel files -->
+
+                                    <div class="btn-group" role="group" aria-label="">
+                                        <button type="submit" name="accion"  value="CARGAR" class="btn btn-success">CARGAR</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                        
                     </div>
-
-                    <!-- grafico 2: Meses -->                    
-                    <div class="col-lg-6 my-3">
-                        <div class="card rounded-0 ">
-                            <div class="d-flex card-header bg-light">
-                                <h6 class="font-weight-bold mb-0 mr-3">Ausentismos por tipo en el mes: </h6>                                
-                                <select class="" id="tiposChartOptions">
-                                    
-                                </select>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="tiposChart" height="400"></canvas>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- grafico 3: Genero -->
-                    <div class="col-lg-6 my-3">
-                        <div class="card rounded-0 ">
-
-                            <div class="card-header bg-light">
-                                <h6 class="font-weight-bold mb-0"> Ausentismos por Genero </h6>
-                            </div>
-
-                            <div class="card-body">
-                                <canvas id="genderChart" height="400"></canvas>
-                            </div>
-
-                            <div class="d-flex card-footer bg-light">
-                                <h5 class="font-weight-bold mb-0 mr-2"> Total Ausentismos:  </h5>
-                                <h6 class="font-weight-bold mb-0 py-1" id="genderTotal">  </h6>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- grafico 4: Indicador -->
-                    <div class="col-lg-6 my-3">
-                        <div class="card rounded-0 ">
-
-                            <div class="card-header bg-light">
-                                <h6 class="font-weight-bold mb-0"> Indicador de costo </h6>
-                            </div>
-
-                            <div class="card-body">
-                                <canvas id="costoChart" height="400"></canvas>
-                            </div>
-
-                            <div class="card-footer bg-light">
-                                <h6 class="font-weight-bold mb-0" id="costoTotal">  </h6>
-                            </div>
-
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
         </section>
-
+    
+        <?php
+        if($tabla1 != null){          
+        ?>
+        <section>
+            <!-- Contenedor de tabla -->
+            <div class="container ">
+                <?php 
+                    echo $tabla1;
+                    if($tabla2 != null){
+                        echo $tabla2;
+                    }
+                    if($tabla3 != null){
+                        echo $tabla3;
+                    }
+                ?>
+            </div>
+        </section>
+        <?php
+        }
+        ?>
     </div>
 
 
@@ -293,25 +302,6 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <!-- LOCAL: JQuery, AJAX, Bootstrap 
     <script src="../bootstrap-4.4.1-dist/js/jquery-3.6.1.min.js"></script> -->     
     <script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
-
-
-    <?php //include 'grafico1.php'; ?>
-    <script src="../js/graficasCharts.js"></script>
-
-<!-- SCRIPT MENU LATERAL --> <!--
-<script>
-    const btn = document.querySelector('#menu-btn');
-    const menu = document.querySelector('#slide-menu');
-
-
-    btn.addEventListener('click', e => {
-        menu.classList.toggle("menu-expanded");
-        window.scrollTo(150,150);
-        menu.classList.toggle("menu-collapsed");
-    });
-
-</script>  -->
-
 
 </body>
 </html>

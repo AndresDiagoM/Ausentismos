@@ -159,7 +159,7 @@
 
 
 <!-- CONTENEDOR DE CUADROS DE BÚSQUEDA -->
-<div class="container offset-md-5 col-md-8">
+<div class="container offset-md-3 col-md-8">
     <br>
     
     <div class="col-md-7">

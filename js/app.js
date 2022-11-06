@@ -82,6 +82,45 @@ const enableEventHandlers = () => {
       //const newData = coasters.map(coaster => coaster[property])
       //updateChartData('featuresChart', newData, label)
   }
+
+  // Slider de tipo de grafico de barra
+  document.querySelector('#tiposMonthsOptions').onchange = e => {
+    const {
+        value: number,
+        text: label
+    } = e.target.selectedOptions[0]
+    //console.log(number, label)
+
+    let var1 = {tipo: label, value: number};
+    //let var2 = array( 'anio' => document.getElementById('statsOptions').value, "mes" => number);
+    //array with anio and mes:
+    var1.anioTipo = document.getElementById('statsOptions').value;
+    //console.log(var1);
+
+
+    $.ajax({
+      method: "POST",
+      url: "../pages/graficos.php",
+      data: $.param(var1),
+      success: function (response) {
+        //console.table(response);
+        const grafica1 = JSON.parse(response);
+
+        const array1 = grafica1.monthsArray;
+        var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        //del array monthsArray cambiar los numeros de los meses por los nombres usando la var meses
+        for (var i = 0; i < array1.length; i++) {
+            array1[i].Mes = meses[array1[i].Mes - 1];
+        }
+        const monthsValues = array1.map(months => months.Ausentismos)        
+        //mapear el valor Mes del array1 al mes correspondiente usando el arreglo meses
+        const monthsLabels = array1.map(months => months.Mes)
+        updateChartDataAndLabels('monthsChart', monthsValues, monthsLabels)
+      }
+    })      
+    //const newData = coasters.map(coaster => coaster[property])
+    //updateChartData('featuresChart', newData, label)
+}
   
 }
 

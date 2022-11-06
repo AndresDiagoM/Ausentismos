@@ -47,11 +47,11 @@
     //              REGISTRO MySQL
     // ===========================================
 
-    $registrar ="INSERT INTO ausentismos (Cedula_F, Fecha_Inicio, Fecha_Fin, Tiempo, Observacion, Tipo_Ausentismo, ID_Usuario, Seguridad_Trabajo) VALUES 
-    ('".$query_values['Cedula_F'][0]."', '".$query_values['Fecha_Inicio'][0]."', '".$query_values['Fecha_Fin'][0]."', '".$query_values['Tiempo'][0]."', '".$query_values['Observacion'][0]."', '".$query_values['Tipo_Ausentismo'][0]."', '".$query_values['ID_Usuario'][0]."', 0)";
+    $registrar ="INSERT INTO ausentismos (Cedula_F, Fecha_Inicio, Fecha_Fin, Tiempo, unidad, Observacion, Tipo_Ausentismo, ID_Usuario, Seguridad_Trabajo) VALUES 
+    ('".$query_values['Cedula_F'][0]."', '".$query_values['Fecha_Inicio'][0]."', '".$query_values['Fecha_Fin'][0]."', '".$query_values['Tiempo'][0]."', 'dias', '".$query_values['Observacion'][0]."', '".$query_values['Tipo_Ausentismo'][0]."', '".$query_values['ID_Usuario'][0]."', 0)";
     //print_r($registrar); exit;
 
-    $prueba = mysqli_query($conectar, $registrar);
+    $prueba = $conectar->query($registrar);
     if($prueba){
         //echo "<script> alert('Registro existoso');   location.href = '../pages/admin_agregar.php'; </script>";
         header("Location: ../pages/admin_agregar.php");

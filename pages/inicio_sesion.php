@@ -36,11 +36,9 @@
                 <span>Divisón de Gestión del Talento Humano</span>
             </div>
             <div class="contenedor_botones">
-                <div class="contenedor_botton_inicio">
-
+                <!-- <div class="contenedor_botton_inicio">
                     <a href="../index.php"><button type="" class="btn-inicio-sesion"> Menú Principal</button></a>
-
-                </div>
+                </div> -->
                 <div class="contenedor_botton_registro">
                     <a href="../pages/form_register.php"><button type="" class="btn-inicio-sesion"> Registrarse </button></a>
                 </div>

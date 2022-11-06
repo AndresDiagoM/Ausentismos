@@ -19,8 +19,17 @@
                 {
                     if($field_name=="Cedula_F"){  //Cedula_F LIKE '%5%'--> '%".$VAR."%'"
                         $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+
+                    }elseif($field_name=="Nombre"){
+                        //convert $value to uppercase
+                        $value = strtoupper($value);
+                        //change spaces in $value to % for LIKE query
+                        $value = str_replace(" ", "%", $value);
+                        $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+
                     }elseif($field_name=="Fecha_Inicio"){
                         $values[$field_name][] = " {$field_name} > '{$value}'";
+
                     }elseif($field_name=="Pagina"){
                         if($value==""){
                             $pag = 1;
@@ -58,14 +67,15 @@
         $offset=($pag-1)*$limit;
 
         $sqliTotal = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
-        INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario ".$extra_query;
-        $busquedaTotal = $conectar->query($sqliTotal);
+        INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario ".$extra_query." ORDER BY Fecha_Inicio DESC";
+        //print_r($sqliTotal); exit;
+        $busquedaTotal = $conectar->query($sqliTotal); 
         $total=$busquedaTotal->num_rows;
 
         //$sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query;
         $sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
         INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario ".$extra_query;
-        $sqli .= " ORDER BY ID ASC LIMIT $offset, $limit";
+        $sqli .= " ORDER BY Fecha_Inicio DESC LIMIT $offset, $limit";
         $ausentismos = $conectar->query($sqli);  //print_r($sqli); exit;
         //SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario WHERE 1 AND ( Cedula_F LIKE '%%' ) 
         //AND ( Fecha_Inicio > '2019-07-22') LIMIT 0, 100 //que muestre los primeros 100 registros
