@@ -17,12 +17,12 @@
 
     $mysqli = $conectar;
     $salida     = "";
-    $query      = "SELECT * FROM usuarios ORDER BY Cedula";
+    $query      = "SELECT * FROM usuarios ORDER BY Cedula_U";
 
     if (isset($_POST['consulta'])){
 
         $q      = $mysqli->real_escape_string($_POST['consulta']);
-        $query  =  "SELECT * FROM usuarios WHERE Cedula LIKE '%".$q."%'";
+        $query  =  "SELECT * FROM usuarios WHERE Cedula_U LIKE '%".$q."%'";
     }
     $resultado = $mysqli->query($query);
     if($resultado->num_rows > 0){
@@ -40,10 +40,10 @@
                             </tr>";
 
         while($fila = $resultado ->fetch_assoc()){
-            $Id_fila = $fila['Cedula'];
+            $Id_fila = $fila['Cedula_U'];
             $salida.="<tr>
-                        <td>".$fila['Cedula']."      </td>
-                        <td>".$fila['Nombre']."      </td>
+                        <td>".$fila['Cedula_U']."      </td>
+                        <td>".$fila['Nombre_U']."      </td>
                         <td>".$fila['Correo']."      </td>
                         <td>".$fila['Dependencia']."       </td>
                         <td>".$fila['TipoUsuario']."       </td>

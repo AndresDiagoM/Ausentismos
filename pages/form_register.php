@@ -69,9 +69,9 @@
             <span>Divisón de Gestión del Talento Humano</span>
         </div>
         <div class="contenedor_botones">
-            <div class="contenedor_botton_inicio">
+            <!-- <div class="contenedor_botton_inicio">
                 <a href="../index.php"><button type="" class="btn-inicio-sesion">Menú principal</button></a>
-            </div>
+            </div> -->
             <div class="contenedor_botton_registro">
                 <a href="inicio_sesion.php"><button type="" class="btn-inicio-sesion">Inicio de sesión</button></a>
             </div>
@@ -81,17 +81,17 @@
 
 </header>
 
-<!-- BARRA DE NAVEGACION -->
+<!-- BARRA DE NAVEGACION 
 <div class="contenedor_menu">
-<div class="contenedor_listas">
-    <ul>
-        <a href="../index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-        
-        <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
+    <div class="contenedor_listas">
+        <ul>
+            <a href="../index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
+            
+            <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
 
-    </ul>
-</div>
-</div>
+        </ul>
+    </div>
+</div>--> 
 
 
 <!-- SCRIPT PARA LA VERFICACION DE CONTRASEÑAS -->
@@ -218,7 +218,8 @@
         </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+    <script src="../js/particles.min.js"></script>
     <script src="../js/app.js"></script>
 </body>
 </html>

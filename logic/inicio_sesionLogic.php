@@ -1,4 +1,5 @@
 <?php
+    session_set_cookie_params(0);
     session_start();
     $bandera = false;
     $autentication  = $_SESSION['TIPO_USUARIO'];
@@ -18,7 +19,7 @@
 
 
 
-    session_start();
+    //session_start();
 
     include '../conexion.php';
     $mysqli = new mysqli($host, $user, $pw, $db);
@@ -59,9 +60,9 @@
 
 
         }
-    //     // VALIDACION SI SE INGRESA UN ID REGISTRADO PERO SIN CONTRASEÑA
+            // VALIDACION SI SE INGRESA UN ID REGISTRADO PERO SIN CONTRASEÑA
         else{
-             header("Location: ../pages/inicio_sesion.php?message=1");
+            header("Location: ../pages/inicio_sesion.php?message=1");
         }
 
     }

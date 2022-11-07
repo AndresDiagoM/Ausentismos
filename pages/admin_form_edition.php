@@ -21,6 +21,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../images/icon.png">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
@@ -58,10 +60,9 @@
 </head>
 <body>
 
-<div id="particles-js"></div>
 <!-- CABECERA DE TRABAJO -->
+<div id="particles-js"></div>
 <header>
-
     <div class="contenedor_principal">
         <div class="contenedor_logo">
             <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
@@ -69,7 +70,7 @@
         <div class="contenedor_nombre_adm">
             <span>FORMULARIO DE EDICIÓN</span>
         </div>
-        <div class="contenedor_admin">
+        <!-- <div class="contenedor_admin">
             Nombre de usuario:
             <span class="info_admin">
                 <?php
@@ -91,20 +92,17 @@
                 ?>
             </span>
 
-
-
            <div class="contenedor_cerrar_sesion" >
                 <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-           </div>
+           </div>-->
     </div>
 </header>
 
 <!-- INICIO DE SLIDE MENU -->
-
 <div class = "contenedor_pr_menu">
-    <div id="slide-menu" class="menu-collapsed">
+    <div id="slide-menu" class="menu-expanded">
 
-        <!-- HEADER -->
+        <!-- HEADER 
         <div id="header">
 
             <div id="menu-btn">
@@ -114,7 +112,7 @@
             </div>
             <div id="title"><span>PERFIL</span></div>
 
-        </div>
+        </div>  -->
 
         <!-- PROFILE -->
         <div id="profile">
@@ -169,9 +167,9 @@
                 </a>
             </div>
 
-                 <!-- SEPARADOR -->
-                 <div class="item separator">
-                </div>
+            <!-- SEPARADOR -->
+            <div class="item separator">
+            </div>
 
             <div class="item">
                 <a href="#">
@@ -181,15 +179,26 @@
                 </a>
             </div>
 
-                 <!-- SEPARADOR -->
-                 <div class="item separator">
-                </div>
+            <!-- SEPARADOR -->
+            <div class="item separator">
+            </div>
 
             <div class="item">
                 <a href="admin_create_user.php">
                     <div class="icon"><img src="../images/add-admin.png" alt=""></div>
                     <div class="title"><span>Creación de usuarios</span></div>
 
+                </a>
+            </div>
+
+            <!-- SEPARADOR -->
+            <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="../logic/cerrar_sesion.php">
+                    <div class="icon"><img src="../images/cerrar-sesion.png" alt=""></div>
+                    <div class="title"><span>Cerrar Sesión</span></div>
                 </a>
             </div>
 
@@ -207,15 +216,10 @@
             </a>
         </div>
 
-
-
-
-
     </div>
-
 </div>
 
-<!-- BARRA DE NAVEGACION -->
+<!-- BARRA DE NAVEGACION 
 <div class="contenedor_menu">
 
     <div class="contenedor_listas">
@@ -230,57 +234,52 @@
             <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
             <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
     </div>
-</div>
+</div>-->
+
+<!-- INICIO DE CONTENEDOR DE USUARIO SELECCIONADO -->
 <div class="contenedor_formularios">
     <div class="contenedor_formulario1">
         <div class="encabezado">
             DATOS ACTUALES
         </div>
+
         <div class="contenedor_info">
-        <?php
-            $sqli   = "SELECT * FROM users WHERE ID = '$id_usuario'";
-            $result = mysqli_query($conectar, $sqli);
-            while($mostrar = mysqli_fetch_array($result)){
+            <?php
+                $sqli   = "SELECT * FROM usuarios WHERE cedula = '$id_usuario'";
+                $result = mysqli_query($conectar, $sqli);
+                while($mostrar = mysqli_fetch_array($result)){
 
-                $Id_editar = $mostrar['ID'];
-
-
-        ?>
-        <div class="contenedor_perfil">
-            <img src="../images/profile2.png" alt="Error al cargar la imagen">
-        </div>
-            <div class="contenedor_datos">
-                <div class="contenedor_datos_col1">
-                    <p>ID:</p>
-                    <p>NOMBRE:</p>
-                    <p>FECHA DE NACIMIENTO:</p>
-                    <p>TIPO DE IDENTIFICACIÓN:</p>
-                    <p>DIRECCIÓN:</p>
-                    <p>DEPARTAMENTO:</p>
-                    <p>MUNICIPIO:</p>
-                    <p>CELULAR:</p>
-                    <p>TIPO DE USUARIO:</p>
-                </div>
-                <div class="contenedor_datos_col2">
-                    <p> <?php echo $mostrar['ID']           ?></p>
-                    <p> <?php echo $mostrar['NAME_LASTNAME']?></p>
-                    <p> <?php echo $mostrar['DATE']         ?></p>
-                    <p> <?php echo $mostrar['TYPE_ID']      ?></p>
-                    <p> <?php echo $mostrar['ADDRESS']      ?></p>
-                    <p> <?php echo $mostrar['DEPARTAMENTO'] ?></p>
-                    <p> <?php echo $mostrar['MUNICIPIO']    ?></p>
-                    <p> <?php echo $mostrar['CELLPHONE']    ?></p>
-                    <p> <?php echo $mostrar['TIPO_USUARIO'] ?></p>
-                </div>
+                    $Id_editar = $mostrar['Cedula'];
+            ?>
+            <div class="contenedor_perfil">
+                <img src="../images/profile2.png" alt="Error al cargar la imagen">
             </div>
-
-
-
-        <?php
-            }
-        ?>
+                <div class="contenedor_datos">
+                    <div class="contenedor_datos_col1">
+                        <p>CEDULA:</p>
+                        <p>NOMBRE:</p>
+                        <p>CORREO:</p>
+                        <p>DEPENDENCIA</p>
+                        <p>TIPO DE USUARIO:</p>
+                        <p>lOGIN:</p>
+                        <p>CONTRASEÑA:</p>
+                    </div>
+                    <div class="contenedor_datos_col2">
+                        <p> <?php echo $mostrar['Cedula']           ?></p>
+                        <p> <?php echo $mostrar['Nombre']?></p>
+                        <p> <?php echo $mostrar['Correo']         ?></p>
+                        <p> <?php echo $mostrar['Dependencia']      ?></p>
+                        <p> <?php echo $mostrar['TipoUsuario']      ?></p>
+                        <p> <?php echo $mostrar['login'] ?></p>
+                        <p> <?php echo $mostrar['contraseña']    ?></p>
+                    </div>
+                </div>
+            <?php
+                }
+            ?>
         </div>
     </div>
+
     <div class="contenedor_formulario2">
         <div class="encabezado">
             MODIFICACIÓN DE DATOS
@@ -293,7 +292,15 @@
 
             <form action="../logic/form_editLogic.php?ID=<?php echo $Id_editar ?>" method="POST">
 
-                <!-- INPUT DE NOMBRE Y APELLIDOS -->
+                <!-- INPUT DE CEDULA-->
+                <div class="form_container">
+                    <div class="form_group">
+                        <label for="fecha_nac_edt">CEDULA</label>
+                        <input type="text" name="cedula_usuario_edt" class="input_decor" min="4" max="40" placeholder="cedula" required>
+                        <span class="form_line"></span>
+                    </div>
+                </div>
+                <!-- INPUT DE NOMBRE  -->
                 <div class="form_container">
                     <div class="form_group">
                         <label for="nombre_usuario_edt">NOMBRE Y APELLIDOS</label>
@@ -301,85 +308,90 @@
                         <span class="form_line"></span>
                     </div>
                 </div>
-                <!-- INPUT DE FECHA DE NACIMIENTO -->
+                <!-- INPUT DE CORREO  -->
                 <div class="form_container">
                     <div class="form_group">
-                        <label for="fecha_nac_edt">FECHA DE NACIMIENTO</label>
-                        <input type="date" name="fecha_nac_edt" class="input_decor" min="1950-01-01" max="2004-12-31"  required>
+                        <label for="nombre_usuario_edt">CORREO</label>
+                        <input type="text" name="correo_usuario_edt" class="input_decor" min="4" max="40" placeholder="correo" required>
                         <span class="form_line"></span>
                     </div>
                 </div>
-                <!-- INPUT DE TIPO DE DOCUMENTO -->
+                <!-- INPUT DE DEPENDENCIA -->
                 <div class="form_container">
                     <div class="form_group">
-                        <label for="tipo_doc_edt"> TIPO DE DOCUMENTO </label>
-                        <select class="input_decor" name="tipo_doc_edt">
+                        <label for="dependencia_edt"> DEPENDENCIA </label>
+
+                        <select class="input_decor" name="dependencia_edt">
                             <option value="">Seleccione</option>
                             <option value="CC">CEDULA DE CIUDADANIA</option>
                             <option value="PST">PASAPORTE</option>
                         </select>
+
                         <span class="form_line"></span>
                     </div>
                 </div>
-                <!-- INPUT DE LA DIRECCION  -->
+                <!-- INPUT DE TIPO USUARIO -->
                 <div class="form_container">
                     <div class="form_group">
-                        <label for="direccion_edt"> DIRECCIÓN </label>
-                        <input type="text" name="direccion_edt" class="input_decor" placeholder="Número de dirección">
+                        <label for="tipo_user_edt"> TIPO USUARIO </label>
+
+                        <select class="input_decor" name="tipo_user_edt">
+                            <option value="">Seleccione</option>
+                            <option value="admin">ADMIN</option>
+                            <option value="consulta">CONSULTA</option>
+                        </select>
+
                         <span class="form_line"></span>
                     </div>
                 </div>
-                <!-- SELECT DE DEPARTAMENTO -->
+                <!-- INPUT DEL LOGIN -->
+                <div class="form_container">
+                    <div class="form_group">
+                        <label for="direccion_edt"> LOGIN </label>
+                        <input type="text" name="login_edt" class="input_decor" placeholder="login">
+                        <span class="form_line"></span>
+                    </div>
+                </div>
+                <!-- INPUT DEL PASS -->
+                <div class="form_container">
+                    <div class="form_group">
+                        <label for="direccion_edt"> CONTRASEÑA </label>
+                        <input type="text" name="pass_edt" class="input_decor" placeholder="contraseña">
+                        <span class="form_line"></span>
+                    </div>
+                </div>
+                <!-- SELECT DE DEPARTAMENTO 
                 <div class="form_container">
                     <div class="form_group">
                         <label for="depart"> DEPARTAMENTO </label>
                         <select class="input_decor" name="depart" onclick="mostrarSelect(this.value)">
-                            <!-- <option >Departamento</option> -->
 
                             <?php
-                                include "../logic/departamentosLogic.php";
+                                //include "../logic/departamentosLogic.php";
                             ?>
 
                         </select>
                         <span class="form_line"></span>
                     </div>
-                </div>
-                <!-- SELECT DE MUNICIPIO -->
-                <div class="form_container">
-                    <div class="form_group" id="div">
-                        <label for="munic"> MUNICIPIO </label>
-                        <select class="input_decor" name="munic">
-                            <option>MUNICIPIO</option>
-                        </select>
-                        <span class="form_line"></span>
-                    </div>
-                </div>
+                </div> --> 
+                
+
+                <!-- BOTON DE GUARDAR -->
                 <div class="contenedor_guardar">
-                   <button type="submit" class="btn_guardar">GUARDAR</button>
+                    <button type="submit" class="btn_guardar">GUARDAR</button>
                 </div>
 
             </form>
-
-
-
         </div>
-
-
-
-
-
     </div>
 </div>
-
-
-
 
 
 <!-- SCRIPTS DE PARTICULAS Y DEL MENU LATERAL -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="../js/app.js"></script>
 
-<!-- SCRIPT MENU LATERAL-->
+<!-- SCRIPT MENU LATERAL
 <script>
     const btn = document.querySelector('#menu-btn');
     const menu = document.querySelector('#slide-menu');
@@ -391,7 +403,7 @@
         menu.classList.toggle("menu-collapsed");
     });
 
-</script>
+</script> -->
 
 </body>
 </html>

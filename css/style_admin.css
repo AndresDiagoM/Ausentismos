@@ -1,3 +1,10 @@
+:root{
+    --width: 20%;
+    --padding: 10px;
+    --bgcolor: rgba(53, 166, 160, 1);
+    --hovercolor: rgb(251,139,2);
+}
+
 .contenedor_admin{
     text-align: center;
     margin-left: 1%;
@@ -7,7 +14,7 @@
 }
 .contenedor_nombre_adm{
     text-shadow: 0 0 0px #275f42;
-    margin-left: 20px;
+    margin-left: 10px;
     width: 50%;
     height: 145px;
     line-height: 180px;
@@ -15,7 +22,7 @@
     font-family: "Kanit", sans-serif;
     font-weight: bold;
     font-size: 30px;
-    color: #fb8c00;
+    color: #000000;
 }
 .info_admin{
     color: #275f42;
@@ -42,20 +49,45 @@ ESTILOS CONTENEDRO TABLA
 ===================================== */
 
 .contenedor_tabla{
-    margin-top: 150px;
-    margin-left: 5%;
+    margin-top: 1cm;
+    margin-left: 270px; /*var(--width)*/
+    position: relative;
+    width: 80%;
+
+    /* PARA QUE LA TABLA DE PRODUCTOS TENGA SCROLL */
+    height: 80vh;
+    overflow-y: scroll;
 }
 
-.users_table {
-    font-size: 18px;
+.users_table { 
+    
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 2px;
+    /*font-size: 18px;
     margin: auto;
     margin-top: 1em;
     border: 1px solid black;
     border-radius: 2px;
     text-align: center;
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Kanit', sans-serif; */
+}
+.users_table td:nth-child(3) { /* ANCHO DE COLUMNAS 3 = columna de nombre */
+    width: 15%;
+}
+.users_table td:nth-child(5) { /* 5 = columna de fecha_fin */
+    width: 10%;
+}
+.users_table td:nth-child(7) { /* 7 es OBSERVACION*/
+    width: 10%;
+}
+.users_table td:nth-child(8) { /* 8 es SEGURIDAD*/
+    width: 10%;
 }
 .users_table th, td{
+    border: 1px solid black;
+}
+.users_table tbody{
     border: 1px solid black;
 }
 
@@ -66,4 +98,10 @@ ESTILOS CONTENEDRO TABLA
 
 .contenido{
     margin-left: 5%;
+}
+.contenedor_tabla2{
+    margin-top: 1cm;
+    margin-left: 270px; /*var(--width)*/
+    position: relative;
+    width: 80%;
 }

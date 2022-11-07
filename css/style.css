@@ -16,11 +16,13 @@
   transition-duration: 0.5s;
 }
 .contenedor_principal:hover {
-  border-color: #fb8c00;
+  border-color: #ff0000;
 }
 
+
 .contenedor_logo {
-  width: 29%;
+  width: 25%;
+  margin-left: 15px;
   height: 180px;
   display: flex;
   align-items: center;
@@ -35,7 +37,7 @@
   font-family: "Kanit", sans-serif;
   font-weight: bold;
   font-size: 30px;
-  color: #fb8c00;
+  color: #000000;
 }
 
 span {

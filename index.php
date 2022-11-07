@@ -1,6 +1,8 @@
 <?php
     include ("conexion.php");
+    //include "./logic/validate_sessionLogic.php";
 
+    session_set_cookie_params(0);
     session_start();
     error_reporting(0);
     $bandera = false;
@@ -28,12 +30,12 @@
     <link rel="icon" href="images/icon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_collapsed_menu.css">
-
+    <link rel="stylesheet" href="css/style_inicio_sesion.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script> -->
     <!-- Estilos del carousel -->
     <title>Ausentismos</title>
 </head>
@@ -75,11 +77,11 @@
 
                     </span>
                 </div>
-                <div class="contenedor_clt">
+                <!-- <div class="contenedor_clt">
                     Nombre de usuario:
                     <span class="info_clt">
                         <?php
-                            echo " $nombre_cliente";
+                            //echo " $nombre_cliente";
                         ?>
                     </span><br>
                     <span>
@@ -87,20 +89,20 @@
                     </span>
                     <span class="info_admin">
                         <?php
-                            echo " $id_cliente";
+                            //echo " $id_cliente";
                         ?>
                     </span><br>
                     Tipo de usuario:
                     <span>
                         <?php
-                            echo $autentication;
+                            //echo $autentication;
                         ?>
                     </span>
 
 
                     <div class="contenedor_cerrar_sesion" >
                         <a href="logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-                    </div>
+                    </div> -->
                 </div>
             <?php
                 }
@@ -119,7 +121,7 @@
         <div class = "contenedor_pr_menu">
             <div id="slide-menu" class="menu-collapsed">
 
-                <!-- HEADER -->
+                <!-- HEADER 
                 <div id="header">
 
                     <div id="menu-btn">
@@ -129,7 +131,7 @@
                     </div>
                     <div id="title"><span>PERFIL</span></div>
 
-                </div>
+                </div> -->
 
                 <!-- PROFILE -->
                 <div id="profile">
@@ -215,9 +217,9 @@
     ?>
         <!-- INICIO DE SLIDE MENU PARA ADMINS-->
         <div class = "contenedor_pr_menu">
-            <div id="slide-menu" class="menu-collapsed">
+            <div id="slide-menu" class="menu-expanded">
 
-                <!-- HEADER -->
+                <!-- HEADER 
                 <div id="header">
 
                     <div id="menu-btn">
@@ -227,7 +229,7 @@
                     </div>
                     <div id="title"><span>PERFIL</span></div>
 
-                </div>
+                </div> -->
 
                 <!-- PROFILE -->
                 <div id="profile">
@@ -302,6 +304,18 @@
                         </a>
                     </div>
 
+                    <!-- SEPARADOR -->
+                    <div class="item separator">
+                        </div>
+
+                    <div class="item">
+                        <a href="admin_edition_client.php">
+                        <a href="../logic/cerrar_sesion.php">
+                            <div class="icon"><img src="./images/cerrar-sesion.png" alt=""></div>
+                            <div class="title"><span>Cerrar Sesión</span></div>
+                        </a>
+                    </div>
+
                 <!--
                     =================================
                     BOTON DE CARGA SUPERIOR
@@ -318,18 +332,20 @@
     <?php
         }
     ?>
-    <!-- BARRA DE NAVEGACION -->
+
+
+    <!-- BARRA DE NAVEGACION 
     <div class="contenedor_menu">
 
         <div class="contenedor_listas">
             <ul>
                 <a href="index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-                 <!--<a href="pages/suscription.php"><li>Suscripciones</a><i class="fa fa-angle-down"></i>
+                <a href="pages/suscription.php"><li>Suscripciones</a><i class="fa fa-angle-down"></i>
                     <ul>
                         <a href="pages/compras.php?suscp=Prem"><li> Premiun</li></a>
                         <a href="pages/compras.php?suscp=Basic"><li> Básico</li></a>
                     </ul>
-                </li> -->
+                </li> 
                 <a href="pages/quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
 
                 <?php
@@ -351,67 +367,86 @@
 
             </ul>
         </div>
-    </div>
+    </div> -->
 
-    <!-- CARRUSEL GLIDE -->
-    <div class="contenedor_slides">
-        <div class="slider">
-            <div class="slides">
-                <!-- BOTONES  -->
-                <input type="radio" name="radio-btn" id="radio1">
-                <input type="radio" name="radio-btn" id="radio2">
-                <input type="radio" name="radio-btn" id="radio3">
-                <input type="radio" name="radio-btn" id="radio4">
 
-                <!-- IMAGENES -->
-                <div class="slide first">
-                    <img src="images/img_slide1.jpg" alt="">
-                </div>
-                <div class="slide ">
-                    <img src="images/img_slide2.jpg" alt="">
-                </div>
-                <div class="slide ">
-                    <img src="images/img_slide3.jpg" alt="">
-                </div>
-                <div class="slide ">
-                    <img src="images/img_slide4.jpg" alt="">
+    <!-- DISEÑO DE INICIO SESION-->
+
+    <div id="particles-js"></div>
+    <!-- <div class="contenedor_form"> -->
+        <form action="logic/inicio_sesionLogic.php" method="POST" >
+            <div class="login-box">
+                <h1>INICIO DE SESIÓN</h1> <!-- El título de Inicio de sesión -->
+
+                <div class="form">
+                    <div class="item"> <!-- parte de nombre de usuario -->
+                        <i class="fa fa-user-circle" id="ic_us" aria-hidden="true" class="iconos"></i> <!-- Se utilizará para dibujar el icono delante del nombre de usuario -->
+                        <input type="text"  placeholder="Identificación" name="username" class="input_decor" > <!-- Entrada de nombre de usuario realizada por cuadro de texto -->
+                    </div>
+
+                    <div class="item"> <!-- parte de la contraseña -->
+
+                        <i class="fa fa-key" aria-hidden="true"></i> <!-- Se utilizará para dibujar el icono delante de la contraseña en el futuro -->
+                        <input type="password" placeholder="password" name="password"> <!-- Entrada de contraseña usando el cuadro de texto de contraseña-->
+
+                        <p  class="label_mensaje">
+
+                        <?php
+                            if (isset($_GET["message"])){
+                            $message = $_GET["message"];
+                            if($_GET["message"] != "" ){
+
+                        ?>
+                        Datos incorrectos:
+                        <?php
+                        if($message == 1){
+                            echo "CONTRASENA INCORRECTA";
+                            // echo "USUARIO O CONTRASEÑA INCORRECTA. INTENTE DE NUEVO.";
+                            session_destroy();
+
+                        }
+                        elseif($message == 2){
+                            echo "USUARIO NO REGISTRADO.";
+                            session_destroy();
+
+                        }
+                        elseif($message == 3){
+                            echo "ALERTA DE SEGURIDAD. FAVOR INICIE SESIÓN";
+                            session_destroy();
+
+
+                        }
+                        elseif($message == 4){
+                            echo "SESIÓN FINALIZADA. INICIE SESIÓN NUEVAMENTE";
+                            session_destroy();
+
+                        }
+                        elseif($message == 5){
+                            echo "INICIE SESIÓN PARA REALIZAR UNA COMPRA";
+                        }
+                        ?>
+
+
+                        </p>
+
+                        <?php
+                            }
+                            }
+                        ?>
+                    </div>
+
                 </div>
 
-                <!-- NAVEGACION AUTO -->
-                <div class="navigation-auto">
-                    <div class="auto-btn1"></div>
-                    <div class="auto-btn2"></div>
-                    <div class="auto-btn3"></div>
-                    <div class="auto-btn4"></div>
-                </div>
+                <button type="submit" class="btn-login">ACCEDER</button> <!-- Botón de inicio de sesión implementado con el botón -->
             </div>
-                <div class="navigation-manual">
-                    <label for="radio1" class="manual-btn"></label>
-                    <label for="radio2" class="manual-btn"></label>
-                    <label for="radio3" class="manual-btn"></label>
-                    <label for="radio4" class="manual-btn"></label>
-                </div>
-        </div>
-    </div>
-
-    <!-- MOVIMIENTO AUTOMATICO EN EL CARROUSEL -->
-<script>
-    var counter = 1;
-    setInterval(function(){
-       document.getElementById('radio' + counter).checked =true;
-       counter++;
-
-       if(counter > 4){
-            counter = 1;
-       }
-    }, 3500);
-</script>
+        </form>
+    <!--</div> -->
 
 <!-- Insercion de particulas -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="js/app.js"></script>
 
-<!-- SCRIPT MENU LATERAL-->
+<!-- SCRIPT MENU LATERAL
 <script>
     const btn = document.querySelector('#menu-btn');
     const menu = document.querySelector('#slide-menu');
@@ -423,7 +458,7 @@
         menu.classList.toggle("menu-collapsed");
     });
 
-</script>
+</script> -->
 
 </body>
 </html>

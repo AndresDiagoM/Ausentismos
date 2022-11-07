@@ -22,6 +22,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../images/icon.png">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
@@ -37,40 +39,14 @@
 
     <div class="contenedor_principal">
         <div class="contenedor_logo">
-            <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
+            <a href="admin_menu.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
         </div>
         <div class="contenedor_nombre_adm">
             <span> CREACIÓN DE USUARIOS</span>
         </div>
-        <div class="contenedor_admin">
-            Nombre de usuario:
-            <span class="info_admin">
-                <?php
-                    echo " $nombre_admin";
-                ?>
-            </span><br>
-            <span>
-                ID usuario:
-            </span>
-            <span class="info_admin">
-                <?php
-                    echo " $id_admin";
-                ?>
-            </span><br>
-                Tipo de usuario:
-            <span>
-                <?php
-                    echo $tipo_usuario;
-                ?>
-            </span>
-
-
-
-        <div class="contenedor_cerrar_sesion" >
-                <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-        </div>
     </div>
 </header>
+
 <!-- INCLUSION DE PARTICULAS -->
 <div id="particles-js"></div>
 
@@ -119,10 +95,11 @@
 
 
 <!-- INICIO DE SLIDE MENU -->
-<div class = "contenedor_pr_menu">
-    <div id="slide-menu" class="menu-collapsed">
 
-        <!-- HEADER -->
+<div class = "contenedor_pr_menu">
+    <div id="slide-menu" class="menu-expanded">
+
+        <!-- HEADER 
         <div id="header">
 
             <div id="menu-btn">
@@ -132,7 +109,7 @@
             </div>
             <div id="title"><span>PERFIL</span></div>
 
-        </div>
+        </div> -->
 
         <!-- PROFILE -->
         <div id="profile">
@@ -145,13 +122,14 @@
         <div id="menu-items">
 
             <div class="item">
-                <a href="../index.php">
+                <a href="admin_menu.php">
                     <div class="icon"><img src="../images/home.png" alt=""></div>
                     <div class="title"><span>Menú Principal</span></div>
 
                 </a>
             </div>
 
+                
                 <!-- SEPARADOR -->
                 <div class="item separator">
                 </div>
@@ -188,6 +166,18 @@
                 </a>
             </div>
 
+                <!-- SEPARADOR -->
+                <div class="item separator">
+                </div>
+
+            <div class="item">
+                <a href="admin_edition_client.php">
+                <a href="../logic/cerrar_sesion.php">
+                    <div class="icon"><img src="../images/cerrar-sesion.png" alt=""></div>
+                    <div class="title"><span>Cerrar Sesión</span></div>
+                </a>
+            </div>
+
 
         </div>
 
@@ -205,7 +195,7 @@
 
 </div>
 
-<!-- BARRA DE NAVEGACION -->
+<!-- BARRA DE NAVEGACION 
 <div class="contenedor_menu">
 
     <div class="contenedor_listas">
@@ -215,10 +205,10 @@
             <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
             <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
     </div>
-</div>
+</div> -->
 
 <!-- CONTENEDOR DE FORMULARIO -->
-<div class="contenedor_form2">
+<div class="contenedor_form">
     <h2>REGISTRO DE USUARIOS</h2>
     <h5>(CONSULTA Y ADMINISTRADOR)</h5>
     <form action="../logic/admin_create_userLogic.php" method="POST" class="form" name="formulario" onsubmit="return comprobarPSW()">
@@ -239,14 +229,16 @@
             </div>
         </div>
 
-        <!-- INPUT DEL CORREO -->
+        <!-- INPUT DEL CORREO 
         <div class="form_container">
             <div class="form_group">
                 <label for="correo"> Correo </label>
                 <input type="text" name="correo" class="input_decor" placeholder="Digite su correo"  required>
                 <span class="form_line"></span>
             </div>
-        </div>
+        </div> -->
+
+
         <!-- INPUT DEL CORREO -->
         <div class="form_container">
             <div class="form_group">
@@ -298,6 +290,8 @@
 
     </form>
 </div>
+
+
 <!-- SCRIPT MENU LATERAL-->
 <script>
     const btn = document.querySelector('#menu-btn');

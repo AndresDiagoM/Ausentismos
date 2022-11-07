@@ -1,24 +1,20 @@
 h2{
     text-align: center;
-    color: #FB8C00;
+    color: #ffffff;
 }
 h5{
     color: #276040;
 }
 
-.input_decor{
-    text-decoration: none;
-    font-family: 'kanit', sans-serif;
-    text-align: center;
-    width: 40%;
-}
+/*Contenerdor <div> del formulario*/
 .contenedor_form{
-    width: 450px;
-    height: 570px;
-    background: #BAD0EF;
+    width: 50%;
+    height: 90vh;
+    background: #3ca7a1;
     border-radius: 15px;
-    margin-top:400px;
-    left: 50%;
+    margin-top:50vh;
+    /*left: 50vw;*/
+    margin-left: 55vw;
     position: absolute;
     transform: translate(-50%, -50% );
     box-sizing: border-box;
@@ -26,14 +22,38 @@ h5{
     text-align: center;
 }
 
+/*Formulario*/
+.form{
+    margin: auto;
+    width: 80%;
+    max-width: 550px;
+    padding-top: 0.2em;
+    padding-bottom: 4.5em;
+    text-align: center;
+}
+.form_container{
+    margin-top: 1em;
+    width: 100%;
+    display: inline-block;
+}
+.form_group{
+    position: relative;
+}
 
+/* Label frente a cada input text */
 label{
     text-align: left;
     display: inline-block;
-    width: 50%;
+    width: 10vw;
 }
 
-
+/* Input text */
+.input_decor{
+    text-decoration: none;
+    font-family: 'kanit', sans-serif;
+    text-align: center;
+    width: 300px;
+}
 .contenedor_img {
     width: 100px;
 	height: 100px;
@@ -50,23 +70,7 @@ label{
     transform: scale(0.7);
 }
 
-.form{
-    margin: auto;
-    width: 100%;
-    max-width: 400px;
-    padding-top: 0.2em;
-    padding-bottom: 4.5em;
-    text-align: center;
-}
 
-.form_container{
-    margin-top: 1em;
-}
-
-
-.form_group{
-    position: relative;
-}
 .btn_registrar{
     margin-top: 1em;
     background-color: white;
@@ -78,4 +82,19 @@ label{
 .btn_registrar:hover{
     background-color: #35A6A0;
     color: white;
+}
+
+
+/*Sobre escribir la clase de boostrap*/
+.contenedor_form_agregar{
+    width: 75%;
+    /*height: 90vh;*/    
+    margin-top: 50vh; 
+    /*left: 50vw;*/
+    margin-left: 55vw;
+    position: relative;
+    transform: translate(-35vw, -50vh );
+    /*box-sizing: border-box;*/
+    font-family: 'kanit', sans-serif;
+    text-align: center;
 }
