@@ -41,35 +41,6 @@
         </div>
         <div class="contenedor_nombre_adm">
             <span> EDICIÓN DE CLIENTES </span>
-
-        </div>
-        <!-- <div class="contenedor_admin">
-            Nombre de usuario:
-            <span class="info_admin">
-                <?php
-                    echo " $nombre_admin";
-                ?>
-            </span><br>
-            <span>
-                ID usuario:
-            </span>
-            <span class="info_admin">
-                <?php
-                    echo " $id_admin";
-                ?>
-            </span><br>
-                Tipo de usuario:
-            <span>
-                <?php
-                    echo $tipo_usuario;
-                ?>
-            </span>
-
-
-
-           <div class="contenedor_cerrar_sesion" >
-                <a href="../logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-           </div>  -->
     </div>
 </header>
 
@@ -174,22 +145,6 @@
 
 </div>
 
-
-
-
-<!-- BARRA DE NAVEGACION 
-<div class="contenedor_menu">
-
-    <div class="contenedor_listas">
-        <ul>
-            <a href="../index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-            
-            <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
-            <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
-
-        </ul>
-    </div>
-</div>  -->
 
 
 <!-- CONTENEDORES DE BUSQUEDAS -->

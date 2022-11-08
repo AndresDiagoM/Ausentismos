@@ -18,8 +18,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../images/icon.png">
 
     <!-- CSS -->
@@ -29,34 +27,7 @@
     <link rel="stylesheet" href="../css/style_admin_form.css">
     <title>Eliminar Usuario</title>
 
-    <!-- CONEXION CON AJAX -->
-    <script type="text/javascript">
-
-        function mostrarSelect(str){
-            var conexion;
-
-            if(str==""){
-
-                document.getElementById("txtHint").innerHTML="";
-                return;
-            }
-
-            if(window.XMLHttpRequest){
-                conexion = new XMLHttpRequest();
-
-            }
-
-            conexion.onreadystatechange = function(){
-                if(conexion.readyState == 4 && conexion.status == 200){
-                    document.getElementById("div").innerHTML = conexion.responseText;
-                }
-            }
-
-            conexion.open("GET", "../logic/municipiosLogic.php?c="+str,true);
-            conexion.send();
-        }
-
-    </script>
+    
 </head>
 <body>
 
@@ -125,7 +96,7 @@
         <div id="menu-items">
 
             <div class="item">
-                <a href="../index.php">
+                <a href="../admin_menu.php">
                     <div class="icon"><img src="../images/home.png" alt=""></div>
                     <div class="title"><span>Menú Principal</span></div>
 
@@ -219,22 +190,6 @@
     </div>
 </div>
 
-<!-- BARRA DE NAVEGACION 
-<div class="contenedor_menu">
-
-    <div class="contenedor_listas">
-        <ul>
-            <a href="../index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-            <a href="suscription.php"><li>Suscripciones<i class="fa fa-angle-down"></i></a>
-                <ul>
-                    <a href="compras.php?suscp=Prem"><li> Premiun</li></a>
-                    <a href="compras.php?suscp=Basic"><li> Básico</li></a>
-                </ul>
-            </li>
-            <a href="quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
-            <a href="admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
-    </div>
-</div>-->
 
 <!-- INICIO DE CONTENEDOR DE USUARIO SELECCIONADO -->
 <div class="contenedor_formularios">
@@ -245,11 +200,13 @@
 
         <div class="contenedor_info">
             <?php
-                $sqli   = "SELECT * FROM usuarios WHERE cedula = '$id_usuario'";
-                $result = mysqli_query($conectar, $sqli);
+                $sqli   = "SELECT * FROM usuarios 
+                            INNER JOIN dependencias ON usuarios.Dependencia=dependencias.ID 
+                            WHERE Cedula_U = '$id_usuario'";
+                $result = $conectar->query($sqli);
                 while($mostrar = mysqli_fetch_array($result)){
 
-                    $Id_editar = $mostrar['Cedula'];
+                    $Id_editar = $mostrar['Cedula_U'];
             ?>
             <div class="contenedor_perfil">
                 <img src="../images/profile2.png" alt="Error al cargar la imagen">
@@ -259,16 +216,18 @@
                         <p>CEDULA:</p>
                         <p>NOMBRE:</p>
                         <p>CORREO:</p>
-                        <p>DEPENDENCIA</p>
+                        <p>DEPARTAMENTO:</p>
+                        <p>FACULTAD:</p>
                         <p>TIPO DE USUARIO:</p>
                         <p>lOGIN:</p>
                         <p>CONTRASEÑA:</p>
                     </div>
                     <div class="contenedor_datos_col2">
-                        <p> <?php echo $mostrar['Cedula']           ?></p>
-                        <p> <?php echo $mostrar['Nombre']?></p>
+                        <p> <?php echo $mostrar['Cedula_U']           ?></p>
+                        <p> <?php echo $mostrar['Nombre_U']?></p>
                         <p> <?php echo $mostrar['Correo']         ?></p>
-                        <p> <?php echo $mostrar['Dependencia']      ?></p>
+                        <p> <?php echo $mostrar['Departamento']      ?></p>
+                        <p> <?php echo $mostrar['Facultad']      ?></p>
                         <p> <?php echo $mostrar['TipoUsuario']      ?></p>
                         <p> <?php echo $mostrar['login'] ?></p>
                         <p> <?php echo $mostrar['contraseña']    ?></p>

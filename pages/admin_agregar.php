@@ -268,7 +268,7 @@
             <div class="form_container">
                 <div class="form_group">
                     <label for="Fecha_Fin[]"> FECHA FIN </label>
-                    <input type="date" class="input_decor" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
+                    <input type="date" class="input_decor" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01" > <!-- //value="2019-07-22" -->
                     <span class="form_line"></span>
                 </div>
             </div>
@@ -278,6 +278,19 @@
                 <div class="form_group">
                     <label for="Tiempo[]"> TIEMPO </label>
                     <input type="number" name="Tiempo[]" class="input_decor" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="200" required>
+                    <span class="form_line"></span>
+                </div>
+            </div>
+
+            <!-- INPUT DE UNIDAD-->
+            <div class="form_container">
+                <div class="form_group">
+                    <label for="Unidad[]"> UNIDAD </label>
+                    <select class="input_decor" name="Unidad[]" id="Unidad" required>
+                        <option value="">Seleccione</option>
+                        <option value="dias"> DIAS </option>
+                        <option value="horas"> HORAS </option>
+                    </select>
                     <span class="form_line"></span>
                 </div>
             </div>
@@ -295,7 +308,7 @@
             <div class="form_container">
                 <div class="form-group">
                     <label for="Tipo_Ausentismo[]">TIPO DE AUSENTIMO</label>
-                    <select class="input_decor" name="Tipo_Ausentismo[]" id="tipo_ausen">
+                    <select class="input_decor" required name="Tipo_Ausentismo[]" id="tipo_ausen">
                         <option value="">Seleccione</option>
                             <?php
                                 $sqli = "SELECT * FROM tipoausentismo";

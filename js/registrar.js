@@ -30,12 +30,13 @@ $(function()
         }else{
             //get_funcionario();
             //$("#form_register").reset();
-            document.getElementById("form_register").reset();
+
+            /*document.getElementById("form_register").reset();
             document.getElementById("nombre").disabled = false ;
             document.getElementById("cedula").disabled = false;
             document.getElementById("cargo").disabled = false;
             document.getElementById("departamento").disabled = false;
-            document.getElementById("facultad").disabled = false;
+            document.getElementById("facultad").disabled = false; */
         }
         //get_funcionario();
         
@@ -70,11 +71,11 @@ function get_funcionario()
                     document.getElementById("departamento").value = funcionario.Departamento; 
                     document.getElementById("facultad").value = funcionario.Facultad; 
 
-                    document.getElementById("nombre").disabled = true ;
+                    /*document.getElementById("nombre").disabled = true ;
                     document.getElementById("cedula").disabled = true;
                     document.getElementById("cargo").disabled = true;
                     document.getElementById("departamento").disabled = true;
-                    document.getElementById("facultad").disabled = true;
+                    document.getElementById("facultad").disabled = true;*/
                 });
 
             }
