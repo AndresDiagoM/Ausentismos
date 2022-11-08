@@ -36,7 +36,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
                     <tbody>";
         foreach($funcionariosExistentes as $funcionario){
             $tabla1 .= "<tr>
-                            <th scope='row'>1".$funcionario['CEDULA']."</th>
+                            <th scope='row'>".$funcionario['CEDULA']."</th>
                             <td>".$funcionario['NOMBRE']."</td>
                             <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
                         </tr>";
