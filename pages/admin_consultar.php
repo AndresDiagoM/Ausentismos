@@ -339,6 +339,21 @@
 
 </script>-->
 
+<script>
+    //SCRIPT para colocar en fecha inicial, la fecha con mes actual
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+    //var today = year + "-" + month + "-" + day;
+    //var today =  +year + "-" + month + "-" + (day+1-day) ;  
+    var today = "2019-07-22";
+    document.getElementById("fecha_inicio").value = today; 
+</script>
+
+
 
 </body>
 </html>
