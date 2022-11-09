@@ -7,7 +7,7 @@
     $nombre_admin   = $_SESSION['NOM_USUARIO'];
     $id_admin       = $_SESSION['ID_USUARIO'];
     $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
-
+    //echo $tipo_usuario;
 ?>
 
 <!DOCTYPE html>
@@ -19,13 +19,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script> -->
     <link rel="icon" href="../images/icon.png">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_delete_user.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
+
+    <!-- Bootstrap local -->
+    <link rel="stylesheet" href="../bootstrap-4.4.1-dist/css/bootstrap.min.css">
+
     <title>Eliminar Usuario</title>
 </head>
 <body>
@@ -165,34 +171,25 @@
         <input type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
 </div>
 <section class="section_principal">
-    <div id="datos">
+    <div class="container" style="margin-left: 200px;" id="datos">
 
     </div>
-
 </section>
 
 
-
-
-<!-- SCRIPTS DE PARTICULAS Y DEL MENU LATERAL -->
-<script src="../js/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+ <!-- SCRIPT DE PARTICULAS -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+<script src="../js/particles.min.js"></script>
 <script src="../js/app.js"></script>
+<!-- INSTALACION DE JQUERY -->
+<script src="../js/jquery.min.js"></script> 
+
+<!-- LOCAL: JQuery, AJAX, Bootstrap 
+<script src="../bootstrap-4.4.1-dist/js/jquery-3.6.1.min.js"></script> -->     
+<script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+
 <script src="../js/search.js"></script>
 
-<!-- SCRIPT MENU LATERAL
-<script>
-    const btn = document.querySelector('#menu-btn');
-    const menu = document.querySelector('#slide-menu');
-
-
-    btn.addEventListener('click', e => {
-        menu.classList.toggle("menu-expanded");
-        window.scrollTo(150,150);
-        menu.classList.toggle("menu-collapsed");
-    });
-
-</script> -->
 
 
 </body>

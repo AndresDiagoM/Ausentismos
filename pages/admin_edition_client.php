@@ -27,6 +27,10 @@
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
     <link rel="stylesheet" href="../css/style_admin_edit_client.css">
+
+    <!-- Bootstrap local -->
+    <link rel="stylesheet" href="../bootstrap-4.4.1-dist/css/bootstrap.min.css">
+
     <title>Editar Usuario</title>
 </head>
 <body>
@@ -121,7 +125,6 @@
                 </div>
 
             <div class="item">
-                <a href="admin_edition_client.php">
                 <a href="../logic/cerrar_sesion.php">
                     <div class="icon"><img src="../images/cerrar-sesion.png" alt=""></div>
                     <div class="title"><span>Cerrar Sesión</span></div>
@@ -152,12 +155,11 @@
         <label for="caja_busqueda">Buscar: </label>
         <input type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
 </div>
-<div class="contenedor_tabla">
-    <table class="users_table" id="datos">
+<section class="section_principal">
+    <div class="container" style="margin-left: 200px;" id="datos">
 
-    </table>
-
-</div>
+    </div>
+</section>
 
 
 <!-- SCRIPT DE PARTICULAS -->
@@ -166,6 +168,8 @@
 <script src="../js/app.js"></script>
 <!-- INSTALACION DE JQUERY -->
 <script src="../js/jquery.min.js"></script>
+<script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+
 <!--    JAVASCRIPT QUE REALIZA LA BUSQUEDA DINAMICA -->
 <script src="../js/search_client_edit.js"></script>
 

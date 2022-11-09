@@ -33,7 +33,7 @@
                 <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
             </div>
             <div class="contenedor_frase">
-                <span>Divisón de Gestión del Talento Humano</span>
+                <span>División de Gestión del Talento Humano</span>
             </div>
             <div class="contenedor_botones">
                 <!-- <div class="contenedor_botton_inicio">

@@ -231,7 +231,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
 
 
     <!-- Contenerdor del contenido de la página-->
-    <div class="contenedor_tabla2">
+    <div class="contenedor_tabla2" >
         <!-- Contenerdor de cards-->
         <section class="bg-gray">
 
@@ -268,7 +268,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
         ?>
         <section>
             <!-- Contenedor de tabla -->
-            <div class="container ">
+            <div class="container " style="overflow-y:auto; height:600px; position:absolute">
                 <?php 
                     echo $tabla1;
                     if($tabla2 != null){

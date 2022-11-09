@@ -8,7 +8,7 @@
     $autentication  = $_SESSION['TIPO_USUARIO'];
     $tipo_cliente   = $_SESSION['TIPO_USUARIO'];
 
-    if ($autentication == 'Admin' || $autentication == 'Cliente' ){
+    if (strtoupper($autentication) == 'ADMIN' || strtoupper($autentication) == 'CONSULTA' ){
         $bandera = true;
     }
     else{
@@ -28,22 +28,24 @@
     $resultado = $mysqli->query($query);
     if($resultado->num_rows > 0){
 
-            $salida.="<table class='users_table2'>
-
+            $salida.="<table class='table table-striped table-bordered table-hover table-condensed'>
+                        <thead class='thead-light'>
                             <tr>
-                                <th>CEDULA        </th>
-                                <th>NOMBRE        </th>
-                                <th>CORREO        </th>
-                                <th>DEPENDENCIA   </th>
-                                <th>TIPO USUARIO  </th>
-                                <th>LOGIN         </th>
-                                <th>CONTRASEÑA    </th>
-                            </tr>";
+                                <th scope='col'>CEDULA        </th>
+                                <th scope='col'>NOMBRE        </th>
+                                <th scope='col'>CORREO        </th>
+                                <th scope='col'>DEPENDENCIA   </th>
+                                <th scope='col'>TIPO USUARIO  </th>
+                                <th scope='col'>LOGIN         </th>
+                                <th scope='col'>CONTRASEÑA    </th>
+                                <th scope='col'>EDITAR    </th>
+                            </tr>
+                        </thead>";
 
         while($fila = $resultado ->fetch_assoc()){
             $Id_fila = $fila['Cedula_U'];
             $salida.="<tr>
-                        <td>".$fila['Cedula_U']."      </td>
+                        <td scope='row'>".$fila['Cedula_U']."      </td>
                         <td>".$fila['Nombre_U']."      </td>
                         <td>".$fila['Correo']."      </td>
                         <td>".$fila['Dependencia']."       </td>

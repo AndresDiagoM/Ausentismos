@@ -284,8 +284,8 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <script src="../js/app.js"></script>
 
     <!-- CDN: Libreria de chart.js para las gráficas -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../chart.js-3.9.1/package/dist/chart.min.js"></script>
+    <script src="../chart.js-3.9.1/package/dist/chart.js"></script>
 
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 

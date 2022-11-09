@@ -335,17 +335,17 @@
             <div class="form_container mb-3" id="incapacidadINPUTS">
                 <div class="form_group">
                     <label for="Codigo[]"> CODIGO </label>
-                    <input type="text" name="Codigo[]" class="input_decor" id="codigo" placeholder="Escriba el codigo" required>
+                    <input type="text" name="Codigo[]" class="input_decor" id="codigo" placeholder="Escriba el codigo" >
                     <span class="form_line"></span>
                 </div>
                 <div class="form_group">
                     <label for="Diagnostico[]"> DIAGNOSTICO </label>
-                    <input type="text" name="Diagnostico[]" class="input_decor" id="diagnostico" placeholder="Escriba el diagnostico" required>
+                    <input type="text" name="Diagnostico[]" class="input_decor" id="diagnostico" placeholder="Escriba el diagnostico" >
                     <span class="form_line"></span>
                 </div>
                 <div class="form_group">
                     <label for="Entidad[]"> ENTIDAD </label>
-                    <input type="text" name="Entidad[]" class="input_decor" id="entidad" placeholder="Escriba la entidad" required>
+                    <input type="text" name="Entidad[]" class="input_decor" id="entidad" placeholder="Escriba la entidad" >
                     <span class="form_line"></span>
                 </div>
             </div>
