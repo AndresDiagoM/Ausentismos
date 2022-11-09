@@ -2,71 +2,77 @@
 <?php
     require '../conexion.php';
 
-    $nombre_edt         =   strtoupper($_POST['nombre_usuario_edt']);
-    $fecha_nac_edt      =   strtoupper($_POST['fecha_nac_edt']);
-    $tipo_doc_edt       =   strtoupper($_POST['tipo_doc_edt']);
-    $direccion_edt      =   strtoupper($_POST['direccion_edt']);
-    $depart_edt         =   strtoupper($_POST['depart']);
-    $munic_edt          =   strtoupper($_POST['munic']);
-    $numero_id          =   $_GET['ID'];
+    //$nombre_edt         =   strtoupper($_POST['nombre_usuario_edt']);
+    $query_values = $_POST;
+    //print_r($query_values); exit;
+
+    $numero_id = $_GET['ID'];
+    //print_r($numero_id); exit;
 
 
 
     // CONSULTA DE DATOS DEL USUARIO ALMACENADOS EN LA BASE DE DATOS
-    $consulta_id    = "SELECT * FROM users WHERE ID='$numero_id'";
-    $verificar_id   = mysqli_query($conectar, $consulta_id);
-    $row_us         = $verificar_id->fetch_array(MYSQLI_NUM);
-    $nombre_bs      = $row_us[2];
-    $fecha_nac_bs   = $row_us[3];
-    $tipo_doc_bs    = $row_us[4];
-    $direccion_bs   = $row_us[5];
-    $depart_bs      = $row_us[6];
-    $munic_bs       = $row_us[7];
-
-     // SENTENCIAS SQL PARA LA CONSULTA DEL NOMBRE DEL DEPARTAMENTO
-    $consulta_depart    = "SELECT * FROM departamentos WHERE ID_Depart = '$depart_edt'";
-    $rslt_depart        = mysqli_query($conectar, $consulta_depart);
-    $row1               = $rslt_depart->fetch_array(MYSQLI_NUM);
-    $nomb_depart        = $row1[1] ;
+    $sql = "SELECT * FROM usuarios WHERE Cedula_U = '$numero_id'";
+    $result = $conectar->query($sql);
+    $row = mysqli_fetch_assoc($result);
 
 
+    // SENTENCIAS SQL PARA LA CONSULTA DE la dependencia, donde el departamento es igual al departamento y la facultad es igual a la facultad 
+    $sql2 = "SELECT * FROM dependencias WHERE Departamento LIKE "."'".$query_values['departamento_usuario_edt']."'"." AND Facultad LIKE "."'".$query_values['facultad_usuario_edt']."'";
+    //print_r($sql2); exit;
+    $result2 = $conectar->query($sql2); 
+    //si no hay resultados, mostrar una alerta de que no hay resultados
+    if($result2->num_rows == 0){
+        echo "<script>alert('No existe la dependencia seleccionada.'); location.href = '../pages/admin_form_edition.php'; </script>"; exit;
+    }else{
+        //si hay resultados, guardar el resultado 
+        $row2 = mysqli_fetch_assoc($result2);
+    }
 
-    if($nombre_bs != $nombre_edt){
-        $actualizar_nom = "UPDATE users SET NAME_LASTNAME = '$nombre_edt' WHERE ID = $numero_id";
-        $sqli1          = mysqli_query($conectar, $actualizar_nom);
+
+    if($query_values['nombre_usuario_edt'] != $row['Nombre_U']){
+        $nombre_edt = $query_values['nombre_usuario_edt'];
+        $actualizar = "UPDATE usuarios SET Nombre_U = '$nombre_edt' WHERE Cedula_U = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
     }
-    if($fecha_nac_bs != $fecha_nac_edt){
-        $actualizar_fech = "UPDATE users SET DATE = '$fecha_nac_edt' WHERE ID = $numero_id";
-        $sqli2          = mysqli_query($conectar, $actualizar_fech);
+    if($query_values['correo_usuario_edt'] != $row['Correo']){
+        $correo_edt = $query_values['apellido_usuario_edt'];
+        $actualizar = "UPDATE usuarios SET Correo = '$correo_edt' WHERE Cedula_U = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
     }
-    if($tipo_doc_bs != $tipo_doc_edt){
-        $actualizar_tipo = "UPDATE users SET TYPE_ID = '$tipo_doc_edt' WHERE ID = $numero_id";
-        $sqli3          = mysqli_query($conectar, $actualizar_tipo);
+    if($row2['ID'] != $row['Dependencia']){
+        $depen_edt = $row2['ID'];
+        $actualizar = "UPDATE usuarios SET Dependencia = '$depen_edt' WHERE Cedula_U = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
     }
-    if($direccion_bs != $tipo_doc_edt){
-        $actualizar_addr = "UPDATE users SET ADDRESS = '$direccion_edt' WHERE ID = $numero_id";
-        $sqli4          = mysqli_query($conectar, $actualizar_addr);
+    //actualizar tipo_usuario
+    if($query_values['tipo_usuario_edt'] != $row['TipoUsuario']){
+        $tipo_edt = $query_values['tipo_usuario_edt'];
+        $actualizar = "UPDATE usuarios SET TipoUsuario = '$tipo_edt' WHERE Cedula_U = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
     }
-    if($depart_bs != $nomb_depart){
-        $actualizar_depart = "UPDATE users SET DEPARTAMENTO = '$nomb_depart' WHERE ID = $numero_id";
-        $sqli5          = mysqli_query($conectar, $actualizar_depart);
+    //actualizar login
+    if($query_values['login_usuario_edt'] != $row['Login']){
+        $login_edt = $query_values['login_usuario_edt'];
+        $actualizar = "UPDATE usuarios SET Login = '$login_edt' WHERE Cedula_U = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
     }
-    if($munic_bs != $munic_edt){
-        $actualizar_munc = "UPDATE users SET MUNICIPIO = '$munic_edt' WHERE ID = $numero_id";
-        $sqli1          = mysqli_query($conectar, $actualizar_munc);
+    //actualizar contraseña
+    if($query_values['contrasena_usuario_edt'] != $row['Contrasena']){
+        $contrasena_edt = $query_values['contrasena_usuario_edt'];
+        $actualizar = "UPDATE usuarios SET Contrasena = '$contrasena_edt' WHERE Cedula_U = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
     }
+    if($query_values['cedula_usuario_edt'] != $row['Cedula_U']){
+        $cedula_edt = $query_values['cedula_usuario_edt'];
+        $actualizar_nom = "UPDATE usuarios SET Cedula_U = '$cedula_edt' WHERE Cedula_U = $numero_id";
+        $sqli1          = $conectar->query($actualizar_nom);
+    }
+
 
     echo "<script>
         alert('Datos Actualizados Correctamtne');
         location.href='../pages/admin_edition_client.php';
     </script>"
-
-
-
-
-
-
-
-
 
 ?>

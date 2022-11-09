@@ -48,8 +48,8 @@
                         <td>".$fila['Correo']."      </td>
                         <td>".$fila['Dependencia']."       </td>
                         <td>".$fila['TipoUsuario']."       </td>
-                        <td>".$fila['login']."        </td>
-                        <td>".$fila['contraseña']."   </td>
+                        <td>".$fila['Login']."        </td>
+                        <td>".$fila['Contrasena']."   </td>
                         <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'></a></td>
                     </tr>";
         }

@@ -89,6 +89,23 @@
         exit; 
     }
 
+    //================================================================================================
+    //=========  comprobar que si se escoge el tipo "incapacidad", exista el codigo de incapacidad
+    //================================================================================================
+    $tipo = $query_values['Tipo_Ausentismo'][0];
+    $codigo = $query_values['Codigo'][0];
+    if($tipo==1 && $codigo==""){
+        echo "<script> alert('Si escoge el tipo de ausentismo: incapacidad, debe ingresar el codigo de incapacidad'); location.href = '../pages/admin_agregar.php';  </script>";          
+        exit; 
+    }else{
+        $sqlCodigo = "SELECT * FROM codigos WHERE Codigo='$codigo' ";
+        $codigos = $conectar->query($sqlCodigo);  //print_r($sqli); exit;
+        $var = mysqli_num_rows($codigos);
+        if($tipo==1 && $var<=0){
+            echo "<script> alert('El codigo de incapacidad no existe'); location.href = '../pages/admin_agregar.php';  </script>";          
+            exit; 
+        }
+    }
 
     // ===========================================
     //              REGISTRO MySQL
@@ -101,7 +118,29 @@
     $prueba = $conectar->query($registrar);
     if($prueba){
         //echo "<script> alert('Registro existoso');   location.href = '../pages/admin_agregar.php'; </script>";
-        header("Location: ../pages/admin_agregar.php");
+
+        // ===========================================
+        //              Registrar incapacidad
+        // ===========================================
+        if($tipo==1){
+            //consultar el último ausentimso SELECT * FROM ausentismos WHERE ID = (SELECT MAX(ID) FROM ausentismos);
+            $sql1 = "SELECT * FROM ausentismos WHERE ID = (SELECT MAX(ID) FROM ausentismos)";
+            $resultado = $conectar->query($sql1);
+            $rows = mysqli_fetch_array($resultado);
+
+            $registrarIncapacidad ="INSERT INTO incapacidad (Codigo, Diagnostico, Entidad, ID_Ausentismo) VALUES 
+            ('".$query_values['Codigo'][0]."', '".$query_values['Diagnostico'][0]."', '".$query_values['Entidad'][0]."', '".$rows['ID']."')";
+            //print_r($registrarIncapacidad); exit;
+            $pruebaIncapacidad = $conectar->query($registrarIncapacidad);
+            if($pruebaIncapacidad){
+                echo "<script> alert('Registro existoso');   location.href = '../pages/admin_agregar.php'; </script>";
+            }else{
+                echo "<script> alert('Error al registrar incapacidad');   location.href = '../pages/admin_agregar.php'; </script>";
+            }
+        }else{
+            header("Location: ../pages/admin_agregar.php");
+        }
+
     }
     else{
         echo "<script> alert('Registro incorrecto');

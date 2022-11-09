@@ -28,8 +28,6 @@
     <link rel="stylesheet" href="../css/style_admin.css">
     <link rel="stylesheet" href="../css/style_collapsed_menu.css">
     <link rel="stylesheet" href="../css/style_form.css">
-    
-    
 
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
@@ -93,7 +91,7 @@
                 </div>
 
             <div class="item">
-                <a href="#">
+                <a href="admin_cargar.php">
                     <div class="icon"><img src="../images/upload.png" alt=""></div>
                     <div class="title"><span>Cargar Datos</span></div>
                 </a>
@@ -305,7 +303,7 @@
             </div>
 
             <!-- INPUT DEL TIPO DE AUSENTISMO -->
-            <div class="form_container">
+            <div class="form_container" >
                 <div class="form-group">
                     <label for="Tipo_Ausentismo[]">TIPO DE AUSENTIMO</label>
                     <select class="input_decor" required name="Tipo_Ausentismo[]" id="tipo_ausen">
@@ -321,15 +319,34 @@
                                     $ID = $tipo["ID"];
                                     $Nombre=$tipo["TipoAusentismo"];
                                     /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
-                            ?>
-                            <option value=<?php echo $ID; ?> > 
-                                <?php echo $Nombre; ?>  
-                            </option>  
-
-                            <?php
+                                    if($ID == 1){
+                                        echo "<option value=\"$ID\">$Nombre</option>";
+                                    }else{
+                                        echo "<option value=\"$ID\">$Nombre</option>";
+                                    }
+                            
                                 }
                             ?>
                     </select>
+                </div>
+            </div>
+
+            <!-- INPUTS INCAPACIDAD -->
+            <div class="form_container mb-3" id="incapacidadINPUTS">
+                <div class="form_group">
+                    <label for="Codigo[]"> CODIGO </label>
+                    <input type="text" name="Codigo[]" class="input_decor" id="codigo" placeholder="Escriba el codigo" required>
+                    <span class="form_line"></span>
+                </div>
+                <div class="form_group">
+                    <label for="Diagnostico[]"> DIAGNOSTICO </label>
+                    <input type="text" name="Diagnostico[]" class="input_decor" id="diagnostico" placeholder="Escriba el diagnostico" required>
+                    <span class="form_line"></span>
+                </div>
+                <div class="form_group">
+                    <label for="Entidad[]"> ENTIDAD </label>
+                    <input type="text" name="Entidad[]" class="input_decor" id="entidad" placeholder="Escriba la entidad" required>
+                    <span class="form_line"></span>
                 </div>
             </div>
 

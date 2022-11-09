@@ -195,13 +195,27 @@
                 </div>
             </div>
     </section>
+    <section>
+        <!-- Contenedor de los botones del paginador de las consultas -->
+        <div class="col-md-12 text-center">
+            <ul class="pagination pagination-lg pager" style="margin-left:25rem" id="myPager">
+
+            </ul>
+            <!-- <ul class="pagination pg-dark justify-content-center pb-5 pt-5 mb-0" style="float: none;" id="myPager">
+                    <li class="page-item">
+
+                    </li>
+            </ul> -->
+        </div>
+    </section>
 </div>
 <div class="contenedor_tabla">         
-    <table class="users_table"> <!-- BOOSTRAP4: table table-bordered -->        
+    <table class="table"> <!-- BOOSTRAP4: table table-bordered -->        
+        <thead class="thead-light">
         <tr>
             <form class="row" id="multi-filters">
 
-            <th>
+            <th scope="col">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -213,7 +227,7 @@
                         </li>
                     </ul>
             </th>
-            <th>
+            <th scope="col">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -225,7 +239,7 @@
                         </li>
                     </ul>
             </th>
-            <th>
+            <th scope="col">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -237,13 +251,13 @@
                         </li>
                     </ul>
             </th>
-            <th>FECHA FIN</th>
-            <th>TIEMPO</th>
-            <th>UNIDAD</th>
-            <th>OBSERVACIÓN</th>
-            <th>COSTO</th>
-            <th>NOMBRE USUARIO</th>
-            <th>
+            <th scope="col">FECHA FIN</th>
+            <th scope="col">TIEMPO</th>
+            <th scope="col">UNIDAD</th>
+            <th scope="col">OBSERVACIÓN</th>
+            <th scope="col">COSTO</th>
+            <th scope="col">NOMBRE USUARIO</th>
+            <th scope="col">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -278,23 +292,12 @@
 
             </form>
         </tr>
-
+        </thead>
+        
         <tbody id="filters-result" class="bg-white">
                 <!-- Aquí se inserta los datos desde el script ../js/consultar.js -->
         </tbody>
     </table>
-        
-    <!-- Contenedor de los botones del paginador de las consultas -->
-    <div class="col-md-12 text-center">
-        <ul class="pagination pagination-lg pager" style="margin-left:25rem" id="myPager">
-
-        </ul>
-        <!-- <ul class="pagination pg-dark justify-content-center pb-5 pt-5 mb-0" style="float: none;" id="myPager">
-                <li class="page-item">
-
-                </li>
-        </ul> -->
-    </div>
     
 </div>
 
