@@ -29,7 +29,7 @@
     if($resultado->num_rows > 0){
 
             $salida.="<table class='table table-striped table-bordered table-hover table-condensed'>
-                        <thead class='thead-light'>
+                        <thead class='thead-light table-active'>
                             <tr>
                                 <th scope='col'>CEDULA        </th>
                                 <th scope='col'>NOMBRE        </th>
@@ -52,7 +52,7 @@
                         <td>".$fila['TipoUsuario']."       </td>
                         <td>".$fila['Login']."        </td>
                         <td>".$fila['Contrasena']."   </td>
-                        <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'></a></td>
+                        <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
                     </tr>";
         }
         $salida.="</table>";

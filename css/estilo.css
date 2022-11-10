@@ -1,0 +1,64 @@
+:root{
+    --primary: #111854;
+    --light: #ffffff;
+    --grey: #efefef;
+    --navbar: #be3838;
+}
+
+body {
+    overflow: hidden; /*para que al hacer scroll, no haya scroll sobre el sidebar*/
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+    color: var(--primary);
+}
+
+a:hover {
+    text-decoration: none;  /* Para que no aparezca las opciones del menu 
+    subrayadas */
+}
+
+/*---------------------  DASHBOARD ---------------- */
+.bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: /*var(--navbar)*/rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+}
+
+/*
+    %----------- side bar -------------%
+*/
+#sidebar-container {
+    min-height: 110vh; /* Es el contenedor de todo el menu lateral, el largo*/
+}
+#sidebar-container .logo {
+    padding: .875rem 1.25rem; /* Es la ubicación del Heading del sidebar */
+}
+#sidebar-container .menu {
+    width: 18rem; /* Es el ancho del SideBar*/
+}
+
+/* ===========================================
+    %----------- NAV BAR - MENU SUPERIOR -------------%
+    ===========================================*/
+.avatar {
+    max-width: 25px; /*Para que la imagen del perfil sea pequeña*/
+}
+
+
+/*Estilo para el contenido del SITIOWEB*/
+#content {
+    overflow-y: auto; /*Para permitir scroll sobre el contenido*/
+    height: 100vh;    /*Para tener una altura fija*/
+    padding-bottom: 5rem;
+}
+
+
+
+/*Para no mostar el Sidebar en version movil*/
+@media (max-width: 768px) {
+    #sidebar-container {
+        display: none;
+    }
+    .stat{
+        border: 0;
+    }
+}
