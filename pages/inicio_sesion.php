@@ -6,117 +6,162 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../images/icon.png">
-    <link rel="stylesheet" href="../css/style_inicio_sesion.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon+SC&family=Kanit:ital,wght@0,400;1,400;1,500;1,900&display=swap">
-    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script>
 
-    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../bootstrap-5.2.2-dist/css/bootstrap.min.css" /> 
+
+    <!-- CSS -->
+    <link href="../css/estilo.css" rel="stylesheet" integrity="" crossorigin="anonymous">
+
+    <!-- ICONOS en https://ionic.io/ionicons/v4/usage#md-pricetag -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <title>Admin</title>
 </head>
-<meta chatset="UTF-8">
+
+<style type="text/css">
+    .divider:after, .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+    }
+    .h-custom {
+        height: calc(100% - 73px);
+    }
+    @media (max-width: 450px) {
+        .h-custom {
+        height: 100%;
+        }
+    }
+</style>
 
 <body>
-
-    <!-- CABECERA DE TRABAJO -->
-    <header>
-
-        <div class="contenedor_principal">
-            <div class="contenedor_logo">
-                <a href="../index.php"><img id="imagen_logo" src="../images/logo.png" alt="Error al cargar la imagen"></a>
+    
+    <div class="mx-auto">
+    
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="../images/logoU.png"
+                class="img-fluid" alt="Sample image">
             </div>
-            <div class="contenedor_frase">
-                <span>División de Gestión del Talento Humano</span>
-            </div>
-            <div class="contenedor_botones">
-                <!-- <div class="contenedor_botton_inicio">
-                    <a href="../index.php"><button type="" class="btn-inicio-sesion"> Menú Principal</button></a>
-                </div> -->
-                <div class="contenedor_botton_registro">
-                    <a href="../pages/form_register.php"><button type="" class="btn-inicio-sesion"> Registrarse </button></a>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form action="../logic/inicio_sesionLogic.php" method="POST">
+
+                <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    <p class=""></p>
                 </div>
 
-            </div>
-        </div>
+                <p class="text-center lead fw-normal mb-0 me-3">
+                    Division de Gestión del Talento Humano</p>
 
-    </header>
-
-
-    <!-- DISEÑO DE INICIO SESION-->
-
-    <div id="particles-js"></div>
-
-    <form action="../logic/inicio_sesionLogic.php" method="POST">
-        <div class="login-box">
-            <h1>INICIO DE SESIÓN</h1> <!-- El título de Inicio de sesión -->
-
-            <div class="form">
-                <div class="item">
-                    <!-- parte de nombre de usuario -->
-                    <i class="fa fa-user-circle" id="ic_us" aria-hidden="true" class="iconos"></i> <!-- Se utilizará para dibujar el icono delante del nombre de usuario -->
-                    <input type="text" placeholder="Identificación" name="username" class="input_decor"> <!-- Entrada de nombre de usuario realizada por cuadro de texto -->
+                <div class="divider d-flex align-items-center my-4">
+                    <!-- <p class="text-center fw-bold mx-3 mb-0">Or</p> -->
                 </div>
 
-                <div class="item">
-                    <!-- parte de la contraseña -->
+                <!-- Email input -->
+                <div class="form-floating mb-3 col-auto"> 
+                    <input type="text" id="form3Example3" name="username" class="form-control"
+                    placeholder="Ingrese su usuario" required/>
+                    <label class="col-form-label" for="form3Example3">Usuario</label>
+                </div>
 
-                    <i class="fa fa-key" aria-hidden="true"></i> <!-- Se utilizará para dibujar el icono delante de la contraseña en el futuro -->
-                    <input type="password" placeholder="password" name="password"> <!-- Entrada de contraseña usando el cuadro de texto de contraseña-->
+                <!-- Password input -->
+                <div class="form-floating mb-3 col-auto"> 
+                    <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
+                    placeholder="Ingrese la contraseña" required/>
+                    <label class="form-label" for="form3Example4">Contraseña</label>
+                </div>
 
-                    <p class="label_mensaje">
-
-                        <?php
-                        if (isset($_GET["message"])) {
-                            $message = $_GET["message"];
-                            if ($_GET["message"] != "") {
-
-                        ?>
-                                Datos incorrectos:
-                                <?php
-                                if ($message == 1) {
-                                    echo "CONTRASENA INCORRECTA";
-                                    // echo "USUARIO O CONTRASEÑA INCORRECTA. INTENTE DE NUEVO.";
-                                    session_destroy();
-                                } elseif ($message == 2) {
-                                    echo "USUARIO NO REGISTRADO.";
-                                    session_destroy();
-                                } elseif ($message == 3) {
-                                    echo "ALERTA DE SEGURIDAD. FAVOR INICIE SESIÓN";
-                                    session_destroy();
-                                } elseif ($message == 4) {
-                                    echo "SESIÓN FINALIZADA. INICIE SESIÓN NUEVAMENTE";
-                                    session_destroy();
-                                } elseif ($message == 5) {
-                                    echo "INICIE SESIÓN PARA REALIZAR UNA COMPRA";
-                                }
-                                ?>
-
-
-                    </p>
-
-            <?php
+                <p class="label_mensaje">
+                    <?php
+                    if (isset($_GET["message"])) {
+                        $message = $_GET["message"];
+                        if ($_GET["message"] != "") {
+                            
+                            echo 'Datos incorrectos:';
+                            
+                            if ($message == 1) {
+                                echo 'CONTRASENA INCORRECTA';
+                                // echo "USUARIO O CONTRASEÑA INCORRECTA. INTENTE DE NUEVO.";
+                                session_destroy();
+                            } elseif ($message == 2) {
+                                echo 'USUARIO NO REGISTRADO.';
+                                session_destroy();
+                            } elseif ($message == 3) {
+                                echo 'ALERTA DE SEGURIDAD. FAVOR INICIE SESIÓN';
+                                session_destroy();
+                            } elseif ($message == 4) {
+                                echo 'SESIÓN FINALIZADA. INICIE SESIÓN NUEVAMENTE';
+                                session_destroy();
+                            } elseif ($message == 5) {
+                                echo 'INICIE SESIÓN PARA REALIZAR UNA COMPRA';
                             }
+                            
+                        echo '</p>';
                         }
-            ?>
+                    }
+                    ?>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Checkbox -->
+                    <div class="form-check mb-0">
+                    <!--<input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                    <label class="form-check-label" for="form2Example3">
+                        Remember me
+                    </label> -->
+                    </div>
+                    <!-- <a href="#!" class="text-body">Forgot password?</a> -->
                 </div>
 
+                <div class="text-center text-lg-start mt-4 pt-2">
+                    <button type="submit" class="btn btn-success btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar Sesion</button>
+                    <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="../pages/form_register.php"
+                        class="link-danger">Register</a></p>
+                </div>
+
+                </form>
             </div>
-
-            <button type="submit" class="btn-login">ACCEDER</button> <!-- Botón de inicio de sesión implementado con el botón -->
+            </div>
         </div>
-    </form>
 
-    <!-- Insercion de particulas -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>  -->
-    <script src="../js/particles.min.js"></script>
-    <script src="../js/app.js"></script>
+            <div
+                class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+                <!-- Copyright -->
+                <div class="text-white mb-3 mb-md-0">
+                Copyright © 2020. All rights reserved.
+                </div>
+                <!-- Copyright -->
+
+                <!-- Right 
+                <div>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="#!" class="text-white">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                </div> -->
+                <!-- Right -->
+            </div>
+        </section>
+
+    </div>
+
 </body>
 
 </html>

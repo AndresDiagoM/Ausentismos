@@ -27,438 +27,158 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/icon.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style_collapsed_menu.css">
-    <link rel="stylesheet" href="css/style_inicio_sesion.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500;1,900&family=Lobster&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/b50f20f4b1.js" crossorigin="anonymous"></script> -->
-    <!-- Estilos del carousel -->
-    <title>Ausentismos</title>
+    <link rel="icon" href="./images/icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./bootstrap-5.2.2-dist/css/bootstrap.min.css" /> 
+
+    <!-- CSS -->
+    <link href="./css/estilo.css" rel="stylesheet" integrity="" crossorigin="anonymous">
+
+    <!-- ICONOS en https://ionic.io/ionicons/v4/usage#md-pricetag -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <title>Admin</title>
 </head>
-<body>
-    <!-- <div id="particles-js"></div> -->
 
-    <!-- CABECERA DE TRABAJO -->
-    <header>
-        <div class="contenedor_principal">
-            <div class="contenedor_logo">
-                <a href="index.php"><img id="imagen_logo" src="images/logo.png" alt="Error al cargar la imagen"></a>
-            </div>
-
-            <?php
-                if ($bandera == false){
-            ?>
-
-                <div class="contenedor_frase">
-                    <span>Divisón de Gestión del Talento Humano</span>
-                </div>
-                <div class="contenedor_botones">
-                    <div class="contenedor_botton_inicio">
-                        <a href="pages/inicio_sesion.php"><button type="" class="btn-inicio-sesion">Inicio de Sesión</button></a>
-                    </div>
-                    <div class="contenedor_botton_registro">
-                        <a href="pages/form_register.php"><button type="" class="btn-inicio-sesion">Registrarse</button></a>
-                    </div>
-                </div>
-            <?php
-                }
-                else{
-            ?>
-                <div class="contenedor_nombre_clt">
-                    <span> BIENVENIDO </span>
-                    <span>
-                        <?php
-                            echo $nombre_cliente;
-                        ?>
-
-                    </span>
-                </div>
-                <!-- <div class="contenedor_clt">
-                    Nombre de usuario:
-                    <span class="info_clt">
-                        <?php
-                            //echo " $nombre_cliente";
-                        ?>
-                    </span><br>
-                    <span>
-                        ID usuario:
-                    </span>
-                    <span class="info_admin">
-                        <?php
-                            //echo " $id_cliente";
-                        ?>
-                    </span><br>
-                    Tipo de usuario:
-                    <span>
-                        <?php
-                            //echo $autentication;
-                        ?>
-                    </span>
-
-
-                    <div class="contenedor_cerrar_sesion" >
-                        <a href="logic/cerrar_sesion.php"><button class="btn-cierre-sesion">Cerrar Sesión</button></a>
-                    </div> -->
-                </div>
-            <?php
-                }
-            ?>
-
-
-        </div>
-    </header>
-
-
-    <!-- MENU DESPLEGABLE SI SE ENCUENTRA CON INICIO DE SESION UN CLIENTE O UN ADMIN -->
-    <?php
-        if($autentication == 'Cliente'){
-    ?>
-        <!-- INICIO DE SLIDE MENU PARA CLIENTES -->
-        <div class = "contenedor_pr_menu">
-            <div id="slide-menu" class="menu-collapsed">
-
-                <!-- HEADER 
-                <div id="header">
-
-                    <div id="menu-btn">
-                        <div class="btn-logo"></div>
-                        <div class="btn-logo"></div>
-                        <div class="btn-logo"></div>
-                    </div>
-                    <div id="title"><span>PERFIL</span></div>
-
-                </div> -->
-
-                <!-- PROFILE -->
-                <div id="profile">
-                    <div id="photo"><img src="images/profile2.png" alt=""></div>
-                    <div id="name"><span>Nombre: <?php echo $nombre_cliente ?></span></div>
-                    <div id="name"><span>Id: <?php echo $id_cliente ?></span></div>
-                </div>
-
-                <!-- ITEMS -->
-                <div id="menu-items">
-
-                    <div class="item">
-                        <a href="pages/client_menu.php">
-                            <div class="icon"><img src="images/home.png" alt=""></div>
-                            <div class="title"><span>Menú Principal</span></div>
-
-                        </a>
-                    </div>
-
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="pages/client_estadisticas.php">
-                            <div class="icon"><img src="images/stadistics.png" alt=""></div>
-                            <div class="title"><span>Estadísticas</span></div>
-
-                        </a>
-                    </div>
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="pages/client_alertas.php">
-                            <div class="icon"><img src="images/alert.png" alt=""></div>
-                            <div class="title"><span>Alertas</span></div>
-
-                        </a>
-                    </div>
-
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="pages/client_suscription.php">
-                            <div class="icon"><img src="images/subscription.png" alt=""></div>
-                            <div class="title"><span>Suscripciones</span></div>
-
-                        </a>
-                    </div>
-                    
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="pages/client_rango_alertas.php">
-                            <div class="icon"><img src="images/meter.png" alt=""></div>
-                            <div class="title"><span>Rangos de medición</span></div>
-                        </a>
-                    </div>
-
-
-                </div>
-
-                <!--
-                    =================================
-                    BOTON DE CARGA SUPERIOR
-                    =================================
-                -->
-                <div class="footer">
-                    <a href="#">
-                        <div class="btn_carga"><img src="images/pages_up.png" alt=""></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    <?php
-        }if($autentication == 'Admin'){
-    ?>
-        <!-- INICIO DE SLIDE MENU PARA ADMINS-->
-        <div class = "contenedor_pr_menu">
-            <div id="slide-menu" class="menu-expanded">
-
-                <!-- HEADER 
-                <div id="header">
-
-                    <div id="menu-btn">
-                        <div class="btn-logo"></div>
-                        <div class="btn-logo"></div>
-                        <div class="btn-logo"></div>
-                    </div>
-                    <div id="title"><span>PERFIL</span></div>
-
-                </div> -->
-
-                <!-- PROFILE -->
-                <div id="profile">
-                    <div id="photo"><img src="images/profile2.png" alt=""></div>
-                    <div id="name"><span>Nombre: <?php echo $nombre_admin ?></span></div>
-                    <div id="name"><span>Id: <?php echo $id_admin ?></span></div>
-                </div>
-
-                <!-- ITEMS -->
-                <div id="menu-items">
-
-                    <div class="item">
-                        <a href="#">
-                            <div class="icon"><img src="images/home.png" alt=""></div>
-                            <div class="title"><span>Menú Principal</span></div>
-
-                        </a>
-                    </div>
-
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="pages/admin_estadisticas.php">
-                            <div class="icon"><img src="images/stadistics.png" alt=""></div>
-                            <div class="title"><span>Estadísticas</span></div>
-
-                        </a>
-                    </div>
-
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="#">
-                            <div class="icon"><img src="images/upload.png" alt=""></div>
-                            <div class="title"><span>Cargar Datos</span></div>
-                        </a>
-                    </div>
-
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="#">
-                            <div class="icon"><img src="images/add.png" alt=""></div>
-                            <div class="title"><span>Agregar Registro</span></div>
-                        </a>
-                    </div>
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="pages/admin_consultar.php">
-                            <div class="icon"><img src="images/stadistics.png" alt=""></div>
-                            <div class="title"><span>Consultar Ausentismos</span></div>
-                        </a>
-                    </div>
-
-                        <!-- SEPARADOR -->
-                        <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="pages/admin_edition_client.php">
-                            <div class="icon"><img src="images/users_admin.png" alt=""></div>
-                            <div class="title"><span>Gestionar Usuario</span></div>
-                        </a>
-                    </div>
-
-                    <!-- SEPARADOR -->
-                    <div class="item separator">
-                        </div>
-
-                    <div class="item">
-                        <a href="admin_edition_client.php">
-                        <a href="../logic/cerrar_sesion.php">
-                            <div class="icon"><img src="./images/cerrar-sesion.png" alt=""></div>
-                            <div class="title"><span>Cerrar Sesión</span></div>
-                        </a>
-                    </div>
-
-                <!--
-                    =================================
-                    BOTON DE CARGA SUPERIOR
-                    =================================
-                -->
-                <div class="footer">
-                    <a href="#">
-                        <div class="btn_carga"><img src="images/pages_up.png" alt=""></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    <?php
+<style type="text/css">
+    .divider:after, .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+    }
+    .h-custom {
+        height: calc(100% - 73px);
+    }
+    @media (max-width: 450px) {
+        .h-custom {
+        height: 100%;
         }
-    ?>
+    }
+</style>
 
+<body>
+    
+    <div class="mx-auto">
+    
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="./images/logoU.png"
+                class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form action="./logic/inicio_sesionLogic.php" method="POST">
 
-    <!-- BARRA DE NAVEGACION 
-    <div class="contenedor_menu">
-
-        <div class="contenedor_listas">
-            <ul>
-                <a href="index.php"><li class="btn-inicio-go_home">Menú Principal</li></a>
-                <a href="pages/suscription.php"><li>Suscripciones</a><i class="fa fa-angle-down"></i>
-                    <ul>
-                        <a href="pages/compras.php?suscp=Prem"><li> Premiun</li></a>
-                        <a href="pages/compras.php?suscp=Basic"><li> Básico</li></a>
-                    </ul>
-                </li> 
-                <a href="pages/quienes_somos.php"><li class="btn-inicio-go_catalogo">¿Quiénes somos?</li></a>
-
-                <?php
-                    if($autentication == 'Cliente'){
-
-
-                ?>
-                    <a href="pages/client_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
-                <?php
-                    }
-
-                    elseif($autentication == 'Admin'){
-                ?>
-                    <a href="pages/admin_menu.php"><li class="btn-dashboard">Menú del Usuario</li></a>
-                <?php
-                    }
-
-                ?>
-
-            </ul>
-        </div>
-    </div> -->
-
-
-    <!-- DISEÑO DE INICIO SESION-->
-
-    <div id="particles-js"></div>
-    <!-- <div class="contenedor_form"> -->
-        <form action="logic/inicio_sesionLogic.php" method="POST" >
-            <div class="login-box">
-                <h1>INICIO DE SESIÓN</h1> <!-- El título de Inicio de sesión -->
-
-                <div class="form">
-                    <div class="item"> <!-- parte de nombre de usuario -->
-                        <i class="fa fa-user-circle" id="ic_us" aria-hidden="true" class="iconos"></i> <!-- Se utilizará para dibujar el icono delante del nombre de usuario -->
-                        <input type="text"  placeholder="Identificación" name="username" class="input_decor" > <!-- Entrada de nombre de usuario realizada por cuadro de texto -->
-                    </div>
-
-                    <div class="item"> <!-- parte de la contraseña -->
-
-                        <i class="fa fa-key" aria-hidden="true"></i> <!-- Se utilizará para dibujar el icono delante de la contraseña en el futuro -->
-                        <input type="password" placeholder="password" name="password"> <!-- Entrada de contraseña usando el cuadro de texto de contraseña-->
-
-                        <p  class="label_mensaje">
-
-                        <?php
-                            if (isset($_GET["message"])){
-                            $message = $_GET["message"];
-                            if($_GET["message"] != "" ){
-
-                        ?>
-                        Datos incorrectos:
-                        <?php
-                        if($message == 1){
-                            echo "CONTRASENA INCORRECTA";
-                            // echo "USUARIO O CONTRASEÑA INCORRECTA. INTENTE DE NUEVO.";
-                            session_destroy();
-
-                        }
-                        elseif($message == 2){
-                            echo "USUARIO NO REGISTRADO.";
-                            session_destroy();
-
-                        }
-                        elseif($message == 3){
-                            echo "ALERTA DE SEGURIDAD. FAVOR INICIE SESIÓN";
-                            session_destroy();
-
-
-                        }
-                        elseif($message == 4){
-                            echo "SESIÓN FINALIZADA. INICIE SESIÓN NUEVAMENTE";
-                            session_destroy();
-
-                        }
-                        elseif($message == 5){
-                            echo "INICIE SESIÓN PARA REALIZAR UNA COMPRA";
-                        }
-                        ?>
-
-
-                        </p>
-
-                        <?php
-                            }
-                            }
-                        ?>
-                    </div>
-
+                <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    <p class=""></p>
                 </div>
 
-                <button type="submit" class="btn-login">ACCEDER</button> <!-- Botón de inicio de sesión implementado con el botón -->
+                <p class="text-center lead fw-normal mb-0 me-3">
+                    Division de Gestión del Talento Humano</p>
+
+                <div class="divider d-flex align-items-center my-4">
+                    <!-- <p class="text-center fw-bold mx-3 mb-0">Or</p> -->
+                </div>
+
+                <!-- Email input -->
+                <div class="form-floating mb-3 col-auto"> 
+                    <input type="text" id="form3Example3" name="username" class="form-control"
+                    placeholder="Ingrese su usuario" required/>
+                    <label class="col-form-label" for="form3Example3">Usuario</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-floating mb-3 col-auto"> 
+                    <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
+                    placeholder="Ingrese la contraseña" required/>
+                    <label class="form-label" for="form3Example4">Contraseña</label>
+                </div>
+
+                <p class="label_mensaje">
+                    <?php
+                    if (isset($_GET["message"])) {
+                        $message = $_GET["message"];
+                        if ($_GET["message"] != "") {
+                            
+                            echo 'Datos incorrectos:';
+                            
+                            if ($message == 1) {
+                                echo 'CONTRASENA INCORRECTA';
+                                // echo "USUARIO O CONTRASEÑA INCORRECTA. INTENTE DE NUEVO.";
+                                session_destroy();
+                            } elseif ($message == 2) {
+                                echo 'USUARIO NO REGISTRADO.';
+                                session_destroy();
+                            } elseif ($message == 3) {
+                                echo 'ALERTA DE SEGURIDAD. FAVOR INICIE SESIÓN';
+                                session_destroy();
+                            } elseif ($message == 4) {
+                                echo 'SESIÓN FINALIZADA. INICIE SESIÓN NUEVAMENTE';
+                                session_destroy();
+                            } elseif ($message == 5) {
+                                echo 'INICIE SESIÓN PARA REALIZAR UNA COMPRA';
+                            }
+                            
+                        echo '</p>';
+                        }
+                    }
+                    ?>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Checkbox -->
+                    <div class="form-check mb-0">
+                    <!--<input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                    <label class="form-check-label" for="form2Example3">
+                        Remember me
+                    </label> -->
+                    </div>
+                    <!-- <a href="#!" class="text-body">Forgot password?</a> -->
+                </div>
+
+                <div class="text-center text-lg-start mt-4 pt-2">
+                    <button type="submit" class="btn btn-success btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar Sesion</button>
+                    <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="./pages/form_register.php"
+                        class="link-danger">Register</a></p>
+                </div>
+
+                </form>
             </div>
-        </form>
-    <!--</div> -->
+            </div>
+        </div>
 
-<!-- Insercion de particulas -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script src="js/app.js"></script>
+            <div
+                class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+                <!-- Copyright -->
+                <div class="text-white mb-3 mb-md-0">
+                Copyright © 2020. All rights reserved.
+                </div>
+                <!-- Copyright -->
 
-<!-- SCRIPT MENU LATERAL
-<script>
-    const btn = document.querySelector('#menu-btn');
-    const menu = document.querySelector('#slide-menu');
+                <!-- Right 
+                <div>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="#!" class="text-white">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                </div> -->
+                <!-- Right -->
+            </div>
+        </section>
 
-
-    btn.addEventListener('click', e => {
-        menu.classList.toggle("menu-expanded");
-        window.scrollTo(150,150);
-        menu.classList.toggle("menu-collapsed");
-    });
-
-</script> -->
+    </div>
 
 </body>
+
 </html>
