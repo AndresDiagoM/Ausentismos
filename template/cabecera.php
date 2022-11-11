@@ -48,6 +48,8 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                 <i class="icon ion-md-add-circle mr-2 lead"></i> AGREGAR REGISTRO</a>
             <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none"> 
                 <i class="icon ion-md-search   mr-2 lead"></i> CONSULTAR AUSENTISMO    </a>
+            <a href="../pages/admin_consultar2.php" class="p-3 text-light d-block text-decoration-none"> 
+                <i class="icon ion-md-search   mr-2 lead"></i> CONSULTAR INCAPACIDAD    </a>
             <a href="../pages/admin_edition_client.php" class="p-3 text-light d-block text-decoration-none"> 
                 <i class="icon ion-md-people mr-2 lead"></i> GESTIONAR USUARIO</a>
             <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none"> 
@@ -60,7 +62,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <!-- NAV BAR - menu en la parte superior -->
         <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../pages/admin_menu2.php">MENU</a>
+            <a class="navbar-brand" href="../pages/admin_menu.php">MENU</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -50,7 +50,7 @@
             }
             // VALIDACION SI EL USUARIO ES CLIENTE
             elseif(strtoupper($tipo_usuario) == 'CONSULTA'){
-                header('Location: ../pages/client_menu.php');
+                header('Location: ../pages/admin_menu.php');
             }
             else{
             // VALIDACION SI EL USUARIO NO TIENE UN ROL DEFINIDO

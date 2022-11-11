@@ -9,8 +9,7 @@
                     alert('Ya se ha iniciado sesión previamente.');
                     location.href='../pages/client_menu.php';
                 </script>";
-    }
-    elseif($autentication == 'Admin'){
+    }elseif($autentication == 'Admin'){
         echo    "<script>
                     alert('Ya se ha iniciado sesión previamente.');
                     location.href='../pages/admin_menu.php';
