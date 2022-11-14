@@ -12,12 +12,8 @@
         header('Location: ../pages/inicio_sesion.php?message=3');
     }
 
-
-
     $username = strtoupper($_POST['username']);
     $password = strtoupper($_POST['password']);
-
-
 
     //session_start();
 
@@ -56,8 +52,6 @@
             // VALIDACION SI EL USUARIO NO TIENE UN ROL DEFINIDO
                 header('Location: ../pages/inicio_sesion.php?message=1');
             }
-
-
 
         }
             // VALIDACION SI SE INGRESA UN ID REGISTRADO PERO SIN CONTRASEÑA

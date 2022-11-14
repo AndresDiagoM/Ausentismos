@@ -9,7 +9,7 @@
         //para observar en el navegador con inspeccionar elemento
 
         $query_values = $_POST;  //Array( [Nombre] => Array ( [0] => andres) [Cedula] => Array ( [0] => 1 ) ...)
-        $extra_query = " WHERE Estado='ACT' "; //"WHERE Cancelled = 0";
+        $extra_query = " WHERE Estado='ACTIVO' "; //"WHERE Cancelled = 0";
 
         if($query_values)
         {

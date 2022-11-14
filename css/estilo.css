@@ -3,6 +3,7 @@
     --light: #ffffff;
     --grey: #efefef;
     --navbar: #be3838;
+    --btnHover: #d66060;
 }
 
 body {
@@ -17,10 +18,17 @@ a:hover {
     subrayadas */
 }
 
-/*---------------------  DASHBOARD ---------------- */
+/*---------------------  CAMNIOS GLOBALES ---------------- */
 .bg-primary {
     --bs-bg-opacity: 1;
-    background-color: /*var(--navbar)*/rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+    background-color: var(--navbar) /*rgba(var(--bs-success-rgb), var(--bs-bg-opacity))*/ !important;
+}
+.btn-success{
+    background-color: var(--navbar) ;
+}
+.btn-success:hover{
+    /*Al hacer hover(poner el mouse encima del boton) se pone de color azul*/
+    background-color: var(--btnHover) !important; /*Este es color morado*/
 }
 
 /*

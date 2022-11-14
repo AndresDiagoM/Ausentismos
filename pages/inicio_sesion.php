@@ -86,10 +86,10 @@
                         $message = $_GET["message"];
                         if ($_GET["message"] != "") {
                             
-                            echo 'Datos incorrectos:';
+                            echo '*';
                             
                             if ($message == 1) {
-                                echo 'CONTRASENA INCORRECTA';
+                                echo 'USUARIO O CONTRASEÑA INCORRECTA';
                                 // echo "USUARIO O CONTRASEÑA INCORRECTA. INTENTE DE NUEVO.";
                                 session_destroy();
                             } elseif ($message == 2) {
@@ -102,7 +102,7 @@
                                 echo 'SESIÓN FINALIZADA. INICIE SESIÓN NUEVAMENTE';
                                 session_destroy();
                             } elseif ($message == 5) {
-                                echo 'INICIE SESIÓN PARA REALIZAR UNA COMPRA';
+                                echo 'INICIE SESIÓN PARA UTILIZAR EL SISTEMA';
                             }
                             
                         echo '</p>';
@@ -141,21 +141,18 @@
                 </div>
                 <!-- Copyright -->
 
-                <!-- Right 
+                <!-- Right -->
                 <div>
-                <a href="#!" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#!" class="text-white me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#!" class="text-white me-4">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="#!" class="text-white">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                </div> -->
+                    <a href="https://www.facebook.com/universidadelcauca/" class="text-white me-4">
+                        <i class="icon ion-logo-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/unicauca/" class="text-white me-4">
+                        <i class="icon ion-logo-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/school/universidad-del-cauca/" class="text-white">
+                        <i class="icon ion-logo-linkedin"></i>
+                    </a>
+                </div> 
                 <!-- Right -->
             </div>
         </section>

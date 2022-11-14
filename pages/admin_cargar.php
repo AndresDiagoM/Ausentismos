@@ -6,6 +6,7 @@ include "../template/cabecera.php";
 $tabla1 ="";
 $tabla2 ="";
 $tabla3 ="";
+$tabla4 ="";
 //Cuando se presiona el boton de cargar
 if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
     //echo 'BOTON: '.$_POST['accion'];
@@ -16,6 +17,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
     $tabla1 ="";
     $tabla2 ="";
     $tabla3 ="";
+    $tabla4 ="";
     if($funcionariosExistentes!=null){
         $tabla1 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
                     <thead class='thead-light'>
@@ -43,7 +45,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
         $tabla2 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
                     <thead class='thead-light'>
                         <tr>
-                            <th scope='col'  colspan='3'>Funcionarios que se insertaron</th>
+                            <th scope='col' class='table-active' colspan='3'>Funcionarios que se insertaron</th>
                         </tr>
                         <tr>
                             <th scope='col'>Cedula</th>
@@ -54,7 +56,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
                     <tbody>";
         foreach($funcionariosInsertados as $funcionario){
             $tabla2 .= "<tr>
-                            <th scope='row'>1".$funcionario['CEDULA']."</th>
+                            <th scope='row'>".$funcionario['CEDULA']."</th>
                             <td>".$funcionario['NOMBRE']."</td>
                             <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
                         </tr>";
@@ -66,7 +68,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
         $tabla3 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
                     <thead class='thead-light'>
                         <tr>
-                            <th scope='col'  colspan='3'>Funcionarios que no se insertaron</th>
+                            <th scope='col' class='table-active' colspan='3'>Funcionarios que no se insertaron</th>
                         </tr>
                         <tr>
                             <th scope='col'>Cedula</th>
@@ -83,6 +85,32 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
                         </tr>";
         }
         $tabla3 .= "</tbody>
+                </table>";
+    }
+    if($funcionariosActualizados!=null){
+        $tabla4 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
+                    <thead class='thead-light'>
+                        <tr>
+                            <th scope='col' class='table-active' colspan='3'>Funcionarios Actualizados</th>
+                        </tr>
+                        <tr>
+                            <th scope='col'>Cedula</th>
+                            <th scope='col'>Nombre</th>
+                            <th scope='col'>Salario</th>
+                            <th scope='col'>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+        foreach($funcionariosActualizados as $funcionario){
+            $tabla4 .= "<tr>
+                            <th scope='row'>".$funcionario['CEDULA']."</th>
+                            <td>".$funcionario['NOMBRE']."</td>
+                            <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
+                            <td>".$funcionario['SALARIO']."</td>
+                            <td>".$funcionario['ESTADO']."</td>
+                        </tr>";
+        }
+        $tabla4 .= "</tbody>
                 </table>";
     }
 }
@@ -130,12 +158,17 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
             <!-- Contenedor de tabla -->
             <div class="container " style="overflow-y:scroll; height:32vw; position:relative">
                 <?php 
-                    echo $tabla1;
+                    if($tabla4 != null){
+                        echo $tabla4;
+                    }
                     if($tabla2 != null){
                         echo $tabla2;
                     }
                     if($tabla3 != null){
                         echo $tabla3;
+                    }
+                    if($tabla1 != null){
+                        echo $tabla1;
                     }
                 ?>
             </div>

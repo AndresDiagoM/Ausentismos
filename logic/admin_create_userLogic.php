@@ -53,7 +53,7 @@
     // ===========================================
 
     $registrar = "INSERT INTO usuarios (Cedula_U, Nombre_U, Correo, Dependencia, TipoUsuario, Login, Contrasena, Estado) 
-                        VALUES ('$numero_id','$nombre_usuario', '$correo', '$dependencia', '$tipo_us', '$login', '$pasw', 'ACT')";
+                        VALUES ('$numero_id','$nombre_usuario', '$correo', '$dependencia', '$tipo_us', '$login', '$pasw', 'ACTIVO')";
     $prueba = mysqli_query($conectar, $registrar);
     if($prueba){
         echo "<script> alert('Registro existoso');

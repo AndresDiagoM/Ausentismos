@@ -31,7 +31,7 @@
             <div class="container">
                 <div class="card rounded-0">
                     <div class="d-flex card-header bg-light">
-                        <h4 class="font-weight-bold mb-0 mr-3"> Ausentismos por tipo, año: </h4>
+                        <h4 class="font-weight-bold mb-0 me-3"> Ausentismos por tipo, año: </h4>
                         <select class="" id="statsOptions">
                             
                         </select>
@@ -55,7 +55,7 @@
                     <div class="col-lg-6 col-md-12 my-3">
                         <div class="card rounded-0 ">
                             <div class="d-flex card-header bg-light">
-                                <h6 class="font-weight-bold mb-0 mr-3">Numero de ausentismos por mes, tipo: </h6>
+                                <h6 class="font-weight-bold mb-0 me-2">Numero de ausentismos por mes, tipo: </h6>
                                 <select class="" id="tiposMonthsOptions">
                                     
                                 </select>
@@ -72,7 +72,7 @@
                     <div class="col-lg-6 col-md-12 my-3">
                         <div class="card rounded-0 ">
                             <div class="d-flex card-header bg-light">
-                                <h6 class="font-weight-bold mb-0 mr-3">Ausentismos por tipo en el mes: </h6>                                
+                                <h6 class="font-weight-bold mb-0 me-2">Ausentismos por tipo en el mes: </h6>                                
                                 <select class="" id="tiposChartOptions">
                                     
                                 </select>
@@ -108,8 +108,11 @@
                     <div class="col-lg-6 col-md-12 my-3">
                         <div class="card rounded-0 ">
 
-                            <div class="card-header bg-light">
-                                <h6 class="font-weight-bold mb-0"> Indicador de costo </h6>
+                            <div class="d-flex card-header bg-light">
+                                <h6 class="font-weight-bold mb-0 me-2"> Indicador de costo </h6>
+                                <select class="" id="costoChartOptions">
+                                    
+                                </select>
                             </div>
 
                             <div class="card-body">
