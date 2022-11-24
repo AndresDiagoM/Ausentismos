@@ -3,9 +3,13 @@ include "../template/cabecera2.php";
 ?>
 
     <!-- CONTENEDORES DE BUSQUEDAS -->
-    <div class="contendor_busqueda">
-            <label for="caja_busqueda">Buscar: </label>
-            <input type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
+    <div class="container row col-3 py-3">
+        <form class="row" id="auto_llenar">
+            <div class="form-floating mb-3">
+                    <input class="form-control" type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
+                    <label class="col-form-label" for="caja_busqueda">Buscar: </label>
+            </div>
+        </form>
     </div>
 
     <div class="container py-4" style="overflow-y: auto; height:75vh;" id="datos">

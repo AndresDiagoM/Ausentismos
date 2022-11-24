@@ -45,7 +45,8 @@
         }
 
 
-        $sqli = "SELECT * FROM funcionarios ".$extra_query." LIMIT 1 ";
+        $sqli = "SELECT * FROM funcionarios 
+                INNER JOIN dependencias ON funcionarios.Dependencia = dependencias.ID ".$extra_query." LIMIT 1 ";
         $funcionarios = $conectar->query($sqli);  //print_r($sqli); exit;
 
         $func_list = [];

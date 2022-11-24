@@ -122,13 +122,13 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
         <!-- Contenerdor de cards-->
         <section class="bg-gray">
 
-            <div class="container">
+            <div class="container ">
                 <div class="row">
                     
-                    <div class="py-1">
+                    <div class=" card-group py-1">
                         
                         <!-- CARD DE CARGAR FUNCIONARIOS -->    
-                        <div class="card rounded-0 mx-auto" style="width: 40vw;">
+                        <div class="card rounded-0 mx-auto" style="width: 30vw;">
                             <div class="d-flex card-header bg-light ">
                                 <h6 class="font-weight-bold mb-0 mr-3">Cargar Funcionarios </h6>                                
                             </div>
@@ -143,6 +143,20 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
                                     </div>
                                 </form>
                             </div>
+                        </div>
+
+                        <!-- CARD DE OPCIONES -->
+                        <div class="card rounded-0 mx-auto" style="width: 30vw;">
+                            <div class="d-flex card-header bg-light ">
+                                <h6 class="font-weight-bold mb-0 mr-3"> Opciones Funcionarios:</h6>                                
+                            </div>
+                            
+                            <div class="card-body">
+                                <a href="./admin_create_func.php" class="btn btn-success">Agregar</a>
+                                <a href="./admin_edit_func.php" class="btn btn-success">Editar</a>
+                                <!-- <a href="./admin_delete_func.php" class="btn btn-success">Eliminar</a> -->
+                            </div>
+
                         </div>
                         
                     </div>

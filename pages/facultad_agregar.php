@@ -1,11 +1,122 @@
 <?php
-    include "../template/cabecera.php";
+//MENU DEL ADMIN, CON DASHBOARD
+include "../conexion.php";
+
+session_start();
+$autentication = $_SESSION['TIPO_USUARIO'];
+if($autentication == '' || $autentication == null || $autentication == 'CONSULTA'){
+    //header('Location: ../pages/inicio_sesion.php?message=3');
+    echo "<script> alert('Sin permisos'); location.href = '../pages/inicio_sesion.php?message=3';  </script>";    
+}
+
+// Inicio o reanudacion de una sesion
+$nombre_admin   = $_SESSION['NOM_USUARIO'];
+$id_admin       = $_SESSION['ID_USUARIO'];
+$tipo_usuario   = $_SESSION['TIPO_USUARIO'];
+
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../bootstrap-5.2.2-dist/css/bootstrap.min.css" /> 
+
+    <!-- CSS -->
+    <link href="../css/estilo.css" rel="stylesheet" integrity="" crossorigin="anonymous">
+
+    <!-- ICONOS en https://ionic.io/ionicons/v4/usage#md-pricetag -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <title>Admin</title>
+</head>
+
+<body>
+    <div class="d-flex">
+
+    <!-- SIDE BAR - menu lateral -->
+    <div id="sidebar-container" class="bg-primary">
+        <div class="logo" >
+            <h4 class="text-light font-weight-bold"> GESTION DE AUSENTISMOS </h4>
+        </div>
+
+        <div class="menu">
+            
+            <!-- <a href="../pages/facultad_edition_client.php" class="p-3 text-light d-block text-decoration-none"> 
+                <i class="icon ion-md-people mr-2 lead"></i> GESTIONAR USUARIO</a> -->
+            <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none"> 
+                <i class="icon ion-md-log-out mr-2 lead"></i> CERRAR CESION</a>
+        </div>
+    </div>
+
+    <div class="w-100">
+
+        <!-- NAV BAR - menu en la parte superior -->
+        <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../pages/facultad_agregar.php"> <i class="icon ion-md-home me-2 lead"></i> </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="d-flex justify-content-end " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../images/user_profile.png" class="img-fluid rounded-circle avatar mr-2" />
+                            <?php //echo de las 2 primeras palabras del nombre
+                                $nombre = explode(" ", $nombre_admin);
+                                //si tiene mas de 2 palabras, imprime las 2 primeras
+                                if (count($nombre) > 1) {
+                                    echo $nombre[0] . " " . $nombre[1];
+                                } elseif(count($nombre) == 1) {
+                                    echo $nombre[0];
+                                }else{
+                                    echo "Usuario";
+                                }
+                                //echo $nombre[0]." ".$nombre[2];
+                            ?>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href=<?php echo '../pages/admin_form_edition.php?ID='.$id_admin.''; ?>>Mi perfil </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="../logic/cerrar_sesion.php">Cerrar Sesion</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        </nav>
+
+
+<!-- Contenerdor de bienvenida y boton de reporte-->
+<section class="py-2">
+        <!-- py-3 es padding en y, como <br> -->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- con 2 columnas -->
+
+                <div class="col-lg-9">
+                    <h1 class="font-weight-bold mb-0">Registro de Permiso por horas</h1> <!-- mb-0 es sin margen inferior -->
+                    
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
 
 <!-- CONTENEDOR DE CUADROS DE BÚSQUEDA -->
 <div class="container">
     <br>
+    
     
     <div class="col-md-7">
         <header class="main-header">
@@ -35,7 +146,7 @@
 
 
 <!-- ESPACIO PARA EL FORMULARIO -->
-<div class="container  card-group" style="overflow-y: auto; height:73vh;">    
+<div class="container  card-group" style="overflow-y: auto; height:65vh;">    
     <div class="card"  >
         <div class="card-header">
             Datos del funcionario
@@ -124,46 +235,31 @@
             
                 <!-- INPUT DEL TIPO DE AUSENTISMO -->
                 <div class="form-floating mb-3">
-                        <select class="form-select form-select-sm" required name="Tipo_Ausentismo[]" id="tipo_ausen">
-                            <option value="">Seleccione</option>
-                                <?php
-                                    $sqli = "SELECT * FROM tipoausentismo";
-                                    $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
-                            
-                                    $ausen_list = [];
-                            
-                                    while($tipo = $tipoAusentismos->fetch_assoc()){
-                                        //$ausen_list[$tipo["ID"]]=$tipo;
-                                        $ID = $tipo["ID"];
-                                        $Nombre=$tipo["TipoAusentismo"];
-                                        /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
-                                        if($ID == 1){
-                                            echo "<option value=\"$ID\">$Nombre</option>";
-                                        }else{
-                                            echo "<option value=\"$ID\">$Nombre</option>";
-                                        }
-                                
-                                    }
-                                ?>
-                        </select>
-                        <label class="col-form-label" for="Tipo_Ausentismo[]">TIPO DE AUSENTIMO</label>
-                    </div>
-
-                <!-- INPUTS INCAPACIDAD -->
-                <div class="form-floating mb-3" id="incapacidadINPUTS">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="Codigo[]" class="form-control" id="codigo" placeholder="Escriba el codigo" >
-                        <label class="col-form-label" for="Codigo[]"> CODIGO </label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" name="Diagnostico[]" class="form-control" id="diagnostico" placeholder="Escriba el diagnostico" >
-                        <label class="col-form-label" for="Diagnostico[]"> DIAGNOSTICO </label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" name="Entidad[]" class="form-control" id="entidad" placeholder="Escriba la entidad" >
-                        <label class="col-form-label" for="Entidad[]"> ENTIDAD </label>
-                    </div>
+                    <select class="form-select form-select-sm" required name="Tipo_Ausentismo[]" id="tipo_ausen">
+                        <option value="">Seleccione</option>
+                        <?php
+                            $sqli = "SELECT * FROM tipoausentismo";
+                            $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
+                    
+                            $ausen_list = [];
+                    
+                            while($tipo = $tipoAusentismos->fetch_assoc()){
+                                //$ausen_list[$tipo["ID"]]=$tipo;
+                                $ID = $tipo["ID"];
+                                $Nombre=$tipo["TipoAusentismo"];
+                                /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
+                                if($ID == 5){
+                                    echo "<option value=\"$ID\">$Nombre</option>";
+                                }else{
+                                    //echo "<option value=\"$ID\">$Nombre</option>";
+                                }
+                        
+                            }
+                        ?>
+                    </select>
+                    <label class="col-form-label" for="Tipo_Ausentismo[]">TIPO DE AUSENTIMO</label>
                 </div>
+
 
                 <input type="hidden" name="ID_Usuario[]"  id="id_usuario" value=<?php echo $id_admin; ?> >
 
@@ -187,10 +283,6 @@
     <script src="../bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
     <script src="../bootstrap-5.2.2-dist/js/popper.min.js"></script>
-
-
-    <!-- APP JS CONTIENE  FUNCIONES PARA LOS GRÁFICOS -->
-    <script src="../js/app1.js"></script>
 
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 

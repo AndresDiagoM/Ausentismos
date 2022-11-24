@@ -48,8 +48,6 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                 <i class="icon ion-md-add-circle mr-2 lead"></i> AGREGAR REGISTRO</a>
             <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none"> 
                 <i class="icon ion-md-search   mr-2 lead"></i> CONSULTAR AUSENTISMO    </a>
-            <a href="../pages/admin_consultar2.php" class="p-3 text-light d-block text-decoration-none"> 
-                <i class="icon ion-md-search   mr-2 lead"></i> CONSULTAR INCAPACIDAD    </a>
             <a href="../pages/admin_edition_client.php" class="p-3 text-light d-block text-decoration-none"> 
                 <i class="icon ion-md-people mr-2 lead"></i> GESTIONAR USUARIO</a>
             <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none"> 
@@ -63,18 +61,27 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="../pages/admin_menu.php"> <i class="icon ion-md-home me-2 lead"></i> </a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="d-flex justify-content-end " id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="../images/user_profile.png" class="img-fluid rounded-circle avatar mr-2" />
                             <?php //echo de las 2 primeras palabras del nombre
                                 $nombre = explode(" ", $nombre_admin);
-                                echo $nombre[0]." ".$nombre[2];
+                                //si tiene mas de 2 palabras, imprime las 2 primeras
+                                if (count($nombre) > 1) {
+                                    echo $nombre[0] . " " . $nombre[1];
+                                } elseif(count($nombre) == 1) {
+                                    echo $nombre[0];
+                                }else{
+                                    echo "Usuario";
+                                }
+                                //echo $nombre[0]." ".$nombre[2];
                             ?>
                         </a>
                         <div class="dropdown-menu">
@@ -84,7 +91,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                         </div>
                     </li>
                 </ul>
-                
             </div>
+
         </div>
         </nav>

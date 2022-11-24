@@ -15,13 +15,15 @@
 
     if($tipo_usuario == 'CONSULTA'){
         $tipo_usuario = 'CONSULTA';
+    }elseif($tipo_usuario == 'FACULTAD'){
+        $tipo_usuario = 'FACULTAD';
     }else{
         $tipo_usuario = 'ADMIN';
     }
 
     // Verificacion de ID NO repetido
     $consulta_id = "SELECT * FROM usuarios WHERE Cedula_U='$numero_id'";
-    $verificar_id = mysqli_query($conectar, $consulta_id);
+    $verificar_id = $conectar->query($consulta_id);
     if(mysqli_num_rows($verificar_id)>0){
 
         echo "<script>
@@ -35,11 +37,25 @@
 
     // Verificacion de correo
     $consulta_correo = "SELECT * FROM usuarios WHERE Correo='$correo'";
-    $verificar_correo = mysqli_query($conectar, $consulta_correo);
+    $verificar_correo = $conectar->query($consulta_correo);
     if(mysqli_num_rows($verificar_correo)>0){
 
         echo "<script>
             alert('Registro Incorrecto. El correo ya se encuentra registrado');
+            location.href = '../pages/admin_create_user.php';
+        </script>";
+
+        // Cierre de conexion
+        exit();
+    }
+
+    // Verificacion de login
+    $consulta_login = "SELECT * FROM usuarios WHERE Login='$login'";
+    $verificar_login = $conectar->query($consulta_login);
+    if(mysqli_num_rows($verificar_login)>0){
+
+        echo "<script>
+            alert('Registro Incorrecto. El login ya se encuentra registrado');
             location.href = '../pages/admin_create_user.php';
         </script>";
 

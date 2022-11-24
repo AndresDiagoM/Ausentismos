@@ -36,7 +36,7 @@
         $sqli1          = $conectar->query($actualizar);
     }
     if($query_values['correo_usuario_edt'] != $row['Correo']){
-        $correo_edt = $query_values['apellido_usuario_edt'];
+        $correo_edt = $query_values['correo_usuario_edt'];
         $actualizar = "UPDATE usuarios SET Correo = '$correo_edt' WHERE Cedula_U = $numero_id";
         $sqli1          = $conectar->query($actualizar);
     }

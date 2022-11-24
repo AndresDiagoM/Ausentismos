@@ -150,6 +150,25 @@
     //print_r($funcionariosNoInsertados); exit;
     //print_r($data); exit;
 
+    //===============================================================================
+    //=================== OBTENER DEPENDENCIA SEGUN DEPAR. Y FACULTAD ================
+    //consultar el ID de dependencia para cada c_costo del array data
+    foreach($data as $key => $value){
+        //echo $value['C_COSTO']."<br>";
+        $sql = "SELECT * FROM dependencias WHERE C_costo = '".$value['C_COSTO']."'";
+        $result = $conectar->query($sql);
+
+        //if the query returns a row, then add the id to the array
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            $data[$key]['DEPENDENCIA'] = $row['ID'];
+        }else{
+            //eliminar el registro del array
+            unset($data[$key]);
+            $funcionariosNoInsertados[] = $value;
+        }
+    }
+
     //==========================================================================
     //=================== INSERTAR DATOS EN LA BASE DE DATOS ===================
     //=========================================================================
@@ -198,8 +217,8 @@
 
         }else{
             //insertar funcionario
-            $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Departamento, Facultad, Genero, Salario, Estado) 
-                    VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPARTAMENTO']."', '".$value['FACULTAD']."', '".$value['GENERO']."', '".$value['SALARIO']."', 'ACTIVO')";
+            $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado) 
+                    VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', 'ACTIVO')";
             $resultado = $conectar->query($sql1);
             if($result){
                 //echo "El funcionario ".$value['NOMBRE']." se ha insertado correctamente";

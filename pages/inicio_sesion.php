@@ -124,8 +124,8 @@
                 <div class="text-center text-lg-start mt-4 pt-2">
                     <button type="submit" class="btn btn-success btn-lg"
                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Iniciar Sesion</button>
-                    <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="../pages/form_register.php"
-                        class="link-danger">Register</a></p>
+                    <!-- <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="../pages/form_register.php"
+                        class="link-danger">Register</a></p> -->
                 </div>
 
                 </form>
@@ -134,15 +134,29 @@
         </div>
 
             <div
-                class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+                class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between px-4 px-xl-5 bg-primary">
                 <!-- Copyright -->
-                <div class="text-white mb-3 mb-md-0">
-                Copyright © 2020. All rights reserved.
-                </div>
+                <div class="container">
+                    <div class="row">
+                        
+                        <div class="col py-2 ">
+                            <img src="../images/lema.png" width="100" height="50" class="img-responsive" alt="Sample image">
+                            <img src="../images/logosIcontec2020.png" width="100" height="50" class="img-responsive" alt="Sample image">
+                        </div>
+
+
+                        <div class="col text-white mb-1 mb-md-0 py-4">
+                        
+                        </div>
+                        <div class="col ">
+                            
+                        </div>
+                    </div>
+                </div>   
                 <!-- Copyright -->
 
                 <!-- Right -->
-                <div>
+                <div class="py-4">
                     <a href="https://www.facebook.com/universidadelcauca/" class="text-white me-4">
                         <i class="icon ion-logo-facebook"></i>
                     </a>

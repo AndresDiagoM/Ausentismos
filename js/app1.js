@@ -44,16 +44,16 @@ const enableEventHandlers = () => {
         updateChartDataAndLabels('monthsChart', monthsValues, monthsLabels)
 
         //Grafica 2
-        const newDatos = grafica2.map(valores => valores.numeros);
+        const newDatos = grafica2.map(valores => valores.numeros); //console.log(newDatos);
         const newLabels = grafica2.map(valores => valores.TipoAusentismo);
         updateChartDataAndLabels('tiposChart', newDatos, newLabels)
 
         //Grafica 3
-        const chart3 = Chart.getChart("genderChart");
+        const chart3 = Chart.getChart("funcChart");
         if(chart3 != null){
           chart3.destroy();
         }
-        renderGenderChart(grafica3);
+        renderFuncChart(grafica3);
         
         //Grafica 4
         const chart4 = Chart.getChart("costoChart");
@@ -137,6 +137,55 @@ const enableEventHandlers = () => {
       })      
       //const newData = coasters.map(coaster => coaster[property])
       //updateChartData('featuresChart', newData, label)
+  }
+
+  // Slider de tipo dependencias de grafico de barra
+  document.querySelector('#tiposDepenOptions').onchange = e => {
+    const {
+        value: number,
+        text: label
+    } = e.target.selectedOptions[0]
+    //console.log(number, label)
+
+    let var1 = {depen: label, value: number};
+    //let var2 = array( 'anio' => document.getElementById('statsOptions').value, "mes" => number);
+    //array with anio and mes:
+    var1.AnioDepen = document.getElementById('statsOptions').value;
+    //console.log(var1);
+
+
+    $.ajax({
+      method: "POST",
+      url: "../pages/graficos.php",
+      data: $.param(var1),
+      success: function (response) {
+        //console.table(response);
+        const grafica3 = JSON.parse(response);
+
+        const funcArray = grafica3.funcArray;
+        const funcValues = funcArray.map(func => func.Numeros)
+        const funcLabels = funcArray.map(func => func.Nombre)   
+
+        var depen = '';
+        if (grafica3.funcArray.length > 0) {	
+            depen = funcArray[0].Departamento + ' - ' + funcArray[0].Facultad
+        }
+
+        const data = {
+          labels: funcLabels,
+          datasets: [{
+              data: funcValues,
+              label: depen,
+              borderColor: getDataColors(),
+              backgroundColor: getDataColors(70),
+          }]
+        }
+
+        updateChartDataArray('funcChart', data)
+      }
+    })      
+    //const newData = coasters.map(coaster => coaster[property])
+    //updateChartData('featuresChart', newData, label)
   }
 
   // Slider de tipo ausen de grafico de costo

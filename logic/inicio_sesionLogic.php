@@ -44,9 +44,13 @@
             if(strtoupper($tipo_usuario) == 'ADMIN'){
                 header('Location: ../pages/admin_menu.php');
             }
-            // VALIDACION SI EL USUARIO ES CLIENTE
+            // VALIDACION SI EL USUARIO ES CONSULTA
             elseif(strtoupper($tipo_usuario) == 'CONSULTA'){
                 header('Location: ../pages/admin_menu.php');
+            }
+            // VALIDACION SI EL USUARIO ES facultad
+            elseif(strtoupper($tipo_usuario) == 'FACULTAD'){
+                header('Location: ../pages/facultad_agregar.php');
             }
             else{
             // VALIDACION SI EL USUARIO NO TIENE UN ROL DEFINIDO

@@ -57,12 +57,26 @@ a:hover {
     overflow-y: auto; /*Para permitir scroll sobre el contenido*/
     height: 100vh;    /*Para tener una altura fija*/
     padding-bottom: 5rem;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 
+/*Estilo para el header de las tablas*/
+/*thead, tbody { display: block; }*/
+.header-table {
+    position: sticky; top: 0; z-index: 1;
+    /* with no transparency -> background-color */
+    background-color: var(--light);
+}
+.table-body-consulta {
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: auto;  /* Hide the horizontal scroll */
+}
+
 
 /*Para no mostar el Sidebar en version movil*/
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     #sidebar-container {
         display: none;
     }

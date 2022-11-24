@@ -3,12 +3,15 @@
 ?>
 
     <!-- Contenerdor del contenido de la página-->
+    <div class="mx-auto">
+
+    
     <div id="content">
 
         <!-- Contenerdor de bienvenida y boton de reporte-->
         <section class="py-3">
             <!-- py-3 es padding en y, como <br> -->
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <!-- con 2 columnas -->
 
@@ -28,8 +31,9 @@
 
         <!-- Contenerdor de estadisticas-->
         <section class="bg-mix">
-            <div class="container">
-                <div class="card rounded-0">
+            <div class="container-fluid">
+            
+                <div class="card rounded-0 mx-auto">
                     <div class="d-flex card-header bg-light">
                         <h4 class="font-weight-bold mb-0 me-3"> Ausentismos por tipo, año: </h4>
                         <select class="" id="statsOptions">
@@ -38,17 +42,18 @@
                     </div>
                     <div class="card-body">
                         <div class="row" id="estadisticas">
-                            
+                        
                         </div>
                     </div>
                 </div>
+            
             </div>
         </section>
 
         <!-- Contenerdor de graficos -->
         <section class="bg-gray">
 
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
 
                     <!-- grafico 1: Años -->                    
@@ -56,7 +61,7 @@
                         <div class="card rounded-0 ">
                             <div class="d-flex card-header bg-light">
                                 <h6 class="font-weight-bold mb-0 me-2">Numero de ausentismos por mes, tipo: </h6>
-                                <select class="" id="tiposMonthsOptions">
+                                <select class="form-select form-select-sm" id="tiposMonthsOptions">
                                     
                                 </select>
                                 
@@ -73,7 +78,7 @@
                         <div class="card rounded-0 ">
                             <div class="d-flex card-header bg-light">
                                 <h6 class="font-weight-bold mb-0 me-2">Ausentismos por tipo en el mes: </h6>                                
-                                <select class="" id="tiposChartOptions">
+                                <select class="form-select form-select-sm" id="tiposChartOptions">
                                     
                                 </select>
                             </div>
@@ -84,21 +89,20 @@
                         </div>
                     </div>
 
-                    <!-- grafico 3: Genero -->
+                    <!-- grafico 3: Dependencias -->
                     <div class="col-lg-6 col-md-12 my-3">
                         <div class="card rounded-0 ">
 
-                            <div class="card-header bg-light">
-                                <h6 class="font-weight-bold mb-0"> Ausentismos por Genero </h6>
+                            <div class="d-flex card-header bg-light">
+                                <h6 class="font-weight mb-0 me-2"> Ausentismos por Dependencia </h6>
+
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="tiposDepenOptions">
+                                
+                                </select>
                             </div>
 
                             <div class="card-body">
-                                <canvas id="genderChart" height="400"></canvas>
-                            </div>
-
-                            <div class="d-flex card-footer bg-light">
-                                <h5 class="font-weight-bold mb-0 me-2"> Total Ausentismos:  </h5>
-                                <h6 class="font-weight-bold mb-0 py-1" id="genderTotal">  </h6>
+                                <canvas id="funcChart"  height="440"></canvas>
                             </div>
 
                         </div>
@@ -110,7 +114,7 @@
 
                             <div class="d-flex card-header bg-light">
                                 <h6 class="font-weight-bold mb-0 me-2"> Indicador de costo </h6>
-                                <select class="" id="costoChartOptions">
+                                <select class="form-select form-select-sm" id="costoChartOptions">
                                     
                                 </select>
                             </div>
@@ -131,7 +135,7 @@
 
         </section>
 
-    </div>
+    </div></div>
 
 
 
@@ -151,7 +155,8 @@
 
     <!-- CDN: Libreria de chart.js para las gráficas -->
     <script src="../chart.js-3.9.1/package/dist/chart.min.js"></script>
-    <script src="../chart.js-3.9.1/package/dist/chart.js"></script>
+    <script src="../chart.js-3.9.1/package/dist/chartjs-plugin-datalabels.min.js"></script>
+
     <script src="../js/graficasCharts.js"></script>
 
 </body>

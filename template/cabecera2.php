@@ -7,7 +7,7 @@ include "../logic/admin_securityLogic.php";
 $nombre_admin   = $_SESSION['NOM_USUARIO'];
 $id_admin       = $_SESSION['ID_USUARIO'];
 $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
-
+$id_usuario     = $_GET['ID'];
 ?>
 
 <!DOCTYPE html>
@@ -71,10 +71,12 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <!-- NAV BAR - menu en la parte superior -->
         <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../pages/admin_menu.php">MENU</a>
+            <a class="navbar-brand" href="../pages/admin_menu.php"> <i class="icon ion-md-home me-2 lead"></i> </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="d-flex justify-content-end " id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
@@ -83,7 +85,14 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                         <img src="../images/user_profile.png" class="img-fluid rounded-circle avatar mr-2" />
                             <?php //echo de las 2 primeras palabras del nombre
                                 $nombre = explode(" ", $nombre_admin);
-                                echo $nombre[0]." ".$nombre[2];
+                                //si tiene mas de 2 palabras, imprime las 2 primeras
+                                if (count($nombre) > 1) {
+                                    echo $nombre[0] . " " . $nombre[1];
+                                } elseif(count($nombre) == 1) {
+                                    echo $nombre[0];
+                                }else{
+                                    echo "Usuario";
+                                }
                             ?>
                         </a>
                         <div class="dropdown-menu">

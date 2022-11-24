@@ -55,10 +55,17 @@ $(function()
         //get_ausentismos();
     });
 
-    /*$(".form-date").on("click", function () 
+    $(document).on('keyup', '#diagnostico', function()  //para el cuadro de busqueda de cedula
     {
-        get_ausentismos(); 
-    }); */
+        var valor = $(this).val();
+
+        if(valor != "" && isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+        }
+        //get_ausentismos();
+    });
 
     $(".form-date").on("change",function(){
         //var selected = $(this).val();
@@ -103,12 +110,23 @@ function get_ausentismos(pagina)
                     //imprimir unidad en formato de moneda con 2 decimales y el símbolo de $ 
                     "<td>"+new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Ausen.Seguridad_Trabajo)+"</td>"+
                     //"<td>"+Ausen.Seguridad_Trabajo+"</td>"+
-                    "<td>"+Ausen.Nombre_U+"</td>"+
-                    "<td>"+Ausen.Tipo_Ausentismo+"</td>"+
-                    "</tr>";
+
+                    "<td>"+Ausen.Login+"</td>"+
+                    "<td>"+Ausen.Tipo_Ausentismo+"</td>";
+
+                    //if there is not index Ausen.Codigo in the array, then do not show the button
+                    if(Ausen.Codigo != undefined || Ausen.Codigo != null){
+                        row = row + "<td>"+Ausen.Codigo+"</td>";
+                        row = row + (Ausen.Diagnostico ? "<td>"+Ausen.Diagnostico+"</td>" : "");
+                        row = row + (Ausen.Entidad ? "<td>"+Ausen.Entidad+"</td>" : "");
+                    }
+
+                    row = row +"</tr>";
 
                     //se hace el append de cada fila al body de la tabla en admin_consultar.php
                     $("#filters-result").append(row);
+                    //clear row variable
+                    row = "";
                 });
                 //$("#myPager").append(data.botones);
                 $("#myPager").append(data.slider);
