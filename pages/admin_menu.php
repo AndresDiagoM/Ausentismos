@@ -44,6 +44,15 @@
                         <div class="row" id="estadisticas">
                         
                         </div>
+                        
+                        <!-- <div class='col-lg-1 col-md-4 d-flex stat my-2'>
+                            <div class='mx-auto'>
+                                
+                                <h6 class='text-muted'> Costo Total </h6>
+                                <h6 class="font-weight-bold mb-0" id="costoTotal">  </h6>
+                            </div>
+                        </div> -->
+
                     </div>
                 </div>
             

@@ -95,7 +95,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">CODIGO</th>
+8            <th scope="col">CODIGO</th>
             <th scope="col">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
@@ -191,10 +191,11 @@
 
     var today = year + "-" + month + "-" + day;
     //var today =  +year + "-" + month + "-" + (day+1-day) ;  
-    var today1 = "2019-07-22";
+    var today1 = year + "-" + "01" + "-" + "01";
     document.getElementById("fecha_inicio").value = today1; 
     document.getElementById("fecha_fin").value = today;
-    console.log(today);
+    //console.log(today);
+
 </script>
 
 

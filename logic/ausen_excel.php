@@ -28,20 +28,21 @@
         $hojaActiva->setCellValue('A1', 'Cedula');
         $hojaActiva->getColumnDimension('A')->setWidth(15);
         $hojaActiva->setCellValue('B1', 'Nombre');
-        $hojaActiva->getColumnDimension('B')->setWidth(25);
+        $hojaActiva->getColumnDimension('B')->setWidth(35);
         $hojaActiva->setCellValue('C1', 'Fecha_Inicio');
         $hojaActiva->getColumnDimension('C')->setWidth(15);
         $hojaActiva->setCellValue('D1', 'Fecha_Fin');
         $hojaActiva->getColumnDimension('D')->setWidth(15);
         $hojaActiva->setCellValue('E1', 'Tiempo');
-        $hojaActiva->setCellValue('F1', 'Observación');
-        $hojaActiva->getColumnDimension('F')->setWidth(20);
-        $hojaActiva->setCellValue('G1', 'Costo');
-        $hojaActiva->getColumnDimension('G')->setWidth(15);
-        $hojaActiva->setCellValue('H1', 'ID_Usuario');
+        $hojaActiva->setCellValue('F1', 'Unidad');
+        $hojaActiva->setCellValue('G1', 'Observación');
+        $hojaActiva->getColumnDimension('G')->setWidth(20);
+        $hojaActiva->setCellValue('H1', 'Costo');
         $hojaActiva->getColumnDimension('H')->setWidth(15);
-        $hojaActiva->setCellValue('I1', 'Tipo_Ausentismo');
-        $hojaActiva->getColumnDimension('I')->setWidth(20);
+        $hojaActiva->setCellValue('I1', 'ID_Usuario');
+        $hojaActiva->getColumnDimension('I')->setWidth(35);
+        $hojaActiva->setCellValue('J1', 'Tipo_Ausentismo');
+        $hojaActiva->getColumnDimension('J')->setWidth(25);
 
 
         $ausentismos = $conectar->query($sqli);
@@ -53,18 +54,21 @@
                 $hojaActiva->setCellValue('C' . $fila, $ausentismo['Fecha_Inicio']);
                 $hojaActiva->setCellValue('D' . $fila, $ausentismo['Fecha_Fin']);
                 $hojaActiva->setCellValue('E' . $fila, $ausentismo['Tiempo']);
-                $hojaActiva->setCellValue('F' . $fila, $ausentismo['Observacion']);
-                $hojaActiva->setCellValue('G' . $fila, $ausentismo['Seguridad_Trabajo']);
-                $hojaActiva->setCellValue('H' . $fila, $ausentismo['Nombre_U']);
+                $hojaActiva->setCellValue('F' . $fila, $ausentismo['Unidad']);
+                $hojaActiva->setCellValue('G' . $fila, $ausentismo['Observacion']);
+                $hojaActiva->setCellValue('H' . $fila, $ausentismo['Seguridad_Trabajo']);
+                $hojaActiva->setCellValue('I' . $fila, $ausentismo['Nombre_U']);
 
                 if ($ausentismo['Tipo_Ausentismo'] == 1) {
-                        $hojaActiva->setCellValue('I' . $fila, 'INCAPACIDAD');
+                        $hojaActiva->setCellValue('J' . $fila, 'INCAPACIDAD');
                 } elseif ($ausentismo['Tipo_Ausentismo'] == 2) {
-                        $hojaActiva->setCellValue('I' . $fila, 'COMPENSATORIO');
+                        $hojaActiva->setCellValue('J' . $fila, 'COMPENSATORIO');
                 } elseif ($ausentismo['Tipo_Ausentismo'] == 3) {
-                        $hojaActiva->setCellValue('I' . $fila, 'PERMISO');
+                        $hojaActiva->setCellValue('J' . $fila, 'PERMISO');
                 } elseif ($ausentismo['Tipo_Ausentismo'] == 4) {
-                        $hojaActiva->setCellValue('I' . $fila, 'LICENCIA');
+                        $hojaActiva->setCellValue('J' . $fila, 'LICENCIA');
+                } elseif ($ausentismo['Tipo_Ausentismo'] == 5) {
+                        $hojaActiva->setCellValue('J' . $fila, 'PERMISO POR HORAS');
                 }
 
                 $fila++;

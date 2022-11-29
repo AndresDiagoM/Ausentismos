@@ -145,8 +145,11 @@
             }elseif($ausentismo["Tipo_Ausentismo"]==3){
                 $replacement = array("Tipo_Ausentismo" => "PERMISO");
 
-            }else{
+            }elseif($ausentismo["Tipo_Ausentismo"]==4){
                 $replacement = array("Tipo_Ausentismo" => "LICENCIA");
+            }
+            elseif($ausentismo["Tipo_Ausentismo"]==5){
+                $replacement = array("Tipo_Ausentismo" => "PERMISO POR HORAS");
             }
 
             $ausen_list[$ausentismo["ID"]] = array_replace($ausen_list[$ausentismo["ID"]], $replacement);

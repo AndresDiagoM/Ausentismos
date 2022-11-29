@@ -43,6 +43,27 @@ a:hover {
 #sidebar-container .menu {
     width: 18rem; /* Es el ancho del SideBar*/
 }
+#sidebar-container .sideBar_foot {
+    /*width: 18rem; *//* Es el ancho del SideBar*/
+
+    /* ubicar en la parte de abajo, con referencia al inferior de la pnatalla */
+    position:absolute;
+    width:100px;
+    height:100px;
+
+    /* posicion vertical */
+    bottom:0px;
+
+    /* centrado horizontal 
+    left:5%;
+    margin-left:-25px;*/
+
+    /* centrar la imagen */
+    left:5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* ===========================================
     %----------- NAV BAR - MENU SUPERIOR -------------%

@@ -43,7 +43,7 @@ $(function()
         //get_ausentismos();
     });
 
-    $(document).on('keyup', '#nombre', function()  //para el cuadro de busqueda de cedula
+    $(document).on('keyup', '#nombre', function()  //para el cuadro de busqueda de cedula. #nombre es el id del input en el HTML
     {
         var valor = $(this).val();
 
@@ -55,7 +55,7 @@ $(function()
         //get_ausentismos();
     });
 
-    $(document).on('keyup', '#diagnostico', function()  //para el cuadro de busqueda de cedula
+    $(document).on('keyup', '#diagnostico', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
     {
         var valor = $(this).val();
 
@@ -67,10 +67,17 @@ $(function()
         //get_ausentismos();
     });
 
-    $(".form-date").on("change",function(){
+    $(".form-date").on("change",function(){  //.form date es la clase de los inputs de fecha
         //var selected = $(this).val();
         get_ausentismos(); 
         //alert(selected);
+    });
+
+    $(".fila_tabla").on("click",function(){  //.form date es la clase de los inputs de fecha
+        //var selected = $(this).val();
+        //get_ausentismos(); 
+        //alert(selected);
+        console.log("hhhh");
     });
 
 });
@@ -82,7 +89,6 @@ function get_ausentismos(pagina)
     form2.push({name: "Pagina", value: pagina});
     //$("#total_resultados").append($.param(form2));
     
-
     $.ajax(
         {
             type:"POST",
@@ -97,8 +103,15 @@ function get_ausentismos(pagina)
                 
                 $.each(data.tabla, function(key,Ausen)
                 {
+
+                    //create a var id, if Ausen.ID_Ausentismo is equal to N/A then id=Ausen.ID, else id=Ausen.ID_Ausentismo
+                    var id = Ausen.ID_Ausentismo;
+                    if(id == "N/A"){
+                        id = Ausen.ID;
+                    }
+
                     let row = ""+
-                    "<tr>"+
+                    "<tr class='fila_tabla' id="+ id +">"+
                     //"<td>"+key+"</td>"+
                     "<td>"+Ausen.Cedula_F+"</td>"+
                     "<td>"+Ausen.Nombre+"</td>"+
@@ -128,10 +141,29 @@ function get_ausentismos(pagina)
                     //clear row variable
                     row = "";
                 });
+                
                 //$("#myPager").append(data.botones);
                 $("#myPager").append(data.slider);
                 $("#total_resultados").append(data.total);
                 
+                //evento click para cada fila de la tabla
+                $('.fila_tabla').click(function(){
+                    //console.log(e);
+
+                    //get the id of the tr that was clicked
+                    var id = $(this).attr('id');
+                    //console.log(id);
+
+                    //redirect to the page that shows the ausentismo
+                    window.location.href = "admin_edit_ausen.php?id="+id;
+
+                    /*var cedula = $(this).find('td').eq(0).text();
+                    var nombre = $(this).find('td').eq(1).text();
+                    */
+                    //console.log(cedula);
+
+                    //alert("I've been clicked!")
+                });
             }
         }
     )

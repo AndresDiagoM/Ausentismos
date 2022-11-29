@@ -53,6 +53,10 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
             <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none"> 
                 <i class="icon ion-md-log-out mr-2 lead"></i> CERRAR CESION</a>
         </div>
+
+        <div class="sideBar_foot" >
+            <img src="../images/logosIcontec2020.png" class="img-fluid" width="100" height="100" alt="Sample image">
+        </div>
     </div>
 
     <div class="w-100">
