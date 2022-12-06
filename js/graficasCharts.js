@@ -155,6 +155,8 @@ const renderFuncChart = array1 => {
     var depen = '';
     if (array1.funcArray.length > 0) {	
         depen = funcArray[0].Departamento + ' - ' + funcArray[0].Facultad
+    }else{
+        depen = 'No hay datos';
     }
 
     const data = {
@@ -210,6 +212,7 @@ const renderCostoChart = array => {
     //mostrar el total de los costos, sumando los valores de costoValues, mostrar el valor en formato de moneda
     const costo = 'Costo total: '+costoValues.map(valor => parseInt(valor)).reduce((acumulador, valor) => acumulador + valor).toLocaleString('en-US', {style: 'currency', currency: 'USD'})
     document.getElementById('costoTotal').innerHTML = costo;
+    document.getElementById('costoTotal1').innerHTML = costo;
 
     const data = {
         labels: costoLabels,

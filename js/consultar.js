@@ -55,7 +55,7 @@ $(function()
         //get_ausentismos();
     });
 
-    $(document).on('keyup', '#diagnostico', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
+    $(document).on('keyup', '#tiempo', function()  //para el cuadro de busqueda de cedula. #nombre es el id del input en el HTML
     {
         var valor = $(this).val();
 
@@ -73,13 +73,36 @@ $(function()
         //alert(selected);
     });
 
-    $(".fila_tabla").on("click",function(){  //.form date es la clase de los inputs de fecha
+    $(document).on('keyup', '#codigo', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
+    {
+        var valor = $(this).val();
+
+        if(valor != "" && isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+        }
+        //get_ausentismos();
+    });
+
+    $(document).on('keyup', '#diagnostico', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
+    {
+        var valor = $(this).val();
+
+        if(valor != "" && isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+        }
+        //get_ausentismos();
+    });
+
+    $(".fila_tabla").on("click",function(){  //.FILA_TABLA, es la clase de las filas de la tabla
         //var selected = $(this).val();
         //get_ausentismos(); 
         //alert(selected);
         console.log("hhhh");
     });
-
 });
 
 function get_ausentismos(pagina)

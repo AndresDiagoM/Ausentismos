@@ -22,7 +22,16 @@
                 foreach((array) $field_value as $value)
                 {
                     if($field_name=="Cedula"){  //Cedula LIKE '%5%'--> '%".$VAR."%'"
-                        $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+
+                        
+                        //if values is empty then search as like
+                        if($values == ""){
+                            $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                        }else{
+                            $values[$field_name][] = " {$field_name} = $value ";
+                        }
+                        
+
                     }elseif($field_name=="Nombre"){
                         $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
                     }else{
@@ -51,13 +60,16 @@
 
         $func_list = [];
 
-        while($funcionario = $funcionarios->fetch_assoc()){
-
-            $func_list[$funcionario["Cedula"]]=$funcionario;
+        if($funcionarios->num_rows > 0)
+        {
+            while($funcionario = $funcionarios->fetch_assoc())
+            {
+                $func_list[] = $funcionario;
+            }
+        }else{
+            $func_list[] = "N/A";
         }
 
         //print_r($func_list);  //en chrome hacer CTRL+U para ver mejor el arreglo
-        
-        //$_SESSION['func_list'] = $sqli; //Para guardar el SQL query y usarlo con el boton de reporte para generar archivo excel 
         echo json_encode($func_list);
 ?>

@@ -3,7 +3,6 @@
 include "../template/cabecera.php";
 
 
-$tabla1 ="";
 $tabla2 ="";
 $tabla3 ="";
 $tabla4 ="";
@@ -14,43 +13,22 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
     include "../logic/cargarFuncionarios.php";
 
     //mostrar una tabla si los arreglos no están vacios
-    $tabla1 ="";
     $tabla2 ="";
     $tabla3 ="";
     $tabla4 ="";
-    if($funcionariosExistentes!=null){
-        $tabla1 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
-                    <thead class='thead-light'>
-                        <tr>
-                            <th scope='col'  colspan='3' class='table-active'>Funcionarios que ya existen</th>
-                        </tr>
-                        <tr>
-                            <th scope='col'>Cedula</th>
-                            <th scope='col'>Nombre</th>
-                            <th scope='col'>Cargo</th>
-                        </tr>
-                    </thead>
-                    <tbody>";
-        foreach($funcionariosExistentes as $funcionario){
-            $tabla1 .= "<tr>
-                            <th scope='row'>".$funcionario['CEDULA']."</th>
-                            <td>".$funcionario['NOMBRE']."</td>
-                            <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
-                        </tr>";
-        }
-        $tabla1 .= "</tbody>
-                </table>";
-    }
+    
     if($funcionariosInsertados!=null){
         $tabla2 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
                     <thead class='thead-light'>
                         <tr>
-                            <th scope='col' class='table-active' colspan='3'>Funcionarios que se insertaron</th>
+                            <th scope='col' class='table-active' colspan='5'>Funcionarios que se insertaron</th>
                         </tr>
                         <tr>
                             <th scope='col'>Cedula</th>
                             <th scope='col'>Nombre</th>
                             <th scope='col'>Cargo</th>
+                            <th scope='col'>Salario</th>
+                            <th scope='col'>Estado</th>
                         </tr>
                     </thead>
                     <tbody>";
@@ -59,6 +37,8 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
                             <th scope='row'>".$funcionario['CEDULA']."</th>
                             <td>".$funcionario['NOMBRE']."</td>
                             <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
+                            <td>".$funcionario['SALARIO']."</td>
+                            <td>".$funcionario['ESTADO']."</td>
                         </tr>";
         }
         $tabla2 .= "</tbody>
@@ -68,12 +48,15 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
         $tabla3 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
                     <thead class='thead-light'>
                         <tr>
-                            <th scope='col' class='table-active' colspan='3'>Funcionarios que no se insertaron</th>
+                            <th scope='col' class='table-active' colspan='6'>Funcionarios que no se insertaron</th>
                         </tr>
                         <tr>
                             <th scope='col'>Cedula</th>
                             <th scope='col'>Nombre</th>
                             <th scope='col'>Cargo</th>
+                            <th scope='col'>Salario</th>
+                            <th scope='col'>Estado</th>
+                            <th scope='col'>Error</th>
                         </tr>
                     </thead>
                     <tbody>";
@@ -82,6 +65,9 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
                             <th scope='row'>".$funcionario['CEDULA']."</th>
                             <td>".$funcionario['NOMBRE']."</td>
                             <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
+                            <td>".$funcionario['SALARIO']."</td>
+                            <td>".$funcionario['ESTADO']."</td>
+                            <td>".$funcionario['ERROR']."</td>
                         </tr>";
         }
         $tabla3 .= "</tbody>
@@ -91,11 +77,12 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
         $tabla4 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
                     <thead class='thead-light'>
                         <tr>
-                            <th scope='col' class='table-active' colspan='3'>Funcionarios Actualizados</th>
+                            <th scope='col' class='table-active' colspan='5'>Funcionarios Actualizados</th>
                         </tr>
                         <tr>
                             <th scope='col'>Cedula</th>
                             <th scope='col'>Nombre</th>
+                            <th scope='col'>Cargo</th>
                             <th scope='col'>Salario</th>
                             <th scope='col'>Estado</th>
                         </tr>
@@ -166,7 +153,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
         </section>
     
         <?php
-        if($tabla1 != null){          
+        if($tabla2 != null || $tabla3!=null){          
         ?>
         <section>
             <!-- Contenedor de tabla -->
@@ -180,9 +167,6 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
                     }
                     if($tabla3 != null){
                         echo $tabla3;
-                    }
-                    if($tabla1 != null){
-                        echo $tabla1;
                     }
                 ?>
             </div>

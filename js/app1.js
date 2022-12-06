@@ -67,7 +67,47 @@ const enableEventHandlers = () => {
     //updateChartData('featuresChart', newData, label)
   }
 
-  // Slider de mese de grafico de doughnut
+  
+  // Slider de tipo ausen de grafico de barra - GRAFICO 1
+  document.querySelector('#tiposMonthsOptions').onchange = e => {
+    const {
+        value: number,
+        text: label
+    } = e.target.selectedOptions[0]
+    //console.log(number, label)
+
+    let var1 = {tipo: label, value: number};
+    //let var2 = array( 'anio' => document.getElementById('statsOptions').value, "mes" => number);
+    //array with anio and mes:
+    var1.anioTipo = document.getElementById('statsOptions').value;
+    //console.log(var1);
+
+
+    $.ajax({
+      method: "POST",
+      url: "../pages/graficos.php",
+      data: $.param(var1),
+      success: function (response) {
+        //console.table(response);
+        const grafica1 = JSON.parse(response);
+
+        const array1 = grafica1.monthsArray;
+        var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        //del array monthsArray cambiar los numeros de los meses por los nombres usando la var meses
+        for (var i = 0; i < array1.length; i++) {
+            array1[i].Mes = meses[array1[i].Mes - 1];
+        }
+        const monthsValues = array1.map(months => months.Ausentismos)        
+        //mapear el valor Mes del array1 al mes correspondiente usando el arreglo meses
+        const monthsLabels = array1.map(months => months.Mes)
+        updateChartDataAndLabels('monthsChart', monthsValues, monthsLabels)
+      }
+    })      
+    //const newData = coasters.map(coaster => coaster[property])
+    //updateChartData('featuresChart', newData, label)
+  }
+
+  // Slider de mese de grafico de doughnut - GRAFICO 2
   document.querySelector('#tiposChartOptions').onchange = e => {
       const {
           value: number,
@@ -100,46 +140,7 @@ const enableEventHandlers = () => {
       //updateChartData('featuresChart', newData, label)
   }
 
-  // Slider de tipo ausen de grafico de barra
-  document.querySelector('#tiposMonthsOptions').onchange = e => {
-      const {
-          value: number,
-          text: label
-      } = e.target.selectedOptions[0]
-      //console.log(number, label)
-
-      let var1 = {tipo: label, value: number};
-      //let var2 = array( 'anio' => document.getElementById('statsOptions').value, "mes" => number);
-      //array with anio and mes:
-      var1.anioTipo = document.getElementById('statsOptions').value;
-      //console.log(var1);
-
-
-      $.ajax({
-        method: "POST",
-        url: "../pages/graficos.php",
-        data: $.param(var1),
-        success: function (response) {
-          //console.table(response);
-          const grafica1 = JSON.parse(response);
-
-          const array1 = grafica1.monthsArray;
-          var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-          //del array monthsArray cambiar los numeros de los meses por los nombres usando la var meses
-          for (var i = 0; i < array1.length; i++) {
-              array1[i].Mes = meses[array1[i].Mes - 1];
-          }
-          const monthsValues = array1.map(months => months.Ausentismos)        
-          //mapear el valor Mes del array1 al mes correspondiente usando el arreglo meses
-          const monthsLabels = array1.map(months => months.Mes)
-          updateChartDataAndLabels('monthsChart', monthsValues, monthsLabels)
-        }
-      })      
-      //const newData = coasters.map(coaster => coaster[property])
-      //updateChartData('featuresChart', newData, label)
-  }
-
-  // Slider de tipo dependencias de grafico de barra
+  // Slider de tipo dependencias de grafico de barra - GRAFICO 3
   document.querySelector('#tiposDepenOptions').onchange = e => {
     const {
         value: number,
@@ -169,6 +170,8 @@ const enableEventHandlers = () => {
         var depen = '';
         if (grafica3.funcArray.length > 0) {	
             depen = funcArray[0].Departamento + ' - ' + funcArray[0].Facultad
+        }else{
+            depen = 'No hay datos';
         }
 
         const data = {
@@ -188,7 +191,7 @@ const enableEventHandlers = () => {
     //updateChartData('featuresChart', newData, label)
   }
 
-  // Slider de tipo ausen de grafico de costo
+  // Slider de tipo ausen de grafico de costo - GRAFICO 4
   document.querySelector('#costoChartOptions').onchange = e => {
     const {
         value: number,
@@ -220,8 +223,8 @@ const enableEventHandlers = () => {
         const costoValues = array1.map(valor => valor.Costo) //[43, 32, 43, 32, 43, 32, 43, 32, 43]
         //mostrar el total de los costos, sumando los valores de costoValues, mostrar el valor en formato de moneda
         const costo = 'Costo total: '+costoValues.map(valor => parseInt(valor)).reduce((acumulador, valor) => acumulador + valor).toLocaleString('en-US', {style: 'currency', currency: 'USD'})
-        document.getElementById('costoTotal').innerHTML = "";
-        document.getElementById('costoTotal').innerHTML = costo;
+        document.getElementById('costoTotal1').innerHTML = "";
+        document.getElementById('costoTotal1').innerHTML = costo;
         
         
         updateChartDataAndLabels('costoChart', costoValues, costoLabels)

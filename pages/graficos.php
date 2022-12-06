@@ -237,7 +237,7 @@
         }
         //print_r($datos4); exit;
         //echo $datos[0]['numeros']; exit;
-
+        //select all from dependencias with no repeat
         $sql = "SELECT * FROM dependencias ORDER BY Departamento";
         $result = $conectar->query($sql);
         $dependencias = "<option class='small'  value='%'> SELECCIONE </option>";

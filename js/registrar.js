@@ -6,6 +6,7 @@ $(function()
 {
     //get_funcionario();
     $("#incapacidadINPUTS").hide();
+    $("#agregar_func").hide();
 
     //se necesita hacer algo cuando se utilice la búsqueda de cedula y nombre
     $(document).on('keyup', '#nombre1', function() 
@@ -28,19 +29,19 @@ $(function()
             get_funcionario();
             //$("#input_decor").html("");
             //document.getElementById("nombre").value = "aqui";
-        }else{
+        }else if(valor == ""){
+
+            //clean the form auto-llenar
+            document.getElementById("form_register").reset();
+            //console.log("no es numero");
+
             //get_funcionario();
             //$("#form_register").reset();
 
             /*document.getElementById("form_register").reset();
-            document.getElementById("nombre").disabled = false ;
-            document.getElementById("cedula").disabled = false;
-            document.getElementById("cargo").disabled = false;
-            document.getElementById("departamento").disabled = false;
-            document.getElementById("facultad").disabled = false; */
+            document.getElementById("nombre").disabled = false ;*/
         }
         //get_funcionario();
-        
     });
 
     // Slider de tipos de ausentismo
@@ -90,17 +91,25 @@ function get_funcionario()
                     
                     //$("#filters-result").append(row);
                     //$("cargo").value(funcionario.Cedula);
-                    document.getElementById("nombre").value = funcionario.Nombre; 
-                    document.getElementById("cedula").value = funcionario.Cedula; 
-                    document.getElementById("cargo").value = funcionario.Cargo; 
-                    document.getElementById("departamento").value = funcionario.Departamento; 
-                    document.getElementById("facultad").value = funcionario.Facultad; 
+                    
 
                     /*document.getElementById("nombre").disabled = true ;
                     document.getElementById("cedula").disabled = true;
                     document.getElementById("cargo").disabled = true;
                     document.getElementById("departamento").disabled = true;
                     document.getElementById("facultad").disabled = true;*/
+
+                    //if funcionario is equal to N/A, then show a button to add a new funcionario 
+                    if(funcionario == "N/A"){
+                        $("#agregar_func").show();
+                    }else{
+                        $("#agregar_func").hide();
+                        document.getElementById("nombre").value = funcionario.Nombre; 
+                        document.getElementById("cedula").value = funcionario.Cedula; 
+                        document.getElementById("cargo").value = funcionario.Cargo; 
+                        document.getElementById("departamento").value = funcionario.Departamento; 
+                        document.getElementById("facultad").value = funcionario.Facultad; 
+                    }
                 });
 
             }

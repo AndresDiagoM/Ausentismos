@@ -49,7 +49,7 @@
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="../images/logoU.png"
+                <img src="../images/logoU3.png"
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
@@ -133,38 +133,23 @@
             </div>
         </div>
 
-            <div
-                class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between px-4 px-xl-5 bg-primary">
+        <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
                 <!-- Copyright -->
-                <div class="container">
-                    <div class="row">
-                        
-                        <div class="col py-2 ">
-                            <img src="../images/lema.png" width="100" height="50" class="img-responsive" alt="Sample image">
-                            <img src="../images/logosIcontec2020.png" width="100" height="50" class="img-responsive" alt="Sample image">
-                        </div>
-
-
-                        <div class="col text-white mb-1 mb-md-0 py-4">
-                        
-                        </div>
-                        <div class="col ">
-                            
-                        </div>
-                    </div>
-                </div>   
+                <div class="text-white mb-3 mb-md-0">
+                Copyright © 2022. All rights reserved.
+                </div>
                 <!-- Copyright -->
 
                 <!-- Right -->
-                <div class="py-4">
+                <div class="">
                     <a href="https://www.facebook.com/universidadelcauca/" class="text-white me-4">
-                        <i class="icon ion-logo-facebook"></i>
+                        <img src="../images/face2.png" class="img-fluid" width="30" height="30" alt="Sample image">
                     </a>
                     <a href="https://twitter.com/unicauca/" class="text-white me-4">
-                        <i class="icon ion-logo-twitter"></i>
+                        <img src="../images/twitter.png" class="img-fluid" width="30" height="30" alt="Sample image">
                     </a>
                     <a href="https://www.linkedin.com/school/universidad-del-cauca/" class="text-white">
-                        <i class="icon ion-logo-linkedin"></i>
+                        <img src="../images/linkedin.png" class="img-fluid" width="30" height="30" alt="Sample image">
                     </a>
                 </div> 
                 <!-- Right -->

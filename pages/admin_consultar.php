@@ -58,7 +58,18 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">TIEMPO</th>
+            <th scope="col">
+                    <ul class="navbar-nav ml-auto">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            TIEMPO
+                            </a>
+                            <div class="dropdown-menu">
+                                <input type="number" class="form-input" id="tiempo" name="Tiempo[]" size="20" placeholder="Ingrese el tiempo">
+                            </div>
+                        </li>
+                    </ul>
+            </th>
             <th scope="col">UNIDAD</th>
             <th scope="col">OBSERVACIÓN</th>
             <th scope="col">COSTO</th>
@@ -95,7 +106,18 @@
                         </li>
                     </ul>
             </th>
-8            <th scope="col">CODIGO</th>
+            <th scope="col">
+                    <ul class="navbar-nav ml-auto">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                CODIGO
+                            </a>
+                            <div class="dropdown-menu">
+                                <input type="text" class="form-input" id="codigo" name="Codigo[]" size="20" placeholder="Ingrese el codigo">
+                            </div>
+                        </li>
+                    </ul>
+            </th>
             <th scope="col">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
@@ -122,11 +144,11 @@
 
 
 <!-- Contener de paginador y boton de reporte -->
-<div class="container offset-md-2 col-md-7">
+<div class="container offset-md-0 col-md-7">
 
     <section>
         <!-- Contenedor de los botones del paginador de las consultas -->
-        <div class="offset-md-6 col-md-6 text-center py-1">
+        <div class="offset-md-8 col-md-6 text-center py-1">
             <ul class="pagination pagination-lg pager" id="myPager">
 
             </ul>
@@ -144,11 +166,11 @@
                 <div class="row">
                     <!-- con 2 columnas -->
 
-                    <div class="col-lg-9 d-flex">
+                    <div class="col-lg-8 d-flex">
                         <h3 class="font-weight-bold mb-0 me-2">Resultados: </h3> <!-- mb-0 es sin margen inferior -->
                         <h3 class="font-weight-bold mb-0 me-2" id="total_resultados"> </h3>
                     </div>
-                    <div class="col-lg-3 d-flex">
+                    <div class="col-lg-4 d-flex">
                         <!-- sobreescribir clase btn-primary, para poner color morado.  w-100 es para que ocupe el ancho del div -->
                         
                         <a name="reporte" id="" class="btn btn-primary w-100 align-self-center" href="../logic/ausen_excel.php" role="button"> 

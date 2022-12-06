@@ -39,6 +39,9 @@
                         <select class="" id="statsOptions">
                             
                         </select>
+                        <div class="d-flex ms-auto">
+                            <h5 class="text-right font-weight-bold mb-0 " id="costoTotal">  </h5>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row" id="estadisticas">
@@ -133,7 +136,7 @@
                             </div>
 
                             <div class="card-footer bg-light">
-                                <h5 class="font-weight-bold mb-0" id="costoTotal">  </h5>
+                                <h5 class="font-weight-bold mb-0" id="costoTotal1">  </h5>
                             </div>
 
                         </div>

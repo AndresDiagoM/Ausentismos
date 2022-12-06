@@ -30,6 +30,10 @@
             <label class="col-form-label" for="Nombre[]"> Nombre </label>
         </div>
 
+        <div class="form-floating py-2 mb-3 col-3" id="agregar_func">  
+            <a href="./admin_create_func.php" class="btn btn-success">Agregar Funcionario</a>
+        </div>
+
     </form>
 </div>
 

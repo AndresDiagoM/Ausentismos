@@ -93,7 +93,7 @@
     }
     $data = array_slice($data, 1); //elimina la primera fila, que son los encabezados
     //print_r($data); //exit;
-    /*  Estructura de los datos:
+    /*  Estructura de los datos del array $data:
         Array
         (
             [0] => Array
@@ -111,6 +111,7 @@
         )
     */
 
+
     //==========================================================================
     //=================== COMPROBAR QUE LOS DATOS SEAN CONSISTENTES ============
     $funcionariosNoInsertados=[];
@@ -124,26 +125,31 @@
         //echo $value['FACULTAD']."<br>";
         //echo $value['SALARIO']."<br>";
         //echo $value['ESTADO']."<br>";
+        $data[$key]['DEPENDENCIA'] = "N/A";
+        $data[$key]['ERROR'] = "N/A";
 
         //comprobrar que ningun campo tenga caracteres especiales
         if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['CEDULA']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['NOMBRE']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['GENERO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬]/', $value['NOMBRE_DEL_CARGO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['C_COSTO']) || preg_match('/[\'^£$%&*()}{@#~?><>|=_+¬-]/', $value['DEPARTAMENTO']) || preg_match('/[\'^£$%&*()}{@#~?><>|=_+¬-]/', $value['FACULTAD']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['SALARIO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['ESTADO'])){
             //eliminar el registro del array
+            $data[$key]['ERROR'] = "Caracteres especiales";
+            $funcionariosNoInsertados[] = $data[$key];
             unset($data[$key]);
-            $funcionariosNoInsertados[] = $value;
         }
 
         //comprobar que el campo cedula y salario sea int.
         if(!is_numeric($value['CEDULA']) || !is_numeric($value['SALARIO'])){
             //eliminar el registro del array
+            $data[$key]['ERROR'] = "Cedula y Salario deben ser numeros";
+            $funcionariosNoInsertados[] = $data[$key];
             unset($data[$key]);
-            $funcionariosNoInsertados[] = $value;
         }
 
         //comprobar que el campo estado sea ACTIVO o INACTIVO, y que el campo genero sea MAS o FEM
         if($value['ESTADO']!="ACTIVO" && $value['ESTADO']!="INACTIVO" || $value['GENERO']!="MAS" && $value['GENERO']!="FEM"){
             //eliminar el registro del array
+            $data[$key]['ERROR'] = "Estado debe ser ACTIVO o INACTIVO y Genero debe ser MAS o FEM";
+            $funcionariosNoInsertados[] = $data[$key];
             unset($data[$key]);
-            $funcionariosNoInsertados[] = $value;
         }
 
     }
@@ -165,13 +171,41 @@
         }else{
             //eliminar el registro del array
             unset($data[$key]);
+            $value['ERROR'] = "Dependencia no encontrada";
             $funcionariosNoInsertados[] = $value;
         }
     }
 
+    //print_r($funcionariosNoInsertados); exit;
+
+    //insertar todos los datos del array $data en la base de datos, en la tabla func_auxiliar
+    foreach($data as $key => $value){
+        $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado, Error) 
+        VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['ERROR']."')";
+        $result = $conectar->query($sql1);
+        echo $sql1."<br>";
+        //IF RESULT IS TRUE, THEN INSERT WAS SUCCESSFUL
+        //convert Object of class mysqli_result into string
+        $result = json_encode($result);
+        echo $result."<br>";
+
+        if($result){
+            echo "INSERT SUCCESSFUL"."\n \n";
+        }else{
+            echo "INSERT FAILED"."\n";
+        }
+    }
+    //insertar todos los datos del array $funcionariosNoInsertados en la base de datos, en la tabla func_auxiliar
+    foreach($funcionariosNoInsertados as $key => $value){
+        $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado, Error) 
+        VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['ERROR']."')";
+        $result = $conectar->query($sql1);
+    }
+
+
     //==========================================================================
     //=================== INSERTAR DATOS EN LA BASE DE DATOS ===================
-    //=========================================================================
+    //==========================================================================
     $funcionariosExistentes=[];
     $funcionariosInsertados=[];
     //$funcionariosNoInsertados=[];
@@ -227,6 +261,7 @@
             }else{
                 //echo "Error al insertar el funcionario ".$value['NOMBRE'];
                 //GUARDAR LOS FUNCIONARIOS QUE NO SE INSERTARON PARA MOSTRARLOS EN UNA TABLA
+                $value['ERROR'] = "Error al insertar el funcionario";
                 $funcionariosNoInsertados[] = $value;
             }
             
