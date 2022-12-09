@@ -1,11 +1,16 @@
 <?php
-    include "../conexion.php"; //conexión a la base de datos
+    include "../conexion.php";
 
-    require '../vendor/autoload.php'; //librería para leer archivos excel
+    require '../vendor/autoload.php';
     //require 'conexion.php';
+    //$mysqli = new mysqli('localhost', 'root','','ausentismos_v1');
 
-    //funciones de la librería PhpSpreadsheet
-    use PhpOffice\PhpSpreadsheet\{Spreadsheet, IOFactory}; 
+    /*if($mysqli->connect_errno){
+        echo 'Fallo la conexion'. $mysqli->connect_error;
+        die();
+    } */
+
+    use PhpOffice\PhpSpreadsheet\{Spreadsheet, IOFactory};
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx; //Csv, Xls
     use PhpOffice\PhpSpreadsheet\Cell\Coordinate; //para pasar de letra a número
     use PhpOffice\PhpSpreadsheet\Calculation\Functions;
@@ -13,7 +18,7 @@
 
     //recibir el archivo excel
     $nombreArchivo = '';
-    if(isset($_FILES['excelFile']['name'])){ //comprobar si se ha cargado el archivo excel desde el formulario de la página admin_cargar.php
+    if(isset($_FILES['excelFile']['name'])){
         //echo $_FILES['excelFile']['name'];
 
         $excelFile=(isset($_FILES['excelFile']['name']))?$_FILES['excelFile']['name']:"";
@@ -47,22 +52,11 @@
                 exit;
             }
         }*/
-    }elseif(isset($_POST['aceptar'])){
-        //echo "<script> alert('Archivo Cargado'); </script>";
-        //exit;
-        insertarDatos($conectar);
-        echo "<script>
-                    window.location.href='./admin_cargar.php';
-            </script>";
-
     }else{
         //echo "No se ha cargado el archivo";
         //show alert that the file was not uploaded
         //echo "<script>alert('No se ha cargado el archivo');</script>";
-        echo "<script>
-                    window.location.href='./admin_cargar.php';
-            </script>";
-        //exit;
+        exit;
     }
 
     //cargar archivo de la carpeta excel
@@ -120,6 +114,7 @@
 
     //==========================================================================
     //=================== COMPROBAR QUE LOS DATOS SEAN CONSISTENTES ============
+    $funcionariosNoInsertados=[];
     foreach($data as $key => $value){
         //echo $value['CEDULA']."<br>";
         //echo $value['NOMBRE']."<br>";
@@ -137,20 +132,24 @@
         if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['CEDULA']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['NOMBRE']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['GENERO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬]/', $value['NOMBRE_DEL_CARGO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['C_COSTO']) || preg_match('/[\'^£$%&*()}{@#~?><>|=_+¬-]/', $value['DEPARTAMENTO']) || preg_match('/[\'^£$%&*()}{@#~?><>|=_+¬-]/', $value['FACULTAD']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['SALARIO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['ESTADO'])){
             //eliminar el registro del array
             $data[$key]['ERROR'] = "Caracteres especiales";
+            $funcionariosNoInsertados[] = $data[$key];
+            unset($data[$key]);
         }
 
         //comprobar que el campo cedula y salario sea int.
         if(!is_numeric($value['CEDULA']) || !is_numeric($value['SALARIO'])){
             //eliminar el registro del array
             $data[$key]['ERROR'] = "Cedula y Salario deben ser numeros";
-            /*$funcionariosNoInsertados[] = $data[$key];
-            unset($data[$key]); */
+            $funcionariosNoInsertados[] = $data[$key];
+            unset($data[$key]);
         }
 
         //comprobar que el campo estado sea ACTIVO o INACTIVO, y que el campo genero sea MAS o FEM
         if($value['ESTADO']!="ACTIVO" && $value['ESTADO']!="INACTIVO" || $value['GENERO']!="MAS" && $value['GENERO']!="FEM"){
             //eliminar el registro del array
             $data[$key]['ERROR'] = "Estado debe ser ACTIVO o INACTIVO y Genero debe ser MAS o FEM";
+            $funcionariosNoInsertados[] = $data[$key];
+            unset($data[$key]);
         }
 
     }
@@ -171,100 +170,100 @@
             $data[$key]['DEPENDENCIA'] = $row['ID'];
         }else{
             //eliminar el registro del array
-            $data[$key]['ERROR'] = "Dependencia no encontrada";
+            unset($data[$key]);
+            $value['ERROR'] = "Dependencia no encontrada";
+            $funcionariosNoInsertados[] = $value;
         }
     }
 
     //print_r($funcionariosNoInsertados); exit;
 
-    //===============================================================================
     //insertar todos los datos del array $data en la base de datos, en la tabla func_auxiliar
     foreach($data as $key => $value){
-        //consultar si el funcionario ya existe en la base de datos, si existe, no insertar
-        $sql = "SELECT * FROM func_auxiliar WHERE Cedula = '".$value['CEDULA']."'";
-        $result = $conectar->query($sql);
-        //numero de filas que devuelve la consulta
-        $numRows = $result->num_rows;
-        if($numRows>0){
-            continue;
+        $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado, Error) 
+        VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['ERROR']."')";
+        $result = $conectar->query($sql1);
+        echo $sql1."<br>";
+        //IF RESULT IS TRUE, THEN INSERT WAS SUCCESSFUL
+        //convert Object of class mysqli_result into string
+        $result = json_encode($result);
+        echo $result."<br>";
+
+        if($result){
+            echo "INSERT SUCCESSFUL"."\n \n";
         }else{
-            $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado, Error) 
-            VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['ERROR']."')";
-            $result = $conectar->query($sql1);
-            //echo $sql1."<br>";
-            //IF RESULT IS TRUE, THEN INSERT WAS SUCCESSFUL
-            //convert Object of class mysqli_result into string
-            //$result = json_encode($result);
-            //echo $result."<br>";
-    
-            if($result){
-                //echo "INSERT SUCCESSFUL"."\n \n";
-            }else{
-                //echo "INSERT FAILED"."\n";
-                //$funcionariosNoInsertados[] = $value;
-            }
+            echo "INSERT FAILED"."\n";
         }
     }
-
-    //$tabla_auxiliar= array_merge($data,$funcionariosNoInsertados);
-
+    //insertar todos los datos del array $funcionariosNoInsertados en la base de datos, en la tabla func_auxiliar
+    foreach($funcionariosNoInsertados as $key => $value){
+        $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado, Error) 
+        VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['ERROR']."')";
+        $result = $conectar->query($sql1);
+    }
 
     //==========================================================================
     //=================== INSERTAR DATOS EN LA BASE DE DATOS ===================
     //==========================================================================
-    function insertarDatos($conectar){
+    $funcionariosExistentes=[];
+    $funcionariosInsertados=[];
+    //$funcionariosNoInsertados=[];
+    $funcionariosActualizados=[];
 
-        //consultar los datos de la tabla auxiliar y guardar en un array
-        $sql = "SELECT * FROM func_auxiliar WHERE Error = 'N/A'";
+    foreach($data as $key => $value){
+
+        //COMPROBAR QUE EL FUNCIONARIO NO EXISTA en la base de datos
+        $sql = "SELECT * FROM funcionarios WHERE Cedula = '".$value['CEDULA']."'"; //AND Nombre = '".$value['NOMBRE']."' AND Apellido = '".$value['APELLIDO']."'";
         $result = $conectar->query($sql);
         $rows = $result->num_rows;
-        $data = array();
+
         if($rows > 0){
-            while($row = $result->fetch_assoc()){
-                $data[] = $row;
-            }
-        }else{
-            exit;
-        }
+            $result = $result->fetch_assoc();
 
-        //foreach $data as $key => $value update if Salario 
-        foreach($data as $key => $value){
-            //COMPROBAR QUE EL FUNCIONARIO NO EXISTA en la base de datos
-            $sql = "SELECT * FROM funcionarios WHERE Cedula = '".$value['Cedula']."'"; //AND Nombre = '".$value['Nombre']."' AND Apellido = '".$value['Apellido']."'";
-            $result = $conectar->query($sql);
-            $rows = $result->num_rows;
+            //echo "El funcionario ".$value['NOMBRE']." ya existe en la base de datos\n";
+            //GUARDAR LOS FUNCIONARIOS QUE EXISTEN PARA MOSTRARLOS EN UNA TABLA 
+            $funcionariosExistentes[] = $value;
 
-            if($rows > 0){ //si el funcionario ya existe en la base de datos, comprobar si se va a actualizar o no
-                $result = $result->fetch_assoc();
-
-                //ACTUALIZAR LOS DATOS DE UN FUNCIONARIO SEGUN LA CEDULA, SI EL SALARIO ES DIFERENTE. si no, actualizar el estado
-                if($value['Salario']!=$result['Salario'] ){
-                    $sql1 = "UPDATE funcionarios SET Salario = '".$value['Salario']."' WHERE Cedula = '".$value['Cedula']."'";
-                    $result = $conectar->query($sql1);
-                    
-                }elseif($value['Estado']!=$result['Estado']){
-                    $sql1 = "UPDATE funcionarios SET Estado = '".$value['Estado']."' WHERE Cedula = '".$value['Cedula']."'";
-                    $result = $conectar->query($sql1);
+            //ACTUALIZAR LOS DATOS DE UN FUNCIONARIO SEGUN LA CEDULA, SI EL SALARIO ES DIFERENTE. si no, actualizar el estado
+            if($value['SALARIO']!=$result['Salario']){
+                $sql = "UPDATE funcionarios SET Cargo = '".$value['NOMBRE_DEL_CARGO']."', Salario = '".$value['SALARIO']."' WHERE Cedula = '".$value['CEDULA']."'";
+                $result = $conectar->query($sql);
+                if($result){
+                    //echo "El funcionario ".$value['NOMBRE']." se actualizó correctamente\n";
+                    $funcionariosActualizados[] = $value;
+                }else{
+                    //echo "Error al actualizar el funcionario ".$value['NOMBRE']."\n";
                 }
-
-            }else{ //si el funcionario no existe en la base de datos, insertar NUEVO funcionario
-                $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado) 
-                    VALUES ('".$value['Cedula']."', '".$value['Nombre']."', '".$value['Cargo']."', '".$value['Dependencia']."', '".$value['Genero']."', '".$value['Salario']."', 'ACTIVO')";
-                $result = $conectar->query($sql1);
-                //echo $sql1."<br>";
+            }elseif($value['ESTADO']!=$result['Estado']){
+                //Actualizar si el estado es igual a ACTIVO o INACTIVO
+                if($value['ESTADO']=="ACTIVO" || $value['ESTADO']=="INACTIVO"){
+                    $sql = "UPDATE funcionarios SET Estado = '".$value['ESTADO']."' WHERE Cedula = '".$value['CEDULA']."'";
+                    $result = $conectar->query($sql);
+                    if($result){
+                        //echo "El funcionario ".$value['NOMBRE']." se actualizó correctamente\n";
+                        $funcionariosActualizados[] = $value;
+                    }else{
+                        //echo "Error al actualizar el funcionario ".$value['NOMBRE']."\n";
+                    }
+                }
             }
-        }
 
-        //cuando termine de actualizar e insertar, eliminar los datos de la tabla auxiliar
-        $sql = "DELETE FROM func_auxiliar";
-        $result = $conectar->query($sql);
-
-        //if the query is successful, then return true, else return try empty with truncate
-        if($result){
-            //echo "DELETE SUCCESSFUL"."\n \n";
         }else{
-            $sql = "TRUNCATE TABLE func_auxiliar";
-            $result = $conectar->query($sql);
+            //insertar funcionario
+            $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado) 
+                    VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', 'ACTIVO')";
+            $resultado = $conectar->query($sql1);
+            if($result){
+                //echo "El funcionario ".$value['NOMBRE']." se ha insertado correctamente";
+                //GUARDAR LOS FUNCIONARIOS QUE SE INSERTARON PARA MOSTRARLOS EN UNA TABLA
+                $funcionariosInsertados[] = $value;
+            }else{
+                //echo "Error al insertar el funcionario ".$value['NOMBRE'];
+                //GUARDAR LOS FUNCIONARIOS QUE NO SE INSERTARON PARA MOSTRARLOS EN UNA TABLA
+                $value['ERROR'] = "Error al insertar el funcionario";
+                $funcionariosNoInsertados[] = $value;
+            }
+            
         }
     }
     //eliminar el archivo de la carpeta excel

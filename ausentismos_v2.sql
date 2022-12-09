@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2022 at 06:43 AM
+-- Generation Time: Dec 09, 2022 at 07:57 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -1757,7 +1757,6 @@ INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiemp
 (1707, 76305878, '2022-09-30', '2022-09-30', 1, 'dias', 'Asuntos académicos', 193664, 34327997, 3),
 (1708, 34540895, '2022-09-29', '2022-09-29', 1, 'dias', 'Asuntos personales', 55042.4, 34327997, 3),
 (1709, 26566163, '2022-09-23', '2022-09-23', 1, 'dias', 'Asuntos personales', 109334, 34327997, 3),
-(1722, 4615890, '2022-11-22', '2022-11-22', 1, 'dias', 'medico', 95146.8, 34327997, 3),
 (1723, 4615890, '2021-11-22', '2021-11-22', 1, 'dias', 'medico', 95146.8, 34327997, 3),
 (1724, 1061744971, '2022-01-14', '2022-01-14', 1, 'horas', 'Asuntos personales', 3290.96, 34327997, 5),
 (1725, 10546378, '2022-01-26', '2022-01-26', 1, 'horas', 'Cita médica', 2436.67, 34327997, 5),
@@ -1937,8 +1936,6 @@ INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiemp
 (1899, 63483237, '2022-03-25', '2022-03-25', 7, 'horas', 'Asuntos personales', 130299, 34327997, 5),
 (1900, 34564288, '2022-03-31', '2022-03-31', 4, 'horas', 'Por voto - elector (1/2 día)', 11230.5, 34327997, 5),
 (1901, 25284491, '2022-03-22', '2022-03-22', 4, 'horas', 'Por voto - elector (1/2 día)', 13163.8, 34327997, 5),
-(1902, 1061737020, '2022-12-30', '2022-12-30', 1, 'horas', 'Asuntos personales', 2977.24, 34327997, 5),
-(1903, 76319254, '2022-12-30', '2022-12-30', 3, 'horas', 'Asuntos personales', 6937.66, 34327997, 5),
 (1904, 76319254, '2022-03-14', '2022-03-14', 2, 'horas', 'Cita médica', 4625.11, 34327997, 5),
 (1905, 76319254, '2022-03-16', '2022-03-16', 2, 'horas', 'Cita médica', 4625.11, 34327997, 5),
 (1906, 76319254, '2022-03-17', '2022-03-17', 2, 'horas', 'Cita médica', 4625.11, 34327997, 5),
@@ -2015,10 +2012,10 @@ INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiemp
 (1977, 48600287, '2022-04-08', '2022-04-08', 4, 'horas', 'Por voto - elector (1/2 día)', 44854.7, 34327997, 5),
 (1978, 4280394, '2022-04-08', '2022-04-08', 4, 'horas', 'Por voto - elector (1/2 día)', 51760.6, 34327997, 5),
 (1979, 94310837, '2022-04-17', '2022-04-17', 4, 'horas', 'Por voto - elector (1/2 día)', 62007.4, 34327997, 5),
-(1980, 16738295, '2022-04-07', '2022-04-07', 4, 'horas', 'Por voto - elector (1/2 día)', 68662.9, 34327997, 5);
-INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiempo`, `Unidad`, `Observacion`, `Seguridad_Trabajo`, `ID_Usuario`, `Tipo_Ausentismo`) VALUES
+(1980, 16738295, '2022-04-07', '2022-04-07', 4, 'horas', 'Por voto - elector (1/2 día)', 68662.9, 34327997, 5),
 (1981, 29105012, '2022-04-04', '2022-04-04', 4, 'horas', 'Por voto - elector (1/2 día)', 27509.4, 34327997, 5),
-(1982, 76318256, '2022-04-08', '2022-04-08', 4, 'horas', 'Por voto - elector (1/2 día)', 12700, 34327997, 5),
+(1982, 76318256, '2022-04-08', '2022-04-08', 4, 'horas', 'Por voto - elector (1/2 día)', 12700, 34327997, 5);
+INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiempo`, `Unidad`, `Observacion`, `Seguridad_Trabajo`, `ID_Usuario`, `Tipo_Ausentismo`) VALUES
 (1983, 4611335, '2022-04-04', '2022-04-04', 4, 'horas', 'Por voto - elector (1/2 día)', 11909, 34327997, 5),
 (1984, 34512561, '2022-03-18', '2022-03-18', 3, 'horas', 'Cita médica', 13666.8, 34327997, 5),
 (1985, 34533114, '2022-04-18', '2022-04-18', 4, 'horas', 'Por voto - elector (1/2 día)', 9746.67, 34327997, 5),
@@ -2241,7 +2238,6 @@ INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiemp
 (2202, 1061756634, '2022-06-14', '2022-06-14', 4, 'horas', 'Compensatorio por elector', 11230.5, 34327997, 5),
 (2203, 34539672, '2022-06-13', '2022-06-13', 4, 'horas', 'Compensatorio por elector', 15324.2, 34327997, 5),
 (2204, 34323142, '2022-06-10', '2022-06-10', 4, 'horas', 'Compensatorio por elector', 11230.5, 34327997, 5),
-(2205, 34543873, '2022-12-30', '2022-12-30', 4, 'horas', 'Compensatorio por elector', 18222.3, 34327997, 5),
 (2206, 1061701768, '2022-06-14', '2022-06-14', 4, 'horas', 'Compensatorio por elector', 9746.67, 34327997, 5),
 (2207, 92532699, '2022-06-24', '2022-06-24', 4, 'horas', 'Compensatorio por elector', 55618.4, 34327997, 5),
 (2208, 76307524, '2022-06-21', '2022-06-21', 4, 'horas', 'Compensatorio por elector', 35529.8, 34327997, 5),
@@ -2488,11 +2484,11 @@ INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiemp
 (2449, 34550851, '2022-06-22', '2022-06-22', 4, 'horas', 'Asuntos personales', 10927.7, 34327997, 5),
 (2450, 34565754, '2022-06-22', '2022-06-22', 4, 'horas', 'Asuntos personales', 10927.7, 34327997, 5),
 (2451, 34323142, '2022-06-03', '2022-06-03', 2, 'horas', 'Cita médica', 5615.27, 34327997, 5),
-(2452, 34546429, '2022-06-06', '2022-06-06', 3, 'horas', 'Asuntos personales', 8450.38, 34327997, 5);
-INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiempo`, `Unidad`, `Observacion`, `Seguridad_Trabajo`, `ID_Usuario`, `Tipo_Ausentismo`) VALUES
+(2452, 34546429, '2022-06-06', '2022-06-06', 3, 'horas', 'Asuntos personales', 8450.38, 34327997, 5),
 (2453, 34546429, '2022-06-06', '2022-06-06', 3, 'horas', 'Asuntos personales', 8450.38, 34327997, 5),
 (2454, 34546429, '2022-06-07', '2022-06-07', 5, 'horas', 'Calamidad', 14084, 34327997, 5),
-(2455, 34546429, '2022-06-29', '2022-06-29', 3, 'horas', 'Asuntos personales', 8450.38, 34327997, 5),
+(2455, 34546429, '2022-06-29', '2022-06-29', 3, 'horas', 'Asuntos personales', 8450.38, 34327997, 5);
+INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiempo`, `Unidad`, `Observacion`, `Seguridad_Trabajo`, `ID_Usuario`, `Tipo_Ausentismo`) VALUES
 (2456, 34323142, '2022-06-10', '2022-06-10', 2, 'horas', 'Asuntos personales', 5615.27, 34327997, 5),
 (2457, 34323142, '2022-06-14', '2022-06-14', 3, 'horas', 'Malestar físico', 8422.9, 34327997, 5),
 (2458, 76332522, '2022-06-21', '2022-06-21', 1, 'horas', 'Asuntos personales', 3621.68, 34327997, 5),
@@ -17167,7 +17163,7 @@ INSERT INTO `funcionarios` (`Cedula`, `Nombre`, `Cargo`, `Dependencia`, `Genero`
 (98393424, 'BRAVO MONCAYO HECTOR ALEXANDER', 'PROFESOR CATEGORIA - A', 51, 'MAS', 1972920, 'ACTIVO'),
 (98395386, 'ARCOS RODRIGUEZ MAURICIO ESTEB', 'PROFESOR ASOCIADO', 36, 'MAS', 6140714, 'ACTIVO'),
 (98396856, 'ORDOÑEZ ERAZO HUGO ARMANDO', 'PROFESOR ASOCIADO', 96, 'MAS', 10934251, 'ACTIVO'),
-(1001086246, '105 OR 1=1', 'PROFESOR', 93, 'MAS', 100000, 'ACTIVO'),
+(1001086246, 'ANDRES FELIPE DIAGO', 'PROFESOR ASISTENTE', 93, 'MAS', 5006381, 'ACTIVO'),
 (1010193089, 'OSORIO SOLARTE DANIEL', 'PROFESOR INSTRUCTOR O AUXILIAR', 60, 'MAS', 1807524, 'ACTIVO'),
 (1014234473, 'CUELLAR SANCHEZ DIANA CAROLINA', 'PROFESOR CATEGORIA - A', 57, 'FEM', 1315280, 'ACTIVO'),
 (1017129541, 'CARDENAS VALENCIA MAURICIO AND', 'PROFESOR INSTRUCTOR O AUXILIAR', 36, 'MAS', 4345685, 'ACTIVO'),
@@ -17485,6 +17481,23 @@ INSERT INTO `funcionarios` (`Cedula`, `Nombre`, `Cargo`, `Dependencia`, `Genero`
 (1144080890, 'BENITEZ PANTOJA LEIDY DANIELA', 'PROFESOR INSTRUCTOR O AUXILIAR', 66, 'FEM', 4320037, 'ACTIVO'),
 (1144128239, 'CANENCIO NATES MONICA FERNANDA', 'PROFESOR INSTRUCTOR O AUXILIAR', 65, 'FEM', 2134864, 'ACTIVO'),
 (1144149790, 'ARANGO CUARTAS STEFANIA', 'PROFESOR INSTRUCTOR O AUXILIAR', 87, 'FEM', 4449592, 'ACTIVO');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `func_auxiliar`
+--
+
+CREATE TABLE `func_auxiliar` (
+  `Cedula` int(11) NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
+  `Cargo` varchar(30) NOT NULL,
+  `Dependencia` varchar(30) NOT NULL,
+  `Genero` varchar(20) NOT NULL,
+  `Salario` int(11) NOT NULL,
+  `Estado` varchar(30) NOT NULL,
+  `Error` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -17975,6 +17988,12 @@ ALTER TABLE `funcionarios`
   ADD KEY `Dependencia` (`Dependencia`);
 
 --
+-- Indexes for table `func_auxiliar`
+--
+ALTER TABLE `func_auxiliar`
+  ADD PRIMARY KEY (`Cedula`);
+
+--
 -- Indexes for table `incapacidad`
 --
 ALTER TABLE `incapacidad`
@@ -18010,7 +18029,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `ausentismos`
 --
 ALTER TABLE `ausentismos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2730;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2731;
 
 --
 -- AUTO_INCREMENT for table `dependencias`

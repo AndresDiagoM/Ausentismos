@@ -1,105 +1,61 @@
 <?php
 
+include "../conexion.php"; //conexión a la base de datos
 include "../template/cabecera.php";
 
 
-$tabla2 ="";
-$tabla3 ="";
-$tabla4 ="";
-//Cuando se presiona el boton de cargar
+$tablaAux ="";
+//Cuando se presiona el boton de cargar, se llama al archivo cargarFuncionarios.php
 if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
     //echo 'BOTON: '.$_POST['accion'];
     //echo ($_FILES['excelFile']['name']!="");
     include "../logic/cargarFuncionarios.php";
-
-    //mostrar una tabla si los arreglos no están vacios
-    $tabla2 ="";
-    $tabla3 ="";
-    $tabla4 ="";
     
-    if($funcionariosInsertados!=null){
-        $tabla2 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
-                    <thead class='thead-light'>
-                        <tr>
-                            <th scope='col' class='table-active' colspan='5'>Funcionarios que se insertaron</th>
-                        </tr>
-                        <tr>
-                            <th scope='col'>Cedula</th>
-                            <th scope='col'>Nombre</th>
-                            <th scope='col'>Cargo</th>
-                            <th scope='col'>Salario</th>
-                            <th scope='col'>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>";
-        foreach($funcionariosInsertados as $funcionario){
-            $tabla2 .= "<tr>
-                            <th scope='row'>".$funcionario['CEDULA']."</th>
-                            <td>".$funcionario['NOMBRE']."</td>
-                            <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
-                            <td>".$funcionario['SALARIO']."</td>
-                            <td>".$funcionario['ESTADO']."</td>
-                        </tr>";
-        }
-        $tabla2 .= "</tbody>
-                </table>";
+}elseif(isset($_POST['aceptar']) and $_POST['aceptar']=="ACEPTAR"){
+    include "../logic/cargarFuncionarios.php";
+}
+
+//query for the func_auxiliar table, then show it in a table
+$query = "SELECT * FROM func_auxiliar";
+$result = $conectar->query($query);
+$tabla_auxiliar = array();
+while($row = mysqli_fetch_array($result)){
+    $tabla_auxiliar[] = $row;
+}
+
+if($tabla_auxiliar!=null){
+    $tablaAux .= "<table class='table table-striped table-bordered table-hover table-condensed'>
+                <thead class='thead-light'>
+                    <tr>
+                        <th scope='col' class='table-active' colspan='8'>Funcionarios a cargar y actualizar</th>
+                    </tr>
+                    <tr>
+                        <th scope='col'>Cedula</th>
+                        <th scope='col'>Nombre</th>
+                        <th scope='col'>Cargo</th>
+                        <th scope='col'>Genero</th>
+                        <th scope='col'>Salario</th>
+                        <th scope='col'>Estado</th>
+                        <th scope='col'>Error</th>
+                        <th scope='col'>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>";
+    foreach($tabla_auxiliar as $funcionario){
+        $Id_fila=$funcionario['Cedula'];
+        $tablaAux .= "<tr>
+                        <th scope='row'>".$funcionario['Cedula']."</th>
+                        <td>".$funcionario['Nombre']."</td>
+                        <td>".$funcionario['Cargo']."</td>
+                        <td>".$funcionario['Genero']."</td>
+                        <td>".$funcionario['Salario']."</td>
+                        <td>".$funcionario['Estado']."</td>
+                        <td>".$funcionario['Error']."</td>
+                        <td><a href='../pages/admin_aux_table_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
+                    </tr>";
     }
-    if($funcionariosNoInsertados!=null){
-        $tabla3 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
-                    <thead class='thead-light'>
-                        <tr>
-                            <th scope='col' class='table-active' colspan='6'>Funcionarios que no se insertaron</th>
-                        </tr>
-                        <tr>
-                            <th scope='col'>Cedula</th>
-                            <th scope='col'>Nombre</th>
-                            <th scope='col'>Cargo</th>
-                            <th scope='col'>Salario</th>
-                            <th scope='col'>Estado</th>
-                            <th scope='col'>Error</th>
-                        </tr>
-                    </thead>
-                    <tbody>";
-        foreach($funcionariosNoInsertados as $funcionario){
-            $tabla3 .= "<tr>
-                            <th scope='row'>".$funcionario['CEDULA']."</th>
-                            <td>".$funcionario['NOMBRE']."</td>
-                            <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
-                            <td>".$funcionario['SALARIO']."</td>
-                            <td>".$funcionario['ESTADO']."</td>
-                            <td>".$funcionario['ERROR']."</td>
-                        </tr>";
-        }
-        $tabla3 .= "</tbody>
-                </table>";
-    }
-    if($funcionariosActualizados!=null){
-        $tabla4 .= "<table class='table table-striped table-bordered table-hover table-condensed'>
-                    <thead class='thead-light'>
-                        <tr>
-                            <th scope='col' class='table-active' colspan='5'>Funcionarios Actualizados</th>
-                        </tr>
-                        <tr>
-                            <th scope='col'>Cedula</th>
-                            <th scope='col'>Nombre</th>
-                            <th scope='col'>Cargo</th>
-                            <th scope='col'>Salario</th>
-                            <th scope='col'>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>";
-        foreach($funcionariosActualizados as $funcionario){
-            $tabla4 .= "<tr>
-                            <th scope='row'>".$funcionario['CEDULA']."</th>
-                            <td>".$funcionario['NOMBRE']."</td>
-                            <td>".$funcionario['NOMBRE_DEL_CARGO']."</td>
-                            <td>".$funcionario['SALARIO']."</td>
-                            <td>".$funcionario['ESTADO']."</td>
-                        </tr>";
-        }
-        $tabla4 .= "</tbody>
-                </table>";
-    }
+    $tablaAux .= "</tbody>
+            </table>";
 }
 ?>
 
@@ -135,7 +91,7 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
                         <!-- CARD DE OPCIONES -->
                         <div class="card rounded-0 mx-auto" style="width: 30vw;">
                             <div class="d-flex card-header bg-light ">
-                                <h6 class="font-weight-bold mb-0 mr-3"> Opciones Funcionarios:</h6>                                
+                                <h6 class="font-weight-bold mb-0 mr-3"> Opciones Funcionarios: </h6>                                
                             </div>
                             
                             <div class="card-body">
@@ -153,25 +109,30 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
         </section>
     
         <?php
-        if($tabla2 != null || $tabla3!=null){          
+        if($tablaAux!=null){          
         ?>
         <section>
             <!-- Contenedor de tabla -->
-            <div class="container " style="overflow-y:scroll; height:32vw; position:relative">
+            <div class="container " style="overflow-y:scroll; height:30vw; position:relative">
                 <?php 
-                    if($tabla4 != null){
-                        echo $tabla4;
-                    }
-                    if($tabla2 != null){
-                        echo $tabla2;
-                    }
-                    if($tabla3 != null){
-                        echo $tabla3;
+                    if($tablaAux != null){
+                        echo $tablaAux;
                     }
                 ?>
             </div>
         </section>
         <?php
+        }
+        if($tablaAux != null){
+            echo "<section class='py-3'>
+                    <div class='container'>
+                        <div class='col-lg-4 d-flex'>
+                            <form action='' method='POST' enctype='multipart/form-data'>
+                                <button type='submit' name='aceptar'  value='ACEPTAR' class='btn btn-success'>ACEPTAR</button>
+                            </form>
+                        </div>
+                    </div>
+                    </section>";
         }
         ?>
     </div>
@@ -181,8 +142,8 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
 
     <!-- SCRIPT DE PARTICULAS -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
-    <script src="../js/particles.min.js"></script>
-    <script src="../js/app.js"></script>
+    <!-- <script src="../js/particles.min.js"></script> -->
+    <script src="../js/app1.js"></script>
 
     <!-- CDN: Libreria de chart.js para las gráficas -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="anonymous"></script>

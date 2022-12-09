@@ -178,7 +178,7 @@ function get_ausentismos(pagina)
                     //console.log(id);
 
                     //redirect to the page that shows the ausentismo
-                    window.location.href = "admin_edit_ausen.php?id="+id;
+                    window.location.href = "admin_edit_ausen.php?ID="+id;
 
                     /*var cedula = $(this).find('td').eq(0).text();
                     var nombre = $(this).find('td').eq(1).text();

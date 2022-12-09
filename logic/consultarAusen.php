@@ -64,7 +64,7 @@
                         $values[$field_name][] = " {$field_name} <= '{$value}'";
 
                     }elseif($field_name=="Pagina"){
-                        if($value==""){
+                        if($value=="" || $value=="<<"){
                             $pag = 1;
                         }else{
                             $pag = $value;
@@ -202,9 +202,13 @@
         if ($pag == "1") {
             //$_GET["pag"] == "0";
             //echo  "";
+            $slider.= "<input type='button' class='btn btn-primary mr-3' aria-label='Previous' value='<<'> </input>";
         } else {
-            if ($pag > 1)
+            if ($pag > 1){
                 $ant = $pag - 1;
+                $slider.= "<input type='button' class='btn btn-primary mr-3' aria-label='Previous' value='<<'> </input>";
+            }
+            
             if($pag != "2"){
                 $slider.= "<input type='button' class='btn btn-primary mr-3' aria-label='Previous' value='1'>  </input>";
             }            

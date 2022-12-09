@@ -1,6 +1,6 @@
 <?php
     include "../template/cabecera.php";
-    $id_usuario     = $_GET['ID'];
+    $id_func     = $_GET['ID'];
 ?>
 
 
@@ -14,9 +14,8 @@
         <div class="card-body">
             
             <?php
-                $sqli   = "SELECT * FROM funcionarios 
-                            INNER JOIN dependencias ON funcionarios.Dependencia=dependencias.ID 
-                            WHERE Cedula = '$id_usuario'";
+                $sqli   = "SELECT * FROM func_auxiliar 
+                            LEFT JOIN dependencias ON dependencias.ID = func_auxiliar.Dependencia WHERE Cedula = '$id_func'";
                 $result = $conectar->query($sqli);
                 $data=[];
                 while($row = mysqli_fetch_assoc($result)){
@@ -26,12 +25,13 @@
                 $mostrar = $data[0];
                 //print_r($mostrar);
             ?>
+
             <h5 class="card-title">Nombre: <?php echo $mostrar['Nombre'] ?></h5>
             <form>
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Cedula</label>
                     <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo $mostrar['Cedula'];?>>
+                    <input type="text" readonly disabled class="form-control" id="staticEmail" value="<?php echo $mostrar['Cedula'];?>" >
                     </div>
                 </div>
                 <div class="form-group row">
@@ -88,18 +88,19 @@
         <div class="card-body">
             <h5 class="card-title">Nombre: <?php echo $mostrar['Nombre'] ?></h5>
 
-            <form action="../logic/form_func_editLogic.php?ID=<?php echo $Id_editar ?>" method="POST">
+            <form action="../logic/form_func_aux_editLogic.php?ID=<?php echo $Id_editar ?>" method="POST">
+
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Cedula</label>
                     <div class="col-sm-10">
-                    <input type="text" name="cedula_func_edt" class="form-control" min="4" max="40" placeholder="cedula" value="<?php echo $mostrar['Cedula'];?>" required>
+                        <input type="text" name="cedula_func_edt" class="form-control" min="4" max="40" placeholder="cedula" value="<?php echo $mostrar['Cedula'];?>" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                        <input type="text" name="nombre_func_edt" class="form-control" min="4" max="40" placeholder="nombre" value="<?php echo $mostrar['Nombre'];?>" required>
+                        <input type="text" name="nombre_func_edt" class="form-control" placeholder="nombre" value="<?php echo $mostrar['Nombre'];?>" required>
                     </div>
                 </div>
 
@@ -111,26 +112,38 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Dependencia</label>
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Departamento</label>
                     <div class="col-sm-10">
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="dependencia_ausen_edt" required>
+                        <select class="custom-select" name="departamento_func_edt" required>
                             <option value="">Seleccione</option>
                             <?php 
-                                //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
-                                //$sql = "SELECT DISTINCT facultad, departamento FROM dependencias";
-                                $sql = "SELECT * FROM dependencias ORDER BY Departamento";
+                                //Consultar en la tabla dependencias, los departamentos de forma unica 
+                                $sql = "SELECT DISTINCT Departamento FROM dependencias";
                                 $result = $conectar->query($sql);
-                                //echo 'ERROR'.$conectar->error;
-                                //print_r($result); exit;
-                                if($result->num_rows > 0){
-                                    while($row = $result->fetch_assoc()){
+                                while($row = mysqli_fetch_assoc($result)){
+                                    echo '<option value="'.$row['Departamento'].'">'.$row['Departamento'].'</option>';
+                                    if($row['Departamento'] == $mostrar['Departamento']){
+                                        echo '<option value="'.$row['Departamento'].'" selected>'.$row['Departamento'].'</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
 
-                                        if ($row['ID'] == $mostrar['Dependencia']) {
-                                            echo '<option value="'.$row['ID'].'" selected>'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
-                                        }else{
-                                            echo '<option value="'.$row['ID'].'">'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
-                                        }
-
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Facultad</label>
+                    <div class="col-sm-10">
+                        <select class="custom-select" name="facultad_func_edt" required>
+                            <option value="">Seleccione</option>
+                            <?php 
+                                //Consultar en la tabla dependencias, los departamentos de forma unica 
+                                $sql = "SELECT DISTINCT Facultad FROM dependencias";
+                                $result = $conectar->query($sql);
+                                while($row = mysqli_fetch_assoc($result)){
+                                    echo '<option value="'.$row['Facultad'].'">'.$row['Facultad'].'</option>';
+                                    if($row['Facultad'] == $mostrar['Facultad']){
+                                        echo '<option value="'.$row['Facultad'].'" selected>'.$row['Facultad'].'</option>';
                                     }
                                 }
                             ?>
@@ -161,8 +174,8 @@
                     <div class="col-sm-10">
                         <select class="custom-select" name="estado_func_edt" required>
                                 <option value="">Seleccione</option>
-                                <option value="ACTIVO" <?php if($mostrar['Estado'] == 'ACTIVO'){echo 'selected';}?> > ACTIVO </option>
-                                <option value="INACTIVO" <?php if($mostrar['Estado'] == 'INACTIVO'){echo 'selected';}?> > INACTIVO </option>
+                                <option value="ACTIVO" <?php if($mostrar['Estado'] == 'ACTIVO'){echo "selected";}?> > ACTIVO </option>
+                                <option value="INACTIVO" <?php if($mostrar['Estado'] == 'INACTIVO'){echo "selected";}?> > INACTIVO </option>
                         </select>
                     </div>
                 </div>
