@@ -4,7 +4,7 @@
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
 <!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
-<div class="table-responsive w-100" style="overflow: auto; height:75vh; font-size:13px">
+<div class="table-responsive w-100" style="overflow-y: scroll; height:75vh; font-size:13px">
     <table class="table table-bordered table-hover table-condensed" id="tabla-consultas">
         <thead class="header-table thead-light table-active">
         <tr>

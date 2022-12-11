@@ -1,11 +1,19 @@
 <?php
     include "../template/cabecera.php";
     $id_ausen    = $_GET['ID'];
+
+    //add security to prevent sql injection
+    $id_ausen = $conectar->real_escape_string($id_ausen);
+
+    //if there is no id redirect to admin_consultar.php
+    if(!isset($id_ausen) || empty($id_ausen)){
+        header("Location: ./admin_consultar.php");
+    }
 ?>
 
 
 <!-- INICIO DE CONTENEDOR DE FUNCIONARIO SELECCIONADO -->
-<div class="container card-group py-2">
+<div class="container card-group py-2" style="overflow-y: auto; height:85vh; font-size:13px ">
 
     <div class="card">
         <div class="card-header">
@@ -14,10 +22,13 @@
         <div class="card-body">
             
             <?php
-                $sqli   = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, dependencias.Departamento as Departamento, dependencias.Facultad as Facultad
+                $sqli   = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, dependencias.Departamento as Departamento, dependencias.Facultad as Facultad,
+                            COALESCE(incapacidad.ID, 'N/A') as ID_In, COALESCE(incapacidad.Codigo, 'N/A') as Codigo, COALESCE(incapacidad.Diagnostico, 'N/A') as Diagnostico, 
+                            COALESCE(incapacidad.Entidad, 'N/A') as Entidad, COALESCE(incapacidad.ID_Ausentismo, 'N/A') as ID_Ausentismo
                             FROM ausentismos 
                             INNER JOIN funcionarios On funcionarios.Cedula=ausentismos.Cedula_F
                             INNER JOIN dependencias ON funcionarios.Dependencia=dependencias.ID
+                            LEFT JOIN incapacidad ON ausentismos.ID = incapacidad.ID_Ausentismo
                             WHERE ausentismos.ID = $id_ausen";
                 $result = $conectar->query($sqli);
                 $data=[];
@@ -103,6 +114,32 @@
                         ?>
                     </div>
                 </div>
+
+                <?php
+                    if($mostrar['Tipo_Ausentismo']==1){
+                        $div = "<div class='form-group row'>
+                                <label for='staticEmail' class='col-sm-2 col-form-label'> Codigo </label>
+                                <div class='col-sm-10'>
+                                    <input type='text' readonly disabled class='form-control' id='staticEmail' value=' ". $mostrar['Codigo'] ."' >
+                                </div>
+                            </div>";
+                        $div .= "<div class='form-group row'>
+                                <label for='staticEmail' class='col-sm-2 col-form-label'> Diagnostico </label>
+                                <div class='col-sm-10'>
+                                    <input type='text' readonly disabled class='form-control' id='staticEmail' value=' ". $mostrar['Diagnostico'] ."' >
+                                </div>
+                            </div>";
+                        $div .= "<div class='form-group row'>
+                                <label for='staticEmail' class='col-sm-2 col-form-label'> Entidad </label>
+                                <div class='col-sm-10'>
+                                    <input type='text' readonly disabled class='form-control' id='staticEmail' value=' ". $mostrar['Entidad'] ."' >
+                                </div>
+                            </div>";
+                        echo $div;
+                    }
+                ?>
+
+
             </form>
             
         </div>
@@ -155,7 +192,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
                     <div class="col-sm-10">
-                        <select class="custom-select" name="unidad_ausen_edt" required>
+                        <select class="form-select" name="unidad_ausen_edt" required>
                                 <option value="">Seleccione</option>
                                 <option value="dias" <?php if($mostrar['Unidad'] == 'dias'){echo 'selected';}?> > dias </option>
                                 <option value="horas" <?php if($mostrar['Unidad'] == 'horas'){echo 'selected';}?> > horas </option>
@@ -205,6 +242,29 @@
                     </div>
                 </div>
 
+                <?php
+                    if($mostrar['Tipo_Ausentismo']==1){
+                        $div = "<div class='form-group row'>
+                                <label for='staticEmail' class='col-sm-2 col-form-label'> Codigo </label>
+                                <div class='col-sm-10'>
+                                    <input type='text'  name='codigo_ausen_edt' class='form-control'  placeholder='codigo' id='staticEmail' value=' ".$mostrar['Codigo']."' required>
+                                </div>
+                            </div>";
+                        $div .= "<div class='form-group row'>
+                                <label for='staticEmail' class='col-sm-2 col-form-label'> Diagnostico </label>
+                                <div class='col-sm-10'>
+                                    <input type='text'  name='diag_ausen_edt' class='form-control'  placeholder='Diagnostico' id='staticEmail' value='".$mostrar['Diagnostico']."' required>
+                                </div>
+                            </div>";
+                        $div .= "<div class='form-group row'>
+                                <label for='staticEmail' class='col-sm-2 col-form-label'> Entidad </label>
+                                <div class='col-sm-10'>
+                                    <input type='text'  name='entidad_ausen_edt' class='form-control'  placeholder='Entidad' id='staticEmail' value='".$mostrar['Entidad']."' required>
+                                </div>
+                            </div>";
+                        echo $div;
+                    }
+                ?>
 
                 <button type="submit" class="btn btn-success"> Modificar </button> 
             </form>

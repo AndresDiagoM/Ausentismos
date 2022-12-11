@@ -7,7 +7,7 @@ include "../logic/admin_securityLogic.php";
 $nombre_admin   = $_SESSION['NOM_USUARIO'];
 $id_admin       = $_SESSION['ID_USUARIO'];
 $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
-$id_usuario     = $_GET['ID'];
+//$id_usuario     = $_GET['ID'];
 ?>
 
 <!DOCTYPE html>
