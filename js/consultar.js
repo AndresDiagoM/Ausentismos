@@ -43,7 +43,7 @@ $(function()
         //get_ausentismos();
     });
 
-    $(document).on('keyup', '#nombre', function()  //para el cuadro de busqueda de cedula
+    $(document).on('keyup', '#nombre', function()  //para el cuadro de busqueda de cedula. #nombre es el id del input en el HTML
     {
         var valor = $(this).val();
 
@@ -55,17 +55,54 @@ $(function()
         //get_ausentismos();
     });
 
-    /*$(".form-date").on("click", function () 
+    $(document).on('keyup', '#tiempo', function()  //para el cuadro de busqueda de cedula. #nombre es el id del input en el HTML
     {
-        get_ausentismos(); 
-    }); */
+        var valor = $(this).val();
 
-    $(".form-date").on("change",function(){
+        if(valor != "" && isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+        }
+        //get_ausentismos();
+    });
+
+    $(".form-date").on("change",function(){  //.form date es la clase de los inputs de fecha
         //var selected = $(this).val();
         get_ausentismos(); 
         //alert(selected);
     });
 
+    $(document).on('keyup', '#codigo', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
+    {
+        var valor = $(this).val();
+
+        if(valor != "" && isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+        }
+        //get_ausentismos();
+    });
+
+    $(document).on('keyup', '#diagnostico', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
+    {
+        var valor = $(this).val();
+
+        if(valor != "" && isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+        }
+        //get_ausentismos();
+    });
+
+    $(".fila_tabla").on("click",function(){  //.FILA_TABLA, es la clase de las filas de la tabla
+        //var selected = $(this).val();
+        //get_ausentismos(); 
+        //alert(selected);
+        console.log("hhhh");
+    });
 });
 
 function get_ausentismos(pagina)
@@ -75,7 +112,6 @@ function get_ausentismos(pagina)
     form2.push({name: "Pagina", value: pagina});
     //$("#total_resultados").append($.param(form2));
     
-
     $.ajax(
         {
             type:"POST",
@@ -90,8 +126,15 @@ function get_ausentismos(pagina)
                 
                 $.each(data.tabla, function(key,Ausen)
                 {
+
+                    //create a var id, if Ausen.ID_Ausentismo is equal to N/A then id=Ausen.ID, else id=Ausen.ID_Ausentismo
+                    var id = Ausen.ID_Ausentismo;
+                    if(id == "N/A"){
+                        id = Ausen.ID;
+                    }
+
                     let row = ""+
-                    "<tr>"+
+                    "<tr class='fila_tabla' id="+ id +">"+
                     //"<td>"+key+"</td>"+
                     "<td>"+Ausen.Cedula_F+"</td>"+
                     "<td>"+Ausen.Nombre+"</td>"+
@@ -103,17 +146,47 @@ function get_ausentismos(pagina)
                     //imprimir unidad en formato de moneda con 2 decimales y el símbolo de $ 
                     "<td>"+new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Ausen.Seguridad_Trabajo)+"</td>"+
                     //"<td>"+Ausen.Seguridad_Trabajo+"</td>"+
-                    "<td>"+Ausen.Nombre_U+"</td>"+
-                    "<td>"+Ausen.Tipo_Ausentismo+"</td>"+
-                    "</tr>";
+
+                    "<td>"+Ausen.Login+"</td>"+
+                    "<td>"+Ausen.Tipo_Ausentismo+"</td>";
+
+                    //if there is not index Ausen.Codigo in the array, then do not show the button
+                    if(Ausen.Codigo != undefined || Ausen.Codigo != null){
+                        row = row + "<td>"+Ausen.Codigo+"</td>";
+                        row = row + (Ausen.Diagnostico ? "<td>"+Ausen.Diagnostico+"</td>" : "");
+                        row = row + (Ausen.Entidad ? "<td>"+Ausen.Entidad+"</td>" : "");
+                    }
+
+                    row = row +"</tr>";
 
                     //se hace el append de cada fila al body de la tabla en admin_consultar.php
                     $("#filters-result").append(row);
+                    //clear row variable
+                    row = "";
                 });
+                
                 //$("#myPager").append(data.botones);
                 $("#myPager").append(data.slider);
                 $("#total_resultados").append(data.total);
                 
+                //evento click para cada fila de la tabla
+                $('.fila_tabla').click(function(){
+                    //console.log(e);
+
+                    //get the id of the tr that was clicked
+                    var id = $(this).attr('id');
+                    //console.log(id);
+
+                    //redirect to the page that shows the ausentismo
+                    window.location.href = "admin_edit_ausen.php?ID="+id;
+
+                    /*var cedula = $(this).find('td').eq(0).text();
+                    var nombre = $(this).find('td').eq(1).text();
+                    */
+                    //console.log(cedula);
+
+                    //alert("I've been clicked!")
+                });
             }
         }
     )

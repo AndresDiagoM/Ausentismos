@@ -1,0 +1,107 @@
+:root{
+    --primary: #111854;
+    --light: #ffffff;
+    --grey: #efefef;
+    --navbar: #be3838;
+    --btnHover: #d66060;
+}
+
+body {
+    overflow: hidden; /*para que al hacer scroll, no haya scroll sobre el sidebar*/
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+    color: var(--primary);
+}
+
+a:hover {
+    text-decoration: none;  /* Para que no aparezca las opciones del menu 
+    subrayadas */
+}
+
+/*---------------------  CAMNIOS GLOBALES ---------------- */
+.bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: var(--navbar) /*rgba(var(--bs-success-rgb), var(--bs-bg-opacity))*/ !important;
+}
+.btn-success{
+    background-color: var(--navbar) ;
+}
+.btn-success:hover{
+    /*Al hacer hover(poner el mouse encima del boton) se pone de color azul*/
+    background-color: var(--btnHover) !important; /*Este es color morado*/
+}
+
+/*
+    %----------- side bar -------------%
+*/
+#sidebar-container {
+    min-height: 110vh; /* Es el contenedor de todo el menu lateral, el largo*/
+}
+#sidebar-container .logo {
+    padding: .875rem 1.25rem; /* Es la ubicación del Heading del sidebar */
+}
+#sidebar-container .menu {
+    width: 18rem; /* Es el ancho del SideBar*/
+}
+#sidebar-container .sideBar_foot {
+    /*width: 18rem; *//* Es el ancho del SideBar*/
+
+    /* ubicar en la parte de abajo, con referencia al inferior de la pnatalla */
+    position:absolute;
+    width:100px;
+    height:100px;
+
+    /* posicion vertical */
+    bottom:0px;
+
+    /* centrado horizontal 
+    left:5%;
+    margin-left:-25px;*/
+
+    /* centrar la imagen */
+    left:5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===========================================
+    %----------- NAV BAR - MENU SUPERIOR -------------%
+    ===========================================*/
+.avatar {
+    max-width: 25px; /*Para que la imagen del perfil sea pequeña*/
+}
+
+
+/*Estilo para el contenido del SITIOWEB*/
+#content {
+    overflow-y: auto; /*Para permitir scroll sobre el contenido*/
+    height: 100vh;    /*Para tener una altura fija*/
+    padding-bottom: 5rem;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+/*Estilo para el header de las tablas*/
+/*thead, tbody { display: block; }*/
+.header-table {
+    position: sticky; top: 0; z-index: 1;
+    /* with no transparency -> background-color */
+    background-color: var(--light);
+}
+.table-body-consulta {
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: auto;  /* Hide the horizontal scroll */
+}
+
+
+/*Para no mostar el Sidebar en version movil*/
+@media (max-width: 900px) {
+    #sidebar-container {
+        display: none;
+    }
+    .stat{
+        border: 0;
+    }
+}

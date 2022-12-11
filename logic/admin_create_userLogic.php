@@ -10,24 +10,25 @@
     $pasw           =   strtoupper($_POST['pasw']);
 
     if($numero_id==''){
-        header('Location: ../pages/inicio_sesion.php');
+        header('Location: ../pages/admin_create_user.php');
     }
 
-    if($tipo_usuario == 'CON'){
-        $tipo_usuario = 'Consulta';
-    }
-    else{
-        $tipo_usuario = 'Admin';
+    if($tipo_usuario == 'CONSULTA'){
+        $tipo_usuario = 'CONSULTA';
+    }elseif($tipo_usuario == 'FACULTAD'){
+        $tipo_usuario = 'FACULTAD';
+    }else{
+        $tipo_usuario = 'ADMIN';
     }
 
     // Verificacion de ID NO repetido
-    $consulta_id = "SELECT * FROM usuarios WHERE Cedula='$numero_id'";
-    $verificar_id = mysqli_query($conectar, $consulta_id);
+    $consulta_id = "SELECT * FROM usuarios WHERE Cedula_U='$numero_id'";
+    $verificar_id = $conectar->query($consulta_id);
     if(mysqli_num_rows($verificar_id)>0){
 
         echo "<script>
             alert('Registro Incorrecto. El ID ya se encuentra registrado');
-            location.href = '../pages/form_register.php';
+            location.href = '../pages/admin_create_user.php';
         </script>";
 
         // Cierre de conexion
@@ -36,12 +37,26 @@
 
     // Verificacion de correo
     $consulta_correo = "SELECT * FROM usuarios WHERE Correo='$correo'";
-    $verificar_correo = mysqli_query($conectar, $consulta_correo);
+    $verificar_correo = $conectar->query($consulta_correo);
     if(mysqli_num_rows($verificar_correo)>0){
 
         echo "<script>
-            alert('Registro Incorrecto. El numero de correo ya se encuentra registrado');
-            location.href = '../pages/form_register.php';
+            alert('Registro Incorrecto. El correo ya se encuentra registrado');
+            location.href = '../pages/admin_create_user.php';
+        </script>";
+
+        // Cierre de conexion
+        exit();
+    }
+
+    // Verificacion de login
+    $consulta_login = "SELECT * FROM usuarios WHERE Login='$login'";
+    $verificar_login = $conectar->query($consulta_login);
+    if(mysqli_num_rows($verificar_login)>0){
+
+        echo "<script>
+            alert('Registro Incorrecto. El login ya se encuentra registrado');
+            location.href = '../pages/admin_create_user.php';
         </script>";
 
         // Cierre de conexion
@@ -53,17 +68,17 @@
     //              REGISTRO EXITOSO
     // ===========================================
 
-    $registrar = "INSERT INTO usuarios (Cedula, Nombre, Correo, Dependencia, TipoUsuario, login, contraseña) 
-                        VALUES ('$numero_id','$nombre_usuario', '$correo', '$dependencia', '$tipo_us', '$login', '$pasw')";
+    $registrar = "INSERT INTO usuarios (Cedula_U, Nombre_U, Correo, Dependencia, TipoUsuario, Login, Contrasena, Estado) 
+                        VALUES ('$numero_id','$nombre_usuario', '$correo', '$dependencia', '$tipo_us', '$login', '$pasw', 'ACTIVO')";
     $prueba = mysqli_query($conectar, $registrar);
     if($prueba){
         echo "<script> alert('Registro existoso');
-        location.href = '../pages/admin_menu.php';
+        location.href = '../pages/admin_create_user.php';
         </script>";
     }
     else{
         echo "<script> alert('Registro incorrecto');
-        location.href = '../index.php';
+        location.href = '../pages/admin_create_user.php';
         </script>";
     }
 

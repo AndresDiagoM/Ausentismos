@@ -5,6 +5,8 @@
 $(function()
 {
     //get_funcionario();
+    $("#incapacidadINPUTS").hide();
+    $("#agregar_func").hide();
 
     //se necesita hacer algo cuando se utilice la búsqueda de cedula y nombre
     $(document).on('keyup', '#nombre1', function() 
@@ -27,19 +29,44 @@ $(function()
             get_funcionario();
             //$("#input_decor").html("");
             //document.getElementById("nombre").value = "aqui";
-        }else{
+        }else if(valor == ""){
+
+            //clean the form auto-llenar
+            document.getElementById("form_register").reset();
+            //console.log("no es numero");
+
             //get_funcionario();
             //$("#form_register").reset();
-            document.getElementById("form_register").reset();
-            document.getElementById("nombre").disabled = false ;
-            document.getElementById("cedula").disabled = false;
-            document.getElementById("cargo").disabled = false;
-            document.getElementById("departamento").disabled = false;
-            document.getElementById("facultad").disabled = false;
+
+            /*document.getElementById("form_register").reset();
+            document.getElementById("nombre").disabled = false ;*/
         }
         //get_funcionario();
-        
     });
+
+    // Slider de tipos de ausentismo
+    document.querySelector('#tipo_ausen').onchange = e => {
+        const {
+            value: number,
+            text: label
+        } = e.target.selectedOptions[0]
+        //console.log(number, label)
+
+        if(number==1){
+            //console.log("IFFF")
+            //let form = $("#form_register"); 
+            //form.serialize()
+            //console.log(form)
+            //CreateFormInput("Codigo[]", "codigo","Escriba el código", "CODIGO");
+            //CreateFormInput("Diagnostico[]", "diagnostico","Escriba el diagnóstico", "DIAGNOSTICO");
+            //CreateFormInput("Entidad[]", "entidad","Escriba la entidad", "ENTIDAD");
+
+            $("#incapacidadINPUTS").show();
+        }else{
+            $("#incapacidadINPUTS").hide();
+        }
+
+    }
 
 });
 
@@ -64,20 +91,59 @@ function get_funcionario()
                     
                     //$("#filters-result").append(row);
                     //$("cargo").value(funcionario.Cedula);
-                    document.getElementById("nombre").value = funcionario.Nombre; 
-                    document.getElementById("cedula").value = funcionario.Cedula; 
-                    document.getElementById("cargo").value = funcionario.Cargo; 
-                    document.getElementById("departamento").value = funcionario.Departamento; 
-                    document.getElementById("facultad").value = funcionario.Facultad; 
+                    
 
-                    document.getElementById("nombre").disabled = true ;
+                    /*document.getElementById("nombre").disabled = true ;
                     document.getElementById("cedula").disabled = true;
                     document.getElementById("cargo").disabled = true;
                     document.getElementById("departamento").disabled = true;
-                    document.getElementById("facultad").disabled = true;
+                    document.getElementById("facultad").disabled = true;*/
+
+                    //if funcionario is equal to N/A, then show a button to add a new funcionario 
+                    if(funcionario == "N/A"){
+                        $("#agregar_func").show();
+                    }else{
+                        $("#agregar_func").hide();
+                        document.getElementById("nombre").value = funcionario.Nombre; 
+                        document.getElementById("cedula").value = funcionario.Cedula; 
+                        document.getElementById("cargo").value = funcionario.Cargo; 
+                        document.getElementById("departamento").value = funcionario.Departamento; 
+                        document.getElementById("facultad").value = funcionario.Facultad; 
+                    }
                 });
 
             }
         }
     )
+}
+
+function CreateFormInput(name1, id1, placeholder1, text1) { //recibe name del input, id del input y el placeholder
+
+    //var form2 = document.getElementById("incapacidadINPUTS");
+    //var form3 = document.getElementById("form_register");
+
+    var div1 = document.createElement("div");
+    div1.setAttribute("class", "form_group");
+    //div1.setAttribute("method", "POST");
+
+    var label1 = document.createElement("label");
+    label1.setAttribute("for", name1);
+    label1.innerHTML = text1;
+
+    var ID4 = document.createElement("input");
+    ID4.setAttribute("type", "text");
+    ID4.setAttribute("name", name1);
+    ID4.setAttribute("class", "input_decor");
+    ID4.setAttribute("id", id1);
+    ID4.setAttribute("placeholder", placeholder1);
+    ID4.setAttribute("required", "");
+
+    var ID5 = document.createElement("span");
+    ID5.setAttribute("class", "form_line");
+
+    div1.append(label1);
+    div1.append(ID4);
+    div1.append(ID5);
+    //form2.appendChild(div1);
+    $("#incapacidadINPUTS").append(div1);
 }

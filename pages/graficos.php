@@ -28,10 +28,10 @@
         }
 
         $estadisticas = getEstadisticas($conectar, $todayYear);
-        $grafica1 = getDatosGrafico1($conectar, $todayYear,'');
+        $grafica1 = getDatosGrafico1($conectar, $todayYear,'%');
         $grafica2 = getDatosGrafico2($conectar, $mesSQL, $todayYear);
-        $grafica3 = getDatosGrafico3($conectar, $todayYear);
-        $grafica4 = getDatosGrafico4($conectar, $todayYear);
+        $grafica3 = getDatosGrafico3($conectar, 1, $todayYear);
+        $grafica4 = getDatosGrafico4($conectar, $todayYear, '%');
         echo json_encode(array(
             'statsOptions' => $statsOptions, 
             'estadisticas' => $estadisticas, 
@@ -51,11 +51,20 @@
 
     }elseif(isset($query_values['anio'])){
         $Year = $query_values['value'];
-        $mesSQL=1;
+        
         $estadisticas = getEstadisticas($conectar, $Year);
         $grafica1 = getDatosGrafico1($conectar, $Year,'%');
+        $mesSQL=$grafica1['monthsArray'][0]['Mes'];
+
         $grafica2 = getDatosGrafico2($conectar, $mesSQL, $Year);
-        echo json_encode(array('estadisticas' => $estadisticas, 'grafica1' => $grafica1, 'grafica2' => $grafica2));
+        $grafica3 = getDatosGrafico3($conectar, $mesSQL, $Year);
+        $grafica4 = getDatosGrafico4($conectar, $Year, '%');
+        echo json_encode(array(
+            'estadisticas' => $estadisticas, 
+            'grafica1' => $grafica1, 
+            'grafica2' => $grafica2, 
+            'grafica3' => $grafica3, 
+            'grafica4' => $grafica4));
         exit;
 
     }elseif(isset($query_values['tipo'])){
@@ -65,11 +74,27 @@
         $grafica1 = getDatosGrafico1($conectar, $Year,$tipo);
         echo json_encode( $grafica1);
         exit;
+
+    }elseif(isset($query_values['costo'])){
+        $Year = $query_values['anioCosto'];
+        $tipo = $query_values['value'];
+        //print_r($query_values); exit;
+        $grafica4 = getDatosGrafico4($conectar, $Year,$tipo);
+        echo json_encode( $grafica4);
+        exit;
+        
+    }elseif(isset($query_values['depen'])){
+        $Year = $query_values['AnioDepen'];
+        $dependencia = $query_values['value'];
+        //print_r($query_values); exit;
+        $grafica3 = getDatosGrafico3($conectar, $dependencia, $Year);
+        echo json_encode( $grafica3);
+        exit;
     }
 
     
     
-    //=======================   FUNCIONES DE ESTADISTICAS   =======================
+    //=======================   FUNCION DE ESTADISTICAS   =======================
     // ESTADISTICAS: Obtener numero de ausentismos de cada tipo para el año actual
     function getEstadisticas($conectar, $todayYear){
         $sqli = "SELECT Tipo_Ausentismo, COUNT(*) as numeros, TipoAusentismo
@@ -89,7 +114,7 @@
             $div ="";
             foreach($data as $row){
                 $div .= "
-                        <div class='col-lg-3 col-md-6 d-flex stat my-3'>
+                        <div class='col-lg-2 col-md-4 d-flex stat my-2'>
                             <div class='mx-auto'>
                                 <!-- para centrar el texto junto con d-flex-->";
                 $div .= "       <h6 class='text-muted'>" .$row['TipoAusentismo']. "</h6>";
@@ -102,6 +127,27 @@
         //echo $div;
         //print_r($datos);
         //echo $datos[0]['numeros']; exit;
+
+        //get the number of ausentismos for MAS and FEM for the current year 
+        $sqli = "SELECT COUNT(*) as numeros, Genero FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F = funcionarios.Cedula WHERE YEAR(Fecha_Inicio) = $todayYear GROUP BY Genero;";
+        $result = $conectar->query($sqli);
+        $data = array();
+        while($row = mysqli_fetch_array($result)){
+            $data[] = $row;
+        }
+        foreach($data as $row){
+            $div .= "
+                    <div class='col-lg-1 col-md-4 d-flex stat my-2'>
+                        <div class='mx-auto'>
+                            <!-- para centrar el texto junto con d-flex-->";
+            $div .= "       <h6 class='text-muted'>". $row['Genero'] ."</h6>";
+            $div .= "       <h3 class='font-wight-bold'>".  $row['numeros'] ."</h3>";
+            $div .= "       <h6 class='text-success'><i class='icon ion-md-arrow-dropup-circle'></i>".  round(($row['numeros']/$suma)*100, 2) ."%</h6>";
+            $div .= "
+                        </div>
+                    </div>";
+        }
+
         return ($div); // para id="estadisticas"
     }
     
@@ -134,10 +180,10 @@
         //LLenar el slide con los meses
         $options = "";
         foreach((array) $meses as $key => $mes){        
-            $options.= "<option value='$key'>  $mes </option>";  //para id="tiposChartOptions"
+            $options.= "<option value='$key'>  $mes </option>";  //para id="tiposChartOptions", gráfico doughnut
         }
 
-        //consulta parallenar slide con los tipos de ausentismo, que estan en la tabla ausentismos para el año $todayYear
+        //consulta para llenar slide con los tipos de ausentismo, que estan en la tabla ausentismos para el año $todayYear
         $sqli3 = "SELECT DISTINCT Tipo_Ausentismo, TipoAusentismo FROM ausentismos 
                     INNER JOIN tipoausentismo ON ausentismos.Tipo_Ausentismo = tipoausentismo.ID
                     WHERE YEAR(Fecha_Inicio) = $todayYear AND Tipo_Ausentismo=tipoausentismo.ID
@@ -157,10 +203,10 @@
     //$sqli3 = "SELECT Tipo_Ausentismo, COUNT(*) FROM ausentismos WHERE MONTH(Fecha_Inicio) = 3 GROUP BY Tipo_Ausentismo;";
     function getDatosGrafico2($conectar, $mesSQL, $todayYear){
         $sqli3 = "SELECT Tipo_Ausentismo, COUNT(*) as numeros, TipoAusentismo
-        FROM ausentismos 
-        INNER JOIN tipoausentismo ON ausentismos.Tipo_Ausentismo = tipoausentismo.ID
-        WHERE MONTH(Fecha_Inicio) = '$mesSQL' AND Tipo_Ausentismo=tipoausentismo.ID AND YEAR(Fecha_Inicio) = $todayYear
-        GROUP BY Tipo_Ausentismo;"; //YEAR(CURDATE())
+                    FROM ausentismos 
+                    INNER JOIN tipoausentismo ON ausentismos.Tipo_Ausentismo = tipoausentismo.ID
+                    WHERE MONTH(Fecha_Inicio) = '$mesSQL' AND Tipo_Ausentismo=tipoausentismo.ID AND YEAR(Fecha_Inicio) = $todayYear
+                    GROUP BY Tipo_Ausentismo;"; //YEAR(CURDATE())
         //echo $sqli3; exit;
         $numeros3 = $conectar->query($sqli3);  //print_r($numeros3);
         $datos3 = array();
@@ -173,34 +219,43 @@
     }
 
     // =======================   GRAFICO 3   =======================
-    // 3.GRAFICO 3 : Obtener numero de ausentismo por genero de funcionario en cada mes del año actual
-    function getDatosGrafico3($conectar, $todayYear){
-        $sqli4 = "SELECT MONTH(Fecha_Inicio) AS Mes, COUNT(*) AS Ausentismos, Genero FROM ausentismos 
-                INNER JOIN funcionarios ON ausentismos.Cedula_F = funcionarios.Cedula
-                WHERE YEAR(Fecha_Inicio) = $todayYear
-                GROUP BY MONTH(Fecha_Inicio), Genero 
-                ORDER BY MONTH(Fecha_Inicio) ASC;";
+    // 3.GRAFICO 3 : Obtener ausentismos de los funcionarios para una dependencia, para el año actual
+    function getDatosGrafico3($conectar, $dependencia, $todayYear){
+        $sqli4 = "SELECT Cedula, COUNT(*) as Numeros, Nombre, Dependencia, Departamento, Facultad
+                    FROM ausentismos 
+                    INNER JOIN funcionarios ON ausentismos.Cedula_F = funcionarios.Cedula
+                    INNER JOIN dependencias ON funcionarios.Dependencia = dependencias.ID
+                    WHERE funcionarios.Dependencia = $dependencia AND YEAR(Fecha_Inicio) = $todayYear
+                    GROUP BY Cedula
+                    ORDER BY numeros DESC;"; //YEAR(CURDATE())
         //echo $sqli4; exit;
         $numeros4 = $conectar->query($sqli4);  //print_r($numeros4);
+        
         $datos4 = array();
         foreach ($numeros4 as $row) {
             $datos4[] = $row;
         }
-        //print_r($datos4);
+        //print_r($datos4); exit;
         //echo $datos[0]['numeros']; exit;
-        return ($datos4);
-        /* ESTRUCTURA DE LOS DATOS:
-            Mes	Ausentismos	Genero	
-            1        43     FEM
-            1        32     MAS
-        */
+        //select all from dependencias with no repeat
+        $sql = "SELECT * FROM dependencias ORDER BY Departamento";
+        $result = $conectar->query($sql);
+        $dependencias = "<option class='small'  value='%'> SELECCIONE </option>";
+        foreach ($result as $row) {
+            //mostrar option con departemnto
+            //$dependencias .= "<option class='small' value='".$row['ID']."'>  ".$row['Departamento']." </option>";
+            $dependencias .= "<option value='".$row['ID']."'>  ".$row['Departamento']." - ".$row['Facultad']." </option>";
+        }
+
+        return (array("funcArray"=>$datos4, "dependencias"=>$dependencias));
     }
+
 
     // =======================   GRAFICO 4   =======================
     // 4.GRAFICO 4 : Obtener costo de ausentismo de los funcionarios en cada mes del año actual, el costo con 2 decimales
-    function getDatosGrafico4($conectar, $todayYear){
+    function getDatosGrafico4($conectar, $todayYear, $tipo){
         $sqli5 = "SELECT MONTH(Fecha_Inicio) AS Mes, SUM(ausentismos.Seguridad_Trabajo) AS Costo FROM ausentismos 
-                WHERE YEAR(Fecha_Inicio) = $todayYear
+                WHERE YEAR(Fecha_Inicio) = $todayYear AND ausentismos.Tipo_Ausentismo LIKE '%".$tipo."%'
                 GROUP BY MONTH(Fecha_Inicio) 
                 ORDER BY MONTH(Fecha_Inicio) ASC;";
         //echo $sqli5; exit;
@@ -216,12 +271,24 @@
             return $item;
         }, $datos5);
         //print_r($datos5); exit;
-
-        return ($datos5);
         /* ESTRUCTURA DE LOS DATOS:
             Mes	     Costo	
             1        36330410.1     
             2        83219591.3     
         */
+
+         //consulta para llenar slide con los tipos de ausentismo, que estan en la tabla ausentismos para el año $todayYear
+        $sqli3 = "SELECT DISTINCT Tipo_Ausentismo, TipoAusentismo FROM ausentismos 
+            INNER JOIN tipoausentismo ON ausentismos.Tipo_Ausentismo = tipoausentismo.ID
+            WHERE YEAR(Fecha_Inicio) = $todayYear AND Tipo_Ausentismo=tipoausentismo.ID
+            ORDER BY Tipo_Ausentismo ASC;";
+        $numeros3 = $conectar->query($sqli3);  //print_r($numeros2);
+        $optionsCosto = "<option value='%'> TODOS </option>";   //para id="tiposMonthsOptions"
+        while ($numero3 = $numeros3->fetch_assoc()) {
+        //echo "['".$numero['Costo_Ausentismo']."',".$numero['COUNT(*)']."],";
+        $optionsCosto .= "<option value='".$numero3['Tipo_Ausentismo']."'>  ".$numero3['TipoAusentismo']." </option>"; 
+        }
+
+        return (array("costoArray"=>$datos5, "optionsCosto"=>$optionsCosto));
     }
 ?>
