@@ -11,14 +11,15 @@ $(function()
     //se necesita hacer algo cuando se utilice la búsqueda de cedula y nombre
     $(document).on('keyup', '#nombre1', function() 
     {
-        var valor = $(this).val();
+        var valor = $('#nombre1').val();
 
         if(valor != "" && isNaN(valor) ){
-            //get_funcionarios();
-        }else{
-            //get_funcionario();
+            get_funcionario();
+        }else if(valor == ""){
+
+            document.getElementById("form_register").reset();
         }
-        get_funcionario();
+        //get_funcionario();
     });
 
     $(document).on('keyup', '#cedula1', function()  //para el cuadro de busqueda de cedula

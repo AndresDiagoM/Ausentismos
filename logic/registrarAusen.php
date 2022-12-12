@@ -25,7 +25,7 @@
 
                         
                         //if values is empty then search as like
-                        if($values == ""){
+                        if($value == "" || strpos($value, ' ') !== false){
                             $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
                         }else{
                             $values[$field_name][] = " {$field_name} = $value ";
@@ -33,6 +33,10 @@
                         
 
                     }elseif($field_name=="Nombre"){
+                        //convert $value to uppercase
+                        $value = strtoupper($value);
+                        //change spaces in $value to % for LIKE query
+                        $value = str_replace(" ", "%", $value);
                         $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
                     }else{
                         //$values[$field_name][] = " {$field_name} = '{$value}'";

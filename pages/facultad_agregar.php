@@ -153,7 +153,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         </div>
         <div class="card-body ">
             
-            <form name="formulario" id="form_register" action="../logic/registrarAusen_form.php" method="POST" >
+            <form name="formulario" id="form_register" action="../logic/registrarAusen_form_Facultad.php" method="POST" >
             <div class="d-block row g-3 align-items-center col-auto">
 
                 <!-- INPUT DE NOMBRES DE USUARIO -->
@@ -213,7 +213,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
                 <!-- INPUT DE TIEMPO -->
                 <div class="form-floating mb-3">
-                    <input type="number" name="Tiempo[]" class="form-control" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="200" required>
+                    <input type="number" name="Tiempo[]" class="form-control" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="24" required>
                     <label class="col-form-label" for="Tiempo[]"> TIEMPO </label>
                 </div>
 
@@ -221,8 +221,8 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                 <div class="form-floating mb-3">
                     <select class="form-select form-select-sm" name="Unidad[]" id="Unidad" required>
                         <option value="">Seleccione</option>
-                        <option value="dias"> DIAS </option>
-                        <option value="horas"> HORAS </option>
+                        <option value="dias" disabled> DIAS </option>
+                        <option value="horas" selected> HORAS </option>
                     </select>
                     <label class="col-form-label" for="Unidad[]"> UNIDAD </label>
                 </div>
@@ -249,7 +249,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                                 $Nombre=$tipo["TipoAusentismo"];
                                 /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
                                 if($ID == 5){
-                                    echo "<option value=\"$ID\">$Nombre</option>";
+                                    echo "<option value=\"$ID\" selected>$Nombre</option>";
                                 }else{
                                     //echo "<option value=\"$ID\">$Nombre</option>";
                                 }
@@ -287,7 +287,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
 
-    <script src="../js/registrar.js"></script>
+    <script src="../js/registrarFacultad.js"></script>
 
 <script>
     //SCRIPT para colocar en fecha inicial, la fecha con mes actual
