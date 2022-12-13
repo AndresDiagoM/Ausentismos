@@ -1,7 +1,7 @@
 <?php
-//MENU DEL ADMIN, CON DASHBOARD
+//MENU DEL ADMINISTRADOR, CON DASHBOARD
 include "../conexion.php";
-include "../logic/admin_securityLogic.php";
+include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
 
 // Inicio o reanudacion de una sesion
 $nombre_admin   = $_SESSION['NOM_USUARIO'];
@@ -40,11 +40,11 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         </div>
 
         <div class="menu">
-            <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none"> 
+            <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none "> 
                 <i class="icon ion-md-apps     mr-2 lead"></i> MENU   </a>
-            <a href="../pages/admin_cargar.php" class="p-3 text-light d-block text-decoration-none"> 
+            <a href="../pages/admin_cargar.php" class="mover p-3 text-light d-block text-decoration-none"> 
                 <i class="icon ion-md-cloud   mr-2 lead"></i> CARGAR DATOS  </a>
-            <a href="../pages/admin_agregar.php" class="p-3 text-light d-block text-decoration-none"> 
+            <a href="../pages/admin_agregar.php" class="p-3 text-light d-block text-decoration-none "> 
                 <i class="icon ion-md-add-circle mr-2 lead"></i> AGREGAR REGISTRO</a>
             <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none"> 
                 <i class="icon ion-md-search   mr-2 lead"></i> CONSULTAR AUSENTISMO    </a>
@@ -54,7 +54,10 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                 <i class="icon ion-md-log-out mr-2 lead"></i> CERRAR CESION</a>
         </div>
 
+        <div class="indicator">  </div>
+
         <div class="sideBar_foot" >
+            <img src="../images/lema.png" class="img-fluid me-2" width="80" height="80" alt="Sample image">
             <img src="../images/logosIcontec2020.png" class="img-fluid" width="100" height="100" alt="Sample image">
         </div>
     </div>
@@ -66,7 +69,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <div class="container-fluid">
             <a class="navbar-brand" href="../pages/admin_menu.php"> <i class="icon ion-md-home me-2 lead"></i> </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler menu-btn" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
 

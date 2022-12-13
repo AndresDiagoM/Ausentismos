@@ -43,6 +43,9 @@ a:hover {
 #sidebar-container .menu {
     width: 18rem; /* Es el ancho del SideBar*/
 }
+#sidebar-container .menu a:hover {
+    background-color: var(--btnHover);
+}
 #sidebar-container .sideBar_foot {
     /*width: 18rem; *//* Es el ancho del SideBar*/
 
@@ -64,6 +67,39 @@ a:hover {
     justify-content: center;
     align-items: center;
 }
+.indicator {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #efefef;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    top: 16vh;
+    left: 16rem;
+    display: none;
+}
+/*.indicator::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    top: 3vh;
+    left: 0rem;
+    box-shadow: 15px 18px #efefef; 
+}*/
+/*.menu  a:nth-child(1).active ~ .indicator {
+    transform: translateY(calc(16vh * 0));
+}*/
+#sidebar-container .menu  a.mover ~ .indicator {
+    /*transform: translateY(calc(16vh + 9vh));*/
+    background-color: #02c751;
+}
+
 
 /* ===========================================
     %----------- NAV BAR - MENU SUPERIOR -------------%
@@ -99,8 +135,29 @@ a:hover {
 /*Para no mostar el Sidebar en version movil*/
 @media (max-width: 900px) {
     #sidebar-container {
-        display: none;
+        /*display: none;*/
+        position: absolute;
+        top: 80px;
+        left: -100%;
+        
+        height: 100vh;
+        width: 100%;
+        display: block;
+        z-index: 1000;
+        text-align: center;
+        transition: all 0.3s ease;
     }
+    /*if the button id="click" is clicked then show the menu*/
+    .menu-btn:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+    .menu-btn:active ~ #sidebar-container {
+        left: 0%;
+        width: 100%;
+    }
+
     .stat{
         border: 0;
     }
