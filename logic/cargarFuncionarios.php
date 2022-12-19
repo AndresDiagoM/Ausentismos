@@ -30,9 +30,10 @@
         if(!in_array($ext,$allowed) ) {
             //echo 'error';
             //show alert that the file is not an excel file
-            echo "<script>alert('El archivo no es un archivo de Excel');
-                    window.location= '../pages/admin_cargar.php'
+            echo "<script>//alert('El archivo no es un archivo de Excel');
+                    window.location= '../pages/admin_cargar.php?ALERT=errorExcel';
                 </script>";
+            exit;
         }/*else{
             $destino = "../excel/".$nombreArchivo;
             if(move_uploaded_file($tmpFile,$destino)){
@@ -255,17 +256,21 @@
             }
         }
 
-        //cuando termine de actualizar e insertar, eliminar los datos de la tabla auxiliar
+        //cuando termine de actualizar e insertar, eliminar los datos de la tabla auxiliar 
         $sql = "DELETE FROM func_auxiliar";
         $result = $conectar->query($sql);
 
         //if the query is successful, then return true, else return try empty with truncate
         if($result){
-            //echo "DELETE SUCCESSFUL"."\n \n";
+            //if the query is successful, show alert and redirect to admin_cargar.php
+            echo "<script>//alert('Datos cargados correctamente'); 
+                window.location.href='../pages/admin_cargar.php?ALERT=success';</script>";
         }else{
             $sql = "TRUNCATE TABLE func_auxiliar";
             $result = $conectar->query($sql);
         }
+        echo "<script>//alert('Datos cargados correctamente'); 
+            window.location.href='../pages/admin_cargar.php?ALERT=success';</script>";
     }
     //eliminar el archivo de la carpeta excel
     //unlink('../excel/'.$nombreArchivo);

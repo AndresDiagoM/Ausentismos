@@ -97,6 +97,18 @@ $(function()
         //get_ausentismos();
     });
 
+    $(document).on('keyup', '#entidad', function()  //para el cuadro de busqueda de cedula. #entidad es el id del input en el HTML
+    {
+        var valor = $(this).val();
+
+        if(valor != "" && isNaN(valor) ){
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+        }
+        //get_ausentismos();
+    });
+
     $(".fila_tabla").on("click",function(){  //.FILA_TABLA, es la clase de las filas de la tabla
         //var selected = $(this).val();
         //get_ausentismos(); 

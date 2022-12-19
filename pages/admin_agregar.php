@@ -57,9 +57,10 @@
 
                 <!-- INPUT DE CÉDULA -->                    
                 <div class="form-floating mb-3">
-                    <input type="text" name="Cedula_F[]" class="form-control" id="cedula" placeholder="Número de identificación"  title="La identifiación solo debe contener carácteres numéricos" required>
+                    <input type="text" name="Cedula[]" class="form-control" id="cedula" pattern="[0-9]{3,10}" placeholder="Número de identificación"  title="La identifiación solo debe contener carácteres numéricos." required>
                     <label class="col-form-label" for="Cedula[]"> CÉDULA </label>
                 </div>
+                <input type="hidden" name="Cedula_F[]"  id="cedula_f" value="" >
 
                 <!-- INPUT DEL cargo -->
                 <div class="form-floating mb-3">

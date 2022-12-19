@@ -1,5 +1,6 @@
 <?php
-include "../template/cabecera2.php";
+include "../template/cabecera.php";
+
 ?>
 
         <!-- CONTENEDORES DE BUSQUEDAS -->
@@ -12,8 +13,17 @@ include "../template/cabecera2.php";
             </form>
         </div>
 
-        <div class="container py-4" style="overflow-y: auto; height:75vh;" id="datos">
+        <div class="container py-4" style="overflow-y: auto; height:70vh;" id="datos">
 
+        </div>
+
+        <!-- Contenedor del boton de nuevo usuario -->
+        <div class="container row col-2 ms-1">
+            <a href="../pages/admin_create_user.php">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Crear
+                </button>
+            </a>
         </div>
 
 
@@ -31,8 +41,42 @@ include "../template/cabecera2.php";
     <script src="../js/jquery.min.js"></script> 
 
 <!--    JAVASCRIPT QUE REALIZA LA BUSQUEDA DINAMICA -->
-<script src="../js/search_client_edit.js"></script>
+<script src="../js/search_usuario_edit.js"></script>
+<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+<script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+<!-- <script src="../js/sweet_alert.js"></script> -->
 
+<?php
+//si se recibe la variable por GET ALERT, entonces se muestra el mensaje de alerta
+if (isset($_GET["ALERT"])) {
+    $alert = $_GET["ALERT"];
+    if ($_GET["ALERT"] != "") {
+        if ($alert == "success") {
+            echo "<script>
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Usuario eliminado!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: \"#be3838\",
+                    //timer: 1500
+                });
+            </script>";
+        } elseif ($alert == "error") {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡No se pudo eliminar el usuario!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: \"#be3838\",
+                    //timer: 1500
+                });
+            </script>";
+        }
+    }
+}
+?>
 
 </body>
 </html>

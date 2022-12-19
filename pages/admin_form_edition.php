@@ -1,5 +1,15 @@
 <?php
-    include "../template/cabecera2.php";
+    include "../template/cabecera.php";
+    $id_usuario     = $_GET['ID'];
+    //si la variable $id_usuario esta vacia, o tiene valore sque no sean numeros, redireccionar a la pagina de admin_edition
+    if(empty($id_usuario) || !is_numeric($id_usuario)){
+        if(headers_sent())
+            die("<script>location.href='admin_edition_client.php';</script>");
+        else
+            exit(header("Location: admin_edition_client.php"));
+        //header("Location: admin_edition.php");
+    }
+
 ?>
 
 
@@ -17,63 +27,70 @@
                             INNER JOIN dependencias ON usuarios.Dependencia=dependencias.ID 
                             WHERE Cedula_U = '$id_usuario'";
                 $result = $conectar->query($sqli);
-                $data=[];
-                while($row = mysqli_fetch_assoc($result)){
-                    $Id_editar = $row['Cedula_U'];
-                    $data[] = $row;
+                $num_rows = $result->num_rows;
+                //si no encuentra ningun usuario, entonces redirigir admin_edition_client.php
+                if($num_rows >0 ){
+                    $data=[];
+                    while($row = mysqli_fetch_assoc($result)){
+                        $Id_editar = $row['Cedula_U'];
+                        $data[] = $row;
+                    }
+                    $mostrar = $data[0];
+                    //print_r($mostrar);
+                }else{
+                    die("<script>location.href='admin_edition_client.php';</script>");
                 }
-                $mostrar = $data[0];
-                //print_r($mostrar);
+
             ?>
             <h5 class="card-title">Nombre: <?php echo $mostrar['Nombre_U'] ?></h5>
             <form>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Cedula</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo $mostrar['Cedula_U'];?>>
-                    </div>
+                
+                <!-- LABEL DE Cedula -->
+                <div class="form-floating mb-2">
+                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Cedula_U'];?>">
+                    <label class="col-form-label" for="Cedula_U"> Cedula </label>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
-                    <input type="text"  disabled class="form-control" value=<?php echo '"'.$mostrar['Nombre_U'].'"';?>>
-                    </div>
+                
+                <!-- LABEL DE Nombre -->
+                <div class="form-floating mb-2">
+                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Nombre_U'];?>">
+                    <label class="col-form-label" for="Nombre"> Nombre </label>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Correo</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Correo'].'"';?>>
-                    </div>
+                
+                <!-- LABEL DE Correo -->
+                <div class="form-floating mb-2">
+                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Correo'];?>">
+                    <label class="col-form-label" for="Correo"> Correo </label>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Departamento</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Departamento'].'"';?>>
-                    </div>
+                
+                <!-- LABEL DE Departamento -->
+                <div class="form-floating mb-2">
+                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Departamento'];?>">
+                    <label class="col-form-label" for="Departamento"> Departamento </label>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Facultad</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Facultad'].'"';?>>
-                    </div>
+                
+                <!-- LABEL DE Facultad -->
+                <div class="form-floating mb-2">
+                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Facultad'];?>">
+                    <label class="col-form-label" for="Facultad"> Facultad </label>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">TipoUsuario</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo $mostrar['TipoUsuario'];?>>
-                    </div>
+                
+                <!-- LABEL DE TipoUsuario -->
+                <div class="form-floating mb-2">
+                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['TipoUsuario'];?>">
+                    <label class="col-form-label" for="TipoUsuario"> Tipo Usuario </label>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Login</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Login'].'"';?>>
-                    </div>
+                
+                <!-- LABEL DE Login -->
+                <div class="form-floating mb-2">
+                    <input type="text" readonly disabled  class="form-control" min="4" max="40" placeholder="Digite su Login"  value="<?php echo $mostrar['Login'];?>">
+                    <label class="col-form-label" for="login"> Login </label>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Contraseña</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo $mostrar['Contrasena'];?>>
-                    </div>
+                
+                <!-- LABEL DE LA Contraseña -->
+                <div class="form-floating mb-2">
+                    <input type="text" readonly disabled  class="form-control" min="4" max="40" placeholder="Digite su contraseña"  value="<?php echo $mostrar['Contrasena'];?>">
+                    <label class="col-form-label" for="Contraseña"> Contraseña </label>
                 </div>
             </form>
             
@@ -88,88 +105,69 @@
             <h5 class="card-title">Nombre: <?php echo $mostrar['Nombre_U'] ?></h5>
 
             <form action="../logic/form_editLogic.php?ID=<?php echo $Id_editar ?>" method="POST">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Cedula</label>
-                    <div class="col-sm-10">
-                    <input type="text" name="cedula_usuario_edt" class="form-control" min="4" max="40" placeholder="cedula" required>
-                    </div>
+                
+                <!-- INPUT DE LA CEDULA -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="cedula_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su cedula"  required>
+                    <label class="col-form-label" for="cedula_usuario_edt"> Cedula </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
-                    <input type="text" name="nombre_usuario_edt" class="form-control" min="4" max="40" placeholder="nombre" required>
-                    </div>
+                <!-- INPUT DEL Nombre -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="nombre_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su nombre"  required>
+                    <label class="col-form-label" for="nombre_usuario_edt"> Nombre </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Correo</label>
-                    <div class="col-sm-10">
-                    <input type="email" name="correo_usuario_edt" class="form-control" min="4" max="40" placeholder="correo" required>
-                    </div>
+                <!-- INPUT DEL Correo -->
+                <div class="form-floating mb-2">
+                    <input type="email" name="correo_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su correo"  required>
+                    <label class="col-form-label" for="correo_usuario_edt"> Correo </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Departamento</label>
-                    <div class="col-sm-10">
-                        <select class="custom-select" name="departamento_usuario_edt" required>
-                            <option value="">Seleccione</option>
-                            <?php 
-                                //Consultar en la tabla dependencias, los departamentos de forma unica 
-                                $sql = "SELECT DISTINCT Departamento FROM dependencias";
-                                $result = $conectar->query($sql);
-                                while($row = mysqli_fetch_assoc($result)){
-                                    echo '<option value="'.$row['Departamento'].'">'.$row['Departamento'].'</option>';
+                <!-- INPUT DE LA DEPENDENCIA -->
+                <div class="form-floating mb-2">
+                    <select class="form-select form-select-sm" name="dependencia_usuario_edt">
+                        <option value="">Seleccione</option>
+                        <?php
+                            //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
+                            //$sql = "SELECT DISTINCT facultad, departamento FROM dependencias";
+                            $sql = "SELECT * FROM dependencias ORDER BY Departamento";
+                            $result = $conectar->query($sql);
+                            //echo 'ERROR'.$conectar->error;
+                            //print_r($result); exit;
+                            if($result->num_rows > 0){
+                                while($row = $result->fetch_assoc()){
+                                    echo '<option value="'.$row['ID'].'">'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
                                 }
-                            ?>
-                        </select>
-                    </div>
+                            }
+                        ?>
+                    </select>
+                    <label class="col-form-label" for="dependencia"> Dependencia </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Facultad</label>
-                    <div class="col-sm-10">
-                        <select class="custom-select" name="facultad_usuario_edt" required>
+                <div class="form-floating mb-2">
+                    <select class="form-select" name="tipo_usuario_edt" required>
                             <option value="">Seleccione</option>
-                            <?php 
-                                //Consultar en la tabla dependencias, los departamentos de forma unica 
-                                $sql = "SELECT DISTINCT Facultad FROM dependencias";
-                                $result = $conectar->query($sql);
-                                while($row = mysqli_fetch_assoc($result)){
-                                    echo '<option value="'.$row['Facultad'].'">'.$row['Facultad'].'</option>';
-                                }
-                            ?>
-                        </select>
-                    </div>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="CONSULTA">CONSULTA</option>
+                            <option value="FACULTAD">FACULTAD</option>
+                    </select>
+                    <label for="tipo_usuario_edt" class="col-form-label">Tipo Usuario</label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">TipoUsuario</label>
-                    <div class="col-sm-10">
-                        <select class="custom-select" name="tipo_usuario_edt" required>
-                                <option value="">Seleccione</option>
-                                <option value="ADMIN">ADMIN</option>
-                                <option value="CONSULTA">CONSULTA</option>
-                                <option value="FACULTAD">FACULTAD</option>
-                        </select>
-                    </div>
+                <!-- INPUT DEL LOGIN -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="login_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su login"  required>
+                    <label class="col-form-label" for="login"> Login </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Login</label>
-                    <div class="col-sm-10">
-                    <input type="text" name="login_usuario_edt" class="form-control" min="4" max="40" placeholder="login" required>
-                    </div>
+                <!-- INPUT DE LA Contraseña -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="contrasena_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su contraseña"  required>
+                    <label class="col-form-label" for="login"> Contraseña </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Contraseña</label>
-                    <div class="col-sm-10">
-                    <input type="text" name="contrasena_usuario_edt" class="form-control" min="4" max="40" placeholder="contraseña" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Modificar</button> 
+                <button type="submit" class="btn btn-success">Modificar</button> 
             </form>
 
         </div>

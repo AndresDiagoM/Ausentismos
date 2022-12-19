@@ -9,7 +9,7 @@ $(function()
     $("#agregar_func").hide();
 
     //se necesita hacer algo cuando se utilice la búsqueda de cedula y nombre
-    $(document).on('keyup', '#nombre1', function() 
+    $(document).on('keyup', '#nombre1', function() //para el cuadro de busqueda de nombre
     {
         var valor = $('#nombre1').val();
 
@@ -78,7 +78,7 @@ function get_funcionario()
     $.ajax(
         {
             type:"POST",
-            url:"../logic/registrarAusen.php",  //es necesario especificar exactamente la ruta
+            url:"../logic/searchFunc.php",  //es necesario especificar exactamente la ruta
             data:form.serialize(), //aqui se pasa información de los inputs que están en el formulario HTML. serialize pasa los datos en arrays a PHP
             success: function (data)
             {
@@ -94,11 +94,11 @@ function get_funcionario()
                     //$("cargo").value(funcionario.Cedula);
                     
 
-                    /*document.getElementById("nombre").disabled = true ;
+                    document.getElementById("nombre").disabled = true ;
                     document.getElementById("cedula").disabled = true;
                     document.getElementById("cargo").disabled = true;
                     document.getElementById("departamento").disabled = true;
-                    document.getElementById("facultad").disabled = true;*/
+                    document.getElementById("facultad").disabled = true;
 
                     //if funcionario is equal to N/A, then show a button to add a new funcionario 
                     if(funcionario == "N/A"){
@@ -107,6 +107,7 @@ function get_funcionario()
                         $("#agregar_func").hide();
                         document.getElementById("nombre").value = funcionario.Nombre; 
                         document.getElementById("cedula").value = funcionario.Cedula; 
+                        document.getElementById("cedula_f").value = funcionario.Cedula; 
                         document.getElementById("cargo").value = funcionario.Cargo; 
                         document.getElementById("departamento").value = funcionario.Departamento; 
                         document.getElementById("facultad").value = funcionario.Facultad; 

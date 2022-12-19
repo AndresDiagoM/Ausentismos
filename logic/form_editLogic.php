@@ -17,7 +17,7 @@
     $row = mysqli_fetch_assoc($result);
 
 
-    // SENTENCIAS SQL PARA LA CONSULTA DE la dependencia, donde el departamento es igual al departamento y la facultad es igual a la facultad 
+    /*// SENTENCIAS SQL PARA LA CONSULTA DE la dependencia, donde el departamento es igual al departamento y la facultad es igual a la facultad 
     $sql2 = "SELECT * FROM dependencias WHERE Departamento LIKE "."'".$query_values['departamento_usuario_edt']."'"." AND Facultad LIKE "."'".$query_values['facultad_usuario_edt']."'";
     //print_r($sql2); exit;
     $result2 = $conectar->query($sql2); 
@@ -27,7 +27,7 @@
     }else{
         //si hay resultados, guardar el resultado 
         $row2 = mysqli_fetch_assoc($result2);
-    }
+    }*/
 
 
     if($query_values['nombre_usuario_edt'] != $row['Nombre_U']){
@@ -40,8 +40,8 @@
         $actualizar = "UPDATE usuarios SET Correo = '$correo_edt' WHERE Cedula_U = $numero_id";
         $sqli1          = $conectar->query($actualizar);
     }
-    if($row2['ID'] != $row['Dependencia']){
-        $depen_edt = $row2['ID'];
+    if($query_values['dependencia_usuario_edt'] != $row['Dependencia']){
+        $depen_edt = $query_values['dependencia_usuario_edt'];
         $actualizar = "UPDATE usuarios SET Dependencia = '$depen_edt' WHERE Cedula_U = $numero_id";
         $sqli1          = $conectar->query($actualizar);
     }

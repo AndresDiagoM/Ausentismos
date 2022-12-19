@@ -1,4 +1,9 @@
 <?php
+    /*
+    *   Codigo para crear un usuario
+    */
+
+    // Conexion a la base de datos
     require '../conexion.php';
 
     $nombre_usuario     =   strtoupper($_POST['nomb_usuario']);

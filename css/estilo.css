@@ -131,7 +131,13 @@ a:hover {
     overflow-x: auto;  /* Hide the horizontal scroll */
 }
 
+/*Convertir todas letras de los inputs a mayusculas en todos los html form*/
+input[type=text], input[type=email], input[type=number], input[type=tel], input[type=date], input[type=time], input[type=datetime-local], input[type=month], input[type=week], input[type=url], input[type=search], input[type=color], textarea {
+    text-transform: uppercase;
+}
 
+
+/*================================================*/
 /*Para no mostar el Sidebar en version movil*/
 @media (max-width: 900px) {
     #sidebar-container {

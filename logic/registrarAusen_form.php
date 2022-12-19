@@ -53,9 +53,12 @@
                         if($value=="dias"){
                             //convertir el tiempo a numero int
                             $costo = $salario/30 * $tiempo;
+                            //echo 'salario: '.$salario.'<br>';
+                            //echo 'costo1: '.$costo.'<br>'.'tiempo: '.$tiempo.'<br>'.$value.'<br>'; 
                         } else {
                             $costo = ($salario/30)/24 * $tiempo;
                         }
+                        
                     }
 
                 }                   
@@ -149,13 +152,16 @@
                 echo "<script> alert('Error al registrar incapacidad');   location.href = '../pages/admin_agregar.php'; </script>";
             }
         }else{
-            header("Location: ../pages/admin_agregar.php");
+            //header("Location: ../pages/admin_agregar.php");
+            echo "<script> alert('Registro existoso');   location.href = '../pages/admin_agregar.php'; </script>";
+            exit;
         }
-
+        
     }
     else{
         echo "<script> alert('Registro incorrecto');
         location.href = '../pages/admin_agregar.php';
         </script>";
     }
+    
 ?>

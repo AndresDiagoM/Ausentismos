@@ -4,6 +4,7 @@ include "../conexion.php"; //conexión a la base de datos
 include "../template/cabecera.php";
 
 
+
 $tablaAux ="";
 //Cuando se presiona el boton de cargar, se llama al archivo cargarFuncionarios.php
 if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
@@ -16,8 +17,9 @@ if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
 }
 
 //query for the func_auxiliar table, then show it in a table
-$query = "SELECT * FROM func_auxiliar";
+$query = "SELECT * FROM func_auxiliar ORDER BY Error ASC"; //WHERE Error != 'N/A' ORDER BY Error ASC
 $result = $conectar->query($query);
+$num_rows = mysqli_num_rows($result);
 $tabla_auxiliar = array();
 while($row = mysqli_fetch_array($result)){
     $tabla_auxiliar[] = $row;
@@ -27,9 +29,9 @@ if($tabla_auxiliar!=null){
     $tablaAux .= "<table class='table table-striped table-bordered table-hover table-condensed'>
                 <thead class='thead-light'>
                     <tr>
-                        <th scope='col' class='table-active' colspan='8'>Funcionarios a cargar y actualizar</th>
+                        <th scope='col' class='header-table table-active' colspan='8'>Funcionarios a cargar y actualizar: ".$num_rows."</th>
                     </tr>
-                    <tr>
+                    <tr class='header-table'>
                         <th scope='col'>Cedula</th>
                         <th scope='col'>Nombre</th>
                         <th scope='col'>Cargo</th>
@@ -41,18 +43,22 @@ if($tabla_auxiliar!=null){
                     </tr>
                 </thead>
                 <tbody>";
+
     foreach($tabla_auxiliar as $funcionario){
         $Id_fila=$funcionario['Cedula'];
-        $tablaAux .= "<tr>
-                        <th scope='row'>".$funcionario['Cedula']."</th>
-                        <td>".$funcionario['Nombre']."</td>
-                        <td>".$funcionario['Cargo']."</td>
-                        <td>".$funcionario['Genero']."</td>
-                        <td>".$funcionario['Salario']."</td>
-                        <td>".$funcionario['Estado']."</td>
-                        <td>".$funcionario['Error']."</td>
-                        <td><a href='../pages/admin_aux_table_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
-                    </tr>";
+        if($funcionario['Error'] != 'N/A'){
+            
+            $tablaAux .= "<tr>
+                            <th scope='row'>".$funcionario['Cedula']."</th>
+                            <td>".$funcionario['Nombre']."</td>
+                            <td>".$funcionario['Cargo']."</td>
+                            <td>".$funcionario['Genero']."</td>
+                            <td>".$funcionario['Salario']."</td>
+                            <td>".$funcionario['Estado']."</td>
+                            <td>".$funcionario['Error']."</td>
+                            <td><a href='../pages/admin_aux_table_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
+                        </tr>";
+        }
     }
     $tablaAux .= "</tbody>
             </table>";
@@ -122,8 +128,6 @@ if($tabla_auxiliar!=null){
             </div>
         </section>
         <?php
-        }
-        if($tablaAux != null){
             echo "<section class='py-3'>
                     <div class='container'>
                         <div class='col-lg-4 d-flex'>
@@ -155,6 +159,39 @@ if($tabla_auxiliar!=null){
     <!-- LOCAL: JQuery, AJAX, Bootstrap 
     <script src="../bootstrap-4.4.1-dist/js/jquery-3.6.1.min.js"></script> -->     
     <script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+
+    <?php
+//si se recibe la variable por GET ALERT, entonces se muestra el mensaje de alerta
+if (isset($_GET["ALERT"])) {
+    $alert = $_GET["ALERT"];
+    if ($_GET["ALERT"] != "") {
+        if ($alert == "success") {
+            echo "<script>
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Usuario eliminado!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: \"#be3838\",
+                    //timer: 2500
+                });
+            </script>";
+        } elseif ($alert == "errorExcel") {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡No es un archivo de excel!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: \"#be3838\",
+                    //timer: 1500
+                });
+            </script>";
+        }
+    }
+}
+?>
 
 </body>
 </html>

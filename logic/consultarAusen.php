@@ -57,6 +57,20 @@
                             $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
                         }
                     
+                    }elseif($field_name=="Entidad"){
+                        //convert $value to uppercase
+                        //$value = strtoupper($value);
+
+                        //if $value is empty, then do not add to query, and delete Diagnostico from $query_values
+                        if($value==""){
+                            unset($query_values["Entidad"]);
+                            //continue;
+                        }else{
+                            //change spaces in $value to % for LIKE query
+                            $value = str_replace(" ", "%", $value);
+                            $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                        }
+                    
                     }elseif($field_name=="Fecha_Inicio"){
                         $values[$field_name][] = " {$field_name} > '{$value}'";
 
@@ -100,7 +114,7 @@
         $offset=($pag-1)*$limit;
 
         //if Diagnostico is in query_values and is not empty, then we need to search in the table "incapacidad"
-        if(isset($query_values['Diagnostico']) && $query_values['Diagnostico']!="" || isset($query_values['Codigo']) && $query_values['Codigo']!=""){
+        if(isset($query_values['Diagnostico']) && $query_values['Diagnostico']!="" || isset($query_values['Codigo']) && $query_values['Codigo']!="" || isset($query_values['Entidad']) && $query_values['Entidad']!=""){
             $sqliTotal = "SELECT * FROM incapacidad 
                         INNER JOIN ausentismos ON incapacidad.ID_Ausentismo=ausentismos.ID
                         INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario

@@ -4,7 +4,7 @@
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
 <!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
-<div class="table-responsive w-100" style="overflow-y: scroll; height:75vh; font-size:13px">
+<div class="table-responsive w-100" style="overflow-y: scroll; height:75vh; font-size:12px">
     <table class="table table-bordered table-hover table-condensed" id="tabla-consultas">
         <thead class="header-table thead-light table-active">
         <tr>
@@ -70,7 +70,28 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">UNIDAD</th>
+            <th scope="col">
+                <ul class="navbar-nav ml-auto">                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        
+                        UNIDAD
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="unidad"  name="Unidad[]" value="dias" >
+                                <label class="form-check-label" for="dias" > Dias </label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="unidad"  name="Unidad[]" value="horas" >
+                                <label class="form-check-label" for="horas" > Horas </label>
+                            </div>
+                            
+                        </div>
+                    </li>
+                </ul>
+            </th>
             <th scope="col">OBSERVACIÓN</th>
             <th scope="col">COSTO</th>
             <th scope="col">USUARIO</th>
@@ -130,7 +151,18 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">ENTIDAD</th>
+            <th scope="col">
+                    <ul class="navbar-nav ml-auto">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ENTIDAD
+                            </a>
+                            <div class="dropdown-menu">
+                                <input type="text" class="form-input" id="entidad" name="Entidad[]" size="20" placeholder="Ingrese el nombre">
+                            </div>
+                        </li>
+                    </ul>
+            </th>
 
             </form>
         </tr>

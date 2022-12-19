@@ -21,7 +21,7 @@ include "../template/cabecera.php";
                     
                     <!-- INPUT DEL NUMERO DE IDENTIFICACION -->
                     <div class="form-floating mb-3">
-                        <input type="number" name="numero_id" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 y 15." required>
+                        <input type="text" name="numero_id" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 a 15 digitos." required>
                         <label class="col-form-label" for="numero_id"> Número de identificación </label>
                     </div>
 
@@ -33,7 +33,7 @@ include "../template/cabecera.php";
 
                     <!-- INPUT DE LA DEPENDENCIA -->
                     <div class="form-floating mb-3">
-                        <select class="form-control" name="dependencia">
+                        <select class="form-select" name="dependencia">
                             <option value="">Seleccione</option>
                             <?php
                                 //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
@@ -54,7 +54,7 @@ include "../template/cabecera.php";
 
                     <!-- INPUT DEL GENERO -->
                     <div class="form-floating mb-3">
-                        <select class="form-control" name="genero">
+                        <select class="form-select" name="genero">
                             <option value="">Seleccione</option>
                             <option value="MAS">Masculino</option>
                             <option value="FEM">Femenino</option>
@@ -64,7 +64,7 @@ include "../template/cabecera.php";
                     
                     <!-- INPUT DEL SALARIO -->
                     <div class="form-floating mb-3">
-                        <input type="number" name="salario" class="form-control" pattern="[0-9]{5,8}" placeholder="Digite el salario" required>
+                        <input type="text" name="salario" class="form-control" pattern="[0-9]{3,8}" title="Solo números." placeholder="Digite el salario" required>
                         <label class="col-form-label" for="salario"> Salario </label>
                     </div>
 

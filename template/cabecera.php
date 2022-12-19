@@ -23,6 +23,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
 
     <!-- CSS -->
     <link href="../css/estilo.css" rel="stylesheet" integrity="" crossorigin="anonymous">
+    <link href="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.css" rel="stylesheet" integrity="" crossorigin="anonymous">
 
     <!-- ICONOS en https://ionic.io/ionicons/v4/usage#md-pricetag -->
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -57,7 +58,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <div class="indicator">  </div>
 
         <div class="sideBar_foot" >
-            <img src="../images/lema.png" class="img-fluid me-2" width="80" height="80" alt="Sample image">
+            <img src="../images/lema.png" class="img-fluid me-2" width="40" height="40" alt="Sample image">
             <img src="../images/logosIcontec2020.png" class="img-fluid" width="100" height="100" alt="Sample image">
         </div>
     </div>

@@ -1,6 +1,10 @@
 <?php
     include "../template/cabecera.php";
     $id_usuario     = $_GET['ID'];
+    //if there is no id redirect to admin_edit_func.php
+    if(!isset($id_usuario) || empty($id_usuario)){
+        header("Location: ./admin_edit_func.php");
+    }
 ?>
 
 
@@ -92,7 +96,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Cedula</label>
                     <div class="col-sm-10">
-                    <input type="text" name="cedula_func_edt" class="form-control" min="4" max="40" placeholder="cedula" value="<?php echo $mostrar['Cedula'];?>" required>
+                    <input type="text" name="cedula_func_edt" class="form-control" placeholder="cedula" pattern="[0-9]{3,8}" title="La identifiación solo debe contener carácteres numéricos." value="<?php echo $mostrar['Cedula'];?>" required>
                     </div>
                 </div>
 
@@ -152,7 +156,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Salario</label>
                     <div class="col-sm-10">
-                    <input type="number" name="salario_func_edt" class="form-control" min="1" max="100000000" placeholder="salario" value="<?php echo $mostrar['Salario'];?>" required>
+                    <input type="text" name="salario_func_edt" class="form-control" min="1" max="100000000" pattern="[0-9]{1,9}" title="Solo números" placeholder="salario" value="<?php echo $mostrar['Salario'];?>" required>
                     </div>
                 </div>
 

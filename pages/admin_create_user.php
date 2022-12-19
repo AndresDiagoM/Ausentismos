@@ -1,5 +1,5 @@
 <?php
-include "../template/cabecera2.php";
+include "../template/cabecera.php";
 ?>
 
 <!-- SCRIPT PARA LA VERFICACION DE CONTRASEÑAS -->
@@ -36,7 +36,7 @@ include "../template/cabecera2.php";
                     
                     <!-- INPUT DEL NUMERO DE IDENTIFICACION -->
                     <div class="form-floating mb-3">
-                        <input type="number" name="numero_id" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 y 15." required>
+                        <input type="text" name="numero_id" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 a 15 dígitos." required>
                         <label class="col-form-label" for="numero_id"> Número de identificación </label>
                     </div>
 
@@ -48,7 +48,7 @@ include "../template/cabecera2.php";
 
                     <!-- INPUT DE LA DEPENDENCIA -->
                     <div class="form-floating mb-3">
-                        <select class="form-control" name="dependencia">
+                        <select class="form-select" name="dependencia">
                             <option value="">Seleccione</option>
                             <?php
                                 //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
@@ -69,7 +69,7 @@ include "../template/cabecera2.php";
 
                     <!-- SELECT DEL TIPO DE USUARIO -->
                     <div class="form-floating mb-3">
-                        <select class="form-control" name="tipo_us">
+                        <select class="form-select" name="tipo_us">
                             <option value="">Seleccione</option>
                             <option value="CONSULTA">CONSULTA</option>
                             <option value="ADMIN">ADMINISTRADOR</option>
