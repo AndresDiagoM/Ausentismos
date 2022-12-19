@@ -107,7 +107,7 @@
 
                 <!-- INPUT DE TIEMPO -->
                 <div class="form-floating mb-3">
-                    <input type="number" name="Tiempo[]" class="form-control" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="200" required>
+                    <input type="text" name="Tiempo[]" class="form-control" id="tiempo" pattern="[0-9]{1,370}" placeholder="Tiempo del ausentimso" title="Solo debe contener carácteres numéricos." required>
                     <label class="col-form-label" for="Tiempo[]"> TIEMPO </label>
                 </div>
 
@@ -161,7 +161,12 @@
                         <label class="col-form-label" for="Codigo[]"> CODIGO </label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" name="Diagnostico[]" class="form-control" id="diagnostico" placeholder="Escriba el diagnostico" >
+                        <select class="form-select form-select-sm" name="Diagnostico[]" id="diagnostico" >
+                            <option value="">Seleccione</option>
+                            <option value="Enfermedad general"> ENFERMEDAD GENERAL </option>
+                            <option value="Enfermedad laboral"> ENFERMEDAD LABORAL </option>
+                            <option value="Accidente de trabajo"> ACCIDENTE DE TRABAJO </option>
+                        </select>
                         <label class="col-form-label" for="Diagnostico[]"> DIAGNOSTICO </label>
                     </div>
                     <div class="form-floating mb-3">
@@ -224,5 +229,39 @@
     //}
 </script>
 
-</body>
-</html>
+<script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+<?php
+//si se recibe la variable por GET ALERT, entonces se muestra el mensaje de alerta
+if (isset($_GET["ALERT"])) {
+    $alert = $_GET["ALERT"];
+    if ($_GET["ALERT"] != "") {
+        if ($alert == "success") {
+            echo "<script>
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡REGISTRO EXITOSO!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: \"#be3838\",
+                    //timer: 2500
+                });
+            </script>";
+        } elseif ($alert == "error") {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡ERROR EN EL REGISTRO!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: \"#be3838\",
+                    //timer: 1500
+                });
+            </script>";
+        }
+    }
+}
+?>
+
+<?php
+    include("../template/pie.php");
+?>

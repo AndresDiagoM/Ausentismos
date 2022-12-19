@@ -129,5 +129,6 @@ include "../template/cabecera.php";
 </script>
 
 
-</body>
-</html>
+<?php
+    include("../template/pie.php");
+?>

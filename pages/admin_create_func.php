@@ -93,5 +93,6 @@ include "../template/cabecera.php";
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
 
-</body>
-</html>
+<?php
+    include("../template/pie.php");
+?>

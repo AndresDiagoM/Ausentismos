@@ -88,7 +88,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                             ?>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href=<?php echo '../pages/admin_form_edition.php?ID='.$id_admin.''; ?>>Mi perfil </a>
+                            <a class="dropdown-item" href="#">Mi perfil </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../logic/cerrar_sesion.php">Cerrar Sesion</a>
                         </div>

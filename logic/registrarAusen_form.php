@@ -147,13 +147,19 @@
             //print_r($registrarIncapacidad); exit;
             $pruebaIncapacidad = $conectar->query($registrarIncapacidad);
             if($pruebaIncapacidad){
-                echo "<script> alert('Registro existoso');   location.href = '../pages/admin_agregar.php'; </script>";
+                echo "<script> //alert('Registro existoso');   
+                    location.href = '../pages/admin_agregar.php?ALERT=success'; 
+                    </script>";
             }else{
-                echo "<script> alert('Error al registrar incapacidad');   location.href = '../pages/admin_agregar.php'; </script>";
+                echo "<script> alert('Error al registrar incapacidad');   
+                    location.href = '../pages/admin_agregar.php'; 
+                </script>";
             }
         }else{
             //header("Location: ../pages/admin_agregar.php");
-            echo "<script> alert('Registro existoso');   location.href = '../pages/admin_agregar.php'; </script>";
+            echo "<script> //alert('Registro existoso');   
+                    location.href = '../pages/admin_agregar.php?ALERT=success'; 
+                    </script>";
             exit;
         }
         

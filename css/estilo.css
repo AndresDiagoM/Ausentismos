@@ -3,7 +3,7 @@
     --light: #ffffff;
     --grey: #efefef;
     --navbar: #be3838;
-    --btnHover: #d66060;
+    --btnHover: #850c0c;
 }
 
 body {
@@ -18,7 +18,7 @@ a:hover {
     subrayadas */
 }
 
-/*---------------------  CAMNIOS GLOBALES ---------------- */
+/*---------------------  CONFIGURACIONES GLOBALES ---------------- */
 .bg-primary {
     --bs-bg-opacity: 1;
     background-color: var(--navbar) /*rgba(var(--bs-success-rgb), var(--bs-bg-opacity))*/ !important;
@@ -32,7 +32,7 @@ a:hover {
 }
 
 /*
-    %----------- side bar -------------%
+    %----------- SIDEBAR -> CONTENEDOR LATERAL -------------%
 */
 #sidebar-container {
     min-height: 110vh; /* Es el contenedor de todo el menu lateral, el largo*/
@@ -40,12 +40,58 @@ a:hover {
 #sidebar-container .logo {
     padding: .875rem 1.25rem; /* Es la ubicación del Heading del sidebar */
 }
+
+/*SIDEBAR MENU*/
 #sidebar-container .menu {
     width: 18rem; /* Es el ancho del SideBar*/
 }
 #sidebar-container .menu a:hover {
     background-color: var(--btnHover);
 }
+.menu ul li{
+    position: relative;
+    list-style: none;
+}
+/*.menu ul li.active a .icon{
+    transform: translateX(-32px);
+    color: #0c30bf;
+}*/
+.indicator {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #efefef;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    top: 115px;
+    left: 260px;
+    display: flex; /*none flex*/
+}
+
+
+.menu ul li:nth-child(1).active ~ .indicator{
+    transform: translateY(calc(120px * 0));
+}
+.menu ul li:nth-child(2).active ~ .indicator{
+    transform: translateY(calc(62px * 1));
+}
+.menu ul li:nth-child(3).active ~ .indicator{
+    transform: translateY(calc(62px * 2));
+}
+.menu ul li:nth-child(4).active ~ .indicator{
+    transform: translateY(calc(62px * 3));
+}
+.menu ul li:nth-child(5).active ~ .indicator{
+    transform: translateY(calc(62px * 4));
+}
+.menu ul li:nth-child(6).active ~ .indicator{
+    transform: translateY(calc(62px * 5));
+}
+
+
+
+
 #sidebar-container .sideBar_foot {
     /*width: 18rem; *//* Es el ancho del SideBar*/
 
@@ -67,38 +113,6 @@ a:hover {
     justify-content: center;
     align-items: center;
 }
-.indicator {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: #efefef;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    z-index: 1;
-    top: 16vh;
-    left: 16rem;
-    display: none;
-}
-/*.indicator::before {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: transparent;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    z-index: 1;
-    top: 3vh;
-    left: 0rem;
-    box-shadow: 15px 18px #efefef; 
-}*/
-/*.menu  a:nth-child(1).active ~ .indicator {
-    transform: translateY(calc(16vh * 0));
-}*/
-#sidebar-container .menu  a.mover ~ .indicator {
-    /*transform: translateY(calc(16vh + 9vh));*/
-    background-color: #02c751;
-}
 
 
 /* ===========================================
@@ -118,8 +132,8 @@ a:hover {
     padding-right: 0;
 }
 
-
-/*Estilo para el header de las tablas*/
+/*=====================================================*/
+/*--------Estilo para el header de las tablas--------*/
 /*thead, tbody { display: block; }*/
 .header-table {
     position: sticky; top: 0; z-index: 1;
@@ -137,8 +151,8 @@ input[type=text], input[type=email], input[type=number], input[type=tel], input[
 }
 
 
-/*================================================*/
-/*Para no mostar el Sidebar en version movil*/
+/*===========================================================*/
+/*--------Para no mostar el Sidebar en version movil---------*/
 @media (max-width: 900px) {
     #sidebar-container {
         /*display: none;*/
@@ -154,7 +168,7 @@ input[type=text], input[type=email], input[type=number], input[type=tel], input[
         transition: all 0.3s ease;
     }
     /*if the button id="click" is clicked then show the menu*/
-    .menu-btn:active {
+    .menu-btn:active { /*menu-btn aparece cuando la pantalla es pequeña*/
         background-color: #3e8e41;
         box-shadow: 0 5px #666;
         transform: translateY(4px);

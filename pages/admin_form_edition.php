@@ -89,7 +89,7 @@
                 
                 <!-- LABEL DE LA Contraseña -->
                 <div class="form-floating mb-2">
-                    <input type="text" readonly disabled  class="form-control" min="4" max="40" placeholder="Digite su contraseña"  value="<?php echo $mostrar['Contrasena'];?>">
+                    <input type="password" readonly disabled  class="form-control" min="4" max="40" placeholder="Digite su contraseña"  value="<?php echo $mostrar['Contrasena'];?>">
                     <label class="col-form-label" for="Contraseña"> Contraseña </label>
                 </div>
             </form>
@@ -192,5 +192,6 @@
     <script src="../js/jquery.min.js"></script> 
 
 
-</body>
-</html>
+<?php
+    include("../template/pie.php");
+?>

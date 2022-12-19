@@ -3,3 +3,7 @@ conexion.php
 
 #Excluir archivo html y docs innecesariosa de chartjs
 chart.js-3.9.1/package/dist/docs
+
+#Excluir archivos de pruebas
+css/menu.css
+template/menu.php

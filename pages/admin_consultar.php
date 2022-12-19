@@ -244,14 +244,20 @@
     if (day < 10) day = "0" + day;
 
     var today = year + "-" + month + "-" + day;
+    var tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var tomorrow_string = tomorrow.toISOString().slice(0,10);
     //var today =  +year + "-" + month + "-" + (day+1-day) ;  
-    var today1 = year + "-" + "01" + "-" + "01";
-    document.getElementById("fecha_inicio").value = today1; 
-    document.getElementById("fecha_fin").value = today;
-    //console.log(today);
+    var inicio_año = year + "-" + "01" + "-" + "01";
+    document.getElementById("fecha_inicio").value = inicio_año; 
+    document.getElementById("fecha_fin").value = tomorrow_string;
+
+    console.log(tomorrow);
+    //convertir fecha tomorrow a string
+    console.log(tomorrow_string);
 
 </script>
 
-
-</body>
-</html>
+<?php
+    include("../template/pie.php");
+?>

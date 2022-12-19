@@ -21,7 +21,7 @@ include "../template/cabecera.php";
         <div class="container row col-2 ms-1">
             <a href="../pages/admin_create_user.php">
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Crear
+                    Crear Usuario
                 </button>
             </a>
         </div>
@@ -78,5 +78,6 @@ if (isset($_GET["ALERT"])) {
 }
 ?>
 
-</body>
-</html>
+<?php
+    include("../template/pie.php");
+?>

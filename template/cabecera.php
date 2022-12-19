@@ -22,7 +22,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <link rel="stylesheet" href="../bootstrap-5.2.2-dist/css/bootstrap.min.css" /> 
 
     <!-- CSS -->
-    <link href="../css/estilo.css" rel="stylesheet" integrity="" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/estilo.css" type="text/css" > <!-- integrity="" crossorigin="anonymous" -->
     <link href="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.css" rel="stylesheet" integrity="" crossorigin="anonymous">
 
     <!-- ICONOS en https://ionic.io/ionicons/v4/usage#md-pricetag -->
@@ -41,21 +41,47 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         </div>
 
         <div class="menu">
-            <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none "> 
-                <i class="icon ion-md-apps     mr-2 lead"></i> MENU   </a>
-            <a href="../pages/admin_cargar.php" class="mover p-3 text-light d-block text-decoration-none"> 
-                <i class="icon ion-md-cloud   mr-2 lead"></i> CARGAR DATOS  </a>
-            <a href="../pages/admin_agregar.php" class="p-3 text-light d-block text-decoration-none "> 
-                <i class="icon ion-md-add-circle mr-2 lead"></i> AGREGAR REGISTRO</a>
-            <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none"> 
-                <i class="icon ion-md-search   mr-2 lead"></i> CONSULTAR AUSENTISMO    </a>
-            <a href="../pages/admin_edition_client.php" class="p-3 text-light d-block text-decoration-none"> 
-                <i class="icon ion-md-people mr-2 lead"></i> GESTIONAR USUARIO</a>
-            <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none"> 
-                <i class="icon ion-md-log-out mr-2 lead"></i> CERRAR CESION</a>
+            <ul>
+                <li class="list" id="admin_menu">
+                    <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none">
+                        <i class="icon ion-md-apps mr-2 lead"></i>
+                        <span class="text">MENU</span>
+                    </a>
+                </li>
+                <li class="list" id="admin_cargar">
+                    <a href="../pages/admin_cargar.php" class="p-3 text-light d-block text-decoration-none">
+                        <!-- <span class="icon"> <ion-icon name="person-outline"></ion-icon> </span> -->
+                        <i class="icon ion-md-cloud mr-2 lead"></i>
+                        <span class="text">CARGAR DATOS</span>
+                    </a>
+                </li>
+                <li class="list" id="admin_agregar">
+                    <a href="../pages/admin_agregar.php" class="p-3 text-light d-block text-decoration-none">
+                        <i class="icon ion-md-add-circle mr-2 lead"></i>
+                        <span class="text">AGREGAR REGISTRO</span>
+                    </a>
+                </li>
+                <li class="list" id="admin_consultar">
+                    <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none">
+                        <i class="icon ion-md-search mr-2 lead"> </i>
+                        <span class="text">CONSULTAR</span>
+                    </a>
+                </li>
+                <li class="list" id="admin_edition_client">
+                    <a href="../pages/admin_edition_client.php" class="p-3 text-light d-block text-decoration-none">
+                        <i class="icon ion-md-people mr-2 lead"></i>
+                        <span class="text">GESTIONAR USUARIO</span>
+                    </a>
+                </li>
+                <li class="list" id="cerrar_sesion">
+                    <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none">
+                        <i class="icon ion-md-log-out mr-2 lead"></i>
+                        <span class="text">CERRAR CESION</span>
+                    </a>
+                </li>
+                <div class="indicator"></div>
+            </ul>
         </div>
-
-        <div class="indicator">  </div>
 
         <div class="sideBar_foot" >
             <img src="../images/lema.png" class="img-fluid me-2" width="40" height="40" alt="Sample image">

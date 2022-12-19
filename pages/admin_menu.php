@@ -171,5 +171,6 @@
 
     <script src="../js/graficasCharts.js"></script>
 
-</body>
-</html>
+<?php
+    include("../template/pie.php");
+?>

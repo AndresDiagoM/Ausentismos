@@ -149,19 +149,16 @@ if($tabla_auxiliar!=null){
     <!-- <script src="../js/particles.min.js"></script> -->
     <script src="../js/app1.js"></script>
 
-    <!-- CDN: Libreria de chart.js para las gráficas -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js" integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
 
-    <!-- LOCAL: JQuery, AJAX, Bootstrap 
-    <script src="../bootstrap-4.4.1-dist/js/jquery-3.6.1.min.js"></script> -->     
-    <script src="../bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <!-- LOCAL: JQuery, AJAX, Bootstrap -->
+    <script src="../bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
+    <script src="../bootstrap-5.2.2-dist/js/popper.min.js"></script>
     <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
 
-    <?php
+<?php
 //si se recibe la variable por GET ALERT, entonces se muestra el mensaje de alerta
 if (isset($_GET["ALERT"])) {
     $alert = $_GET["ALERT"];
@@ -170,7 +167,7 @@ if (isset($_GET["ALERT"])) {
             echo "<script>
                 Swal.fire({
                     icon: 'success',
-                    title: '¡Usuario eliminado!',
+                    title: '¡Funcionarios cargados y actualizados!',
                     showConfirmButton: true,
                     confirmButtonText: 'Aceptar',
                     confirmButtonColor: \"#be3838\",
@@ -193,5 +190,6 @@ if (isset($_GET["ALERT"])) {
 }
 ?>
 
-</body>
-</html>
+<?php
+    include("../template/pie.php");
+?>
