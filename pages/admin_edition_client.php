@@ -13,7 +13,7 @@ include "../template/cabecera.php";
             </form>
         </div>
 
-        <div class="container py-4" style="overflow-y: auto; height:70vh;" id="datos">
+        <div class="container py-4" style="overflow-y: auto; height:70vh; font-size:14px" id="datos">
 
         </div>
 

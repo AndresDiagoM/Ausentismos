@@ -30,9 +30,8 @@
         if(!in_array($ext,$allowed) ) {
             //echo 'error';
             //show alert that the file is not an excel file
-            echo "<script>//alert('El archivo no es un archivo de Excel');
-                    window.location= '../pages/admin_cargar.php?ALERT=errorExcel';
-                </script>";
+            //echo "<script>//alert('El archivo no es un archivo de Excel');window.location= '../pages/admin_cargar.php?ALERT=errorExcel';</script>";
+            echo json_encode("error1");
             exit;
         }/*else{
             $destino = "../excel/".$nombreArchivo;
@@ -52,9 +51,8 @@
         //echo "<script> alert('Archivo Cargado'); </script>";
         //exit;
         insertarDatos($conectar);
-        echo "<script>
-                    window.location.href='./admin_cargar.php';
-            </script>";
+        //echo "<script> window.location.href='./admin_cargar.php'; </script>";
+        exit;
 
     }else{
         //echo "No se ha cargado el archivo";
@@ -74,6 +72,10 @@
 
     //CONVERTIR LOS DATOS DEL DOCUMENTO A UN ARRAY
     $sheetData = $documento->getActiveSheet()->toArray();
+    if(!isset($sheetData[0])){
+        echo json_encode("error2");
+        exit;
+    }
     
     //eliminar filas vacias
     foreach($sheetData as $key => $value){
@@ -85,8 +87,10 @@
     //print_r($sheetData);
 
     //read the headers of the excel file, to get the column names and number, to save them in an array
-    $headers = $sheetData[0];    
-    //print_r($headers);
+    $headers = $sheetData[0];   
+    
+    
+    //print_r($headers); exit;
     //print_r($sheetData);exit;
 
     //for each array in $sheetData, change the keys for the values in $headers
@@ -197,15 +201,22 @@
             //convert Object of class mysqli_result into string
             //$result = json_encode($result);
             //echo $result."<br>";
-    
             if($result){
-                //echo "INSERT SUCCESSFUL"."\n \n";
+                //echo json_encode("INSERT SUCCESSFUL");
             }else{
-                //echo "INSERT FAILED"."\n";
-                //$funcionariosNoInsertados[] = $value;
+                //echo json_encode("INSERT FAILED");
             }
         }
     }
+
+    //json encode the array $data and return it to the ajax call, with the success message
+    $json = array();
+    $json['alert'] = "success_aux";
+    //$json['table'] = $tablaAux;
+    //$json['button'] = $buttonAcept;
+    echo json_encode($json);
+    exit;
+
 
     //$tabla_auxiliar= array_merge($data,$funcionariosNoInsertados);
 
@@ -263,14 +274,16 @@
         //if the query is successful, then return true, else return try empty with truncate
         if($result){
             //if the query is successful, show alert and redirect to admin_cargar.php
-            echo "<script>//alert('Datos cargados correctamente'); 
-                window.location.href='../pages/admin_cargar.php?ALERT=success';</script>";
+            //echo "<script>//alert('Datos cargados correctamente'); window.location.href='../pages/admin_cargar.php?ALERT=success';</script>";
+            echo json_encode("success1");
+            exit;
         }else{
             $sql = "TRUNCATE TABLE func_auxiliar";
             $result = $conectar->query($sql);
         }
-        echo "<script>//alert('Datos cargados correctamente'); 
-            window.location.href='../pages/admin_cargar.php?ALERT=success';</script>";
+        //echo "<script>//alert('Datos cargados correctamente'); window.location.href='../pages/admin_cargar.php?ALERT=success';</script>";
+        echo json_encode("success1");
+        exit;
     }
     //eliminar el archivo de la carpeta excel
     //unlink('../excel/'.$nombreArchivo);

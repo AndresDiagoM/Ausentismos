@@ -230,37 +230,181 @@
 </script>
 
 <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
-<?php
-//si se recibe la variable por GET ALERT, entonces se muestra el mensaje de alerta
-if (isset($_GET["ALERT"])) {
-    $alert = $_GET["ALERT"];
-    if ($_GET["ALERT"] != "") {
-        if ($alert == "success") {
-            echo "<script>
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡REGISTRO EXITOSO!',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Aceptar',
-                    confirmButtonColor: \"#be3838\",
-                    //timer: 2500
-                });
-            </script>";
-        } elseif ($alert == "error") {
-            echo "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: '¡ERROR EN EL REGISTRO!',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Aceptar',
-                    confirmButtonColor: \"#be3838\",
-                    //timer: 1500
-                });
-            </script>";
-        }
-    }
-}
-?>
+
+<script>
+    //enviar datos del form a ../logic/registrarAusen_form.php con peticion ajax cuando se presion el boton de registrar
+    $(document).ready(function(){
+        $("#form_register").submit(function(e){
+            e.preventDefault();
+            var datos = $(this).serialize();
+            //console.log(datos);
+            $.ajax({
+                type: "POST",
+                url: "../logic/registrarAusen_form.php",
+                data: datos,
+                success: function(r){
+                    var obj = JSON.parse(r);
+                    //console.log(obj);
+
+                    if(obj=="success"){
+                        //use sweetalert2, reload the page when the alert dissapears
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Registro exitoso!.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else if(obj=="error1"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'No existe la cedula del funcionario!.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else if(obj=="errorTiempo"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'El tiempo de las fechas no es igual al tiempo de la ausencia!.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                //document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else if(obj=="error2"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Debe seleccionar el tipo de ausentismo!.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                //document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else if(obj=="error3"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Las horas deben estar en el mismo día!.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                //document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else if(obj=="error4"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso por horas.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                //document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else if(obj=="error5"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Si escoge el tipo de ausentismo: incapacidad, debe ingresar el codigo de incapacidad.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                //document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else if(obj=="error6"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'El codigo de incapacidad no existe.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                //document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else if(obj=="error7"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error al registrar incapacidad.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                //document.getElementById("form_register").reset();
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error al registrar ausentismo.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //location.reload();
+                                //clean the form
+                                //document.getElementById("form_register").reset();
+                            }
+                        });
+                    }
+
+
+                }
+            });
+        });
+    });
+</script>
 
 <?php
     include("../template/pie.php");

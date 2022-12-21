@@ -1,5 +1,5 @@
 <?php
-    include "../template/cabecera2.php";
+    include "../template/cabecera.php";
 ?>
 
 

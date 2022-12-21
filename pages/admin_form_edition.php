@@ -108,19 +108,19 @@
                 
                 <!-- INPUT DE LA CEDULA -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="cedula_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su cedula"  required>
+                    <input type="text" name="cedula_usuario_edt" class="form-control" pattern="[0-9]{3,10}" value="<?php echo $mostrar['Cedula_U'];?>" placeholder="Digite su cedula"  required>
                     <label class="col-form-label" for="cedula_usuario_edt"> Cedula </label>
                 </div>
 
                 <!-- INPUT DEL Nombre -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="nombre_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su nombre"  required>
+                    <input type="text" name="nombre_usuario_edt" class="form-control" min="4" max="45"  value="<?php echo $mostrar['Nombre_U'];?>" placeholder="Digite su nombre"  required>
                     <label class="col-form-label" for="nombre_usuario_edt"> Nombre </label>
                 </div>
 
                 <!-- INPUT DEL Correo -->
                 <div class="form-floating mb-2">
-                    <input type="email" name="correo_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su correo"  required>
+                    <input type="email" name="correo_usuario_edt" class="form-control" min="4" max="40" value="<?php echo $mostrar['Correo'];?>" placeholder="Digite su correo"  required>
                     <label class="col-form-label" for="correo_usuario_edt"> Correo </label>
                 </div>
 
@@ -138,6 +138,9 @@
                             if($result->num_rows > 0){
                                 while($row = $result->fetch_assoc()){
                                     echo '<option value="'.$row['ID'].'">'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
+                                    if($row['ID'] == $mostrar['ID']){
+                                        echo '<option value="'.$row['ID'].'" selected>'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
+                                    }
                                 }
                             }
                         ?>
@@ -148,22 +151,22 @@
                 <div class="form-floating mb-2">
                     <select class="form-select" name="tipo_usuario_edt" required>
                             <option value="">Seleccione</option>
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="CONSULTA">CONSULTA</option>
-                            <option value="FACULTAD">FACULTAD</option>
+                            <option value="ADMIN" <?php if($mostrar['TipoUsuario'] == 'ADMIN'){echo 'selected';}?> >ADMIN</option>
+                            <option value="CONSULTA" <?php if($mostrar['TipoUsuario'] == 'CONSULTA'){echo 'selected';}?> >CONSULTA</option>
+                            <option value="FACULTAD" <?php if($mostrar['TipoUsuario'] == 'FACULTAD'){echo 'selected';}?> >FACULTAD</option>
                     </select>
                     <label for="tipo_usuario_edt" class="col-form-label">Tipo Usuario</label>
                 </div>
 
                 <!-- INPUT DEL LOGIN -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="login_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su login"  required>
+                    <input type="text" name="login_usuario_edt" class="form-control" min="4" max="40" value="<?php echo $mostrar['Login'];?>" placeholder="Digite su login"  required>
                     <label class="col-form-label" for="login"> Login </label>
                 </div>
 
                 <!-- INPUT DE LA Contraseña -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="contrasena_usuario_edt" class="form-control" min="4" max="40" placeholder="Digite su contraseña"  required>
+                    <input type="password" name="contrasena_usuario_edt" class="form-control" min="4" max="40" value="<?php echo $mostrar['Contrasena'];?>" placeholder="Digite su contraseña"  required>
                     <label class="col-form-label" for="login"> Contraseña </label>
                 </div>
 

@@ -17,19 +17,23 @@
 
 
     $salida     = "";
-    $query      = "SELECT * FROM usuarios ORDER BY Cedula_U";
+    $query      = "SELECT * FROM usuarios 
+                    INNER JOIN dependencias ON usuarios.Dependencia=dependencias.ID
+                    ORDER BY Cedula_U";
     //$query      = "SELECT * FROM usuarios EXCEPT SELECT * FROM usuarios  WHERE TipoUsuario = '%' ORDER BY Cedula_U";
 
     if (isset($_POST['consulta'])){
 
         $q      = $mysqli->real_escape_string($_POST['consulta']);
-        $query  =  "SELECT * FROM usuarios WHERE Cedula_U LIKE '%".$q."%'";
+        $query  =  "SELECT * FROM usuarios 
+                    INNER JOIN dependencias ON usuarios.Dependencia=dependencias.ID
+                    WHERE Cedula_U LIKE '%".$q."%' ORDER BY ID ";
     }
     $resultado = $mysqli->query($query);
     if($resultado->num_rows > 0){
 
             $salida.="<table class='table table-striped table-bordered table-hover table-condensed'>
-                        <thead class='thead-light table-active'>
+                        <thead class='header-table thead-light table-active'>
                             <tr>
                                 <th scope='col'>CEDULA        </th>
                                 <th scope='col'>NOMBRE        </th>
@@ -50,7 +54,7 @@
                         <td scope='row'>".$fila['Cedula_U']."      </td>
                         <td>".$fila['Nombre_U']."      </td>
                         <td>".$fila['Correo']."      </td>
-                        <td>".$fila['Dependencia']."       </td>
+                        <td>".$fila['Departamento']." - ". $fila['Facultad']  ."       </td>
                         <td>".$fila['TipoUsuario']."       </td>
                         <td>".$fila['Login']."        </td>
                         <td>".$fila['Contrasena']."   </td>

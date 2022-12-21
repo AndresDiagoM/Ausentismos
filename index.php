@@ -76,7 +76,7 @@
                     <p class=""></p>
                 </div>
 
-                <p class="text-center lead fw-normal mb-0 me-3">
+                <p class="text-center lead fw-normal mb-0 me-3 fs-1">
                     División de Gestión del Talento Humano</p>
 
                 <div class="divider d-flex align-items-center my-4">

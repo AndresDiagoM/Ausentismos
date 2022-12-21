@@ -12,28 +12,28 @@ include "../template/cabecera.php";
             REGISTRO DE FUNCIONARIO
             </div>
             <div class="card-body">            
-                <form action="../logic/admin_create_funcLogic.php" method="POST" class="form" name="formulario">
+                <form  method="POST" class="form" name="formulario">
                     <!-- INPUT DE NOMBRES DE FUNCIONARIO -->
                     <div class="form-floating mb-3">
-                        <input type="text" name="nomb_func" class="form-control" placeholder="Digite los nombres y apellidos" required>
+                        <input type="text" name="nomb_func" id="nomb_func" class="form-control" placeholder="Digite los nombres y apellidos" required>
                         <label class="col-form-label" for="nomb_func"> Nombres y Apellidos </label>
                     </div>
                     
                     <!-- INPUT DEL NUMERO DE IDENTIFICACION -->
                     <div class="form-floating mb-3">
-                        <input type="text" name="numero_id" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 a 15 digitos." required>
+                        <input type="text" name="numero_id" id="cedula" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 a 15 digitos." required>
                         <label class="col-form-label" for="numero_id"> Número de identificación </label>
                     </div>
 
                     <!-- INPUT DEL CARGO-->
                     <div class="form-floating mb-3">
-                        <input type="text" name="cargo" class="form-control" placeholder="Digite el cargo" required>
+                        <input type="text" name="cargo" id="cargo" class="form-control" placeholder="Digite el cargo" required>
                         <label class="col-form-label" for="cargo"> Cargo </label>
                     </div>
 
                     <!-- INPUT DE LA DEPENDENCIA -->
                     <div class="form-floating mb-3">
-                        <select class="form-select" name="dependencia">
+                        <select class="form-select" name="dependencia" id="dependencia">
                             <option value="">Seleccione</option>
                             <?php
                                 //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
@@ -49,12 +49,12 @@ include "../template/cabecera.php";
                                 }
                             ?>
                         </select>
-                        <label class="col-form-label" for="dependencia"> Dependencia </label>
+                        <label class="col-form-label" for="dependencia"> Dependencia a consultar </label>
                     </div>
 
                     <!-- INPUT DEL GENERO -->
                     <div class="form-floating mb-3">
-                        <select class="form-select" name="genero">
+                        <select class="form-select" name="genero" id="genero">
                             <option value="">Seleccione</option>
                             <option value="MAS">Masculino</option>
                             <option value="FEM">Femenino</option>
@@ -64,7 +64,7 @@ include "../template/cabecera.php";
                     
                     <!-- INPUT DEL SALARIO -->
                     <div class="form-floating mb-3">
-                        <input type="text" name="salario" class="form-control" pattern="[0-9]{3,8}" title="Solo números." placeholder="Digite el salario" required>
+                        <input type="text" name="salario" id="salario" class="form-control" pattern="[0-9]{3,8}" title="Solo números." placeholder="Digite el salario" required>
                         <label class="col-form-label" for="salario"> Salario </label>
                     </div>
 
@@ -92,6 +92,10 @@ include "../template/cabecera.php";
     <script src="../js/app1.js"></script> -->
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
+    <!-- INSTALACION DE SWEETALERT2 -->
+    <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+
+    <script src="../js/registrarFunc.js"></script>
 
 <?php
     include("../template/pie.php");

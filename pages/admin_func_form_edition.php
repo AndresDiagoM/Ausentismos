@@ -92,11 +92,15 @@
         <div class="card-body">
             <h5 class="card-title">Nombre: <?php echo $mostrar['Nombre'] ?></h5>
 
-            <form action="../logic/form_func_editLogic.php?ID=<?php echo $Id_editar ?>" method="POST">
+            <form id="form_func_edit" action="" method="POST">
+
+                <input type="hidden" name="cedula_f" id="cedula_f" value="<?php echo $mostrar['Cedula'];?>">
+                    
+
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Cedula</label>
                     <div class="col-sm-10">
-                    <input type="text" name="cedula_func_edt" class="form-control" placeholder="cedula" pattern="[0-9]{3,8}" title="La identifiación solo debe contener carácteres numéricos." value="<?php echo $mostrar['Cedula'];?>" required>
+                    <input type="text" name="cedula_func_edt" class="form-control" placeholder="cedula" pattern="[0-9]{3,15}" title="La identifiación solo debe contener carácteres numéricos." value="<?php echo $mostrar['Cedula'];?>" required>
                     </div>
                 </div>
 
@@ -171,7 +175,7 @@
                     </div>
                 </div>
 
-
+                <!-- Boton de enviar formulario para modificar funcionario -->
                 <button type="submit" class="btn btn-success">Modificar</button> 
             </form>
 
@@ -195,6 +199,68 @@
 
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
+    
+    <!-- INSTALACION DE SWEETALERT2 -->
+    <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+
+<script>
+    //mandar formulario mediante peticion ajax a ../logic/form_func_editLogic.php, cuando se presione el boton Modificar
+    $(document).ready(function(){
+        $('#form_func_edit').submit(function(e){
+            e.preventDefault();
+            var datos = $(this).serialize();
+            //console.log(datos);
+
+
+            $.ajax({
+                type: "POST",
+                url: "../logic/form_func_editLogic.php",
+                data: datos,
+                success: function(response)
+                {
+                    //json decode the response
+                    var resp = $.parseJSON(response);
+                    console.log(resp);
+
+                    if(resp == 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Funcionario modificado con éxito',
+                            showConfirmButton: true,
+                            //timer: 1500
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "./admin_edit_func.php";
+                            }
+                        })
+                    }else if(resp == 'error1'){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'No existe la dependencia seleccionada',
+                            showConfirmButton: true,
+                            //timer: 1500
+                        })
+                    }else if(resp == 'error2'){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Complete todos los campos!',
+                            showConfirmButton: true,
+                            //timer: 1500
+                        })
+                    }
+                    else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al modificar funcionario',
+                            showConfirmButton: true,
+                            //timer: 1500
+                        })
+                    }
+                }
+            });
+        });
+    });
+</script> 
 
 
 <?php

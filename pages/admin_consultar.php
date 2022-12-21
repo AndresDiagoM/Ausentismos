@@ -10,7 +10,7 @@
         <tr>
             <form class="row" id="multi-filters">
 
-            <th scope="col">
+            <th scope="col" id="th_cedula" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -22,7 +22,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">
+            <th scope="col" id="th_nombre" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,7 +34,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">
+            <th scope="col" id="th_fecha_inicio" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,7 +46,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">
+            <th scope="col" id="th_fecha_fin" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -58,7 +58,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">
+            <th scope="col" id="th_tiempo" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,7 +70,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">
+            <th scope="col" id="th_unidad" class="">
                 <ul class="navbar-nav ml-auto">                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -92,10 +92,10 @@
                     </li>
                 </ul>
             </th>
-            <th scope="col">OBSERVACIÓN</th>
-            <th scope="col">COSTO</th>
-            <th scope="col">USUARIO</th>
-            <th scope="col">
+            <th scope="col" id="th_observar" class="">OBSERVACIÓN</th>
+            <th scope="col" id="th_costo" class="">COSTO</th>
+            <th scope="col" id="th_usuario" class="">USUARIO</th>
+            <th scope="col" id="th_tipo" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -116,7 +116,7 @@
                                         /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
                                 ?>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id=<?php echo "\""."type_".$ID."\""; ?>  name="Tipo_Ausentismo[]" value=<?php echo $ID; ?> >
+                                    <input type="checkbox" class="form-check-input tipo_ausen" id=<?php echo "\""."type_".$ID."\""; ?>  name="Tipo_Ausentismo[]" value=<?php echo $ID; ?> >
                                     <label class="form-check-label" for=<?php echo "\""."type_".$ID."\""; ?> > <?php echo $Nombre; ?> </label>
                                 </div>
                                 <?php
@@ -127,7 +127,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">
+            <th scope="col" id="th_codigo" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -139,7 +139,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">
+            <th scope="col" id="th_diagnostico" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -151,7 +151,7 @@
                         </li>
                     </ul>
             </th>
-            <th scope="col">
+            <th scope="col" id="th_entidad" class="">
                     <ul class="navbar-nav ml-auto">                    
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -252,9 +252,9 @@
     document.getElementById("fecha_inicio").value = inicio_año; 
     document.getElementById("fecha_fin").value = tomorrow_string;
 
-    console.log(tomorrow);
+    //console.log(tomorrow);
     //convertir fecha tomorrow a string
-    console.log(tomorrow_string);
+    //console.log(tomorrow_string);
 
 </script>
 

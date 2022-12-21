@@ -7,16 +7,7 @@ $(function()
 {
     get_ausentismos();
 
-    /*const botones = document.querySelectorAll("#myPager input");
-    //const botones = document.getElementById("myPager a");
-    for(let i = 0; i < botones.length; i++){
-        botones[i].addEventListener("click", function(e){
-            const num = e.target.dataset.pagina;
-            alert(num);
-            $("#filters-result").html("");
-            e.preventDefault(); //Evita que se recargue la página con el href
-        });
-    }*/
+    //se reliaza la busqueda cuando se de click en el boton del paginador
     $(document).on('click', '#myPager input', function() 
     {
         var valor = $(this).val();
@@ -25,32 +16,39 @@ $(function()
         //$("#total_resultados").append(valor);
     });
 
-    //se necesita hacer algo cuando se utilice los checkboxes, la búsqueda de cedula y la fecha
-    $(".form-check-input").on("click", function ()  //la funcion onClick de JQUERY, todos los checkbox inputs en el HTML tienen la clase "form-check-input"
-    {
-        get_ausentismos(); //cuando se de click en el checkbox que se ejecute get_ausentismos();
-    }); 
-
+    //se realiza la busqueda cuando se de click en el boton de la cedula
     $(document).on('keyup', '#cedula', function()  //para el cuadro de busqueda de cedula
     {
         var valor = $(this).val();
 
         if(valor != "" && !isNaN(valor) ){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_cedula").classList.add("table-warning");
             get_ausentismos();
         }else{
             get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_cedula").classList.remove("table-warning");
         }
+
         //get_ausentismos();
     });
 
+    //se realiza la busqueda cuando se de click en el boton del nombre
     $(document).on('keyup', '#nombre', function()  //para el cuadro de busqueda de cedula. #nombre es el id del input en el HTML
     {
         var valor = $(this).val();
 
         if(valor != "" && isNaN(valor) ){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_nombre").classList.add("table-warning");
             get_ausentismos();
         }else{
             get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_nombre").classList.remove("table-warning");
         }
         //get_ausentismos();
     });
@@ -59,13 +57,36 @@ $(function()
     {
         var valor = $(this).val();
 
-        if(valor != "" && isNaN(valor) ){
+        if(valor != "" && !isNaN(valor) ){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_tiempo").classList.add("table-warning");
             get_ausentismos();
         }else{
             get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_tiempo").classList.remove("table-warning");
         }
         //get_ausentismos();
     });
+
+    //se necesita hacer algo cuando se utilice los checkboxes de UNIDAD
+    $("#unidad").on("click", function ()  //la funcion onClick de JQUERY, todos los checkbox inputs en el HTML tienen la clase "form-check-input"
+    {
+        get_ausentismos(); //cuando se de click en el checkbox que se ejecute get_ausentismos();
+
+        //add to the th class list the atribute table-warning to change the color of the th. if it is already there, then it will be removed
+        if(document.getElementById("th_unidad").classList.contains("table-warning")){
+            //document.getElementById("th_tipo").classList.remove("table-warning");
+        }else{
+            document.getElementById("th_unidad").classList.add("table-warning");
+        }
+
+        //if the checkbox is unchecked, then remove the class table-warning to the th
+        if(!$(this).is(':checked')){
+            document.getElementById("th_unidad").classList.remove("table-warning");
+        }
+    }); 
 
     $(".form-date").on("change",function(){  //.form date es la clase de los inputs de fecha
         //var selected = $(this).val();
@@ -73,14 +94,37 @@ $(function()
         //alert(selected);
     });
 
+    //se necesita hacer algo cuando se utilice los checkboxes de TIPO AUSENTISMOS
+    $(".tipo_ausen").on("click", function ()  //la funcion onClick de JQUERY, todos los checkbox inputs en el HTML tienen la clase "form-check-input"
+    {
+        get_ausentismos(); //cuando se de click en el checkbox que se ejecute get_ausentismos();
+
+        //add to the th class list the atribute table-warning to change the color of the th. if it is already there, then it will be removed
+        if(document.getElementById("th_tipo").classList.contains("table-warning")){
+            //document.getElementById("th_tipo").classList.remove("table-warning");
+        }else{
+            document.getElementById("th_tipo").classList.add("table-warning");
+        }
+
+        //if the checkbox is unchecked, then remove the class table-warning to the th
+        if(!$(this).is(':checked')){
+            document.getElementById("th_tipo").classList.remove("table-warning");
+        }
+    }); 
+
     $(document).on('keyup', '#codigo', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
     {
         var valor = $(this).val();
 
-        if(valor != "" && isNaN(valor) ){
+        if(valor != "" ){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_codigo").classList.add("table-warning");
             get_ausentismos();
         }else{
             get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_codigo").classList.remove("table-warning");
         }
         //get_ausentismos();
     });
@@ -90,9 +134,14 @@ $(function()
         var valor = $(this).val();
 
         if(valor != "" && isNaN(valor) ){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_diagnostico").classList.add("table-warning");
             get_ausentismos();
         }else{
             get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_diagnostico").classList.remove("table-warning");
         }
         //get_ausentismos();
     });
@@ -102,19 +151,18 @@ $(function()
         var valor = $(this).val();
 
         if(valor != "" && isNaN(valor) ){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_entidad").classList.add("table-warning");
             get_ausentismos();
         }else{
             get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_entidad").classList.remove("table-warning");
         }
         //get_ausentismos();
     });
 
-    $(".fila_tabla").on("click",function(){  //.FILA_TABLA, es la clase de las filas de la tabla
-        //var selected = $(this).val();
-        //get_ausentismos(); 
-        //alert(selected);
-        console.log("hhhh");
-    });
 });
 
 function get_ausentismos(pagina)

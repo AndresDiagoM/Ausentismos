@@ -90,7 +90,25 @@ a:hover {
 }
 
 
+#sidebar-container .logoU {
+    /*width: 18rem; *//* Es el ancho del SideBar*/
 
+    /* set the image size according to the SIDEBAR size */
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-image: url(../images/icon.png);*/
+
+    /*position:absolute;
+    width:100px;
+    height:100px;*/
+    
+    /* centrar verticalmente la imagen */
+    top:10%;
+    margin-top:10%;
+}
 
 #sidebar-container .sideBar_foot {
     /*width: 18rem; *//* Es el ancho del SideBar*/
@@ -155,7 +173,7 @@ input[type=text], input[type=email], input[type=number], input[type=tel], input[
 /*--------Para no mostar el Sidebar en version movil---------*/
 @media (max-width: 900px) {
     #sidebar-container {
-        /*display: none;*/
+        display: none;
         position: absolute;
         top: 80px;
         left: -100%;
@@ -167,6 +185,9 @@ input[type=text], input[type=email], input[type=number], input[type=tel], input[
         text-align: center;
         transition: all 0.3s ease;
     }
+    .indicator {
+        display: none;
+    }
     /*if the button id="click" is clicked then show the menu*/
     .menu-btn:active { /*menu-btn aparece cuando la pantalla es pequeña*/
         background-color: #3e8e41;
@@ -177,6 +198,7 @@ input[type=text], input[type=email], input[type=number], input[type=tel], input[
         left: 0%;
         width: 100%;
     }
+    
 
     .stat{
         border: 0;

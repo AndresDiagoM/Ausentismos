@@ -37,55 +37,105 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <!-- SIDE BAR - menu lateral -->
     <div id="sidebar-container" class="bg-primary">
         <div class="logo" >
-            <h4 class="text-light font-weight-bold"> GESTION DE AUSENTISMOS </h4>
+            <h4 class="text-center text-light font-weight-bold"> GESTION DE AUSENTISMOS </h4>
         </div>
 
         <div class="menu">
-            <ul>
-                <li class="list" id="admin_menu">
-                    <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none">
-                        <i class="icon ion-md-apps mr-2 lead"></i>
-                        <span class="text">MENU</span>
-                    </a>
-                </li>
-                <li class="list" id="admin_cargar">
-                    <a href="../pages/admin_cargar.php" class="p-3 text-light d-block text-decoration-none">
-                        <!-- <span class="icon"> <ion-icon name="person-outline"></ion-icon> </span> -->
-                        <i class="icon ion-md-cloud mr-2 lead"></i>
-                        <span class="text">CARGAR DATOS</span>
-                    </a>
-                </li>
-                <li class="list" id="admin_agregar">
-                    <a href="../pages/admin_agregar.php" class="p-3 text-light d-block text-decoration-none">
-                        <i class="icon ion-md-add-circle mr-2 lead"></i>
-                        <span class="text">AGREGAR REGISTRO</span>
-                    </a>
-                </li>
-                <li class="list" id="admin_consultar">
-                    <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none">
-                        <i class="icon ion-md-search mr-2 lead"> </i>
-                        <span class="text">CONSULTAR</span>
-                    </a>
-                </li>
-                <li class="list" id="admin_edition_client">
-                    <a href="../pages/admin_edition_client.php" class="p-3 text-light d-block text-decoration-none">
-                        <i class="icon ion-md-people mr-2 lead"></i>
-                        <span class="text">GESTIONAR USUARIO</span>
-                    </a>
-                </li>
-                <li class="list" id="cerrar_sesion">
-                    <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none">
-                        <i class="icon ion-md-log-out mr-2 lead"></i>
-                        <span class="text">CERRAR CESION</span>
-                    </a>
-                </li>
-                <div class="indicator"></div>
-            </ul>
+            <?php
+                if($tipo_usuario == 'ADMIN'){
+                    
+            ?>
+                <ul>
+                    <li class="list" id="admin_menu">
+                        <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-apps mr-2 lead"></i>
+                            <span class="text">MENU</span>
+                        </a>
+                    </li>
+                    <li class="list" id="admin_cargar">
+                        <a href="../pages/admin_cargar.php" class="p-3 text-light d-block text-decoration-none">
+                            <!-- <span class="icon"> <ion-icon name="person-outline"></ion-icon> </span> -->
+                            <i class="icon ion-md-cloud mr-2 lead"></i>
+                            <span class="text">CARGAR DATOS</span>
+                        </a>
+                    </li>
+                    <li class="list" id="admin_agregar">
+                        <a href="../pages/admin_agregar.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-add-circle mr-2 lead"></i>
+                            <span class="text">AGREGAR REGISTRO</span>
+                        </a>
+                    </li>
+                    <li class="list" id="admin_consultar">
+                        <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-search mr-2 lead"> </i>
+                            <span class="text">CONSULTAR</span>
+                        </a>
+                    </li>
+                    <li class="list" id="admin_edition_client">
+                        <a href="../pages/admin_edition_client.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-people mr-2 lead"></i>
+                            <span class="text">GESTIONAR USUARIO</span>
+                        </a>
+                    </li>
+                    <li class="list" id="cerrar_sesion">
+                        <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-log-out mr-2 lead"></i>
+                            <span class="text">CERRAR CESION</span>
+                        </a>
+                    </li>
+                    <div class="indicator"></div>
+                </ul>
+            <?php //MENU DEL CONSULTOR, SIN OPCIONES DE GESTION Y CRUD
+                }else if($tipo_usuario == 'CONSULTA'){
+            ?>
+                <ul>
+                    <li class="list" id="admin_menu">
+                        <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-apps mr-2 lead"></i>
+                            <span class="text">MENU</span>
+                        </a>
+                    </li>
+                    <li class="list" id="admin_consultar">
+                        <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-search mr-2 lead"> </i>
+                            <span class="text">CONSULTAR</span>
+                        </a>
+                    </li>
+                    <li class="list" id="cerrar_sesion">
+                        <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-log-out mr-2 lead"></i>
+                            <span class="text">CERRAR CESION</span>
+                        </a>
+                    </li>
+                    <div class="indicator"></div>
+                </ul>
+            <?php //MENU DE FACULTAD, SOLO SE PERMITE AGREGAR AUSENTISMO
+                }elseif($tipo_usuario == 'FACULTAD'){
+            ?>
+                <ul>
+                    <li class="list" id="cerrar_sesion">
+                        <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-log-out mr-2 lead"></i>
+                            <span class="text">CERRAR CESION</span>
+                        </a>
+                    </li>
+                </ul>
+            <?php
+                }
+            ?>
         </div>
 
-        <div class="sideBar_foot" >
-            <img src="../images/lema.png" class="img-fluid me-2" width="40" height="40" alt="Sample image">
-            <img src="../images/logosIcontec2020.png" class="img-fluid" width="100" height="100" alt="Sample image">
+        <div class="container-fluid">
+            <!-- LOGO DE LA UNIVERSIDAD -->
+            <div class="container logoU" >
+                <img src="../images/icon.png" class="img-fluid me-2" alt="Sample image">
+            </div>
+            
+            <!-- logos de icontec y lema 
+            <div class="sideBar_foot" >
+                <img src="../images/lema.png" class="img-fluid me-2" width="40" height="40" alt="Sample image">
+                <img src="../images/logosIcontec2020.png" class="img-fluid" width="100" height="100" alt="Sample image">
+            </div> -->
         </div>
     </div>
 

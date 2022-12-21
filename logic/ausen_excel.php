@@ -43,6 +43,13 @@
         $hojaActiva->getColumnDimension('I')->setWidth(35);
         $hojaActiva->setCellValue('J1', 'Tipo_Ausentismo');
         $hojaActiva->getColumnDimension('J')->setWidth(25);
+        $hojaActiva->setCellValue('K1', 'Codgio');
+        $hojaActiva->getColumnDimension('K')->setWidth(15);
+        $hojaActiva->setCellValue('L1', 'Diagnostico');
+        $hojaActiva->getColumnDimension('L')->setWidth(25);
+        $hojaActiva->setCellValue('M1', 'Entidad');
+        $hojaActiva->getColumnDimension('M')->setWidth(25);
+
 
 
         $ausentismos = $conectar->query($sqli);
@@ -70,6 +77,10 @@
                 } elseif ($ausentismo['Tipo_Ausentismo'] == 5) {
                         $hojaActiva->setCellValue('J' . $fila, 'PERMISO POR HORAS');
                 }
+
+                $hojaActiva->setCellValue('K' . $fila, $ausentismo['Codigo']);
+                $hojaActiva->setCellValue('L' . $fila, $ausentismo['Diagnostico']);
+                $hojaActiva->setCellValue('M' . $fila, $ausentismo['Entidad']);
 
                 $fila++;
         }

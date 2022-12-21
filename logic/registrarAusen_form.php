@@ -29,7 +29,8 @@
                         $var = mysqli_num_rows($funcionarios);                        
                         
                         if($var<=0){
-                            echo "<script> alert('No existe la cedula del funcionario'); location.href = '../pages/admin_agregar.php';  </script>";          
+                            //echo "<script> alert('No existe la cedula del funcionario'); location.href = '../pages/admin_agregar.php';  </script>";     
+                            echo json_encode("error1");
                             exit; 
                         }else{
                             $row = mysqli_fetch_array($funcionarios);
@@ -41,7 +42,8 @@
                     } elseif ($field_name == "Tipo_Ausentismo") {
 
                         if($value==""){
-                            echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/admin_agregar.php';  </script>";          
+                            //echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/admin_agregar.php';  </script>";
+                            echo json_encode("error2");          
                             exit;              
                         }
 
@@ -79,7 +81,8 @@
         if($dias != $tiempo){
             //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
             //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
-            echo "<script> alert('El tiempo de las fechas no es igual al tiempo de la ausencia'); location.href = '../pages/admin_agregar.php';  </script>";          
+            //echo "<script> alert('El tiempo de las fechas no es igual al tiempo de la ausencia'); location.href = '../pages/admin_agregar.php';  </script>";   
+            echo json_encode("errorTiempo");       
             exit; 
         }
     }else{
@@ -88,7 +91,8 @@
         if($dias != 1){
             //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
             //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
-            echo "<script> alert('Las horas deben estar en el mismo día'); location.href = '../pages/admin_agregar.php';  </script>";          
+            //echo "<script> alert('Las horas deben estar en el mismo día'); location.href = '../pages/admin_agregar.php';  </script>";   
+            echo json_encode("error3");        
             exit; 
         }
     }
@@ -99,7 +103,8 @@
     $unidad = $query_values['Unidad'][0];
     $tipo = $query_values['Tipo_Ausentismo'][0];
     if($unidad=="horas" && $tipo!=5){
-        echo "<script> alert('Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso por horas'); location.href = '../pages/admin_agregar.php';  </script>";          
+        //echo "<script> alert('Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso por horas'); location.href = '../pages/admin_agregar.php';  </script>";    
+        echo json_encode("error4");        
         exit; 
     }
 
@@ -109,14 +114,16 @@
     $tipo = $query_values['Tipo_Ausentismo'][0];
     $codigo = $query_values['Codigo'][0];
     if($tipo==1 && $codigo==""){
-        echo "<script> alert('Si escoge el tipo de ausentismo: incapacidad, debe ingresar el codigo de incapacidad'); location.href = '../pages/admin_agregar.php';  </script>";          
+        //echo "<script> alert('Si escoge el tipo de ausentismo: incapacidad, debe ingresar el codigo de incapacidad'); location.href = '../pages/admin_agregar.php';  </script>";  
+        echo json_encode("error5");          
         exit; 
     }else{
         $sqlCodigo = "SELECT * FROM codigos WHERE Codigo='$codigo' ";
         $codigos = $conectar->query($sqlCodigo);  //print_r($sqli); exit;
         $var = mysqli_num_rows($codigos);
         if($tipo==1 && $var<=0){
-            echo "<script> alert('El codigo de incapacidad no existe'); location.href = '../pages/admin_agregar.php';  </script>";          
+            //echo "<script> alert('El codigo de incapacidad no existe'); location.href = '../pages/admin_agregar.php';  </script>";
+            echo json_encode("error6"); 
             exit; 
         }
     }
@@ -147,27 +154,21 @@
             //print_r($registrarIncapacidad); exit;
             $pruebaIncapacidad = $conectar->query($registrarIncapacidad);
             if($pruebaIncapacidad){
-                echo "<script> //alert('Registro existoso');   
-                    location.href = '../pages/admin_agregar.php?ALERT=success'; 
-                    </script>";
+                echo json_encode("success"); 
             }else{
-                echo "<script> alert('Error al registrar incapacidad');   
-                    location.href = '../pages/admin_agregar.php'; 
-                </script>";
+                //echo "<script> alert('Error al registrar incapacidad');location.href = '../pages/admin_agregar.php';</script>";
+                echo json_encode("error"); 
             }
         }else{
             //header("Location: ../pages/admin_agregar.php");
-            echo "<script> //alert('Registro existoso');   
-                    location.href = '../pages/admin_agregar.php?ALERT=success'; 
-                    </script>";
+            //echo "<script> //alert('Registro existoso'); location.href = '../pages/admin_agregar.php?ALERT=success'; </script>";
+            echo json_encode("success"); 
             exit;
         }
         
     }
     else{
-        echo "<script> alert('Registro incorrecto');
-        location.href = '../pages/admin_agregar.php';
-        </script>";
+        echo json_encode("error"); 
     }
     
 ?>

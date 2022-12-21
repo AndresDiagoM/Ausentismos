@@ -4,70 +4,69 @@ include "../conexion.php"; //conexión a la base de datos
 include "../template/cabecera.php";
 
 
-
-$tablaAux ="";
-//Cuando se presiona el boton de cargar, se llama al archivo cargarFuncionarios.php
-if(isset($_POST['accion']) and isset($_FILES['excelFile'])){
-    //echo 'BOTON: '.$_POST['accion'];
-    //echo ($_FILES['excelFile']['name']!="");
-    include "../logic/cargarFuncionarios.php";
-    
-}elseif(isset($_POST['aceptar']) and $_POST['aceptar']=="ACEPTAR"){
-    include "../logic/cargarFuncionarios.php";
-}
-
-//query for the func_auxiliar table, then show it in a table
-$query = "SELECT * FROM func_auxiliar ORDER BY Error ASC"; //WHERE Error != 'N/A' ORDER BY Error ASC
-$result = $conectar->query($query);
-$num_rows = mysqli_num_rows($result);
-$tabla_auxiliar = array();
-while($row = mysqli_fetch_array($result)){
-    $tabla_auxiliar[] = $row;
-}
-
-if($tabla_auxiliar!=null){
-    $tablaAux .= "<table class='table table-striped table-bordered table-hover table-condensed'>
-                <thead class='thead-light'>
-                    <tr>
-                        <th scope='col' class='header-table table-active' colspan='8'>Funcionarios a cargar y actualizar: ".$num_rows."</th>
-                    </tr>
-                    <tr class='header-table'>
-                        <th scope='col'>Cedula</th>
-                        <th scope='col'>Nombre</th>
-                        <th scope='col'>Cargo</th>
-                        <th scope='col'>Genero</th>
-                        <th scope='col'>Salario</th>
-                        <th scope='col'>Estado</th>
-                        <th scope='col'>Error</th>
-                        <th scope='col'>Editar</th>
-                    </tr>
-                </thead>
-                <tbody>";
-
-    foreach($tabla_auxiliar as $funcionario){
-        $Id_fila=$funcionario['Cedula'];
-        if($funcionario['Error'] != 'N/A'){
-            
-            $tablaAux .= "<tr>
-                            <th scope='row'>".$funcionario['Cedula']."</th>
-                            <td>".$funcionario['Nombre']."</td>
-                            <td>".$funcionario['Cargo']."</td>
-                            <td>".$funcionario['Genero']."</td>
-                            <td>".$funcionario['Salario']."</td>
-                            <td>".$funcionario['Estado']."</td>
-                            <td>".$funcionario['Error']."</td>
-                            <td><a href='../pages/admin_aux_table_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
-                        </tr>";
-        }
+    //query for the func_auxiliar table, then show it in a table
+    $query = "SELECT * FROM func_auxiliar ORDER BY Error ASC"; //WHERE Error != 'N/A' ORDER BY Error ASC
+    $result = $conectar->query($query);
+    $num_rows = mysqli_num_rows($result);
+    $tabla_auxiliar = array();
+    while($row = mysqli_fetch_array($result)){
+        $tabla_auxiliar[] = $row;
     }
-    $tablaAux .= "</tbody>
-            </table>";
-}
+    $tablaAux ="";
+    if($tabla_auxiliar!=null){
+        $tablaAux .= "<table class='table table-striped table-bordered table-hover table-condensed'>
+                    <thead class='thead-light'>
+                        <tr>
+                            <th scope='col' class='header-table table-active' colspan='8'>Funcionarios a cargar y actualizar: ".$num_rows."</th>
+                        </tr>
+                        <tr class='header-table'>
+                            <th scope='col'>Cedula</th>
+                            <th scope='col'>Nombre</th>
+                            <th scope='col'>Cargo</th>
+                            <th scope='col'>Genero</th>
+                            <th scope='col'>Salario</th>
+                            <th scope='col'>Estado</th>
+                            <th scope='col'>Error</th>
+                            <th scope='col'>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+
+        foreach($tabla_auxiliar as $funcionario){
+            $Id_fila=$funcionario['Cedula'];
+            if($funcionario['Error'] != 'N/A'){
+                
+                $tablaAux .= "<tr>
+                                <th scope='row'>".$funcionario['Cedula']."</th>
+                                <td>".$funcionario['Nombre']."</td>
+                                <td>".$funcionario['Cargo']."</td>
+                                <td>".$funcionario['Genero']."</td>
+                                <td>".$funcionario['Salario']."</td>
+                                <td>".$funcionario['Estado']."</td>
+                                <td>".$funcionario['Error']."</td>
+                                <td><a href='../pages/admin_aux_table_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
+                            </tr>";
+            }
+        }
+        $tablaAux .= "</tbody>
+                </table>";
+    }
+
+    $buttonAcept =  "<section class='py-3'>
+                    <div class='container'>
+                        <div class='col-lg-4 d-flex'>
+                            <!-- <form action='' method='POST' enctype='multipart/form-data'> -->
+                                <button type='button' name='aceptar' onclick = 'Aceptar()'  value='ACEPTAR' class='btn btn-success'>ACEPTAR</button>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                    </section>";
+
 ?>
 
 
     <!-- Contenerdor del contenido de la página-->
-    <div class="content" >
+    <div class="content" id="cargar-content">
         <!-- Contenerdor de cards-->
         <section class="bg-gray">
 
@@ -83,8 +82,8 @@ if($tabla_auxiliar!=null){
                             </div>
                             
                             <div class="card-body">
-                                <form action="" method="POST" enctype="multipart/form-data">
-                                    <input type="file" class="form-control mb-3" name="excelFile" required id="excelFile" placeholder="Imagen">
+                                <form name="formulario" action="" method="POST" enctype="multipart/form-data">
+                                    <input type="file" class="form-control mb-3" name="excelFile" required id="excelFile" placeholder="archivo">
                                     <!--- input type file that just allows excel files -->
 
                                     <div class="btn-group" role="group" aria-label="">
@@ -113,31 +112,18 @@ if($tabla_auxiliar!=null){
             </div>
 
         </section>
-    
         <?php
-        if($tablaAux!=null){          
-        ?>
-        <section>
-            <!-- Contenedor de tabla -->
-            <div class="container " style="overflow-y:scroll; height:30vw; position:relative">
-                <?php 
-                    if($tablaAux != null){
-                        echo $tablaAux;
-                    }
-                ?>
-            </div>
-        </section>
-        <?php
-            echo "<section class='py-3'>
-                    <div class='container'>
-                        <div class='col-lg-4 d-flex'>
-                            <form action='' method='POST' enctype='multipart/form-data'>
-                                <button type='submit' name='aceptar'  value='ACEPTAR' class='btn btn-success'>ACEPTAR</button>
-                            </form>
-                        </div>
-                    </div>
+            if($tablaAux != ""){
+                echo "<section>
+                        <!-- Contenedor de tabla -->
+                        <div class='container' id='table_func_aux' style='overflow-y:scroll; height:30vw; position:relative'>";
+                            
+                
+                echo $tablaAux;
+                echo "      </div>
                     </section>";
-        }
+                echo $buttonAcept;
+            }
         ?>
     </div>
 
@@ -158,37 +144,153 @@ if($tabla_auxiliar!=null){
     <script src="../bootstrap-5.2.2-dist/js/popper.min.js"></script>
     <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
 
-<?php
-//si se recibe la variable por GET ALERT, entonces se muestra el mensaje de alerta
-if (isset($_GET["ALERT"])) {
-    $alert = $_GET["ALERT"];
-    if ($_GET["ALERT"] != "") {
-        if ($alert == "success") {
-            echo "<script>
+<script>
+    //script para que solo se puedan subir archivos de excel .xlsx y .xls
+    $(document).ready(function(){
+        $("#excelFile").change(function(){
+            var file = this.files[0];
+            var fileType = file.type;
+            var match = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+            if(!(fileType == match[0] || fileType == match[1])){
+                //use sweetalert2
                 Swal.fire({
-                    icon: 'success',
-                    title: '¡Funcionarios cargados y actualizados!',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Aceptar',
-                    confirmButtonColor: \"#be3838\",
-                    //timer: 2500
-                });
-            </script>";
-        } elseif ($alert == "errorExcel") {
-            echo "<script>
-                Swal.fire({
+                    position: 'center',
                     icon: 'error',
-                    title: '¡No es un archivo de excel!',
+                    title: 'Por favor seleccione un archivo de excel válido.',
                     showConfirmButton: true,
-                    confirmButtonText: 'Aceptar',
-                    confirmButtonColor: \"#be3838\",
-                    //timer: 1500
+                    //timer: 2500
+                    allowOutsideClick: false
                 });
-            </script>";
-        }
+                $("#excelFile").val('');
+                return false;
+            }
+        });
+    });
+
+    //when document is ready, call a function to send the file to the server, when the form is submitted
+    $(document).ready(function(){
+        //alert("Hola");
+        //$("#formulario").submit(function(e){
+        $("form[name=formulario]").submit(function(e){
+            e.preventDefault();
+
+            //get the file from the form
+            var file = $("#excelFile")[0].files[0];
+
+            //send the file to the server with ajax 
+            var formData = new FormData();
+            formData.append("excelFile", file);
+
+            //ajax call
+            $.ajax({
+                url: "../logic/cargarFuncionarios.php",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    //alert(response);
+
+                    //convert the response from json to an object
+                    var obj = JSON.parse(response);
+                    //console.log(obj);
+                    //console.log(obj.alert);
+                    
+
+                    //if obj has the property alert, then show the alert
+                    if(obj.alert=="success_aux"){
+                        //use sweetalert2, reload the page when the alert dissapears
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Archivo cargado correctamente.',
+                            showConfirmButton: true,
+                            //timer: 2500
+                            allowOutsideClick: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+
+                        //reload the page, 
+                        //location.reload();
+
+                        //add to the div id="table_func_aux" the table with the data
+                        //$("#table_func_aux").html(obj.table);
+
+                        //add to the div id=cargar_conte the section obj.button
+                        //$("#cargar_conte").html(obj.button);
+
+                    }else if(obj == "error1"){
+                        //use sweetalert2
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'El archivo no es de excel.',
+                            showConfirmButton: true,
+                            //timer: 1500
+                        });
+                    }
+                    else{
+                        //use sweetalert2
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error al cargar el archivo.',
+                            showConfirmButton: true,
+                            //timer: 1500
+                        });
+                    }
+                }
+            });
+            
+        });
+    });
+
+    //funcion Aceptar() para el boton aceptar, que envia una peticion ajax al servidor
+    function Aceptar(){
+        //alert("Hola");
+        $.ajax({
+            url: "../logic/cargarFuncionarios.php",
+            type: "POST",
+            data: {aceptar: "aceptar"},
+            success: function(response){
+                //alert(response);
+
+                //convert the response from json to an object
+                var obj = JSON.parse(response);
+                console.log(obj);
+                //console.log(obj.alert);
+
+                if(obj == "success1"){
+                    //use sweetalert2 , reload the page when the alert is closed
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Funcionarios actualizados correctamente!',
+                        showConfirmButton: true,
+                        //timer: 1500
+                        allowOutsideClick: false
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
+
+                    //clean the form
+                    $("form[name=formulario]").trigger("reset");
+
+                    //reload the page
+                    //location.reload();
+                
+                }
+            }
+        });
     }
-}
-?>
+
+</script>
+
 
 <?php
     include("../template/pie.php");
