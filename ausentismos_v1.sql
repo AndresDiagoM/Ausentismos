@@ -16922,11 +16922,8 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-<<<<<<<<< Temporary merge branch 1
-INSERT INTO `usuarios` (`Cedula`, `Nombre`, `Correo`, `Dependencia`, `TipoUsuario`, `login`, `contraseña`) VALUES
-=========
-INSERT INTO `usuarios` (`Cedula_U`, `Nombre_U`, `Correo`, `Dependencia`, `TipoUsuario`, `login`, `contraseña`) VALUES
->>>>>>>>> Temporary merge branch 2
+
+INSERT INTO `usuarios` (`Cedula_U`, `Nombre_U`, `Correo`, `Dependencia`, `TipoUsuario`, `login`, `contrasena`) VALUES
 (25277884, 'Alejandra Plaza', 'alejandraplaza@unicauca.edu.co', 102, 'consulta', 'consulta', '123'),
 (34327997, 'Adriana Patricia Benavides Tabares', 'adrianabenavides@unicauca.edu.co', 102, 'Admin', 'admin', '123'),
 (1001086246, 'ANDRES FELIPE DIAGO', 'andresdiag@unicauca.edu.co', 94, 'Admin', 'admin1', '123');
@@ -17003,11 +17000,8 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ausentismos`
 --
 ALTER TABLE `ausentismos`
-<<<<<<<<< Temporary merge branch 1
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
-=========
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1712;
->>>>>>>>> Temporary merge branch 2
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1712;
+
 
 --
 -- AUTO_INCREMENT de la tabla `dependencias`
@@ -17025,11 +17019,8 @@ ALTER TABLE `entidades`
 -- AUTO_INCREMENT de la tabla `incapacidad`
 --
 ALTER TABLE `incapacidad`
-<<<<<<<<< Temporary merge branch 1
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-=========
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=378;
->>>>>>>>> Temporary merge branch 2
+
 
 --
 -- AUTO_INCREMENT de la tabla `salarios`

@@ -1,10 +1,22 @@
 <?php
+    //include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
+
+    include "../conexion.php";
+    session_start();
+
+    $autentication = $_SESSION['TIPO_USUARIO'];
+    if($autentication == '' || $autentication == null || !in_array($autentication, array("ADMIN", "CONSULTA","FACULTAD"))){
+        //header('Location: ../pages/inicio_sesion.php?message=3');
+        session_destroy();
+        echo "<script> alert('Sin permisos'); location.href = '../pages/inicio_sesion.php?message=3';  </script>";
+    }
+
     include "../template/cabecera.php";
 ?>
 
 <!-- CONTENEDOR CON TABLA DE AUSENTISMOS -->
 <!--  <div class="table table-bordered table-hover">  PARA USAR CON BOOSTRAP 4-->
-<div class="table-responsive w-100" style="overflow-y: scroll; height:75vh; font-size:12px">
+<div class="table-responsive w-100" style="overflow-x: auto; overflow-y: scroll; height:75vh; font-size:12px">
     <table class="table table-bordered table-hover table-condensed" id="tabla-consultas">
         <thead class="header-table thead-light table-active">
         <tr>
@@ -74,7 +86,6 @@
                 <ul class="navbar-nav ml-auto">                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        
                         UNIDAD
                         </a>
                         <div class="dropdown-menu">

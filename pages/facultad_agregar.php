@@ -1,9 +1,10 @@
 <?php
+    include "../logic/client_securityLogic.php"; // Verifica que el usuario sea facultad
     include "../template/cabecera.php";
 ?>
 
 
-<!-- Contenerdor de bienvenida y boton de reporte-->
+<!-- CONTENEDOR DEL NOMBRE DE LA PÁGINA-->
 <section class="py-2">
         <!-- py-3 es padding en y, como <br> -->
         <div class="container-fluid">
@@ -20,32 +21,20 @@
         </div>
     </section>
 
-<!-- CONTENEDOR DE CUADROS DE BÚSQUEDA -->
+<!-- CONTENEDOR DE CUADROS DE BÚSQUEDA DE CEDULA Y NOMBRE -->
 <div class="container">
     <br>
-    
-    
-    <div class="col-md-7">
-        <header class="main-header">
-            <h6>
-                <span class="icon-title">
-                    <i class="fas fa-filter"></i>
-                </span>
-                BUSCAR
-            </h6>
-        </header>
-    </div>
     
     <form class="row" id="auto_llenar">
 
         <div class="form-floating mb-3 col-3">          
             <input type="text" class="form-control" id="cedula1" name="Cedula[]" placeholder="Ingrese la cédula">
-            <label class="col-form-label" for="Cedula[]"> C&eacute;dula </label>
+            <label class="col-form-label" for="Cedula[]"> Buscar C&eacute;dula </label>
         </div>
 
         <div class="form-floating mb-3 col-3">  
             <input type="text" class="form-control" id="nombre1" name="Nombre[]" placeholder="Ingrese el nombre">
-            <label class="col-form-label" for="Nombre[]"> Nombre </label>
+            <label class="col-form-label" for="Nombre[]"> Buscar Nombre </label>
         </div>
 
     </form>
@@ -60,9 +49,9 @@
         </div>
         <div class="card-body ">
             
-            <form name="formulario" id="form_register" action="../logic/registrarAusen_form_Facultad.php" method="POST" >
+            <form name="formulario" id="form_register" action="" method="POST" >
             <div class="d-block row g-3 align-items-center col-auto">
-
+                
                 <!-- INPUT DE NOMBRES DE USUARIO -->
                 <div class="form-floating mb-3">
                     <input type="text" name="Nombre[]" class="form-control" id="nombre" placeholder="Nombres y apellidos" value="" required>
@@ -71,9 +60,10 @@
 
                 <!-- INPUT DE CÉDULA -->                    
                 <div class="form-floating mb-3">
-                    <input type="text" name="Cedula_F[]" class="form-control" id="cedula" placeholder="Número de identificación"  title="La identifiación solo debe contener carácteres numéricos" required>
+                    <input type="text" name="Cedula[]" class="form-control" id="cedula" placeholder="Número de identificación"  title="La identifiación solo debe contener carácteres numéricos" required>
                     <label class="col-form-label" for="Cedula[]"> CÉDULA </label>
                 </div>
+                <input type="hidden" name="Cedula_F[]"  id="cedula_f" value="" >
 
                 <!-- INPUT DEL cargo -->
                 <div class="form-floating mb-3">
@@ -128,7 +118,7 @@
                 <div class="form-floating mb-3">
                     <select class="form-select form-select-sm" name="Unidad[]" id="Unidad" required>
                         <option value="">Seleccione</option>
-                        <option value="dias" disabled> DIAS </option>
+                        <!-- <option value="dias" disabled> DIAS </option> -->
                         <option value="horas" selected> HORAS </option>
                     </select>
                     <label class="col-form-label" for="Unidad[]"> UNIDAD </label>
@@ -194,29 +184,12 @@
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
 
+    <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+    <script src="../js/sweet_alert.js"></script>
+    
     <script src="../js/registrarFacultad.js"></script>
 
-<script>
-    //SCRIPT para colocar en fecha inicial, la fecha con mes actual
-    //function DateNow()
-    //{        
-        var date = new Date();
 
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
-
-        var today = year + "-" + month + "-" + day;
-        //var today = year + "-" + month + "-0" + 1 ;  
-        //var today = "2019-07-22";
-        document.getElementById("fecha_inicio").value = today; 
-        document.getElementById("fecha_fin").value = today; 
-        //return today;
-    //}
-</script>
-
-</body>
-</html>
+<?php
+    include("../template/pie.php");
+?>

@@ -1,10 +1,12 @@
-/*
-  * Para detectar el cambio en el slider de las graficas
+/**
+  * Esta funcion controla los eventos de los sliders de las graficas
 */
 const enableEventHandlers = () => {
 
   // Slider de años de las estadisticas
   document.querySelector('#statsOptions').onchange = e => {
+
+    //obtener 
     const {
         value: number,
         text: label
@@ -32,6 +34,8 @@ const enableEventHandlers = () => {
 
         //Grafica 1
         document.getElementById('tiposChartOptions').innerHTML = grafica1.options;
+        //actualizar el slider de meses
+        document.getElementById('tiposMonthsOptions').innerHTML = grafica1.optionsTipo;
         const array1 = grafica1.monthsArray;
         var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
         //del array monthsArray cambiar los numeros de los meses por los nombres usando la var meses
@@ -67,7 +71,6 @@ const enableEventHandlers = () => {
     //updateChartData('featuresChart', newData, label)
   }
 
-  
   // Slider de tipo ausen de grafico de barra - GRAFICO 1
   document.querySelector('#tiposMonthsOptions').onchange = e => {
     const {
@@ -81,7 +84,6 @@ const enableEventHandlers = () => {
     //array with anio and mes:
     var1.anioTipo = document.getElementById('statsOptions').value;
     //console.log(var1);
-
 
     $.ajax({
       method: "POST",
@@ -120,7 +122,6 @@ const enableEventHandlers = () => {
       //array with anio and mes:
       var1.anio = document.getElementById('statsOptions').value;
       //console.log(var1);
-
 
       $.ajax({
         method: "POST",
@@ -251,6 +252,12 @@ const updateChartData = (chartId, data, label) => {
   chart.update()
 }
 
+/**
+ * Funcion para actualizar gráfica y labels (nombres de ejes x e y)
+ * @param {*} chartId 
+ * @param {*} data 
+ * @param {*} labels 
+ */
 const updateChartDataAndLabels = (chartId, data, labels) => {
   const chart = Chart.getChart(chartId)
   chart.data.datasets[0].data = data
@@ -258,6 +265,11 @@ const updateChartDataAndLabels = (chartId, data, labels) => {
   chart.update()
 }
 
+/**
+ * Funcion para actualizar los datos de las gráficas
+ * @param {*} chartId 
+ * @param {*} data 
+ */
 const updateChartDataArray = (chartId, data) => {
   const chart = Chart.getChart(chartId)
   chart.data.datasets = data.datasets

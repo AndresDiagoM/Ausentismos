@@ -1,4 +1,5 @@
 <?php
+    include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
     include("../template/cabecera.php");
 ?>
 
@@ -17,7 +18,7 @@
 
                     <div class="col-lg-9">
                         <h1 class="font-weight-bold mb-0">Estadísticas de Ausentismos</h1> <!-- mb-0 es sin margen inferior -->
-                        <p class="lead text-muted">Revisa la última información</p>
+                        <p class="lead text-muted">Revisa la información en tiempo real</p>
                     </div>
                     <div class="col-lg-3 d-flex">
                         <!-- sobreescribir clase btn-primary, para poner color morado.  w-100 es para que ocupe el ancho del div 

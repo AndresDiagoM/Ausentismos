@@ -3,40 +3,32 @@ $("#cedula").keyup(function(){
     //alert("Hola");
     var cedula = $(this).val();
 
-    //if cedula is empty, clear the inputs
-    if(cedula == ""){
-        $("#nomb_func").val("");
-        $("#cargo").val("");
-        $("#dependencia").val("");
-        $("#genero").val("");
-        $("#salario").val("");
-    }else{
-        //if cedula is not empty, send the ajax request
-        $.ajax({
-            type: "POST",
-            url: "../logic/admin_create_funcLogic.php",
-            data: {cedula:cedula},
-            success: function (response) {
-                //console.log(response);
-                //if the response is not empty, fill the inputs with the response
-                if(response != "error"){
-                    var datos = JSON.parse(response);
-                    //console.log(datos);
-                    $("#nomb_func").val(datos.nombre);
-                    $("#cargo").val(datos.cargo);
-                    $("#dependencia").val(datos.dependencia);
-                    $("#genero").val(datos.genero);
-                    $("#salario").val(datos.salario);
-                }else{
-                    $("#nomb_func").val("");
-                    $("#cargo").val("");
-                    $("#dependencia").val("");
-                    $("#genero").val("");
-                    $("#salario").val("");
-                }
+    //if cedula is not empty, send the ajax request
+    $.ajax({
+        type: "POST",
+        url: "../logic/admin_create_funcLogic.php",
+        data: {cedula:cedula},
+        success: function (response) {
+            //console.log(response);
+            var datos = JSON.parse(response);
+            //if the datos.nombre is defined, show an alert saying that the cedula is already registered
+            if(datos.nombre != undefined){
+                //use sweetalert2
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Cedula ya registrada!',
+                    showConfirmButton: true,
+                    //timer: 1500
+                });
+                //alert("Cedula ya registrada!");
+                //clean the form
+                $("form[name=formulario]").trigger("reset");
             }
-        });
-    }
+
+        }
+    });
+
 });
 
 //1. when the document is ready, the function is executed
@@ -53,8 +45,12 @@ $(document).ready(function(){
             url: "../logic/admin_create_funcLogic.php",
             data: datos,
             success: function (response) {
+
+                //parse response to json
+                response = JSON.parse(response);
+
                 //alert(response);
-                if(response == "success1"){
+                if(response == "success"){
                     //use sweetalert2
                     Swal.fire({
                         position: 'center',
@@ -116,5 +112,5 @@ $(document).ready(function(){
 
 //evitar que el usuario abra el inspeccionar elemento
 document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
+    //e.preventDefault();
 });

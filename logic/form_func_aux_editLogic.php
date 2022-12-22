@@ -5,7 +5,7 @@
     $query_values = $_POST;
     //print_r($query_values); exit;
 
-    $numero_id = $_GET['ID'];
+    $numero_id = $_POST['cedula_f'];
     //print_r($numero_id); exit;
     //verify anti sql injection 
     $numero_id =  $conectar->real_escape_string($numero_id);
@@ -18,12 +18,13 @@
 
 
     // SENTENCIAS SQL PARA LA CONSULTA DE la dependencia, donde el departamento es igual al departamento y la facultad es igual a la facultad 
-    $sql2 = "SELECT * FROM dependencias WHERE Departamento LIKE "."'".$query_values['departamento_func_edt']."'"." AND Facultad LIKE "."'".$query_values['facultad_func_edt']."'";
+    $sql2 = "SELECT * FROM dependencias WHERE ID LIKE "."'".$query_values['dependencia_func_edt']."'";
     //print_r($sql2); exit;
     $result2 = $conectar->query($sql2); 
     //si no hay resultados, mostrar una alerta de que no hay resultados
     if($result2->num_rows == 0){
-        echo "<script>alert('No existe la dependencia seleccionada.'); location.href = '../pages/admin_aux_table_edition.php?ID=$numero_id'; </script>"; exit;
+        //echo "<script>alert('No existe la dependencia seleccionada.'); location.href = '../pages/admin_aux_table_edition.php?ID=$numero_id'; </script>"; exit;
+        echo json_encode("error1"); exit;
     }else{
         //si hay resultados, guardar el resultado 
         $row2 = mysqli_fetch_assoc($result2);
@@ -32,7 +33,8 @@
     // verificar que ningun campo de $query_values esté vacio
     foreach($query_values as $key => $value){
         if(empty($value)){
-            echo "<script>alert('Complete todos los campos.'); location.href = '../pages/admin_aux_table_edition.php?ID=$numero_id'; </script>"; exit;
+            //echo "<script>alert('Complete todos los campos.'); location.href = '../pages/admin_aux_table_edition.php?ID=$numero_id'; </script>"; exit;
+            echo json_encode("error2"); exit;
         }
     }
 
@@ -50,6 +52,12 @@
     if($row2['ID'] != $row['Dependencia']){
         $depen_edt = $row2['ID'];
         $actualizar = "UPDATE func_auxiliar SET Dependencia = '$depen_edt' WHERE Cedula = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
+    }
+    //actualizar correo
+    if($query_values['correo_func_edt'] != $row['Correo']){
+        $correo_edt = $query_values['correo_func_edt'];
+        $actualizar = "UPDATE func_auxiliar SET Correo = '$correo_edt' WHERE Cedula = $numero_id";
         $sqli1          = $conectar->query($actualizar);
     }
     //actualizar Genero
@@ -94,9 +102,6 @@
         $sqli1          = $conectar->query($actualizar);
     }
 
-    echo "<script>
-        alert('Datos Actualizados Correctamtne');
-        location.href='../pages/admin_cargar.php';
-    </script>"
-
+    //echo "<script>alert('Datos Actualizados Correctamtne');location.href='../pages/admin_cargar.php';</script>";
+    echo json_encode("success"); exit;
 ?>

@@ -1,9 +1,8 @@
 <?php
-//MENU DEL ADMINISTRADOR, CON DASHBOARD
-include "../conexion.php";
-include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
+//include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
 
 // Inicio o reanudacion de una sesion
+//session_start();
 $nombre_admin   = $_SESSION['NOM_USUARIO'];
 $id_admin       = $_SESSION['ID_USUARIO'];
 $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
@@ -37,48 +36,57 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <!-- SIDE BAR - menu lateral -->
     <div id="sidebar-container" class="bg-primary">
         <div class="logo" >
-            <h4 class="text-center text-light font-weight-bold"> GESTION DE AUSENTISMOS </h4>
+            <h4 class="text-center text-light font-weight-bold"> SIGA </h4>
         </div>
 
         <div class="menu">
-            <?php
-                if($tipo_usuario == 'ADMIN'){
-                    
-            ?>
+            <?php if($tipo_usuario == 'ADMIN'){ ?>
                 <ul>
                     <li class="list" id="admin_menu">
-                        <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../pages/admin_menu.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-apps mr-2 lead"></i>
                             <span class="text">MENU</span>
                         </a>
                     </li>
                     <li class="list" id="admin_cargar">
-                        <a href="../pages/admin_cargar.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../pages/admin_cargar.php" class="p-2 text-light d-block text-decoration-none">
                             <!-- <span class="icon"> <ion-icon name="person-outline"></ion-icon> </span> -->
                             <i class="icon ion-md-cloud mr-2 lead"></i>
                             <span class="text">CARGAR DATOS</span>
                         </a>
                     </li>
                     <li class="list" id="admin_agregar">
-                        <a href="../pages/admin_agregar.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../pages/admin_agregar.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-add-circle mr-2 lead"></i>
-                            <span class="text">AGREGAR REGISTRO</span>
+                            <span class="text">AGREGAR AUSENTISMO</span>
                         </a>
                     </li>
                     <li class="list" id="admin_consultar">
-                        <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../pages/admin_consultar.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-search mr-2 lead"> </i>
                             <span class="text">CONSULTAR</span>
                         </a>
                     </li>
                     <li class="list" id="admin_edition_client">
-                        <a href="../pages/admin_edition_client.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../pages/admin_edition_client.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-people mr-2 lead"></i>
                             <span class="text">GESTIONAR USUARIO</span>
                         </a>
                     </li>
+                    <li class="list" id="admin_edit_func">
+                        <a href="../pages/admin_edit_func.php" class="p-2 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-people mr-2 lead"></i>
+                            <span class="text">GESTIONAR FUNCIONARIO</span>
+                        </a>
+                    </li>
+                    <li class="list" id="ayuda_pdf">
+                        <a href="#" class="p-2 text-light d-block text-decoration-none" value="<?=$tipo_usuario;?>">
+                            <i class="icon ion-md-help mr-2 lead"></i>
+                            <span class="text">AYUDA</span>
+                        </a>
+                    </li>
                     <li class="list" id="cerrar_sesion">
-                        <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../logic/cerrar_sesion.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-log-out mr-2 lead"></i>
                             <span class="text">CERRAR CESION</span>
                         </a>
@@ -86,23 +94,28 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                     <div class="indicator"></div>
                 </ul>
             <?php //MENU DEL CONSULTOR, SIN OPCIONES DE GESTION Y CRUD
-                }else if($tipo_usuario == 'CONSULTA'){
-            ?>
+                }else if($tipo_usuario == 'CONSULTA'){ ?>
                 <ul>
                     <li class="list" id="admin_menu">
-                        <a href="../pages/admin_menu.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../pages/admin_menu.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-apps mr-2 lead"></i>
                             <span class="text">MENU</span>
                         </a>
                     </li>
                     <li class="list" id="admin_consultar">
-                        <a href="../pages/admin_consultar.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../pages/admin_consultar.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-search mr-2 lead"> </i>
                             <span class="text">CONSULTAR</span>
                         </a>
                     </li>
+                    <li class="list" id="ayuda_pdf">
+                        <a href="#" class="p-2 text-light d-block text-decoration-none" value="<?=$tipo_usuario;?>">
+                            <i class="icon ion-md-help mr-2 lead"></i>
+                            <span class="text">AYUDA</span>
+                        </a>
+                    </li>
                     <li class="list" id="cerrar_sesion">
-                        <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../logic/cerrar_sesion.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-log-out mr-2 lead"></i>
                             <span class="text">CERRAR CESION</span>
                         </a>
@@ -110,25 +123,41 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                     <div class="indicator"></div>
                 </ul>
             <?php //MENU DE FACULTAD, SOLO SE PERMITE AGREGAR AUSENTISMO
-                }elseif($tipo_usuario == 'FACULTAD'){
-            ?>
+                }elseif($tipo_usuario == 'FACULTAD'){ ?>
                 <ul>
+                    <li class="list active" id="facultad_agregar">
+                        <a href="../pages/facultad_agregar.php" class="p-2 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-add-circle mr-2 lead"></i>
+                            <span class="text">AGREGAR AUSENTISMO</span>
+                        </a>
+                    </li>
+                    <li class="list" id="facultad_consultar">
+                        <a href="../pages/admin_consultar.php" class="p-2 text-light d-block text-decoration-none">
+                            <i class="icon ion-md-search mr-2 lead"> </i>
+                            <span class="text">CONSULTAR</span>
+                        </a>
+                    </li>
+                    <li class="list" id="ayuda_pdf">
+                        <a href="#" class="p-2 text-light d-block text-decoration-none" value="<?=$tipo_usuario;?>">
+                            <i class="icon ion-md-help mr-2 lead"></i>
+                            <span class="text">AYUDA</span>
+                        </a>
+                    </li>
                     <li class="list" id="cerrar_sesion">
-                        <a href="../logic/cerrar_sesion.php" class="p-3 text-light d-block text-decoration-none">
+                        <a href="../logic/cerrar_sesion.php" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-log-out mr-2 lead"></i>
                             <span class="text">CERRAR CESION</span>
                         </a>
                     </li>
+                    <div class="indicator"></div>
                 </ul>
-            <?php
-                }
-            ?>
+            <?php } ?>
         </div>
 
         <div class="container-fluid">
             <!-- LOGO DE LA UNIVERSIDAD -->
             <div class="container logoU" >
-                <img src="../images/icon.png" class="img-fluid me-2" alt="Sample image">
+                <img src="../images/icon4.png" class=" img-fluid me-2" alt="Sample image">
             </div>
             
             <!-- logos de icontec y lema 
@@ -144,7 +173,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <!-- NAV BAR - menu en la parte superior -->
         <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../pages/admin_menu.php"> <i class="icon ion-md-home me-2 lead"></i> </a>
+            <a class="navbar-brand text-light" href="../pages/admin_menu.php"> <i class="icon ion-md-home me-2 lead"></i> </a>
             
             <button class="navbar-toggler menu-btn" type="button">
                 <span class="navbar-toggler-icon"></span>
@@ -153,7 +182,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
             <div class="d-flex justify-content-end " id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="../images/user_profile.png" class="img-fluid rounded-circle avatar mr-2" />
                             <?php //echo de las 2 primeras palabras del nombre
                                 $nombre = explode(" ", $nombre_admin);

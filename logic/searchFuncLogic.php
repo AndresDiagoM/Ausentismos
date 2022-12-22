@@ -80,7 +80,7 @@
     if($funcionarios->num_rows > 0){
 
             $salida.="<table class='table table-striped table-bordered table-hover table-condensed'>
-                            <thead class='header-table thead-light'>
+                            <thead class='header-table thead-light table-active'>
                                 <tr>
                                     <th scope='col'>CEDULA        </th>
                                     <th scope='col'>NOMBRE        </th>

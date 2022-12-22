@@ -10,6 +10,26 @@
     // Array ( [Nombre] => Array ( [0] => SALINAS BALCAZAR CESAR ANDRES ) [Cedula_F] => Array ( [0] => 4615890 ) [Cargo] => Array ( [0] => PROFESIONAL UNIVERSITARIO ) [Departamento] => 
     //  Array ( [0] => DECANATURA ) [Facultad] => Array ( [0] => FAC. DE CIENCIAS HUMANAS Y SOC ) [Fecha_Inicio] => Array ( [0] => 2022-10-16 ) [Fecha_Fin] => Array ( [0] => 2022-10-16 ) [Tiempo] => Array ( [0] => 20 ) [Observacion] => Array ( [0] => medico ) [Tipo_Ausentimo] => Array ( [0] => 1 ) [ID_Usuario] => Array ( [0] => 34327997 ) )
     
+
+    //consultar informacion del usuario logueado
+    $sql = "SELECT * FROM usuarios INNER JOIN dependencias ON usuarios.Dependencia = dependencias.ID
+            WHERE Cedula_U = ".$_POST['ID_Usuario'][0];
+    //echo $sql; exit;
+    $result = $conectar->query($sql);
+    $C_costo="";
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $depen = $row['Dependencia'];
+
+        //consultar el nombre de la dependencia
+        $sql = "SELECT * FROM dependencias WHERE ID = ".$depen;
+        $result = $conectar->query($sql);
+        $row = $result->fetch_assoc();
+        $C_costo = $row['C_costo'];
+    } else {
+        echo json_encode("error"); exit;  
+    }
+
     $salario=0;
     $costo=0;
     $tiempo=0;
@@ -24,12 +44,17 @@
                 {
                     if ($field_name == "Cedula_F") {   //comprobar si la cedula existe en la tabla funcionarios
 
-                        $sqli = "SELECT * FROM funcionarios WHERE Cedula='$value' ";
+                        //take three first 3 characters of the string
+                        $C_costo = substr($C_costo, 0, 3);
+
+                        $sqli = "SELECT * FROM funcionarios INNER JOIN dependencias ON funcionarios.Dependencia = dependencias.ID
+                                WHERE Cedula='$value' AND dependencias.C_costo LIKE '%".$C_costo."%'; ";
                         $funcionarios = $conectar->query($sqli);  //print_r($sqli); exit;
                         $var = mysqli_num_rows($funcionarios);                        
                         
                         if($var<=0){
-                            echo "<script> alert('No existe la cedula del funcionario'); location.href = '../pages/facultad_agregar.php';  </script>";          
+                            //echo "<script> alert('No existe la cedula del funcionario'); location.href = '../pages/facultad_agregar.php';  </script>";   
+                            echo json_encode("error1"); exit;       
                             exit; 
                         }else{
                             $row = mysqli_fetch_array($funcionarios);
@@ -41,7 +66,8 @@
                     } elseif ($field_name == "Tipo_Ausentismo") {
 
                         if($value==""){
-                            echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/facultad_agregar.php';  </script>";          
+                            //echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/facultad_agregar.php';  </script>";          
+                            echo json_encode("error2"); exit;
                             exit;              
                         }
 
@@ -51,7 +77,8 @@
 
                         //si el tiempo es mayor a 24 horas no se puede registrar
                         if($tiempo>24){
-                            echo "<script> alert('El tiempo no puede ser mayor a 24 horas'); location.href = '../pages/facultad_agregar.php';  </script>";          
+                            //echo "<script> alert('El tiempo no puede ser mayor a 24 horas'); location.href = '../pages/facultad_agregar.php';  </script>";          
+                            echo json_encode("error3"); exit;
                             exit; 
                         }
                         
@@ -79,7 +106,8 @@
         if($dias != $tiempo){
             //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
             //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
-            echo "<script> alert('El tiempo de las fechas no es igual al tiempo de la ausencia'); location.href = '../pages/facultad_agregar.php';  </script>";          
+            //echo "<script> alert('El tiempo de las fechas no es igual al tiempo de la ausencia'); location.href = '../pages/facultad_agregar.php';  </script>";          
+            echo json_encode("error4"); exit;
             exit; 
         }
     }else{
@@ -88,7 +116,8 @@
         if($dias != 1){
             //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
             //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
-            echo "<script> alert('Las horas deben estar en el mismo día'); location.href = '../pages/facultad_agregar.php';  </script>";          
+            //echo "<script> alert('Las horas deben estar en el mismo día'); location.href = '../pages/facultad_agregar.php';  </script>";          
+            echo json_encode("error5"); exit;
             exit; 
         }
     }
@@ -99,7 +128,8 @@
     $unidad = $query_values['Unidad'][0];
     $tipo = $query_values['Tipo_Ausentismo'][0];
     if($unidad=="horas" && $tipo!=5){
-        echo "<script> alert('Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso por horas'); location.href = '../pages/facultad_agregar.php';  </script>";          
+        //echo "<script> alert('Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso por horas'); location.href = '../pages/facultad_agregar.php';  </script>";          
+        echo json_encode("error6"); exit;
         exit; 
     }
 
@@ -115,13 +145,12 @@
     $prueba = $conectar->query($registrar);
     if($prueba){
         
-        echo "<script> alert('Registro existoso.');   location.href = '../pages/facultad_agregar.php'; </script>";
+        //echo "<script> alert('Registro existoso.');   location.href = '../pages/facultad_agregar.php'; </script>";
         //header("Location: ../pages/facultad_agregar.php");
-        
+        echo json_encode("success"); exit;
     }
     else{
-        echo "<script> alert('Registro incorrecto');
-        location.href = '../pages/facultad_agregar.php';
-        </script>";
+        //echo "<script> alert('Registro incorrecto');location.href = '../pages/facultad_agregar.php';</script>";
+        echo json_encode("error"); exit;
     }
 ?>

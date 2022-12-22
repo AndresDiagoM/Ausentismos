@@ -22,10 +22,7 @@
         var link = item.querySelector('a').getAttribute('href');
         link = link.substr(link.lastIndexOf('/') + 1);
 
-        //if lastPart is equal to admin_form_edition.php, admin_create_user.php then add active class to admin_edition_client
-        //if lastPart is equal to admin_edit_ausen.php then add active class to admin_consultar
-        //if lastPart is equal to admin_create_func.php then add active class to admin_agregar
-        if (lastPart == 'admin_form_edition.php' || lastPart == 'admin_create_user.php' || lastPart == 'admin_edit_ausen.php' || lastPart == 'admin_create_func.php' || lastPart == 'admin_edit_func.php' || lastPart == 'admin_func_form_edition.php') {
+        if (lastPart == 'admin_form_edition.php' || lastPart == 'admin_create_user.php' || lastPart == 'admin_edit_ausen.php' || lastPart == 'admin_create_func.php' || lastPart == 'admin_func_form_edition.php') {
 
             if (link == 'admin_edition_client.php' && lastPart == 'admin_form_edition.php' || link == 'admin_edition_client.php' && lastPart == 'admin_create_user.php') {
                 item.classList.add('active');
@@ -33,17 +30,16 @@
             } else if(lastPart == 'admin_edit_ausen.php' && link == 'admin_consultar.php'){
                 item.classList.add('active');
 
-            }else if(lastPart == 'admin_create_func.php' && link == 'admin_agregar.php'){
-                item.classList.add('active');
-
-            } else if((lastPart == 'admin_edit_func.php' || lastPart == 'admin_func_form_edition.php') && link == 'admin_cargar.php'){
+            } else if((lastPart == 'admin_create_func.php' || lastPart == 'admin_func_form_edition.php') && link == 'admin_edit_func.php'){
                 item.classList.add('active');
 
             } else {
                 item.classList.remove('active');
             }
 
-        } else {
+        } 
+        else {
+            //console.log(link);
             if (link == lastPart) {
                 item.classList.add('active');
             } else {
@@ -52,7 +48,34 @@
         }
     });
 
+    /* 
+     * @description: Descargar el pdf de ayuda
+     */
+    document.getElementById("ayuda_pdf").querySelector("a").addEventListener("click", function(event){
+        event.preventDefault(); //evitar que el navegador siga el enlace
+        var value = this.getAttribute("value");
+        //console.log(value);
 
+        fetch("../logic/descargarAyuda.php", {
+            method: "POST",
+            body: "tipo_usuario="+value,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        .then(res => res.json()) //recoge la respuesta json del servidor y lo transforma en un objeto javascript
+        .then(response => {
+            if(response.status === 'success'){
+                let a = document.createElement('a');
+                a.href = "data:application/pdf;base64,"+response.file_data;
+                a.download = response.file_name;
+                a.click(); //se simula un click para descargar el archivo
+            }else{
+                console.log(response.message);
+            }
+        })
+        .catch(error => console.log(error));
+    });
 </script>
 
 </body>

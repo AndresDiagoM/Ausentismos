@@ -1,4 +1,5 @@
 <?php
+include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
 include "../template/cabecera.php";
 ?>
 
@@ -13,22 +14,29 @@ include "../template/cabecera.php";
             </div>
             <div class="card-body">            
                 <form  method="POST" class="form" name="formulario">
+
+                    <!-- INPUT DEL NUMERO DE IDENTIFICACION -->
+                    <div class="form-floating mb-3">
+                        <input type="text" name="numero_id" id="cedula" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 a 15 digitos." required>
+                        <label class="col-form-label" for="numero_id"> Número de identificación </label>
+                    </div>
+                    
                     <!-- INPUT DE NOMBRES DE FUNCIONARIO -->
                     <div class="form-floating mb-3">
                         <input type="text" name="nomb_func" id="nomb_func" class="form-control" placeholder="Digite los nombres y apellidos" required>
                         <label class="col-form-label" for="nomb_func"> Nombres y Apellidos </label>
                     </div>
                     
-                    <!-- INPUT DEL NUMERO DE IDENTIFICACION -->
-                    <div class="form-floating mb-3">
-                        <input type="text" name="numero_id" id="cedula" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 a 15 digitos." required>
-                        <label class="col-form-label" for="numero_id"> Número de identificación </label>
-                    </div>
-
                     <!-- INPUT DEL CARGO-->
                     <div class="form-floating mb-3">
                         <input type="text" name="cargo" id="cargo" class="form-control" placeholder="Digite el cargo" required>
                         <label class="col-form-label" for="cargo"> Cargo </label>
+                    </div>
+
+                    <!-- INPUT DEL CORREO-->
+                    <div class="form-floating mb-3">
+                        <input type="text" name="correo" id="correo" class="form-control" placeholder="Digite el correo" required>
+                        <label class="col-form-label" for="correo"> Correo </label>
                     </div>
 
                     <!-- INPUT DE LA DEPENDENCIA -->
@@ -49,7 +57,7 @@ include "../template/cabecera.php";
                                 }
                             ?>
                         </select>
-                        <label class="col-form-label" for="dependencia"> Dependencia a consultar </label>
+                        <label class="col-form-label" for="dependencia"> Dependencia </label>
                     </div>
 
                     <!-- INPUT DEL GENERO -->
@@ -69,7 +77,7 @@ include "../template/cabecera.php";
                     </div>
 
                     <div class="container">
-                        <button type="submit" class="btn btn-primary">REGISTRAR</button>
+                        <button type="submit" class="btn btn-success">REGISTRAR</button>
                     </div>
 
                 </form>
@@ -94,6 +102,7 @@ include "../template/cabecera.php";
     <script src="../js/jquery.min.js"></script> 
     <!-- INSTALACION DE SWEETALERT2 -->
     <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+    <script src="../js/sweet_alert.js"></script>
 
     <script src="../js/registrarFunc.js"></script>
 

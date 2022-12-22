@@ -13,59 +13,67 @@
     $salario=0;
     $costo=0;
     $tiempo=0;
+    $unidad = "";
     if($query_values)
     {
-            $values = [];
-            $queries = [];
+        $values = [];
+        $queries = [];
 
-            foreach($query_values as $field_name => $field_value)
+        foreach($query_values as $field_name => $field_value)
+        {
+            foreach((array) $field_value as $value)
             {
-                foreach((array) $field_value as $value)
-                {
-                    if ($field_name == "Cedula_F") {   //comprobar si la cedula existe en la tabla funcionarios
+                if ($field_name == "Cedula_F") {   //comprobar si la cedula existe en la tabla funcionarios
 
-                        $sqli = "SELECT * FROM funcionarios WHERE Cedula='$value' ";
-                        $funcionarios = $conectar->query($sqli);  //print_r($sqli); exit;
-                        $var = mysqli_num_rows($funcionarios);                        
-                        
-                        if($var<=0){
-                            //echo "<script> alert('No existe la cedula del funcionario'); location.href = '../pages/admin_agregar.php';  </script>";     
-                            echo json_encode("error1");
-                            exit; 
-                        }else{
-                            $row = mysqli_fetch_array($funcionarios);
-                            //convertir el salario a numero int
-                            $salario = (int) filter_var($row['Salario'], FILTER_SANITIZE_NUMBER_INT);
-                            //$salario = $row['Salario'];
-                        }
-
-                    } elseif ($field_name == "Tipo_Ausentismo") {
-
-                        if($value==""){
-                            //echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/admin_agregar.php';  </script>";
-                            echo json_encode("error2");          
-                            exit;              
-                        }
-
-                    }  elseif ($field_name == "Tiempo"){ //pasar tiempo a numero int
-
-                        $tiempo = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
-                        
-                    } elseif ($field_name == "Unidad") {  //calcular el costo de seguridad en el trabajo
-                        if($value=="dias"){
-                            //convertir el tiempo a numero int
-                            $costo = $salario/30 * $tiempo;
-                            //echo 'salario: '.$salario.'<br>';
-                            //echo 'costo1: '.$costo.'<br>'.'tiempo: '.$tiempo.'<br>'.$value.'<br>'; 
-                        } else {
-                            $costo = ($salario/30)/24 * $tiempo;
-                        }
-                        
+                    $sqli = "SELECT * FROM funcionarios WHERE Cedula='$value' ";
+                    $funcionarios = $conectar->query($sqli);  //print_r($sqli); exit;
+                    $var = mysqli_num_rows($funcionarios);                        
+                    
+                    if($var<=0){
+                        //echo "<script> alert('No existe la cedula del funcionario'); location.href = '../pages/admin_agregar.php';  </script>";     
+                        echo json_encode("error1");
+                        exit; 
+                    }else{
+                        $row = mysqli_fetch_array($funcionarios);
+                        //convertir el salario a numero int
+                        $salario = (int) filter_var($row['Salario'], FILTER_SANITIZE_NUMBER_INT);
+                        //$salario = $row['Salario'];
                     }
 
-                }                   
-            }            
+                } elseif ($field_name == "Tipo_Ausentismo") {
+
+                    if($value==""){
+                        //echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/admin_agregar.php';  </script>";
+                        echo json_encode("error2");          
+                        exit;              
+                    }
+
+                }  elseif ($field_name == "Tiempo"){ //pasar tiempo a numero int
+
+                    $tiempo = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+                    
+                } elseif ($field_name == "Unidad") {  //calcular el costo de seguridad en el trabajo
+                    if($value=="dias"){
+                        $unidad = "dias";
+                    } else {
+                        $unidad = "horas";
+                    }
+                    
+                }
+            }                   
+        }            
+    } 
+
+    //Calcular el valor del costo, 
+    if($unidad=="dias"){
+        //hacer el calculo del costo, si es dias con ($slario/30)*$tiempo
+        $costo = ($salario/30) * $tiempo;
+        //echo 'salario: '.$salario.'<br>';
+        //echo 'costo1: '.$costo.'<br>'.'tiempo: '.$tiempo.'<br>'.$value.'<br>'; 
+    } else {
+        $costo = ($salario/30)/24 * $tiempo;
     }
+
 
     //================================================================================================
     //=========  comprobar que el tiempo de las fechas sea igual a la variable $tiempo

@@ -78,6 +78,16 @@
 
                 <p class="text-center lead fw-normal mb-0 me-3 fs-1">
                     División de Gestión del Talento Humano</p>
+                
+                <div class="divider d-flex align-items-center my-4">
+                    <!-- <p class="text-center fw-bold mx-3 mb-0">Or</p> -->
+                </div>
+
+
+                <p class="text-center lead fw-normal mb-0 me-3 fs-4">
+                    SIGA</p>
+                <p class="text-center lead fw-normal mb-0 me-3 fs-6">
+                    Sistema de Gestión de Ausentismos</p>
 
                 <div class="divider d-flex align-items-center my-4">
                     <!-- <p class="text-center fw-bold mx-3 mb-0">Or</p> -->

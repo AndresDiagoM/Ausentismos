@@ -13,6 +13,7 @@
 
     //recibir el archivo excel
     $nombreArchivo = '';
+    $tmpFile = '';
     if(isset($_FILES['excelFile']['name'])){ //comprobar si se ha cargado el archivo excel desde el formulario de la página admin_cargar.php
         //echo $_FILES['excelFile']['name'];
 
@@ -72,11 +73,7 @@
 
     //CONVERTIR LOS DATOS DEL DOCUMENTO A UN ARRAY
     $sheetData = $documento->getActiveSheet()->toArray();
-    if(!isset($sheetData[0])){
-        echo json_encode("error2");
-        exit;
-    }
-    
+
     //eliminar filas vacias
     foreach($sheetData as $key => $value){
         if($value[0]==null){
@@ -87,7 +84,18 @@
     //print_r($sheetData);
 
     //read the headers of the excel file, to get the column names and number, to save them in an array
+    if(!isset($sheetData[0])){
+        echo json_encode("error2");
+        exit;
+    }
+
     $headers = $sheetData[0];   
+    //if headers do not contain CODIGO, CEDULA, NOMBRE, GENERO, NOMBRE_DEL_CARGO, C_COSTO, DEPARTAMENTO, FACULTAD, salario and estado, then show error
+    if(!in_array("CEDULA", $headers) || !in_array("NOMBRE", $headers) || !in_array("EMAIL", $headers) || !in_array("GENERO", $headers) || !in_array("NOMBRE_DEL_CARGO", $headers) || !in_array("C_COSTO", $headers) || !in_array("DEPARTAMENTO", $headers) || !in_array("FACULTAD", $headers) || !in_array("SALARIO", $headers) || !in_array("ESTADO", $headers)){
+        echo json_encode("error2");
+        //print_r($headers);
+        exit;
+    }
     
     
     //print_r($headers); exit;
@@ -103,7 +111,7 @@
         $data[] = array_combine($headers, $t);
     }
     $data = array_slice($data, 1); //elimina la primera fila, que son los encabezados
-    //print_r($data); //exit;
+    //print_r($data); exit;
     /*  Estructura de los datos del array $data:
         Array
         (
@@ -118,6 +126,7 @@
                     [FACULTAD] => Facultad
                     [SALARIO] => 800000
                     [ESTADO] => ACTIVO
+                    [EMAIL] => dmitri@unicauca.edu.co
                 )
         )
     */
@@ -155,7 +164,17 @@
         //comprobar que el campo estado sea ACTIVO o INACTIVO, y que el campo genero sea MAS o FEM
         if($value['ESTADO']!="ACTIVO" && $value['ESTADO']!="INACTIVO" || $value['GENERO']!="MAS" && $value['GENERO']!="FEM"){
             //eliminar el registro del array
-            $data[$key]['ERROR'] = "Estado debe ser ACTIVO o INACTIVO y Genero debe ser MAS o FEM";
+            $data[$key]['ERROR'] = "Estado debe ser ACTIVO o INACTIVO y Genero MAS o FEM";
+        }
+
+        //si el correo no tiene "@" o no tiene "." entonces ERROR es "Correo con formato incorrecto"
+        if(!strpos($value['EMAIL'], "@") || !strpos($value['EMAIL'], ".")){
+            //if $data error, is not set, then set it to "Correo con formato incorrecto", else append the error
+            if(!isset($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Correo con formato incorrecto";
+            }else{
+                $data[$key]['ERROR'] = ", Correo incorrecto";
+            }
         }
 
     }
@@ -193,8 +212,8 @@
         if($numRows>0){
             continue;
         }else{
-            $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado, Error) 
-            VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['ERROR']."')";
+            $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado, Error) 
+            VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['EMAIL']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['ERROR']."')";
             $result = $conectar->query($sql1);
             //echo $sql1."<br>";
             //IF RESULT IS TRUE, THEN INSERT WAS SUCCESSFUL
@@ -202,9 +221,9 @@
             //$result = json_encode($result);
             //echo $result."<br>";
             if($result){
-                //echo json_encode("INSERT SUCCESSFUL");
+                //echo json_encode("error2");
             }else{
-                //echo json_encode("INSERT FAILED");
+                //echo json_encode("error2");
             }
         }
     }
@@ -260,8 +279,8 @@
                 }
 
             }else{ //si el funcionario no existe en la base de datos, insertar NUEVO funcionario
-                $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Dependencia, Genero, Salario, Estado) 
-                    VALUES ('".$value['Cedula']."', '".$value['Nombre']."', '".$value['Cargo']."', '".$value['Dependencia']."', '".$value['Genero']."', '".$value['Salario']."', 'ACTIVO')";
+                $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado) 
+                    VALUES ('".$value['Cedula']."', '".$value['Nombre']."', '".$value['Cargo']."', '".$value['Correo']."', '".$value['Dependencia']."', '".$value['Genero']."', '".$value['Salario']."', 'ACTIVO')";
                 $result = $conectar->query($sql1);
                 //echo $sql1."<br>";
             }

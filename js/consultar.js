@@ -45,10 +45,48 @@ $(function()
             document.getElementById("th_nombre").classList.add("table-warning");
             get_ausentismos();
         }else{
-            get_ausentismos();
+            //get_ausentismos();
 
             //remove the atribute table-warning to change the color of the th
             document.getElementById("th_nombre").classList.remove("table-warning");
+        }
+        //get_ausentismos();
+    });
+
+    //se realiza la busqueda cuando se de click y cuando se escribe en el boton de fecha_inicio
+    $(document).on('keyup'&&'click'&&'change', '#fecha_inicio', function()  //#fecha_inicio es el id del input en el HTML
+    {
+        var valor = $(this).val();
+        //console.log(valor);
+
+        if(valor != ""){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_fecha_inicio").classList.add("table-warning");
+            get_ausentismos();
+        }else{
+            //get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_fecha_inicio").classList.remove("table-warning");
+        }
+        //get_ausentismos();
+    });
+
+    //se realiza la busqueda cuando se de click y cuando se escribe en el boton de fecha_fin
+    $(document).on('keyup'&&'click'&&'change', '#fecha_fin', function()  //#fecha_fin es el id del input en el HTML
+    {
+        var valor = $(this).val();
+        //console.log(valor);
+
+        if(valor != ""){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_fecha_fin").classList.add("table-warning");
+            get_ausentismos();
+        }else{
+            //get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_fecha_fin").classList.remove("table-warning");
         }
         //get_ausentismos();
     });
@@ -70,8 +108,7 @@ $(function()
         //get_ausentismos();
     });
 
-    //se necesita hacer algo cuando se utilice los checkboxes de UNIDAD
-    $("#unidad").on("click", function ()  //la funcion onClick de JQUERY, todos los checkbox inputs en el HTML tienen la clase "form-check-input"
+    $(document).on('click', '#unidad', function()  //para el cuadro de busqueda de cedula. #unidad es el id del input en el HTML
     {
         get_ausentismos(); //cuando se de click en el checkbox que se ejecute get_ausentismos();
 
@@ -86,12 +123,6 @@ $(function()
         if(!$(this).is(':checked')){
             document.getElementById("th_unidad").classList.remove("table-warning");
         }
-    }); 
-
-    $(".form-date").on("change",function(){  //.form date es la clase de los inputs de fecha
-        //var selected = $(this).val();
-        get_ausentismos(); 
-        //alert(selected);
     });
 
     //se necesita hacer algo cuando se utilice los checkboxes de TIPO AUSENTISMOS
@@ -112,7 +143,7 @@ $(function()
         }
     }); 
 
-    $(document).on('keyup', '#codigo', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
+    $(document).on('keyup', '#codigo', function()  // #codigo es el id del input
     {
         var valor = $(this).val();
 
@@ -129,7 +160,7 @@ $(function()
         //get_ausentismos();
     });
 
-    $(document).on('keyup', '#diagnostico', function()  //para el cuadro de busqueda de cedula. #diagnostico es el id del input
+    $(document).on('keyup', '#diagnostico', function()  // #diagnostico es el id del input
     {
         var valor = $(this).val();
 
@@ -138,7 +169,7 @@ $(function()
             document.getElementById("th_diagnostico").classList.add("table-warning");
             get_ausentismos();
         }else{
-            get_ausentismos();
+            //get_ausentismos();
 
             //remove the atribute table-warning to change the color of the th
             document.getElementById("th_diagnostico").classList.remove("table-warning");
@@ -146,7 +177,7 @@ $(function()
         //get_ausentismos();
     });
 
-    $(document).on('keyup', '#entidad', function()  //para el cuadro de busqueda de cedula. #entidad es el id del input en el HTML
+    $(document).on('keyup', '#entidad', function()  // #entidad es el id del input en el HTML
     {
         var valor = $(this).val();
 
@@ -155,7 +186,7 @@ $(function()
             document.getElementById("th_entidad").classList.add("table-warning");
             get_ausentismos();
         }else{
-            get_ausentismos();
+            //get_ausentismos();
 
             //remove the atribute table-warning to change the color of the th
             document.getElementById("th_entidad").classList.remove("table-warning");
@@ -179,10 +210,14 @@ function get_ausentismos(pagina)
             data:$.param(form2),//form.serialize(), //aqui se pasa información de los inputs que están en el formulario HTML. serialize pasa los datos en arrays a PHP
             success: function (data)
             {
+                //parse the data to JSON
+                //data = JSON.parse(data);
+
                 $("#filters-result").html(""); //limpiar la tabla que se muestra en HTML para borrar las busqeudas anteriores
                 $("#total_resultados").html("");
                 $("#myPager").html("");
                 //var tabla = data.tabla;
+                //console.table(data.tabla);
                 
                 $.each(data.tabla, function(key,Ausen)
                 {
@@ -229,24 +264,28 @@ function get_ausentismos(pagina)
                 $("#myPager").append(data.slider);
                 $("#total_resultados").append(data.total);
                 
-                //evento click para cada fila de la tabla
-                $('.fila_tabla').click(function(){
-                    //console.log(e);
+                //SI EL TIPO DE USUARIO (data.tipo_user) ES IGUAL A "ADMIN", SE AÑADE EL EVENTO A LAS FILAS DE LA TABLA
+                //console.log(data.tipo_usuario);
+                if(data.tipo_usuario == "ADMIN"){
+                    //evento click para cada fila de la tabla
+                    $('.fila_tabla').click(function(){
+                        //console.log(e);
 
-                    //get the id of the tr that was clicked
-                    var id = $(this).attr('id');
-                    //console.log(id);
+                        //get the id of the tr that was clicked
+                        var id = $(this).attr('id');
+                        //console.log(id);
 
-                    //redirect to the page that shows the ausentismo
-                    window.location.href = "admin_edit_ausen.php?ID="+id;
+                        //redirect to the page that shows the ausentismo
+                        window.location.href = "admin_edit_ausen.php?ID="+id;
+                        
+                        /*var cedula = $(this).find('td').eq(0).text();
+                        var nombre = $(this).find('td').eq(1).text();
+                        */
+                        //console.log(cedula);
+                        //alert("I've been clicked!")
+                    });
+                }
 
-                    /*var cedula = $(this).find('td').eq(0).text();
-                    var nombre = $(this).find('td').eq(1).text();
-                    */
-                    //console.log(cedula);
-
-                    //alert("I've been clicked!")
-                });
             }
         }
     )

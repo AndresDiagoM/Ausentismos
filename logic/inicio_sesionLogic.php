@@ -20,25 +20,27 @@
     include '../conexion.php';
     $mysqli = new mysqli($host, $user, $pw, $db);
 
-    $sql = "SELECT * FROM usuarios WHERE Login = '$username'";
+    $sql = "SELECT * FROM usuarios INNER JOIN dependencias ON dependencias.ID=usuarios.Dependencia WHERE Login = '$username'";
     $result1 = $mysqli->query($sql);
-    $row1 = $result1->fetch_array(MYSQLI_NUM);
+    $row1 = $result1->fetch_assoc();
     $numero_filas = $result1->num_rows;
 
     if($numero_filas > 0){
 
-
-        $passw_bd = $row1[6];
+        $passw_bd = $row1['Contrasena'];
 
         if($passw_bd == $password){
 
 
-            $id_usuario     = $row1[0];
-            $nom_usuario    = $row1[1];
-            $tipo_usuario   = $row1[4];
+            $id_usuario     = $row1['Cedula_U'];
+            $nom_usuario    = $row1['Nombre_U'];
+            $tipo_usuario   = $row1['TipoUsuario'];
+            $dependencia  = $row1['C_costo'];
+            
             $_SESSION['ID_USUARIO']     = $id_usuario;
             $_SESSION['NOM_USUARIO']    = $nom_usuario;
             $_SESSION['TIPO_USUARIO']   = $tipo_usuario;
+            $_SESSION['DEPENDENCIA']   = $dependencia;
 
             // VALIDACION SI EL USUARIO ES ADMINISTRADOR
             if(strtoupper($tipo_usuario) == 'ADMIN'){

@@ -39,7 +39,7 @@
                                 <th scope='col'>NOMBRE        </th>
                                 <th scope='col'>CORREO        </th>
                                 <th scope='col'>DEPENDENCIA   </th>
-                                <th scope='col'>TIPO USUARIO  </th>
+                                <th scope='col'>ROL  </th>
                                 <th scope='col'>LOGIN         </th>
                                 <th scope='col'>CONTRASEÑA    </th>
                                 <th scope='col'>ESTADO    </th>
@@ -50,6 +50,11 @@
 
         while($fila = $resultado ->fetch_assoc()){
             $Id_fila = $fila['Cedula_U'];
+
+            //pasar la contraseña a un forato encriptado u oculto para que no se vea
+            $contrasena = $fila['Contrasena'];
+            $contrasena = str_repeat("*", strlen($contrasena));
+
             $salida.="<tr>
                         <td scope='row'>".$fila['Cedula_U']."      </td>
                         <td>".$fila['Nombre_U']."      </td>
@@ -57,10 +62,10 @@
                         <td>".$fila['Departamento']." - ". $fila['Facultad']  ."       </td>
                         <td>".$fila['TipoUsuario']."       </td>
                         <td>".$fila['Login']."        </td>
-                        <td>".$fila['Contrasena']."   </td>
+                        <td>".$contrasena."   </td>
                         <td>".$fila['Estado']."   </td>
                         <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
-                        <td><a href='../logic/confirmationDeleteLogic.php?ID=$Id_fila' class='btn-delete'><img src='../images/delete.png'></a></td>
+                        <td><a  onclick = 'eliminarUsuario($Id_fila)' class='btn-delete'><img src='../images/delete.png'></a></td>
                     </tr>";
         }
         $salida.="</table>";
@@ -71,4 +76,4 @@
     echo $salida;
     $mysqli->close();
 ?>
-<script src="../js/confirmation.js"></script>
+<!-- <script src="../js/confirmation.js"></script> -->
