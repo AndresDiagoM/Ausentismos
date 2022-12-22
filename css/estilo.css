@@ -2,8 +2,9 @@
     --primary: #111854;
     --light: #ffffff;
     --grey: #efefef;
-    --navbar: #be3838;
+    --sidebar: #CC0000;
     --btnHover: #850c0c;
+    --navbar: #082066;
 }
 
 body {
@@ -21,14 +22,18 @@ a:hover {
 /*---------------------  CONFIGURACIONES GLOBALES ---------------- */
 .bg-primary {
     --bs-bg-opacity: 1;
-    background-color: var(--navbar) /*rgba(var(--bs-success-rgb), var(--bs-bg-opacity))*/ !important;
+    background-color: var(--sidebar) /*rgba(var(--bs-success-rgb), var(--bs-bg-opacity))*/ !important;
 }
 .btn-success{
-    background-color: var(--navbar) ;
+    background-color: var(--sidebar) ;
 }
 .btn-success:hover{
     /*Al hacer hover(poner el mouse encima del boton) se pone de color azul*/
     background-color: var(--btnHover) !important; /*Este es color morado*/
+}
+/*navbar color*/
+.navbar {
+    background-color: var(--navbar) !important;
 }
 
 /*
@@ -48,6 +53,13 @@ a:hover {
 #sidebar-container .menu a:hover {
     background-color: var(--btnHover);
 }
+
+/*quitar margen izquierdo de UL*/
+#sidebar-container .menu ul {
+    padding-left: 0;
+    list-style: none;
+}
+
 .menu ul li{
     position: relative;
     list-style: none;
@@ -64,29 +76,35 @@ a:hover {
     border-radius: 50%;
     transition: transform 0.3s ease;
     z-index: 1;
-    top: 115px;
+    top: 80px;
     left: 260px;
     display: flex; /*none flex*/
 }
 
 
 .menu ul li:nth-child(1).active ~ .indicator{
-    transform: translateY(calc(120px * 0));
+    transform: translateY(calc(80px * 0));
 }
 .menu ul li:nth-child(2).active ~ .indicator{
-    transform: translateY(calc(62px * 1));
+    transform: translateY(calc(42px * 1));
 }
 .menu ul li:nth-child(3).active ~ .indicator{
-    transform: translateY(calc(62px * 2));
+    transform: translateY(calc(44px * 2));
 }
 .menu ul li:nth-child(4).active ~ .indicator{
-    transform: translateY(calc(62px * 3));
+    transform: translateY(calc(45px * 3));
 }
 .menu ul li:nth-child(5).active ~ .indicator{
-    transform: translateY(calc(62px * 4));
+    transform: translateY(calc(45px * 4));
 }
 .menu ul li:nth-child(6).active ~ .indicator{
-    transform: translateY(calc(62px * 5));
+    transform: translateY(calc(45px * 5));
+}
+.menu ul li:nth-child(7).active ~ .indicator{
+    transform: translateY(calc(45px * 6));
+}
+.menu ul li:nth-child(8).active ~ .indicator{
+    transform: translateY(calc(45px * 7));
 }
 
 
@@ -94,12 +112,12 @@ a:hover {
     /*width: 18rem; *//* Es el ancho del SideBar*/
 
     /* set the image size according to the SIDEBAR size */
-    width: 150px;
-    height: 150px;
+    width: 190px;
+    height: 190px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /*background-image: url(../images/icon.png);*/
+    /*background-image: url(../images/icon3.png);*/
 
     /*position:absolute;
     width:100px;

@@ -1,91 +1,31 @@
 <?php
+    include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
     include "../template/cabecera.php";
     $id_usuario     = $_GET['ID'];
     //if there is no id redirect to admin_edit_func.php
     if(!isset($id_usuario) || empty($id_usuario)){
         header("Location: ./admin_edit_func.php");
     }
+
+    //Consultar datos del usuario seleccionado
+    $sqli   = "SELECT * FROM funcionarios 
+                INNER JOIN dependencias ON funcionarios.Dependencia=dependencias.ID 
+                WHERE Cedula = '$id_usuario'";
+    $result = $conectar->query($sqli);
+    $data=[];
+    while($row = mysqli_fetch_assoc($result)){
+        $Id_editar = $row['Cedula'];
+        $data[] = $row;
+    }
+    $mostrar = $data[0];
+    //print_r($mostrar);
 ?>
 
 
 <!-- INICIO DE CONTENEDOR DE FUNCIONARIO SELECCIONADO -->
-<div class="container card-group py-2">
+<div class="container py-2">
 
-    <div class="card">
-        <div class="card-header">
-            DATOS ACTUALES
-        </div>
-        <div class="card-body">
-            
-            <?php
-                $sqli   = "SELECT * FROM funcionarios 
-                            INNER JOIN dependencias ON funcionarios.Dependencia=dependencias.ID 
-                            WHERE Cedula = '$id_usuario'";
-                $result = $conectar->query($sqli);
-                $data=[];
-                while($row = mysqli_fetch_assoc($result)){
-                    $Id_editar = $row['Cedula'];
-                    $data[] = $row;
-                }
-                $mostrar = $data[0];
-                //print_r($mostrar);
-            ?>
-            <h5 class="card-title">Nombre: <?php echo $mostrar['Nombre'] ?></h5>
-            <form>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Cedula</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo $mostrar['Cedula'];?>>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
-                    <input type="text"  disabled class="form-control" value=<?php echo '"'.$mostrar['Nombre'].'"';?>>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Cargo</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Cargo'].'"';?>>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Departamento</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Departamento'].'"';?>>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Facultad</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Facultad'].'"';?>>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Genero</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo $mostrar['Genero'];?>>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Salario</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Salario'].'"';?>>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Estado</label>
-                    <div class="col-sm-10">
-                    <input type="text" readonly disabled class="form-control" id="staticEmail" value=<?php echo '"'.$mostrar['Estado'].'"';?>>
-                    </div>
-                </div>
-            </form>
-            
-        </div>
-    </div>
-
-    <div class="card">
+    <div class="card mx-auto" style="width: 30rem; overflow-y: auto; height:auto;">
         <div class="card-header">
             MODIFICACIÓN DE DATOS
         </div>
@@ -95,84 +35,76 @@
             <form id="form_func_edit" action="" method="POST">
 
                 <input type="hidden" name="cedula_f" id="cedula_f" value="<?php echo $mostrar['Cedula'];?>">
-                    
-
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Cedula</label>
-                    <div class="col-sm-10">
-                    <input type="text" name="cedula_func_edt" class="form-control" placeholder="cedula" pattern="[0-9]{3,15}" title="La identifiación solo debe contener carácteres numéricos." value="<?php echo $mostrar['Cedula'];?>" required>
-                    </div>
+                
+                <!-- INPUT DE LA CEDULA -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="cedula_func_edt" class="form-control" pattern="[0-9]{3,15}" title="La identifiación solo debe contener carácteres numéricos." value="<?php echo $mostrar['Cedula'];?>" placeholder="Digite su cedula"  required>
+                    <label class="col-form-label" for="cedula_func_edt"> Cedula </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="nombre_func_edt" class="form-control" min="4" max="40" placeholder="nombre" value="<?php echo $mostrar['Nombre'];?>" required>
-                    </div>
+                <!-- INPUT DEL NOMBRE -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="nombre_func_edt" class="form-control" min="4" max="40" placeholder="Nombre" title="El nombre solo puede tener letras." value="<?php echo $mostrar['Nombre'];?>" required>
+                    <label class="col-form-label" for="nombre_func_edt"> Nombre </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Cargo</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="cargo_func_edt" class="form-control"  placeholder="cargo" value="<?php echo $mostrar['Cargo'];?>" required>
-                    </div>
+                <!-- INPUT DEL CARGO -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="cargo_func_edt" class="form-control" min="4" max="40" placeholder="Cargo"  value="<?php echo $mostrar['Cargo'];?>" required>
+                    <label class="col-form-label" for="cargo_func_edt"> Cargo </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Dependencia</label>
-                    <div class="col-sm-10">
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="dependencia_ausen_edt" required>
-                            <option value="">Seleccione</option>
-                            <?php 
-                                //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
-                                //$sql = "SELECT DISTINCT facultad, departamento FROM dependencias";
-                                $sql = "SELECT * FROM dependencias ORDER BY Departamento";
-                                $result = $conectar->query($sql);
-                                //echo 'ERROR'.$conectar->error;
-                                //print_r($result); exit;
-                                if($result->num_rows > 0){
-                                    while($row = $result->fetch_assoc()){
+                <!-- INPUT DE LA DEPENDENCIA -->
+                <div class="form-floating mb-2">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="dependencia_ausen_edt" required>
+                        <option value="">Seleccione</option>
+                        <?php 
+                            //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
+                            //$sql = "SELECT DISTINCT facultad, departamento FROM dependencias";
+                            $sql = "SELECT * FROM dependencias ORDER BY Departamento";
+                            $result = $conectar->query($sql);
+                            //echo 'ERROR'.$conectar->error;
+                            //print_r($result); exit;
+                            if($result->num_rows > 0){
+                                while($row = $result->fetch_assoc()){
 
-                                        if ($row['ID'] == $mostrar['Dependencia']) {
-                                            echo '<option value="'.$row['ID'].'" selected>'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
-                                        }else{
-                                            echo '<option value="'.$row['ID'].'">'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
-                                        }
-
+                                    if ($row['ID'] == $mostrar['Dependencia']) {
+                                        echo '<option value="'.$row['ID'].'" selected>'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
+                                    }else{
+                                        echo '<option value="'.$row['ID'].'">'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
                                     }
+
                                 }
-                            ?>
-                        </select>
-                    </div>
+                            }
+                        ?>
+                    </select>
+                    <label class="col-form-label" for="dependencia_ausen_edt"> Dependencia </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Genero</label>
-                    <div class="col-sm-10">
-                        <select class="custom-select" name="genero_func_edt" required>
-                                <option value="">Seleccione</option>
-                                <option value="MAS" <?php if($mostrar['Genero'] == 'MAS'){echo 'selected';}?> > Masculino </option>
-                                <option value="FEM" <?php if($mostrar['Genero'] == 'FEM'){echo 'selected';}?> > Femenino </option>
-                        </select>
-                    </div>
+                <!-- INPUT DEL Genero -->
+                <div class="form-floating mb-2">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="genero_func_edt" required>
+                            <option value="">Seleccione</option>
+                            <option value="MAS" <?php if($mostrar['Genero'] == 'MAS'){echo 'selected';}?> > Masculino </option>
+                            <option value="FEM" <?php if($mostrar['Genero'] == 'FEM'){echo 'selected';}?> > Femenino </option>
+                    </select>
+                    <label class="col-form-label" for="genero_func_edt"> Genero </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Salario</label>
-                    <div class="col-sm-10">
+                <!-- INPUT DEL Salario -->
+                <div class="form-floating mb-2">
                     <input type="text" name="salario_func_edt" class="form-control" min="1" max="100000000" pattern="[0-9]{1,9}" title="Solo números" placeholder="salario" value="<?php echo $mostrar['Salario'];?>" required>
-                    </div>
+                    <label class="col-form-label" for="salario_func_edt"> Salario </label>
                 </div>
 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Estado</label>
-                    <div class="col-sm-10">
-                        <select class="custom-select" name="estado_func_edt" required>
-                                <option value="">Seleccione</option>
-                                <option value="ACTIVO" <?php if($mostrar['Estado'] == 'ACTIVO'){echo 'selected';}?> > ACTIVO </option>
-                                <option value="INACTIVO" <?php if($mostrar['Estado'] == 'INACTIVO'){echo 'selected';}?> > INACTIVO </option>
-                        </select>
-                    </div>
+                <!-- INPUT DEL Estado -->
+                <div class="form-floating mb-2">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="estado_func_edt" required>
+                            <option value="">Seleccione</option>
+                            <option value="ACTIVO" <?php if($mostrar['Estado'] == 'ACTIVO'){echo 'selected';}?> > ACTIVO </option>
+                            <option value="INACTIVO" <?php if($mostrar['Estado'] == 'INACTIVO'){echo 'selected';}?> > INACTIVO </option>
+                    </select>
+                    <label class="col-form-label" for="estado_func_edt"> Estado </label>
                 </div>
 
                 <!-- Boton de enviar formulario para modificar funcionario -->
@@ -202,6 +134,7 @@
     
     <!-- INSTALACION DE SWEETALERT2 -->
     <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+    <script src="../js/sweet_alert.js"></script>
 
 <script>
     //mandar formulario mediante peticion ajax a ../logic/form_func_editLogic.php, cuando se presione el boton Modificar
@@ -223,40 +156,20 @@
                     console.log(resp);
 
                     if(resp == 'success'){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Funcionario modificado con éxito',
-                            showConfirmButton: true,
-                            //timer: 1500
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "./admin_edit_func.php";
-                            }
-                        })
+                        show_alert_redirect('success', 'Funcionario modificado con éxito', "./admin_edit_func.php");
+
                     }else if(resp == 'error1'){
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'No existe la dependencia seleccionada',
-                            showConfirmButton: true,
-                            //timer: 1500
-                        })
+                        show_alert('error', 'No existe la dependencia seleccionada');
+
                     }else if(resp == 'error2'){
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Complete todos los campos!',
-                            showConfirmButton: true,
-                            //timer: 1500
-                        })
-                    }
-                    else{
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error al modificar funcionario',
-                            showConfirmButton: true,
-                            //timer: 1500
-                        })
+                        show_alert('error', 'Complete todos los campos!');
+
+                    }else{
+                        show_alert('error', 'Error al modificar funcionario');
+
                     }
                 }
+                
             });
         });
     });

@@ -6,15 +6,11 @@
     $resultado  = $conectar->query($eliminar);
 
     if($resultado){
-        echo "
-            <script>
-                window.location.href='../pages/admin_edition_client.php?ALERT=success';
-            </script>";
+        //echo "<script>window.location.href='../pages/admin_edition_client.php?ALERT=success';</script>";
+        echo json_encode("success");
     }
     else{
-        echo "<script>
-            //alert('No se pudo realizar la eliminacion');
-            window.location.href='../pages/admin_edition_client.php?ALERT=error';
-        </script>";
+        //echo "<script>//alert('No se pudo realizar la eliminacion');window.location.href='../pages/admin_edition_client.php?ALERT=error';</script>";
+        echo json_encode("error1");
     }
 ?>

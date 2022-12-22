@@ -1,19 +1,34 @@
 <?php
+include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
 include "../template/cabecera.php";
 ?>
 
-        <!-- CONTENEDORES DE BUSQUEDAS -->
-        <div class="container row col-3 py-2">
-            <form class="row" id="auto_llenar">
-                <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
-                        <label class="col-form-label" for="caja_busqueda">Buscar: </label>
-                </div>
-            </form>
+        <!-- CONTENEDORES DE BUSQUEDAS Y BOTON DE CREAR -->
+        <div class="row ms-1">
+
+            <!-- CONTENEDORES DE BUSQUEDAS -->
+            <div class="container row col-3 py-2">
+                <form class="row" id="auto_llenar">
+                    <div class="form-floating mb-3">
+                            <input class="form-control" type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
+                            <label class="col-form-label" for="caja_busqueda">Buscar cedula: </label>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Contenedor del boton de nuevo funcionario -->
+            <div class="container row col-2 ms-1 py-3">
+                <a href="../pages/admin_create_func.php">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Crear Funcionario
+                    </button>
+                </a>
+            </div>
+
         </div>
 
         <!-- Contenedor de la tabla de funcionarios -->
-        <div class="container py-4" style="overflow-y: auto; height:65vh;" id="datos">
+        <div class="container py-4" style="overflow-x: auto; overflow-y: auto; height:65vh; font-size:14px" id="datos">
 
         </div>
 
@@ -21,7 +36,7 @@ include "../template/cabecera.php";
         <div class="container offset-md-0 col-md-7">
             <section>
                 <!-- Contenedor de los botones del paginador de las consultas -->
-                <div class="offset-md-8 col-md-6 text-center py-2">
+                <div class="offset-md-8 col-md-6 text-center py-1">
                     <ul class="pagination pagination-lg pager" id="myPager">
 
                     </ul>

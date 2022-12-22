@@ -39,6 +39,43 @@
         height: 100%;
         }
     }
+
+    /*.overlay-container {
+        position: absolute;
+        top: 29%;
+        left: 55%;
+        width: 40%;
+        height: 12%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 100;
+    }
+    .overlay {
+        background: #FF416C;
+        background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+        background: linear-gradient(to right, #FF4B2B, #FF416C);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0 0;
+        color: #FFFFFF;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }*/
+    /*
+    <div class="overlay-container">
+                    <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <h1 class="text-center">Bienvenido</h1>
+                        <p class="text-center">Para continuar, inicie sesión</p>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
+                    </div>
+                    </div>
+                    
+                </div>*/
 </style>
 
 <body>
@@ -60,7 +97,18 @@
                 </div>
 
                 <p class="text-center lead fw-normal mb-0 me-3 fs-1">
-                    Division de Gestión del Talento Humano</p>
+                    División de Gestión del Talento Humano</p>
+                
+                <div class="divider d-flex align-items-center my-4">
+                    <!-- <p class="text-center fw-bold mx-3 mb-0">Or</p> -->
+                </div>
+
+
+                <p class="text-center lead fw-normal mb-0 me-3 fs-4">
+                    SIGA</p>
+                <p class="text-center lead fw-normal mb-0 me-3 fs-6">
+                    Sistema de Gestión de Ausentismos</p>
+
 
                 <div class="divider d-flex align-items-center my-4">
                     <!-- <p class="text-center fw-bold mx-3 mb-0">Or</p> -->

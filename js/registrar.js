@@ -1,5 +1,8 @@
-/*!
- * Se comunica con el archivo registrarAusen.php donde se realiza la busqueda o query MySQL
+/*
+    * Este archivo se encarga de realizar la busqueda de funcionarios en la base de datos
+    * Se comunica con el archivo registrarAusen.php donde se realiza la busqueda o query MySQL
+    * Se crea el evento del boton de registrar ausentismo
+    * Tambien se encarga de mostrar los inputs de incapacidad cuando se selecciona incapacidad en el slider de tipos de ausentismo
  */
 
 $(function()
@@ -8,7 +11,7 @@ $(function()
     $("#incapacidadINPUTS").hide();
     $("#agregar_func").hide();
 
-    //se necesita hacer algo cuando se utilice la búsqueda de cedula y nombre
+    //Evento de buscar funcionario por nombre
     $(document).on('keyup', '#nombre1', function() //para el cuadro de busqueda de nombre
     {
         var valor = $('#nombre1').val();
@@ -18,10 +21,20 @@ $(function()
         }else if(valor == ""){
 
             document.getElementById("form_register").reset();
+            document.getElementById("fecha_inicio").valueAsDate = new Date();
+            document.getElementById("fecha_fin").valueAsDate = new Date();
+
+            //let the user write in the inputs
+            document.getElementById("nombre").disabled = false ;
+            document.getElementById("cedula").disabled = false;
+            document.getElementById("cargo").disabled = false;
+            document.getElementById("departamento").disabled = false;
+            document.getElementById("facultad").disabled = false;
         }
         //get_funcionario();
     });
 
+    //Evento de buscar funcionario por cedula
     $(document).on('keyup', '#cedula1', function()  //para el cuadro de busqueda de cedula
     {
         var valor = $('#cedula1').val();
@@ -35,17 +48,48 @@ $(function()
             //clean the form auto-llenar
             document.getElementById("form_register").reset();
             //console.log("no es numero");
+            document.getElementById("fecha_inicio").valueAsDate = new Date();
+            document.getElementById("fecha_fin").valueAsDate = new Date();
+
+            //let the user write in the inputs
+            document.getElementById("nombre").disabled = false ;
+            document.getElementById("cedula").disabled = false;
+            document.getElementById("cargo").disabled = false;
+            document.getElementById("departamento").disabled = false;
+            document.getElementById("facultad").disabled = false;
 
             //get_funcionario();
             //$("#form_register").reset();
-
-            /*document.getElementById("form_register").reset();
-            document.getElementById("nombre").disabled = false ;*/
         }
         //get_funcionario();
     });
 
-    // Slider de tipos de ausentismo
+    //add event to calculate the time of ausentismo when input tiempo is changed and unidad dias is selected. Calculate the tiempo in days with the dates
+    $(document).on('change', '#tiempo', function() 
+    {
+        let tiempo = document.getElementById("tiempo").value;
+        let unidad = document.getElementById("Unidad").value;
+        //console.log( unidad);
+
+        if(unidad == "dias"){
+            let fecha_inicio = document.getElementById("fecha_inicio").value;
+            let fecha_fin = document.getElementById("fecha_fin").value;
+
+            let date1 = new Date(fecha_inicio);
+            let date2 = new Date(fecha_fin);
+
+            let diffTime = Math.abs(date2 - date1);
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))+1; 
+
+            //if tiempo is different to diffDays, then change the tiempo
+            if(tiempo != diffDays){
+                document.getElementById("tiempo").value = diffDays;
+                show_alert('error', 'El tiempo de las fechas no es igual al tiempo digitado!');
+            }
+        }
+    });
+
+    // Evento para mostrar inputs de incapacidad cuando se selecciona incapacidad en Slider de tipos de ausentismo
     document.querySelector('#tipo_ausen').onchange = e => {
         const {
             value: number,
@@ -69,8 +113,11 @@ $(function()
 
     }
 
+    // Colocar fechas de inicio y fin de ausentismo en el mismo dia
+    DateNow();
 });
 
+//funcion para buscar el funcionario
 function get_funcionario()
 {
     let form = $("#auto_llenar");  //el id del formulario HTML es "auto-llenar"
@@ -94,15 +141,22 @@ function get_funcionario()
                     //$("cargo").value(funcionario.Cedula);
                     
 
-                    document.getElementById("nombre").disabled = true ;
-                    document.getElementById("cedula").disabled = true;
-                    document.getElementById("cargo").disabled = true;
-                    document.getElementById("departamento").disabled = true;
-                    document.getElementById("facultad").disabled = true;
-
                     //if funcionario is equal to N/A, then show a button to add a new funcionario 
                     if(funcionario == "N/A"){
                         $("#agregar_func").show();
+
+                        //clean the form form-register, set the date picker to today 
+                        document.getElementById("form_register").reset();
+                        document.getElementById("fecha_inicio").valueAsDate = new Date();
+                        document.getElementById("fecha_fin").valueAsDate = new Date();
+
+                        //let the user write in the inputs
+                        document.getElementById("nombre").disabled = false ;
+                        document.getElementById("cedula").disabled = false;
+                        document.getElementById("cargo").disabled = false;
+                        document.getElementById("departamento").disabled = false;
+                        document.getElementById("facultad").disabled = false;
+
                     }else{
                         $("#agregar_func").hide();
                         document.getElementById("nombre").value = funcionario.Nombre; 
@@ -111,6 +165,13 @@ function get_funcionario()
                         document.getElementById("cargo").value = funcionario.Cargo; 
                         document.getElementById("departamento").value = funcionario.Departamento; 
                         document.getElementById("facultad").value = funcionario.Facultad; 
+
+                        //dont let the user write in the inputs
+                        document.getElementById("nombre").disabled = true ;
+                        document.getElementById("cedula").disabled = true;
+                        document.getElementById("cargo").disabled = true;
+                        document.getElementById("departamento").disabled = true;
+                        document.getElementById("facultad").disabled = true;
                     }
                 });
 
@@ -119,33 +180,82 @@ function get_funcionario()
     )
 }
 
-function CreateFormInput(name1, id1, placeholder1, text1) { //recibe name del input, id del input y el placeholder
+//Funcion para colocar en fecha inicial, la fecha con mes actual
+function DateNow()
+{        
+    var date = new Date();
 
-    //var form2 = document.getElementById("incapacidadINPUTS");
-    //var form3 = document.getElementById("form_register");
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
 
-    var div1 = document.createElement("div");
-    div1.setAttribute("class", "form_group");
-    //div1.setAttribute("method", "POST");
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
 
-    var label1 = document.createElement("label");
-    label1.setAttribute("for", name1);
-    label1.innerHTML = text1;
-
-    var ID4 = document.createElement("input");
-    ID4.setAttribute("type", "text");
-    ID4.setAttribute("name", name1);
-    ID4.setAttribute("class", "input_decor");
-    ID4.setAttribute("id", id1);
-    ID4.setAttribute("placeholder", placeholder1);
-    ID4.setAttribute("required", "");
-
-    var ID5 = document.createElement("span");
-    ID5.setAttribute("class", "form_line");
-
-    div1.append(label1);
-    div1.append(ID4);
-    div1.append(ID5);
-    //form2.appendChild(div1);
-    $("#incapacidadINPUTS").append(div1);
+    var today = year + "-" + month + "-" + day;
+    //var today = year + "-" + month + "-0" + 1 ;  
+    //var today = "2019-07-22";
+    document.getElementById("fecha_inicio").value = today; 
+    document.getElementById("fecha_fin").value = today; 
+    //return today;
 }
+
+//enviar datos del form a ../logic/registrarAusen_form.php con peticion ajax cuando se presion el boton de registrar
+$(document).ready(function(){
+    $("#form_register").submit(function(e){
+        e.preventDefault();
+        var datos = $(this).serialize();
+        //console.log(datos);
+        $.ajax({
+            type: "POST",
+            url: "../logic/registrarAusen_form.php",
+            data: datos,
+            success: function(r){
+                var obj = JSON.parse(r);
+                //console.log(obj);
+
+                if(obj=="success"){
+                    show_alert_reset_form('success', 'Registro exitoso!', "form_register");
+
+                    //reset the form after submit
+                    document.getElementById("auto_llenar").reset();
+
+                    //permitir al usuario escribir en los inputs
+                    document.getElementById("nombre").disabled = false ;
+                    document.getElementById("cedula").disabled = false;
+                    document.getElementById("cargo").disabled = false;
+                    document.getElementById("departamento").disabled = false;
+                    document.getElementById("facultad").disabled = false;
+
+                }else if(obj=="error1"){
+                    show_alert_reset_form('error', 'No existe la cedula del funcionario!', "form_register");
+
+                }else if(obj=="errorTiempo"){
+                    show_alert('error', 'El tiempo de las fechas no es igual al tiempo de la ausencia!');
+
+                }else if(obj=="error2"){
+                    show_alert('error', 'Debe seleccionar el tipo de ausentismo!');
+                    
+                }else if(obj=="error3"){
+                    show_alert('error', 'Las horas deben estar en el mismo día!');
+
+                }else if(obj=="error4"){
+                    show_alert('error', 'Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso por horas.');
+
+                }else if(obj=="error5"){
+                    show_alert('error', 'Si escoge el tipo de ausentismo: incapacidad, debe ingresar el codigo de incapacidad.');
+
+                }else if(obj=="error6"){
+                    show_alert('error', 'El codigo de incapacidad no existe.');
+
+                }else if(obj=="error7"){
+                    show_alert('error', 'Error al registrar incapacidad.');
+
+                }else{
+                    show_alert('error', 'Error al registrar ausentismo.');
+                }
+
+            }
+        });
+    });
+});

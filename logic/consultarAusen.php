@@ -2,15 +2,28 @@
     session_start();
     require("../conexion.php");    
 
+    //OBTENER EL TIPO DE USUARIO QUE HACE LA CONSULTA
+    $tipo_usuario = isset($_SESSION['TIPO_USUARIO']) ? $_SESSION['TIPO_USUARIO'] : null;
+    $dependencia = isset($_SESSION['DEPENDENCIA']) ? $_SESSION['DEPENDENCIA'] : null;
+
         //print_r($_POST); exit; //para observar en el navegador con inspeccionar elemento
 
         $query_values = $_POST;
-        $extra_query = " WHERE 1 "; //"WHERE Cancelled = 0";
+        $BuscarIncapacidad = false;
+
+        //SI EL USUARIO EL FACULTAD, LIMITAR LA BUSQUEDA A LOS AUSENTISMOS DE LA FACULTAD
+        if($tipo_usuario=="FACULTAD"){
+            // donde las dependencias que tengan los 3 primeros numeros iguales a la dependencia del usuario $dependencia
+            $dependencia = substr($dependencia, 0, 3);
+            $extra_query = " WHERE dependencias.C_costo LIKE '%".$dependencia."%' ";
+        }else{
+            $extra_query = " WHERE 1 "; 
+        }
 
         if($query_values)
         {
             $extra_query.= " AND ";
-            $values = [];
+            $BUSCAR_CAMPOS = [];
             $queries = [];
 
             foreach($query_values as $field_name => $field_value)
@@ -18,18 +31,18 @@
                 foreach((array) $field_value as $value)
                 {
                     if($field_name=="Cedula_F"){  //Cedula_F LIKE '%5%'--> '%".$VAR."%'"
-                        $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                        $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
 
                     }elseif($field_name=="Nombre"){
                         //convert $value to uppercase
                         $value = strtoupper($value);
                         //change spaces in $value to % for LIKE query
                         $value = str_replace(" ", "%", $value);
-                        $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                        $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
 
                     }elseif($field_name=="Tiempo"){
 
-                        $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                        $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
 
                     }elseif($field_name=="Codigo"){
                         //convert $value to uppercase
@@ -40,7 +53,8 @@
                             unset($query_values["Codigo"]);
                             //continue;
                         }else{
-                            $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                            $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                            $BuscarIncapacidad = true;
                         }
                     
                     }elseif($field_name=="Diagnostico"){
@@ -54,7 +68,8 @@
                         }else{
                             //change spaces in $value to % for LIKE query
                             $value = str_replace(" ", "%", $value);
-                            $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                            $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                            $BuscarIncapacidad = true;
                         }
                     
                     }elseif($field_name=="Entidad"){
@@ -68,14 +83,15 @@
                         }else{
                             //change spaces in $value to % for LIKE query
                             $value = str_replace(" ", "%", $value);
-                            $values[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                            $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+                            $BuscarIncapacidad = true;
                         }
                     
                     }elseif($field_name=="Fecha_Inicio"){
-                        $values[$field_name][] = " {$field_name} > '{$value}'";
+                        $BUSCAR_CAMPOS[$field_name][] = " {$field_name} > '{$value}'";
 
                     }elseif($field_name=="Fecha_Fin"){
-                        $values[$field_name][] = " {$field_name} <= '{$value}'";
+                        $BUSCAR_CAMPOS[$field_name][] = " {$field_name} <= '{$value}'";
 
                     }elseif($field_name=="Pagina"){
                         if($value=="" || $value=="<<"){
@@ -84,12 +100,13 @@
                             $pag = $value;
                         }
                     }else{
-                        $values[$field_name][] = " {$field_name} = '{$value}'";
+                        $BUSCAR_CAMPOS[$field_name][] = " {$field_name} = '{$value}'";
                     }                     
                 }
             }
+
             //print_r($values); //exit;
-            foreach($values as $field_name => $field_values)
+            foreach($BUSCAR_CAMPOS as $field_name => $field_values)
             {
                 $queries[$field_name] = "(".implode(" OR ", $field_values).")";
             }
@@ -99,7 +116,7 @@
             //print_r($extra_query); exit;
         }
 
-        //PAGINACIÓN de resultados
+        //PAGINACIÓN DE RESULTADOS
         $limit=100;
         //$pag = 1;
         /*if(isset($_GET['pag'])) {
@@ -113,31 +130,37 @@
         }*/
         $offset=($pag-1)*$limit;
 
-        //if Diagnostico is in query_values and is not empty, then we need to search in the table "incapacidad"
-        if(isset($query_values['Diagnostico']) && $query_values['Diagnostico']!="" || isset($query_values['Codigo']) && $query_values['Codigo']!="" || isset($query_values['Entidad']) && $query_values['Entidad']!=""){
-            $sqliTotal = "SELECT * FROM incapacidad 
+        //SI LA BANDERA DE BuscarIncapacidad ES true, BSUCAR LA INCAPACIDAD QUE PERTENECE AL AUSENTIMSO
+        if($BuscarIncapacidad==true){
+            //consultar el número total de datos para el paginador
+            $sqliTotal = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, usuarios.*, incapacidad.ID as ID_in, incapacidad.Codigo as Codigo, incapacidad.Diagnostico as Diagnostico, incapacidad.Entidad as Entidad
+                        FROM incapacidad 
                         INNER JOIN ausentismos ON incapacidad.ID_Ausentismo=ausentismos.ID
                         INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario
-                        INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query." ORDER BY Fecha_Inicio DESC";
+                        INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
+                        INNER JOIN dependencias ON dependencias.ID = funcionarios.Dependencia ".$extra_query." ORDER BY Fecha_Inicio DESC";
             //print_r($sqliTotal); exit;
             $busquedaTotal = $conectar->query($sqliTotal); 
             $total=$busquedaTotal->num_rows;
 
-            //$sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query;
-            $sqli = "SELECT * FROM incapacidad 
+            //Consulta para llenar la tabla de ausentimsos
+            $sqli = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, usuarios.*, incapacidad.ID as ID_in, incapacidad.Codigo as Codigo, incapacidad.Diagnostico as Diagnostico, incapacidad.Entidad as Entidad
+                    FROM incapacidad 
                     INNER JOIN ausentismos ON incapacidad.ID_Ausentismo=ausentismos.ID
                     INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario
-                    INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query;
+                    INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
+                    INNER JOIN dependencias ON dependencias.ID = funcionarios.Dependencia ".$extra_query;
             $sqli .= " ORDER BY Fecha_Inicio DESC LIMIT $offset, $limit";
             $ausentismos = $conectar->query($sqli);  //print_r($sqli); exit;
             //SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario WHERE 1 AND ( Cedula_F LIKE '%%' ) 
             //AND ( Fecha_Inicio > '2019-07-22') LIMIT 0, 100 //que muestre los primeros 100 registros
         }else{
-
-            $sqliTotal = "SELECT ausentismos.*, funcionarios.*, usuarios.*, 
+            //consultar el número total de datos para el paginador
+            $sqliTotal = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, usuarios.*, 
                 COALESCE(incapacidad.ID, 'N/A') as ID_In, COALESCE(incapacidad.Codigo, 'N/A') as Codigo, COALESCE(incapacidad.Diagnostico, 'N/A') as Diagnostico, COALESCE(incapacidad.Entidad, 'N/A') as Entidad, COALESCE(incapacidad.ID_Ausentismo, 'N/A') as ID_Ausentismo
                 FROM ausentismos 
                 INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
+                INNER JOIN dependencias ON dependencias.ID = funcionarios.Dependencia
                 INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario 
                 LEFT JOIN incapacidad ON ausentismos.ID = incapacidad.ID_Ausentismo ".$extra_query." ORDER BY Fecha_Inicio DESC";
             //print_r($sqliTotal); exit;
@@ -145,21 +168,22 @@
             $total=$busquedaTotal->num_rows;
 
             //$sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query;
-            $sqli = "SELECT ausentismos.*, funcionarios.*, usuarios.*, 
+            $sqli = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, usuarios.*, 
                 COALESCE(incapacidad.ID, 'N/A') as ID_In, COALESCE(incapacidad.Codigo, 'N/A') as Codigo, COALESCE(incapacidad.Diagnostico, 'N/A') as Diagnostico, COALESCE(incapacidad.Entidad, 'N/A') as Entidad, COALESCE(incapacidad.ID_Ausentismo, 'N/A') as ID_Ausentismo
                 FROM ausentismos 
                 INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
+                INNER JOIN dependencias ON dependencias.ID = funcionarios.Dependencia
                 INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario 
                 LEFT JOIN incapacidad ON ausentismos.ID = incapacidad.ID_Ausentismo ".$extra_query;
             $sqli .= " ORDER BY Fecha_Inicio DESC LIMIT $offset, $limit";
             $ausentismos = $conectar->query($sqli);  //print_r($sqli); exit;
-            //num rows
+            
             //$numerofilas=$ausentismos->num_rows;
             //SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario WHERE 1 AND ( Cedula_F LIKE '%%' ) 
             //AND ( Fecha_Inicio > '2019-07-22') LIMIT 0, 100 //que muestre los primeros 100 registros
         }
 
-
+        //Convertir los datos de la cosulta en un array
         $ausen_list = [];
         $data = array();
         while($ausentismo = $ausentismos->fetch_assoc()){
@@ -192,23 +216,9 @@
         $json['total'] = $total;
         //print_r($json); exit;
 
-        //print_r($ausen_list);  //en chrome hacer CTRL+U para ver mejor el arreglo
+        //print_r($ausen_list); exit;
 
-        //Agregar links de las páginas
-        /*$botones = '';//'<tr><td class="text-center" colspan="10">';
-        $totalpag = ceil($total/$limit); //ceil redondea el numero
-        $links = array(); //creamos un array para guardar los links de las páginas
-        for($i=1; $i<=$totalpag; $i++){
-            //$links[] = '<a  href="admin_consultar.php?pag='.$i.'" class="btn btn-primary">'.$i.'</a>';
-            //style="border:solid 1px blue; padding-left:.6%; padding-right:.6%; padding-top:.25%; padding-bottom:.25%;"
-            $links[] = '<li><input type="button" style="margin-top:1rem"  value="'.$i.'" class="btn btn-primary mr-3 "></li>';
-        }
-        $botones .= implode(" ", $links);
-        //$botones .= ' </td> </tr>';
-        $json['botones'] = $botones; */
-
-
-        //Slider para no mostrar todos los botones de las páginas
+        //Slider de los botones de las páginas
         $totalpag = ceil($total/$limit); //ceil redondea el numero
         $slider = '<li class="page-item">';
         //$slider .= '<input type="button" value="<<" class="btn btn-primary mr-3" id="btnAnterior">';
@@ -245,6 +255,10 @@
         $json['slider'] = $slider;
         
         $_SESSION['ausen_list'] = $sqliTotal; //Para guardar el SQL query y usarlo con el boton de reporte para generar archivo excel 
+        //add $_SESSION['TIPO_USUARIO']; to json if it is defined, else add null
+        $json['tipo_usuario'] = $tipo_usuario;
+
+        //Enviar los datos en formato JSON
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($json);
 ?>

@@ -7,5 +7,8 @@ chart.js-3.9.1/package/dist/docs
 #Excluir archivos de pruebas
 css/menu.css
 template/menu.php
-js/sweet_alert.js
 pages/inicio.php
+#fun.xlsx
+~$fun.xlsx
+
+ausentismos_v1.sql

@@ -22,7 +22,7 @@
         $excel->getProperties()->setCreator($nombre_admin)->setTitle("Mi excel"); //metadatos
         $excel->setActiveSheetIndex(0);  //trabajar con la primera hoja del excel
         $hojaActiva = $excel->getActiveSheet();
-        $hojaActiva->setTitle("Funcionarios");
+        $hojaActiva->setTitle("Ausentismos");
 
         //Añadir informacion al archivo, CABECERAS:
         $hojaActiva->setCellValue('A1', 'Cedula');
