@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 11, 2023 at 04:00 PM
+-- Generation Time: Jan 20, 2023 at 03:59 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -2766,7 +2766,12 @@ INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiemp
 (2756, 1001086246, '2022-12-24', '2022-12-24', 1, 'dias', 'loquera', 124206, 34327997, 4),
 (2757, 1001086246, '2023-01-04', '2023-01-04', 1, 'dias', 'medico', 0, 34327997, 3),
 (2758, 1001086246, '2023-01-10', '2023-01-10', 1, 'dias', 'medico', 0, 34327997, 4),
-(2759, 1001086246, '2023-01-10', '2023-01-10', 1, 'dias', 'medico', 0, 34327997, 2);
+(2759, 1001086246, '2023-01-10', '2023-01-10', 1, 'dias', 'medico', 0, 34327997, 2),
+(2760, 1001086246, '2023-01-19', '2023-01-19', 1, 'dias', 'pruebas1', 124206, 34327997, 3),
+(2761, 1001086246, '2023-01-20', '2023-01-21', 2, 'dias', 'pruebas1', 266667, 34327997, 4),
+(2765, 1001086246, '2023-01-20', '2023-01-20', 20, 'horas', 'Viaje a cali - horas', 111111, 45555, 5),
+(2766, 1001086246, '2023-01-20', '2023-01-20', 20, 'horas', 'Viaje a cali - horas55', 111111, 45555, 5),
+(2767, 1001086246, '2023-01-20', '2023-01-20', 18, 'horas', 'Viaje a MEDELLIN- horas', 100000, 45555, 5);
 
 -- --------------------------------------------------------
 
@@ -17169,7 +17174,7 @@ INSERT INTO `funcionarios` (`Cedula`, `Nombre`, `Cargo`, `Correo`, `Dependencia`
 (98393424, 'BRAVO MONCAYO HECTOR ALEXANDER', 'PROFESOR CATEGORIA - A', 'hbravo@unicauca.edu.co', 51, 'MAS', 1972920, 'ACTIVO'),
 (98395386, 'ARCOS RODRIGUEZ MAURICIO ESTEB', 'PROFESOR ASOCIADO', 'marcos@unicauca.edu.co', 36, 'MAS', 6140714, 'ACTIVO'),
 (98396856, 'ORDOÑEZ ERAZO HUGO ARMANDO', 'PROFESOR ASOCIADO', 'hugoordonez@unicauca.edu.co', 96, 'MAS', 10934251, 'ACTIVO'),
-(1001086246, 'ANDRES FELIPE DIAGO M', 'ESTUDIANTE', 'N/A', 93, 'MAS', 3726188, 'ACTIVO'),
+(1001086246, 'ANDRES FELIPE DIAGO M', 'ESTUDIANTE', 'N/A', 93, 'MAS', 4000000, 'ACTIVO'),
 (1010193089, 'OSORIO SOLARTE DANIEL', 'PROFESOR INSTRUCTOR O AUXILIAR', 'danielosorio@unicauca.edu.co', 60, 'MAS', 1807524, 'ACTIVO'),
 (1014234473, 'CUELLAR SANCHEZ DIANA CAROLINA', 'PROFESOR CATEGORIA - A', 'dccuellar@unicauca.edu.co', 57, 'FEM', 1315280, 'ACTIVO'),
 (1017129541, 'CARDENAS VALENCIA MAURICIO AND', 'PROFESOR INSTRUCTOR O AUXILIAR', 'N/A', 36, 'MAS', 4345685, 'ACTIVO'),
@@ -18231,7 +18236,7 @@ CREATE TABLE `usuarios` (
   `Dependencia` int(11) NOT NULL,
   `TipoUsuario` varchar(20) NOT NULL,
   `Login` varchar(30) NOT NULL,
-  `Contrasena` varchar(30) NOT NULL,
+  `Contrasena` varchar(50) NOT NULL,
   `Estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -18240,11 +18245,12 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`Cedula_U`, `Nombre_U`, `Correo`, `Dependencia`, `TipoUsuario`, `Login`, `Contrasena`, `Estado`) VALUES
-(45555, 'fiet', 'fiet@unicauca.edu', 97, 'FACULTAD', 'fiet', '123', 'ACTIVO'),
-(25277884, 'Alejandra Maria Plaza', 'alejandraplaza@unicauca.edu.co', 102, 'CONSULTA', 'consulta', '123', 'ACTIVO'),
-(34327997, 'ADRIANA PATRICIA BENAVIDES TABARES', 'adrianabenavides@unicauca.edu.co', 102, 'ADMIN', 'admin', '123', 'ACTIVO'),
-(76315774, 'LOPEZ PIEDRAHITA JULIO CESAR', 'JCLOPE@UNICAUCA.EDU.CO', 19, 'FACULTAD', 'JCLOPEZ', '12345', 'ACTIVO'),
-(1001086246, 'ANDRES FELIPE DIAGO M', 'N/A', 93, 'ADMIN', 'FELIPE', '12345', 'ACTIVO');
+(45555, 'fiet', 'fiet@unicauca.edu', 97, 'FACULTAD', 'fiet', '202cb962ac59075b964b07152d234b70', 'ACTIVO'),
+(25277884, 'Alejandra Maria Plaza', 'alejandraplaza@unicauca.edu.co', 102, 'CONSULTA', 'consulta', '202cb962ac59075b964b07152d234b70', 'ACTIVO'),
+(34327997, 'ADRIANA PATRICIA BENAVIDES TABARES', 'adrianabenavides@unicauca.edu.co', 102, 'ADMIN', 'admin', '202cb962ac59075b964b07152d234b70', 'ACTIVO'),
+(76315774, 'LOPEZ PIEDRAHITA JULIO CESAR', 'JCLOPE@UNICAUCA.EDU.CO', 19, 'FACULTAD', 'JCLOPEZ', '827ccb0eea8a706c4c34a16891f84e7b', 'ACTIVO'),
+(1001086246, 'ANDRES FELIPE DIAGO M', 'N/A', 93, 'ADMIN', 'FELIPE', '827ccb0eea8a706c4c34a16891f84e7b', 'ACTIVO'),
+(1001086247, 'ANDRES FELIPE', 'ANDRESDIAG@UNICAUCA.EDU.CO', 47, 'ADMIN', 'FELIPE12', '202cb962ac59075b964b07152d234b70', 'ACTIVO');
 
 --
 -- Indexes for dumped tables
@@ -18326,7 +18332,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `ausentismos`
 --
 ALTER TABLE `ausentismos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2760;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2768;
 
 --
 -- AUTO_INCREMENT for table `dependencias`
