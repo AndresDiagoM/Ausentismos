@@ -105,7 +105,7 @@
                         <td>".$fila['Genero']."       </td>
                         <td>".$fila['Salario']."        </td>
                         <td>".$fila['Estado']."        </td>
-                        <td><a href='../pages/admin_func_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
+                        <td><a href='../pages/admin_func_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../assets/images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
                     </tr>";
         }
         $salida.="</table>";

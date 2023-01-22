@@ -32,6 +32,10 @@ class ComposerStaticInitc732de0629e45f953797b15bd04d53ae
             'MyCLabs\\Enum\\' => 13,
             'Matrix\\' => 7,
         ),
+        'F' => 
+        array (
+            'Felip\\Ausen2\\' => 13,
+        ),
         'C' => 
         array (
             'Complex\\' => 8,
@@ -53,8 +57,8 @@ class ComposerStaticInitc732de0629e45f953797b15bd04d53ae
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -71,6 +75,10 @@ class ComposerStaticInitc732de0629e45f953797b15bd04d53ae
         'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
+        ),
+        'Felip\\Ausen2\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'Complex\\' => 
         array (

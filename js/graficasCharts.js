@@ -88,9 +88,12 @@ const renderMonthsChart = (grafica1) => {
         responsive: true,
     }
 
-    /* PARAMETROS DE Chart()
-    *id del canvas donde se renderiza el chart y los datos
-    */
+    /**
+     * @param {string} id
+     * @param {string} type
+     * @param {object} data
+     * @param {object} options
+     */
     new Chart('monthsChart', {
         type: 'bar',
         data,

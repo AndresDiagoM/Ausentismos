@@ -38,6 +38,39 @@ include "../template/cabecera.php";
         foreach($tabla_auxiliar as $funcionario){
             $Id_fila=$funcionario['Cedula'];
             if($funcionario['Error'] != 'N/A'){
+
+                //Pasar los errores a un array 
+                $errores = explode(",", $funcionario['Error']);
+
+                //Pasar los errores a un string que sea entendible por el usuario
+                $erroresString = "";
+                foreach($errores as $error){
+                    if($error == "Cedula"){
+                        $erroresString .= "Cedula: Formato incorrecto, ";
+                    }
+                    if($error == "Nombre"){
+                        $erroresString .= "Nombre: Formato incorrecto, ";
+                    }
+                    if($error == "Cargo"){
+                        $erroresString .= "Cargo: Formato incorrecto, ";
+                    }
+                    if($error == "Salario"){
+                        $erroresString .= "Salario: Formato incorrecto, ";
+                    }
+                    if($error == "Estado"){
+                        $erroresString .= "Estado ACTIVO o INACTIVO, ";
+                    }
+                    if($error == "Genero"){
+                        $erroresString .= "Genero MAS o FEM, ";
+                    }
+                    if($error == "Correo"){
+                        $erroresString .= "Correo no valido, ";
+                    }
+                    if($error == "Dependencia"){
+                        $erroresString .= "Dependencia inválida, ";
+                    }
+                }
+
                 
                 $tablaAux .= "<tr>
                                 <th scope='row'>".$funcionario['Cedula']."</th>
@@ -47,8 +80,8 @@ include "../template/cabecera.php";
                                 <td>".$funcionario['Genero']."</td>
                                 <td>".$funcionario['Salario']."</td>
                                 <td>".$funcionario['Estado']."</td>
-                                <td>".$funcionario['Error']."</td>
-                                <td><a href='../pages/admin_aux_table_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
+                                <td>".$erroresString."</td>
+                                <td><a href='../pages/admin_aux_table_edition.php?ID=$Id_fila' class='btn-edit'><img src='../assets/images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
                             </tr>";
             }
         }
@@ -136,9 +169,9 @@ include "../template/cabecera.php";
     <script src="../js/jquery.min.js"></script> 
 
     <!-- LOCAL: JQuery, AJAX, Bootstrap -->
-    <script src="../bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
-    <script src="../bootstrap-5.2.2-dist/js/popper.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
     <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
     <script src="../js/sweet_alert.js"></script>
 

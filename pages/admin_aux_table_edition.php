@@ -2,6 +2,18 @@
     include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea administrador
     include "../template/cabecera.php";
     $id_func     = $_GET['ID'];
+
+    //Cosultar datos del funcionario seleccionado
+    $sqli   = "SELECT * FROM func_auxiliar 
+                LEFT JOIN dependencias ON dependencias.ID = func_auxiliar.Dependencia WHERE Cedula = '$id_func'";
+    $result = $conectar->query($sqli);
+    $data=[];
+    while($row = mysqli_fetch_assoc($result)){
+        $Id_editar = $row['Cedula'];
+        $data[] = $row;
+    }
+    $mostrar = $data[0];
+    //print_r($mostrar);
 ?>
 
 
@@ -13,90 +25,68 @@
             DATOS ACTUALES
         </div>
         <div class="card-body">
-            
-            <?php
-                $sqli   = "SELECT * FROM func_auxiliar 
-                            LEFT JOIN dependencias ON dependencias.ID = func_auxiliar.Dependencia WHERE Cedula = '$id_func'";
-                $result = $conectar->query($sqli);
-                $data=[];
-                while($row = mysqli_fetch_assoc($result)){
-                    $Id_editar = $row['Cedula'];
-                    $data[] = $row;
-                }
-                $mostrar = $data[0];
-                //print_r($mostrar);
-            ?>
 
             <h5 class="card-title">Nombre: <?php echo $mostrar['Nombre'] ?></h5>
             <form>
-                <!-- LABEL DE Cedula -->
-                <div class="form-floating mb-2">
-                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Cedula'];?>">
-                    <label class="col-form-label" for="Cedula"> Cedula </label>
-                </div>
 
-                <!-- LABEL DE NOMBRE -->
-                <div class="form-floating mb-2">
-                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Nombre'];?>">
-                    <label class="col-form-label" for="Nombre"> Nombre </label>
-                </div>
+                <?php
+                //pasar los errores a un array
+                $errores = explode(",", $mostrar['Error']);
 
-                <!-- LABEL DE Cargo -->
-                <div class="form-floating mb-2">
-                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Cargo'];?>">
-                    <label class="col-form-label" for="Cargo"> Cargo </label>
-                </div>
+                //Para cada campo del arreglo $mostrar se crea un label y un input
+                foreach($mostrar as $key => $value){
 
-                <!-- INPUT DEL Correo -->
-                <div class="form-floating mb-2">
-                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Correo'];?>">
-                    <label class="col-form-label" for="Correo"> Correo </label>
-                </div>
+                    if($key != 'ID' && $key != 'Error' && $key != 'Dependencia' && $key != 'Departamento' && $key != 'Facultad' && $key != 'C_costo'){
 
-                <!-- INPUT DE LA DEPENDENCIA -->
-                <div class="form-floating mb-3">
-                    <select readonly disabled  class="form-select" >
-                        <option value="">Seleccione</option>
-                        <?php
-                            //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
-                            //$sql = "SELECT DISTINCT facultad, departamento FROM dependencias";
-                            $sql = "SELECT * FROM dependencias ORDER BY Departamento";
-                            $result = $conectar->query($sql);
-                            //echo 'ERROR'.$conectar->error;
-                            //print_r($result); exit;
+                        //añadir color si el campo error lo indica
+                        if(in_array($key, $errores)){
+                            $color = 'bg-warning';
+                        }else{
+                            $color = '';
+                        }
+                        echo "<div class='form-floating mb-2'>
+                                <input type='text' readonly disabled class='form-control $color' id='floatingInput' value='$value'>
+                                <label for='floatingInput'>$key</label>
+                            </div>";
+
+                    }else if($key == 'Dependencia'){
+                        //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
+                        //$sql = "SELECT DISTINCT facultad, departamento FROM dependencias";
+                        $sql = "SELECT * FROM dependencias ORDER BY Departamento";
+                        $result = $conectar->query($sql);
+                        //echo 'ERROR'.$conectar->error;
+
+                        //Si hay error en la dependencia se muestra un mensaje de error
+                        if(in_array($key, $errores)){
+                            $color = 'bg-warning';
+                            echo "<div class='form-floating mb-2'>
+                                            <input type='text' readonly disabled  class='form-control $color ' value='SIN DEPENDENCIA'>
+                                            <label class='col-form-label' for='$key'> $key </label>
+                                        </div>";
+                        }else{
+                            //Si hay dependencias se muestran en un input con el nombre de la dependencia
                             if($result->num_rows > 0){
-                                while($row = $result->fetch_assoc()){
+                                while($dependencias_bd = $result->fetch_assoc()){
                                     
-                                    if ($row['ID'] == $mostrar['Dependencia']) {
-                                        echo '<option value="'.$row['ID'].'" selected>'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
+                                    if ($dependencias_bd['ID'] == $mostrar['Dependencia']) {
+                                        $var = ''.$dependencias_bd['Facultad'].' - '.$dependencias_bd['Departamento'].'';
+                                        echo "<div class='form-floating mb-2'>
+                                                <input type='text' readonly disabled  class='form-control' value='$var'>
+                                                <label class='col-form-label' for='$key'> $key </label>
+                                            </div>";
+                                        
                                     }else{
-                                        echo '<option value="'.$row['ID'].'">'.$row['Facultad'].' - '.$row['Departamento'].'</option>';
+                                        //echo '<option value="'.$dependencias_bd['ID'].'">'.$dependencias_bd['Facultad'].' - '.$dependencias_bd['Departamento'].'</option>';
                                     }
-
                                 }
                             }
-                        ?>
-                    </select>
-                    <label class="col-form-label" for="dependencia"> Dependencia </label>
-                </div>
+                        }
 
-                <!-- INPUT DEL Genero -->
-                <div class="form-floating mb-2">
-                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Genero'];?>">
-                    <label class="col-form-label" for="Genero"> Genero </label>
-                </div>
+                        
+                    }
+                }
+                ?>
 
-                <!-- INPUT DEL Salario -->
-                <div class="form-floating mb-2">
-                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Salario'];?>">
-                    <label class="col-form-label" for="Salario"> Salario </label>
-                </div>
-
-                <!-- INPUT DEL Estado -->
-                <div class="form-floating mb-2">
-                    <input type="text" readonly disabled  class="form-control" value="<?php echo $mostrar['Estado'];?>">
-                    <label class="col-form-label" for="Estado"> Estado </label>
-                </div>
             </form>
             
         </div>
@@ -115,31 +105,31 @@
 
                 <!-- INPUT DE LA CEDULA -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="cedula_func_edt" class="form-control" pattern="[0-9]{3,15}" title="La identifiación solo debe contener carácteres numéricos." value="<?php echo $mostrar['Cedula'];?>" placeholder="Digite su cedula"  required>
-                    <label class="col-form-label" for="cedula_func_edt"> Cedula </label>
+                    <input type="text" name="Cedula" class="form-control" pattern="[0-9]{3,15}" title="Solo debe contener carácteres numéricos." value="<?php echo $mostrar['Cedula'];?>" placeholder="Digite su cedula"  required <?= !in_array("Cedula", $errores)?"readonly disabled":"";?>>
+                    <label class="col-form-label" for="Cedula"> Cedula </label>
                 </div>
 
                 <!-- INPUT DEL NOMBRE -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="nombre_func_edt" class="form-control" placeholder="nombre"  value="<?php echo $mostrar['Nombre'];?>"  required>
-                    <label class="col-form-label" for="nombre_func_edt"> Nombre </label>
+                    <input type="text" name="Nombre" class="form-control" placeholder="nombre"  value="<?php echo $mostrar['Nombre'];?>" required <?= !in_array("Nombre", $errores)?"readonly disabled":"";?> >
+                    <label class="col-form-label" for="Nombre"> Nombre </label>
                 </div>
 
                 <!-- INPUT DEL CARGO -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="cargo_func_edt" class="form-control" placeholder="Cargo"  value="<?php echo $mostrar['Cargo'];?>"  required>
-                    <label class="col-form-label" for="cargo_func_edt"> Cargo </label>
+                    <input type="text" name="Cargo" class="form-control" placeholder="Cargo"  value="<?php echo $mostrar['Cargo'];?>" required <?= !in_array("Cargo", $errores)?"readonly disabled":"";?>> 
+                    <label class="col-form-label" for="Cargo"> Cargo </label>
                 </div>
 
                 <!-- INPUT DEL Correo -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="correo_func_edt" class="form-control" placeholder="Correo"  value="<?php echo $mostrar['Correo'];?>"  required>
-                    <label class="col-form-label" for="correo_func_edt"> Correo </label>
+                    <input type="email" name="Correo" class="form-control" placeholder="Correo"  value="<?php echo $mostrar['Correo'];?>" required <?= !in_array("Correo", $errores)?"readonly disabled":"";?>>
+                    <label class="col-form-label" for="Correo"> Correo </label>
                 </div>
 
                 <!-- INPUT DE LA DEPENDENCIA -->
                 <div class="form-floating mb-3">
-                    <select class="form-select" name="dependencia_func_edt" id="dependencia" required>
+                    <select class="form-select" name="Dependencia" id="dependencia" required <?= !in_array("Dependencia", $errores)?"readonly disabled":"";?>>
                         <option value="">Seleccione</option>
                         <?php
                             //Consultar dependencias de la base de datos, donde la facultad y departamento sean unicos
@@ -159,33 +149,33 @@
                             }
                         ?>
                     </select>
-                    <label class="col-form-label" for="dependencia"> Dependencia </label>
+                    <label class="col-form-label" for="Dependencia"> Dependencia </label>
                 </div>
 
                 <!-- INPUT DEL GENERO -->
                 <div class="form-floating mb-2">
-                    <select class="form-select" name="genero_func_edt" required>
+                    <select class="form-select" name="Genero" required <?= !in_array("Genero", $errores)?"readonly disabled":"";?>>
                             <option value="">Seleccione</option>
                             <option value="MAS" <?php if($mostrar['Genero'] == 'MAS'){echo 'selected';}?> >Masculino</option>
                             <option value="FEM" <?php if($mostrar['Genero'] == 'FEM'){echo 'selected';}?> >Femenino</option>
                     </select>
-                    <label for="genero_func_edt" class="col-form-label">Genero</label>
+                    <label for="Genero" class="col-form-label">Genero</label>
                 </div>
 
                 <!-- INPUT DEL Salario -->
                 <div class="form-floating mb-2">
-                    <input type="number" name="salario_func_edt" class="form-control" placeholder="Salario" min="1" max="100000000" value="<?php echo $mostrar['Salario'];?>"  required>
-                    <label class="col-form-label" for="salario_func_edt"> Salario </label>
+                    <input type="number" name="Salario" class="form-control" placeholder="Salario" min="1" max="100000000" value="<?php echo $mostrar['Salario'];?>"  required <?= !in_array("Salario", $errores)?"readonly disabled":"";?>>
+                    <label class="col-form-label" for="Salario"> Salario </label>
                 </div>
 
                 <!-- INPUT DEL ESTADO -->
                 <div class="form-floating mb-2">
-                    <select class="form-select" name="estado_func_edt" required>
+                    <select class="form-select" name="Estado" required <?= !in_array("Estado", $errores)?"readonly disabled":"";?>>
                             <option value="">Seleccione</option>
                             <option value="ACTIVO" <?php if($mostrar['Estado'] == 'ACTIVO'){echo 'selected';}?> >ACTIVO</option>
                             <option value="INACTIVO" <?php if($mostrar['Estado'] == 'INACTIVO'){echo 'selected';}?> >INACTIVO</option>
                     </select>
-                    <label for="estado_func_edt" class="col-form-label">Estado</label>
+                    <label for="Estado" class="col-form-label">Estado</label>
                 </div>
 
 
@@ -203,9 +193,9 @@
 </div> <!-- fin de la clase d-flex -->
 
     <!-- Bootstrap core JavaScript -->
-    <script src="../bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
-    <script src="../bootstrap-5.2.2-dist/js/popper.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
 
     <!-- APP JS CONTIENE  FUNCIONES PARA LOS GRÁFICOS 
     <script src="../js/app1.js"></script> -->

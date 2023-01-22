@@ -26,6 +26,8 @@
         }
         $mostrar = $data[0];
         //print_r($mostrar);
+
+        
     }else{
         die("<script>location.href='admin_edition_client.php';</script>");
     }
@@ -116,8 +118,14 @@
 
                 <!-- INPUT DE LA Contraseña -->
                 <div class="form-floating mb-2">
-                    <input type="password" name="contrasena_usuario_edt" class="form-control" min="4" max="40" value="<?php echo $mostrar['Contrasena'];?>" placeholder="Digite su contraseña"  required>
-                    <label class="col-form-label" for="login"> Contraseña </label>
+                    <input type="password" id="contrasena_usuario_edt" name="contrasena_usuario_edt" class="form-control" pattern="[A-Za-z0-9]{5,30}"  min="5" max="30" value="<?php echo $mostrar['Contrasena'];?>" placeholder="Digite su contraseña" title="Debe tener de 5 a 30 caracteres."  required>
+                    <label class="col-form-label" for="contrasena_usuario_edt"> Contraseña </label>
+                </div>
+
+                <!-- INPUT DE LA Contraseña -->
+                <div class="form-floating mb-2">
+                    <input type="password" id="contrasena_usuario" name="contrasena_usuario" class="form-control" pattern="[A-Za-z0-9]{5,30}"  min="5" max="30" value="<?php echo $mostrar['Contrasena'];?>" placeholder="Digite su contraseña" title="Debe tener de 5 a 30 caracteres."  required>
+                    <label class="col-form-label" for="contrasena_usuario"> Repita la Contraseña </label>
                 </div>
 
                 <button type="submit" class="btn btn-success">Modificar</button> 
@@ -134,9 +142,9 @@
 </div> <!-- fin de la clase d-flex -->
 
     <!-- Bootstrap core JavaScript -->
-    <script src="../bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
-    <script src="../bootstrap-5.2.2-dist/js/popper.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
 
     <!-- APP JS CONTIENE  FUNCIONES PARA LOS GRÁFICOS 
     <script src="../js/app1.js"></script> -->
@@ -165,8 +173,14 @@
                     if(obj == 'success'){
                         show_alert_redirect('success', 'Datos Actualizados Correctamente', '../pages/admin_edition_client.php');
 
-                    }else{
-                        show_alert_redirect('Error', 'Error al actualizar', '../pages/admin_edition_client.php');
+                    } else if(obj == 'error2'){
+                        show_alert_redirect('error', 'Complete todos los campos', '../pages/admin_edition_client.php');
+
+                    } else if(obj == 'error3'){
+                        show_alert_redirect('error', 'Las contraseñas no coinciden', '../pages/admin_edition_client.php');
+
+                    } else{
+                        show_alert_redirect('error', 'Error al actualizar', '../pages/admin_edition_client.php');
 
                     }
                     
@@ -174,6 +188,22 @@
             });
         });
     });
+
+    //if the password in the password field doesn't match the password in the confirm password field then dont send the form and show an alert
+    var password = document.getElementById("contrasena_usuario_edt")
+    , confirm_password = document.getElementById("contrasena_usuario");
+
+    function validatePassword(){
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Las contraseñas no coinciden");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
 </script> 
 
 <?php

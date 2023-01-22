@@ -60,8 +60,8 @@
                         <td>".$fila['Login']."        </td>
                         <td> *****  </td>
                         <td>".$fila['Estado']."   </td>
-                        <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
-                        <td><a  onclick = 'eliminarUsuario($Id_fila)' class='btn-delete'><img src='../images/delete.png'></a></td>
+                        <td><a href='../pages/admin_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../assets/images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
+                        <td><a  onclick = 'eliminarUsuario($Id_fila)' class='btn-delete'><img src='../assets/images/delete.png'></a></td>
                     </tr>";
         }
         $salida.="</table>";

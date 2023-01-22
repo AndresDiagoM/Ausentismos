@@ -1,6 +1,7 @@
 <?php
-    /*  Para buscar el funcionario de forma dinámica cuando se escribe la cedula o nombre
-        * registrarAusen.php es llamado por registrar.js, donde se detecta el evento keyup
+    /** 
+     * Para buscar el funcionario de forma dinámica cuando se escribe la cedula o nombre
+     * registrarAusen.php es llamado por registrar.js, donde se detecta el evento keyup
     */
     //session_start();
     require("../conexion.php");

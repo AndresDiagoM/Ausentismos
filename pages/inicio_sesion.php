@@ -10,13 +10,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../images/icon.png">
+    <link rel="icon" href="../assets/images/icon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../bootstrap-5.2.2-dist/css/bootstrap.min.css" /> 
+    <link rel="stylesheet" href="../assets/bootstrap-5.2.2-dist/css/bootstrap.min.css" /> 
 
     <!-- CSS -->
-    <link href="../css/estilo.css" rel="stylesheet" integrity="" crossorigin="anonymous">
+    <link href="../assets/css/estilo.css" rel="stylesheet" integrity="" crossorigin="anonymous">
 
     <!-- ICONOS en https://ionic.io/ionicons/v4/usage#md-pricetag -->
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -86,7 +86,7 @@
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="../images/inicio.png"
+                <img src="../assets/images/inicio.png"
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
@@ -191,13 +191,13 @@
                 <!-- Right -->
                 <div class="">
                     <a href="https://www.facebook.com/universidadelcauca/" class="text-white me-4">
-                        <img src="../images/face2.png" class="img-fluid" width="30" height="30" alt="Sample image">
+                        <img src="../assets/images/face2.png" class="img-fluid" width="30" height="30" alt="Sample image">
                     </a>
                     <a href="https://twitter.com/unicauca/" class="text-white me-4">
-                        <img src="../images/twitter.png" class="img-fluid" width="30" height="30" alt="Sample image">
+                        <img src="../assets/images/twitter.png" class="img-fluid" width="30" height="30" alt="Sample image">
                     </a>
                     <a href="https://www.linkedin.com/school/universidad-del-cauca/" class="text-white">
-                        <img src="../images/linkedin.png" class="img-fluid" width="30" height="30" alt="Sample image">
+                        <img src="../assets/images/linkedin.png" class="img-fluid" width="30" height="30" alt="Sample image">
                     </a>
                 </div> 
                 <!-- Right -->

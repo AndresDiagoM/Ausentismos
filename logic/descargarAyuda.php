@@ -7,11 +7,11 @@ $tipo_usuario = $_POST['tipo_usuario'];
 //Comprobrar que tipo de usuario es para descargar el archivo que corresponda
 $file = '';
 if($tipo_usuario == 'ADMIN'){
-    $file = '../documents/ayudaAdmin.pdf';
+    $file = '../assets/documents/ayudaAdmin.pdf';
 }else if($tipo_usuario == 'CONSULTA'){
-    $file = '../documents/ayudaConsulta.pdf';
+    $file = '../assets/documents/ayudaConsulta.pdf';
 }else if($tipo_usuario == 'FACULTAD'){
-    $file = '../documents/ayudaFacultad.pdf';
+    $file = '../assets/documents/ayudaFacultad.pdf';
 }else{
     exit;
 }

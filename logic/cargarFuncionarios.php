@@ -49,8 +49,7 @@
             }
         }*/
     }elseif(isset($_POST['aceptar'])){
-        //echo "<script> alert('Archivo Cargado'); </script>";
-        //exit;
+        
         insertarDatos($conectar);
         //echo "<script> window.location.href='./admin_cargar.php'; </script>";
         exit;
@@ -59,9 +58,7 @@
         //echo "No se ha cargado el archivo";
         //show alert that the file was not uploaded
         //echo "<script>alert('No se ha cargado el archivo');</script>";
-        echo "<script>
-                    window.location.href='./admin_cargar.php';
-            </script>";
+        echo json_encode("error");
         //exit;
     }
 
@@ -83,20 +80,20 @@
     //unset($sheetData[0]);
     //print_r($sheetData);
 
-    //read the headers of the excel file, to get the column names and number, to save them in an array
+    //Leer los encabezados de la hoja de excel
     if(!isset($sheetData[0])){
         echo json_encode("error2");
         exit;
     }
 
     $headers = $sheetData[0];   
-    //if headers do not contain CODIGO, CEDULA, NOMBRE, GENERO, NOMBRE_DEL_CARGO, C_COSTO, DEPARTAMENTO, FACULTAD, salario and estado, then show error
-    if(!in_array("CEDULA", $headers) || !in_array("NOMBRE", $headers) || !in_array("EMAIL", $headers) || !in_array("GENERO", $headers) || !in_array("NOMBRE_DEL_CARGO", $headers) || !in_array("C_COSTO", $headers) || !in_array("DEPARTAMENTO", $headers) || !in_array("FACULTAD", $headers) || !in_array("SALARIO", $headers) || !in_array("ESTADO", $headers)){
+    //Si no tiene los encabeczados de CODIGO, CEDULA, NOMBRE, GENERO, NOMBRE_DEL_CARGO, C_COSTO, DEPARTAMENTO, FACULTAD, salario y estado, entonces es error
+    $requiredHeaders = array("CEDULA", "NOMBRE", "EMAIL", "GENERO", "NOMBRE_DEL_CARGO", "C_COSTO", "DEPARTAMENTO", "FACULTAD", "SALARIO", "ESTADO");
+    $missingHeaders = array_diff($requiredHeaders, $headers);
+    if (!empty($missingHeaders)) {
         echo json_encode("error2");
-        //print_r($headers);
         exit;
     }
-    
     
     //print_r($headers); exit;
     //print_r($sheetData);exit;
@@ -134,6 +131,9 @@
 
     //==========================================================================
     //=================== COMPROBAR QUE LOS DATOS SEAN CONSISTENTES ============
+    function validateField($fieldValue) {
+        return !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $fieldValue);
+    }
     foreach($data as $key => $value){
         //echo $value['CEDULA']."<br>";
         //echo $value['NOMBRE']."<br>";
@@ -145,36 +145,91 @@
         //echo $value['SALARIO']."<br>";
         //echo $value['ESTADO']."<br>";
         $data[$key]['DEPENDENCIA'] = "N/A";
-        $data[$key]['ERROR'] = "N/A";
-
-        //comprobrar que ningun campo tenga caracteres especiales
-        if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['CEDULA']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['NOMBRE']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['GENERO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬]/', $value['NOMBRE_DEL_CARGO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['C_COSTO']) || preg_match('/[\'^£$%&*()}{@#~?><>|=_+¬-]/', $value['DEPARTAMENTO']) || preg_match('/[\'^£$%&*()}{@#~?><>|=_+¬-]/', $value['FACULTAD']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['SALARIO']) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $value['ESTADO'])){
-            //eliminar el registro del array
-            $data[$key]['ERROR'] = "Caracteres especiales";
-        }
+        $data[$key]['ERROR'] = "";
 
         //comprobar que el campo cedula y salario sea int.
-        if(!is_numeric($value['CEDULA']) || !is_numeric($value['SALARIO'])){
-            //eliminar el registro del array
-            $data[$key]['ERROR'] = "Cedula y Salario deben ser numeros";
-            /*$funcionariosNoInsertados[] = $data[$key];
-            unset($data[$key]); */
+        if(!is_numeric($value['CEDULA']) || !validateField($value['CEDULA'])){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Cedula"; //error2: Cedula y Salario deben ser int
+            }else{
+                $data[$key]['ERROR'] .= ",Cedula";
+            }
+
+            //Si tiene caracteres especiales entonces quitarlos
+            if(!validateField($value['CEDULA'])){
+                $data[$key]['CEDULA'] = preg_replace('/[^A-Za-z0-9\-]/', '', $value['CEDULA']);
+            }
         }
 
-        //comprobar que el campo estado sea ACTIVO o INACTIVO, y que el campo genero sea MAS o FEM
-        if($value['ESTADO']!="ACTIVO" && $value['ESTADO']!="INACTIVO" || $value['GENERO']!="MAS" && $value['GENERO']!="FEM"){
-            //eliminar el registro del array
-            $data[$key]['ERROR'] = "Estado debe ser ACTIVO o INACTIVO y Genero MAS o FEM";
+        //Comprobar que el nombre sea string y sin caracteres especiales
+        if(!validateField($value['NOMBRE']) || !is_string($value['NOMBRE'])){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Nombre"; 
+            }else{
+                $data[$key]['ERROR'] .= ",Nombre";
+            }
+        }
+
+        //Comprobar que el cargo sea string y sin caracteres especiales
+        if(!validateField($value['NOMBRE_DEL_CARGO']) || !is_string($value['NOMBRE_DEL_CARGO'])){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Cargo"; 
+            }else{
+                $data[$key]['ERROR'] .= ",Cargo";
+            }
+        }
+
+        //comprobar que el salario sea int.
+        if(!is_numeric($value['SALARIO']) || !validateField($value['SALARIO'])){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Salario"; 
+            }else{
+                $data[$key]['ERROR'] .= ",Salario";
+            }
+
+            //Si tiene caracteres especiales entonces quitarlos
+            if(!validateField($value['CEDULA'])){
+                $data[$key]['CEDULA'] = preg_replace('/[^A-Za-z0-9\-]/', '', $value['CEDULA']);
+            }
+        }
+
+        //comprobar que el campo estado sea ACTIVO o INACTIVO
+        if($value['ESTADO']!="ACTIVO" && $value['ESTADO']!="INACTIVO" || !validateField($value['ESTADO'])){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Estado"; // Estado ACTIVO o INACTIVO
+            }else{
+                $data[$key]['ERROR'] .= ",Estado";
+            }
+        }
+
+        //comprobar que el campo genero sea MAS o FEM
+        if($value['GENERO']!="MAS" && $value['GENERO']!="FEM" || !validateField($value['GENERO'])){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Genero"; // Genero debe ser MAS o FEM
+            }else{
+                $data[$key]['ERROR'] .= ",Genero";
+            }
         }
 
         //si el correo no tiene "@" o no tiene "." entonces ERROR es "Correo con formato incorrecto"
-        if(!strpos($value['EMAIL'], "@") || !strpos($value['EMAIL'], ".")){
-            //if $data error, is not set, then set it to "Correo con formato incorrecto", else append the error
-            if(!isset($data[$key]['ERROR'])){
-                $data[$key]['ERROR'] = "Correo con formato incorrecto";
+        if(!strpos($value['EMAIL'], "@") || !strpos($value['EMAIL'], ".") || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $value['EMAIL'])){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Correo"; // Correo con formato incorrecto
             }else{
-                $data[$key]['ERROR'] = ", Correo incorrecto";
+                $data[$key]['ERROR'] .= ",Correo";
             }
+        }
+
+        //si el campo error esta vacio, igualar a N/A
+        if(empty($data[$key]['ERROR'])){
+            $data[$key]['ERROR'] = "N/A";
         }
 
     }
@@ -194,8 +249,12 @@
             $row = $result->fetch_assoc();
             $data[$key]['DEPENDENCIA'] = $row['ID'];
         }else{
-            //eliminar el registro del array
-            $data[$key]['ERROR'] = "Dependencia no encontrada";
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "Dependencia"; 
+            }else{
+                $data[$key]['ERROR'] .= ",Dependencia";
+            }
         }
     }
 

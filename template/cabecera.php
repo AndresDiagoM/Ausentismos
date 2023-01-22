@@ -15,13 +15,13 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../images/icon.png">
+    <link rel="icon" href="../assets/images/icon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../bootstrap-5.2.2-dist/css/bootstrap.min.css" /> 
+    <link rel="stylesheet" href="../assets/bootstrap-5.2.2-dist/css/bootstrap.min.css" /> 
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/estilo.css" type="text/css" > <!-- integrity="" crossorigin="anonymous" -->
+    <link rel="stylesheet" href="../assets/css/estilo.css" type="text/css" > <!-- integrity="" crossorigin="anonymous" -->
     <link href="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.css" rel="stylesheet" integrity="" crossorigin="anonymous">
 
     <!-- ICONOS en https://ionic.io/ionicons/v4/usage#md-pricetag -->
@@ -157,13 +157,13 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         <div class="container-fluid">
             <!-- LOGO DE LA UNIVERSIDAD -->
             <div class="container logoU" >
-                <img src="../images/icon4.png" class=" img-fluid me-2" alt="Sample image">
+                <img src="../assets/images/icon4.png" class=" img-fluid me-2" alt="Sample image">
             </div>
             
             <!-- logos de icontec y lema 
             <div class="sideBar_foot" >
-                <img src="../images/lema.png" class="img-fluid me-2" width="40" height="40" alt="Sample image">
-                <img src="../images/logosIcontec2020.png" class="img-fluid" width="100" height="100" alt="Sample image">
+                <img src="../assets/images/lema.png" class="img-fluid me-2" width="40" height="40" alt="Sample image">
+                <img src="../assets/images/logosIcontec2020.png" class="img-fluid" width="100" height="100" alt="Sample image">
             </div> -->
         </div>
     </div>
@@ -183,7 +183,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../images/user_profile.png" class="img-fluid rounded-circle avatar mr-2" />
+                        <img src="../assets/images/user_profile.png" class="img-fluid rounded-circle avatar mr-2" />
                             <?php //echo de las 2 primeras palabras del nombre
                                 $nombre = explode(" ", $nombre_admin);
                                 //si tiene mas de 2 palabras, imprime las 2 primeras

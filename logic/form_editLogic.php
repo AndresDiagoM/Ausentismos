@@ -36,13 +36,19 @@
     foreach($query_values as $key => $value){
         if(empty($value)){
             //echo "<script>alert('Complete todos los campos.'); location.href = '../pages/admin_func_form_edition.php?ID=$numero_id'; </script>"; exit;
-            echo json_encode("error2");
+            echo json_encode("error2"); exit;
         }
     }
 
     // convertir los campos de Nombre y login a mayusculas
     $query_values['nombre_usuario_edt'] = strtoupper($query_values['nombre_usuario_edt']);
     $query_values['login_usuario_edt'] = strtoupper($query_values['login_usuario_edt']);
+
+    //Comprobar que las contraseñas coincidan
+    if($query_values['contrasena_usuario_edt'] != $query_values['contrasena_usuario']){
+        //echo "<script>alert('Las contraseñas no coinciden.'); location.href = '../pages/admin_func_form_edition.php?ID=$numero_id'; </script>"; exit;
+        echo json_encode("error3"); exit;
+    }
 
 
     if($query_values['nombre_usuario_edt'] != $row['Nombre_U']){

@@ -1,1 +1,21 @@
-{}
+{
+    "name": "felip/ausen2",
+    "description": "Sistema de Gestion de Ausentismos",
+    "type": "project",
+    "require": {
+        "phpoffice/phpspreadsheet": "dev-NumberFormatMask-Helpers"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Felip\\Ausen2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andres Diago",
+            "email": "andresdiag@unicauca.edu.co"
+        }
+    ],
+    "minimum-stability": "dev"
+}

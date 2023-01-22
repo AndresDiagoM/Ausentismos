@@ -155,9 +155,9 @@
     </div> <!-- fin de la clase w-100-->
     </div> <!-- fin de la clase d-flex -->
 
-<script src="../bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
 <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
-<script src="../bootstrap-5.2.2-dist/js/popper.min.js"></script>
+<script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
 
 
     <!-- APP JS CONTIENE  FUNCIONES PARA LOS GRÁFICOS -->
@@ -167,8 +167,8 @@
     <script src="../js/jquery.min.js"></script> 
 
     <!-- CDN: Libreria de chart.js para las gráficas -->
-    <script src="../chart.js-3.9.1/package/dist/chart.min.js"></script>
-    <script src="../chart.js-3.9.1/package/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="../assets/chart.js-3.9.1/package/dist/chart.min.js"></script>
+    <script src="../assets/chart.js-3.9.1/package/dist/chartjs-plugin-datalabels.min.js"></script>
 
     <script src="../js/graficasCharts.js"></script>
 

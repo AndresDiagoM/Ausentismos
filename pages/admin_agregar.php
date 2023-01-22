@@ -183,9 +183,9 @@
 </div> <!-- fin de la clase d-flex -->
 
 
-    <script src="../bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
-    <script src="../bootstrap-5.2.2-dist/js/popper.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
 
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 

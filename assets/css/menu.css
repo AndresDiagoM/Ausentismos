@@ -1,0 +1,183 @@
+:root{
+    --primary: #111854;
+    --light: #ffffff;
+    --grey: #efefef;
+    --navbar: #be3838;
+    --btnHover: #d66060;
+}
+
+body {
+    overflow: hidden; /*para que al hacer scroll, no haya scroll sobre el sidebar*/
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+    color: var(--primary);
+}
+
+a:hover {
+    text-decoration: none;  /* Para que no aparezca las opciones del menu 
+    subrayadas */
+}
+
+/*---------------------  CONFIGURACIONES GLOBALES ---------------- */
+.bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: var(--navbar) /*rgba(var(--bs-success-rgb), var(--bs-bg-opacity))*/ !important;
+}
+.btn-success{
+    background-color: var(--navbar) ;
+}
+.btn-success:hover{
+    /*Al hacer hover(poner el mouse encima del boton) se pone de color azul*/
+    background-color: var(--btnHover) !important; /*Este es color morado*/
+}
+
+/*
+    %----------- SIDEBAR -> CONTENEDOR LATERAL -------------%
+*/
+#sidebar-container {
+    min-height: 110vh; /* Es el contenedor de todo el menu lateral, el largo*/
+}
+#sidebar-container .logo {
+    padding: .875rem 1.25rem; /* Es la ubicación del Heading del sidebar */
+}
+
+/*SIDEBAR MENU*/
+#sidebar-container .menu {
+    width: 18rem; /* Es el ancho del SideBar*/
+}
+#sidebar-container .menu a:hover {
+    background-color: var(--btnHover);
+}
+.menu ul li{
+    list-style: none;
+}
+/*.menu ul li.active a .icon{
+    transform: translateX(-32px);
+    color: #0c30bf;
+}*/
+.indicator {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #efefef;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    top: 16vh;
+    left: 16rem;
+    display: flex; /*none flex*/
+}
+
+
+.menu ul li:nth-child(1).active ~ .indicator{
+    transform: translateY(calc(16vh * 0));
+}
+.menu ul li:nth-child(2).active ~ .indicator{
+    transform: translateY(calc(8vh * 1));
+}
+.menu ul li:nth-child(3).active ~ .indicator{
+    transform: translateY(calc(8vh * 2));
+}
+.menu ul li:nth-child(4).active ~ .indicator{
+    transform: translateY(calc(8vh * 3));
+}
+.menu ul li:nth-child(5).active ~ .indicator{
+    transform: translateY(calc(8vh * 4));
+}
+.menu ul li:nth-child(6).active ~ .indicator{
+    transform: translateY(calc(8vh * 5));
+}
+
+
+
+
+#sidebar-container .sideBar_foot {
+    /*width: 18rem; *//* Es el ancho del SideBar*/
+
+    /* ubicar en la parte de abajo, con referencia al inferior de la pnatalla */
+    position:absolute;
+    width:100px;
+    height:100px;
+
+    /* posicion vertical */
+    bottom:0px;
+
+    /* centrado horizontal 
+    left:5%;
+    margin-left:-25px;*/
+
+    /* centrar la imagen */
+    left:5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ===========================================
+    %----------- NAV BAR - MENU SUPERIOR -------------%
+    ===========================================*/
+.avatar {
+    max-width: 25px; /*Para que la imagen del perfil sea pequeña*/
+}
+
+
+/*Estilo para el contenido del SITIOWEB*/
+#content {
+    overflow-y: auto; /*Para permitir scroll sobre el contenido*/
+    height: 100vh;    /*Para tener una altura fija*/
+    padding-bottom: 5rem;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*=====================================================*/
+/*--------Estilo para el header de las tablas--------*/
+/*thead, tbody { display: block; }*/
+.header-table {
+    position: sticky; top: 0; z-index: 1;
+    /* with no transparency -> background-color */
+    background-color: var(--light);
+}
+.table-body-consulta {
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: auto;  /* Hide the horizontal scroll */
+}
+
+/*Convertir todas letras de los inputs a mayusculas en todos los html form*/
+input[type=text], input[type=email], input[type=number], input[type=tel], input[type=date], input[type=time], input[type=datetime-local], input[type=month], input[type=week], input[type=url], input[type=search], input[type=color], textarea {
+    text-transform: uppercase;
+}
+
+
+/*===========================================================*/
+/*--------Para no mostar el Sidebar en version movil---------*/
+@media (max-width: 900px) {
+    #sidebar-container {
+        /*display: none;*/
+        position: absolute;
+        top: 80px;
+        left: -100%;
+        
+        height: 100vh;
+        width: 100%;
+        display: block;
+        z-index: 1000;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    /*if the button id="click" is clicked then show the menu*/
+    .menu-btn:active { /*menu-btn aparece cuando la pantalla es pequeña*/
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+    .menu-btn:active ~ #sidebar-container {
+        left: 0%;
+        width: 100%;
+    }
+
+    .stat{
+        border: 0;
+    }
+}
