@@ -173,7 +173,7 @@
         }
 
         //Comprobar que el cargo sea string y sin caracteres especiales
-        if(!validateField($value['NOMBRE_DEL_CARGO']) || !is_string($value['NOMBRE_DEL_CARGO'])){
+        if(!preg_replace('/[\'^£$%&*()}{@#~?><>,|=_+¬]/', '', $value['NOMBRE_DEL_CARGO']) || !is_string($value['NOMBRE_DEL_CARGO'])){
             //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
             if(empty($data[$key]['ERROR'])){
                 $data[$key]['ERROR'] = "Cargo"; 
@@ -192,8 +192,8 @@
             }
 
             //Si tiene caracteres especiales entonces quitarlos
-            if(!validateField($value['CEDULA'])){
-                $data[$key]['CEDULA'] = preg_replace('/[^A-Za-z0-9\-]/', '', $value['CEDULA']);
+            if(!validateField($value['SALARIO'])){
+                $data[$key]['SALARIO'] = preg_replace('/[^A-Za-z0-9\-]/', '', $value['SALARIO']);
             }
         }
 

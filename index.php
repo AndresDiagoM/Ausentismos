@@ -1,22 +1,23 @@
 <?php
-    include ("conexion.php");
-    //include "./logic/validate_sessionLogic.php";
+    include ("conexion.php"); //Incluye el archivo de conexión a la base de datos
+    //include "./logic/validate_sessionLogic.php"; 
 
-    session_set_cookie_params(0);
-    session_start();
-    error_reporting(0);
-    $bandera = false;
-    $autentication  = $_SESSION['TIPO_USUARIO'];
-    $nombre_cliente = strtoupper($_SESSION['NOM_USUARIO']);
-    $nombre_admin   = strtoupper($_SESSION['NOM_USUARIO']);
-    $id_cliente     = strtoupper($_SESSION['ID_USUARIO']);
+    session_set_cookie_params(0); //Establece los parámetros de la sesión
+    session_start(); //Inicia una nueva sesión
+    error_reporting(0); //Desactiva la reportación de errores
+    
+    $autentication  = $_SESSION['TIPO_USUARIO']; //Asigna a la variable 'autentication' el valor del tipo de usuario almacenado en la sesión
+    $nombre_cliente = strtoupper($_SESSION['NOM_USUARIO']); //Asigna a la variable 'nombre_cliente' el valor del nombre del usuario convertido a mayúsculas
+    $nombre_admin   = strtoupper($_SESSION['NOM_USUARIO']); //Asigna a la variable 'nombre_admin' el valor del nombre del usuario convertido a mayúsculas
+    $id_cliente     = strtoupper($_SESSION['ID_USUARIO']); //Asigna a la variable 'id_cliente' el valor del id del usuario convertido a mayúsculas
     $id_admin       = strtoupper($_SESSION['ID_USUARIO']);
 
-    if($autentication == 'Cliente' || $autentication == 'Admin'){
-        $bandera = true;
-    }
-    else{
-        $bandera = false;
+    if($autentication == 'CONSULTA' || $autentication == 'ADMIN'){
+        //LLEVAR AL USUARIO A LA PÁGINA DE INICIO admin_menu.php
+        header("Location: ./pages/admin_menu.php");
+    } else if( $autentication == 'FACULTAD'){
+        //LLEVAR AL USUARIO A LA PÁGINA DE INICIO admin_menu.php
+        header("Location: ./pages/facultad_agregar.php");
     }
     
 ?>
@@ -65,10 +66,13 @@
     <section class="vh-100">
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
+
+            <!-- Contenedor de la imagen -->
             <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="./assets/images/inicio.png"
-                class="img-fluid" alt="Sample image">
+                <img src="./assets/images/inicio.png" class="img-fluid" alt="Sample image">
             </div>
+
+            <!-- Contenedor del formulario de inicio de sesion -->
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 <form action="./logic/inicio_sesionLogic.php" method="POST">
 
@@ -93,18 +97,18 @@
                     <!-- <p class="text-center fw-bold mx-3 mb-0">Or</p> -->
                 </div>
 
-                <!-- Email input -->
+                <!-- Username input -->
                 <div class="form-floating mb-3 col-auto"> 
-                    <input type="text" id="form3Example3" name="username" class="form-control"
+                    <input type="text" id="username1" name="username" pattern="[a-zA-Z0-9]+" maxlength="20" class="form-control"
                     placeholder="Ingrese su usuario" required/>
-                    <label class="col-form-label" for="form3Example3">Usuario</label>
+                    <label class="col-form-label" for="username1">Usuario</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-floating mb-3 col-auto"> 
-                    <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
+                    <input type="password" id="password1" name="password" class="form-control form-control-lg"
                     placeholder="Ingrese la contraseña" required/>
-                    <label class="form-label" for="form3Example4">Contraseña</label>
+                    <label class="form-label" for="password1">Contraseña</label>
                 </div>
 
                 <p class="label_mensaje">
@@ -186,5 +190,45 @@
     </div>
 
 </body>
+
+<script>
+
+    //Funcion que detecte cuando se presiona una tecla en un input de username
+    document.getElementById("username1").addEventListener("input", function() {
+        var inputValue = document.getElementById("username1").value;
+        var specialChars = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+        //console.log("INPUT1")
+
+        if (specialChars.test(inputValue)) {
+            // Show an error message
+            document.getElementById("username1").setCustomValidity("No se permiten caracteres especiales!");
+        } else {
+            // Clear the error message
+            document.getElementById("username1").setCustomValidity("");
+        }
+    });
+
+    //Funcion que detecte cuando se presiona una tecla en un input
+    document.getElementById("password1").addEventListener("input", function() {
+        var inputValue = document.getElementById("password1").value;
+        var specialChars = /[ !$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+        //console.log("INPUT1")
+
+        if (specialChars.test(inputValue)) {
+            // Show an error message
+            document.getElementById("password1").setCustomValidity("No se permiten caracteres especiales!");
+        } else {
+            // Clear the error message
+            document.getElementById("password1").setCustomValidity("");
+        }
+    });
+
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+</script>
 
 </html>

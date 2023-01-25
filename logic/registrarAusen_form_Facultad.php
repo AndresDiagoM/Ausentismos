@@ -15,82 +15,91 @@
     $sql = "SELECT * FROM usuarios INNER JOIN dependencias ON usuarios.Dependencia = dependencias.ID
             WHERE Cedula_U = ".$_POST['ID_Usuario'][0];
     //echo $sql; exit;
-    $result = $conectar->query($sql);
+    $usuario = $conectar->query($sql);
     $C_costo="";
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $depen = $row['Dependencia'];
+    if ($usuario->num_rows > 0) {
+        $usuarioLogueado = $usuario->fetch_assoc();
+        $depen = $usuarioLogueado['Dependencia'];
 
         //consultar el nombre de la dependencia
         $sql = "SELECT * FROM dependencias WHERE ID = ".$depen;
         $result = $conectar->query($sql);
         $row = $result->fetch_assoc();
         $C_costo = $row['C_costo'];
+
     } else {
         echo json_encode("error"); exit;  
     }
 
+    /**
+     * Organizar los campos obtenidos del formulario de registro
+     */
     $salario=0;
     $costo=0;
     $tiempo=0;
+    $unidad="";
     if($query_values)
     {
-            $values = [];
-            $queries = [];
+        $values = [];
+        $queries = [];
 
-            foreach($query_values as $field_name => $field_value)
+        foreach($query_values as $field_name => $field_value)
+        {
+            foreach((array) $field_value as $value)
             {
-                foreach((array) $field_value as $value)
-                {
-                    if ($field_name == "Cedula_F") {   //comprobar si la cedula existe en la tabla funcionarios
+                if ($field_name == "Cedula_F") {   //comprobar si la cedula existe en la tabla funcionarios
 
-                        //take three first 3 characters of the string
-                        $C_costo = substr($C_costo, 0, 3);
+                    //take three first 3 characters of the string
+                    $C_costo = substr($C_costo, 0, 3);
 
-                        $sqli = "SELECT * FROM funcionarios INNER JOIN dependencias ON funcionarios.Dependencia = dependencias.ID
-                                WHERE Cedula='$value' AND dependencias.C_costo LIKE '%".$C_costo."%'; ";
-                        $funcionarios = $conectar->query($sqli);  //print_r($sqli); exit;
-                        $var = mysqli_num_rows($funcionarios);                        
-                        
-                        if($var<=0){
-                            //echo "<script> alert('No existe la cedula del funcionario'); location.href = '../pages/facultad_agregar.php';  </script>";   
-                            echo json_encode("error1"); exit;       
-                            exit; 
-                        }else{
-                            $row = mysqli_fetch_array($funcionarios);
-                            //convertir el salario a numero int
-                            $salario = (int) filter_var($row['Salario'], FILTER_SANITIZE_NUMBER_INT);
-                            //$salario = $row['Salario'];
-                        }
-
-                    } elseif ($field_name == "Tipo_Ausentismo") {
-
-                        if($value==""){
-                            //echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/facultad_agregar.php';  </script>";          
-                            echo json_encode("error2"); exit;
-                            exit;              
-                        }
-
-                    }  elseif ($field_name == "Tiempo"){ //pasar tiempo a numero int
-
-                        $tiempo = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
-
-                        //si el tiempo es mayor a 24 horas no se puede registrar
-                        if($tiempo>24){
-                            //echo "<script> alert('El tiempo no puede ser mayor a 24 horas'); location.href = '../pages/facultad_agregar.php';  </script>";          
-                            echo json_encode("error3"); exit;
-                            exit; 
-                        }
-                        
-                    } elseif ($field_name == "Unidad") {  //calcular el costo de seguridad en el trabajo
-                        if($value=="horas"){
-                            $costo = ($salario/30)/24 * $tiempo;
-                        }
+                    $sqli = "SELECT * FROM funcionarios INNER JOIN dependencias ON funcionarios.Dependencia = dependencias.ID
+                            WHERE Cedula='$value' AND dependencias.C_costo LIKE '%".$C_costo."%'; ";
+                    $funcionarios = $conectar->query($sqli);  //print_r($sqli); exit;
+                    $var = mysqli_num_rows($funcionarios);                        
+                    
+                    if($var<=0){
+                        //echo "<script> alert('No existe la cedula del funcionario'); location.href = '../pages/facultad_agregar.php';  </script>";   
+                        echo json_encode("error1"); exit;       
+                        exit; 
+                    }else{
+                        $row = mysqli_fetch_array($funcionarios);
+                        //convertir el salario a numero int
+                        $salario = (int) filter_var($row['Salario'], FILTER_SANITIZE_NUMBER_INT);
+                        //$salario = $row['Salario'];
                     }
 
-                }                   
-            }            
+                } elseif ($field_name == "Tipo_Ausentismo") {
+
+                    if($value==""){
+                        //echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/facultad_agregar.php';  </script>";          
+                        echo json_encode("error2"); exit;
+                        exit;              
+                    }
+
+                }  elseif ($field_name == "Tiempo"){ //pasar tiempo a numero int
+
+                    $tiempo = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+
+                    //si el tiempo es mayor a 24 horas no se puede registrar
+                    if($tiempo>8){
+                        //echo "<script> alert('El tiempo no puede ser mayor a 24 horas'); location.href = '../pages/facultad_agregar.php';  </script>";          
+                        echo json_encode("error3"); exit;
+                    }
+                    
+                } elseif ($field_name == "Unidad") {  //calcular el costo de seguridad en el trabajo
+                    if($value=="horas"){
+                        $unidad = "horas";
+                    }else{
+                        echo json_encode("error"); exit;
+                    }
+                }
+
+            }                   
+        }            
     }
+
+    //Calcular el costo
+    $costo = ($salario/30)/24 * $tiempo;
 
     //================================================================================================
     //=========  comprobar que el tiempo de las fechas sea igual a la variable $tiempo

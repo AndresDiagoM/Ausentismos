@@ -76,6 +76,58 @@
         })
         .catch(error => console.log(error));
     });
+
+    /* 
+     * @description: Cerrar sesión
+     */
+    //funcion que haga una petición al servidor para cerrar la sesión 
+    document.getElementById("cerrar_sesion").querySelector("a").addEventListener("click", function(event){
+        event.preventDefault(); //evitar que el navegador siga el enlace
+
+        fetch("../logic/cerrar_sesion.php", {
+            method: "POST",
+            body: "",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        .then(res => res.json()) //recoge la respuesta json del servidor y lo transforma en un objeto javascript
+        .then(response => {
+            if(response.status === 'success'){
+                window.location.href    = response.url;
+            }else{
+                console.log(response.message);
+            }
+        })
+        .catch(error => console.log(error));
+    });
+
+    document.getElementById("cerrar_sesion_head").addEventListener("click", function(event){
+        event.preventDefault(); //evitar que el navegador siga el enlace
+
+        fetch("../logic/cerrar_sesion.php", {
+            method: "POST",
+            body: "",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        .then(res => res.json()) //recoge la respuesta json del servidor y lo transforma en un objeto javascript
+        .then(response => {
+            if(response.status === 'success'){
+                window.location.href    = response.url;
+            }else{
+                console.log(response.message);
+            }
+        })
+        .catch(error => console.log(error));
+    });
+
+    //evitar que el usuario abra el inspeccionar elemento
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
 </script>
 
 </body>

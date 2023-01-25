@@ -10,7 +10,7 @@ include "../template/cabecera.php";
             <div class="container row col-3 py-2">
                 <form class="row" id="auto_llenar">
                     <div class="form-floating mb-3">
-                            <input class="form-control" type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
+                            <input class="form-control" type="text" name="caja_busqueda" id="caja_busqueda" pattern="[a-zA-Z0-9\s]+" size="50" placeholder="Ingrese el ID que desea buscar">
                             <label class="col-form-label" for="caja_busqueda">Buscar cedula: </label>
                     </div>
                 </form>
@@ -78,70 +78,8 @@ include "../template/cabecera.php";
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
 
-<!--    JAVASCRIPT QUE REALIZA LA BUSQUEDA DINAMICA -->
-<script>
-    $(function()
-    {
-        busqueda()
-        
-        $(document).on('keyup', '#caja_busqueda', function(){ //añadir el evento keyup a la caja de busqueda de cedula
-
-            var valor = $(this).val();
-        
-            if(valor != ""){
-                busqueda(valor, "cedula");
-        
-            }else{
-                busqueda();
-            }
-        });
-
-        $(document).on('click', '#myPager input', function() //añadir el evento click a los botones del paginador
-        {
-            var valor = $(this).val();
-            busqueda(valor, "pagina");
-        });
-    });
-
-    function busqueda(consulta, param){
-        let enviar = Array();
-        //let form2=enviar.serializeArray();
-        //enviar.push({name: "Pagina", value: pagina});
-
-        //si param es "cedula", entonces se realiza una busqueda por cedula. Si es "pagina", se realiza una busqueda por pagina
-        if(param=="cedula"){
-            enviar.push({name: "Cedula", value: consulta});
-        }else if(param=="pagina"){
-            enviar.push({name: "Pagina", value: consulta});
-        }
-        //console.log(enviar);
-
-        $("#myPager").html(""); //se limpia el paginador
-        $("#total_resultados").html("");
-
-        //se realiza la busqueda por ajax
-        $.ajax({
-            url:        '../logic/searchFuncLogic.php',
-            type:       'POST',
-            dataType:   'html',
-            data:       enviar, //{consulta:consulta},
-
-        })
-        .done(function(respuesta){
-            const obj = JSON.parse(respuesta);
-            //console.log(obj.tabla);
-            $("#datos").html(obj.tabla); //se muestra la tabla con los datos de la busqueda
-            $("#myPager").append(obj.slider); //se muestra el paginador
-            $("#total_resultados").append(obj.total);
-
-        })
-        .fail(function(){
-            console.log("Fail");
-
-        })
-
-    }
-</script>
+    <!-- JAVASCRIPT QUE REALIZA LA BUSQUEDA DINAMICA -->
+    <script src="../js/search_func_edit.js"></script>
 
 
 <?php

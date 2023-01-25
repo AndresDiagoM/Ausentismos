@@ -1,4 +1,6 @@
-//script para que solo se puedan subir archivos de excel .xlsx y .xls
+/**
+ * Script para que solo se puedan subir archivos de excel .xlsx y .xls
+ */
 $(document).ready(function(){
     $("#excelFile").change(function(){
         var file = this.files[0];
@@ -13,7 +15,9 @@ $(document).ready(function(){
     });
 });
 
-//when document is ready, call a function to send the file to the server, when the form is submitted
+/**
+ * Script para cargar el archivo de excel cuando se presiona el boton "Cargar"
+ */
 $(document).ready(function(){
     //alert("Hola");
     //$("#formulario").submit(function(e){
@@ -75,7 +79,9 @@ $(document).ready(function(){
     });
 });
 
-//funcion Aceptar() para el boton aceptar, que envia una peticion ajax al servidor
+/**
+ * Funcion para aceptar los cambios cuando se presiona el boton "Aceptar"
+ */
 function Aceptar(){
     //alert("Hola");
     $.ajax({
@@ -104,6 +110,7 @@ function Aceptar(){
         }
     });
 }
+
 //evitar que el usuario abra el inspeccionar elemento
 document.addEventListener('contextmenu', function(e) {
     //e.preventDefault();

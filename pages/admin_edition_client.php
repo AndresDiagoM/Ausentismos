@@ -9,7 +9,7 @@ include "../template/cabecera.php";
             <div class="container row col-3 py-2">
                 <form class="row" id="auto_llenar">
                     <div class="form-floating mb-3">
-                            <input class="form-control" type="text" name="caja_busqueda" id="caja_busqueda" size="50" placeholder="Ingrese el ID que desea buscar">
+                            <input class="form-control" type="text" name="caja_busqueda" id="caja_busqueda" pattern="[a-zA-Z0-9\s]+" size="50" placeholder="Ingrese el ID que desea buscar">
                             <label class="col-form-label" for="caja_busqueda">Buscar cedula: </label>
                     </div>
                 </form>
@@ -44,47 +44,13 @@ include "../template/cabecera.php";
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
 
-<!--    JAVASCRIPT QUE REALIZA LA BUSQUEDA DINAMICA -->
-<script src="../js/search_usuario_edit.js"></script>
-<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-<script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
-<script src="../js/sweet_alert.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="../js/sweetalert2-11.6.15/package/dist/sweetalert2.min.js"></script>
+    <script src="../js/sweet_alert.js"></script>
 
-<script>
-    //funcion para eliminar usuario, se envia el id del usuario a eliminar por ajax a la pagina confirmationDeleteLogic.php
-    function eliminarUsuario(id) {  //href='../logic/confirmationDeleteLogic.php?ID=$Id_fila'
-        Swal.fire({
-            title: '¿Está seguro de eliminar el usuario?',
-            text: "¡No podrá revertir esta acción!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '¡Sí, eliminar!',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "../logic/confirmationDeleteLogic.php",
-                    type: "GET",
-                    data: {ID: id},
-                    success: function (data) {
-                        //parse json data
-                        data = JSON.parse(data);
+    <!--    JAVASCRIPT QUE REALIZA LA BUSQUEDA DINAMICA -->
+    <script src="../js/search_usuario_edit.js"></script>
 
-                        if (data == "success") {
-                            show_alert_reload('success', '¡Usuario eliminado!');
-
-                        } else {
-                            show_alert_reload('error', '¡No se pudo eliminar el usuario!');
-                        }
-                    }
-                });
-            }
-        })
-    }
-    
-</script>
 
 <?php
     include("../template/pie.php");

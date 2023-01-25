@@ -155,12 +155,12 @@
     </div> <!-- fin de la clase w-100-->
     </div> <!-- fin de la clase d-flex -->
 
-<script src="../assets/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
-<!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
-<script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
+    <script src="../assets/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
+    <script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
 
 
-    <!-- APP JS CONTIENE  FUNCIONES PARA LOS GRÁFICOS -->
+    <!-- SCRIPT DE JAVASCRIPT QUE CONTIENE FUNCIONES PARA LOS GRÁFICOS -->
     <script src="../js/app1.js"></script>
 
     <!-- INSTALACION DE JQUERY -->
@@ -170,6 +170,7 @@
     <script src="../assets/chart.js-3.9.1/package/dist/chart.min.js"></script>
     <script src="../assets/chart.js-3.9.1/package/dist/chartjs-plugin-datalabels.min.js"></script>
 
+    <!-- SCRIPT PARA DEFINIR CADA GRÁFICA -->
     <script src="../js/graficasCharts.js"></script>
 
 <?php

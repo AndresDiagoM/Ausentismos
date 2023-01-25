@@ -86,7 +86,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                         </a>
                     </li>
                     <li class="list" id="cerrar_sesion">
-                        <a href="../logic/cerrar_sesion.php" class="p-2 text-light d-block text-decoration-none">
+                        <a href="#" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-log-out mr-2 lead"></i>
                             <span class="text">CERRAR CESION</span>
                         </a>
@@ -115,7 +115,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                         </a>
                     </li>
                     <li class="list" id="cerrar_sesion">
-                        <a href="../logic/cerrar_sesion.php" class="p-2 text-light d-block text-decoration-none">
+                        <a href="#" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-log-out mr-2 lead"></i>
                             <span class="text">CERRAR CESION</span>
                         </a>
@@ -144,7 +144,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                         </a>
                     </li>
                     <li class="list" id="cerrar_sesion">
-                        <a href="../logic/cerrar_sesion.php" class="p-2 text-light d-block text-decoration-none">
+                        <a href="#" class="p-2 text-light d-block text-decoration-none">
                             <i class="icon ion-md-log-out mr-2 lead"></i>
                             <span class="text">CERRAR CESION</span>
                         </a>
@@ -200,7 +200,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href=<?php echo '../pages/admin_form_edition.php?ID='.$id_admin.''; ?>>Mi perfil </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../logic/cerrar_sesion.php">Cerrar Sesion</a>
+                            <a class="dropdown-item" id="cerrar_sesion_head" href="#">Cerrar Sesion</a>
                         </div>
                     </li>
                 </ul>

@@ -110,7 +110,7 @@
 
                 <!-- INPUT DE TIEMPO -->
                 <div class="form-floating mb-3">
-                    <input type="number" name="Tiempo[]" class="form-control" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="24" required>
+                    <input type="number" name="Tiempo[]" class="form-control" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="8" required>
                     <label class="col-form-label" for="Tiempo[]"> TIEMPO </label>
                 </div>
 

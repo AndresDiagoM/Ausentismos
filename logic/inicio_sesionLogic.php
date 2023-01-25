@@ -5,6 +5,7 @@
     $autentication  = $_SESSION['TIPO_USUARIO'];
     $tipo_cliente   = $_SESSION['TIPO_USUARIO'];
 
+    //
     if (strtoupper($autentication) == 'ADMIN' || strtoupper($autentication) == 'CONSULTA' ){
         $bandera = true;
     }
@@ -15,11 +16,27 @@
     $username = strtoupper($_POST['username']);
     $password = strtoupper($_POST['password']);
 
+    //Verificar que los campos de username y password no tengan intyeccion de codigo 
+    $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
+    $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
+
+    //Si los campos tienen caracteres especiales entonces quitarlos
+    $username = preg_replace('/[^A-Za-z0-9]/', '', $username);
+    $password = preg_replace('/[^A-Za-z0-9]/', '', $password);
+
+    //echo $username.' pass: '. $password; exit;
+    
+    // Verificar que los campos de username y password no esten vacios
+    if (empty($username) || empty($password)) {
+        header('Location: ../pages/inicio_sesion.php?message=2');
+    }
+
     //session_start();
 
     include '../conexion.php';
     $mysqli = new mysqli($host, $user, $pw, $db);
 
+    //Consultar si el usuario ingresado existe
     $sql = "SELECT * FROM usuarios INNER JOIN dependencias ON dependencias.ID=usuarios.Dependencia WHERE Login = '$username'";
     $result1 = $mysqli->query($sql);
     $row1 = $result1->fetch_assoc();

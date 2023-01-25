@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteRule ^assets - [L,F]
+RewriteRule ^js - [L,F]
+RewriteRule ^vendor - [L,F]
+RewriteRule ^template - [L,F]

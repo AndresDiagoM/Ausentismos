@@ -12,7 +12,7 @@
     // CONSULTA DE DATOS DEL USUARIO ALMACENADOS EN LA BASE DE DATOS
     $sql = "SELECT * FROM usuarios WHERE Cedula_U = '$numero_id'";
     $result = $conectar->query($sql);
-    $row = mysqli_fetch_assoc($result);
+    $usuario_bd = mysqli_fetch_assoc($result);
 
     // if there is no result, show an alert and redirect to the form
     if($result->num_rows == 0){
@@ -32,72 +32,49 @@
         $row2 = mysqli_fetch_assoc($result2);
     }*/
 
-    // verificar que ningun campo de $query_values esté vacio
+    // verificar que ningun campo de $query_values esté vacio, y que ningun campo tenga SQL inyection
     foreach($query_values as $key => $value){
         if(empty($value)){
-            //echo "<script>alert('Complete todos los campos.'); location.href = '../pages/admin_func_form_edition.php?ID=$numero_id'; </script>"; exit;
+            //echo "<script>alert('No se permiten campos vacios.'); location.href = '../pages/admin_func_form_edition.php?ID=$numero_id'; </script>"; exit;
+            echo json_encode("error1"); exit;
+        }
+        if(!preg_match("/^[a-zA-Z0-9 .@]*$/", $value)){
+            //echo "<script>alert('No se permiten caracteres especiales.'); location.href = '../pages/admin_func_form_edition.php?ID=$numero_id'; </script>"; exit;
             echo json_encode("error2"); exit;
         }
+        //echo $key . " => " . $value . "<br>";
     }
 
     // convertir los campos de Nombre y login a mayusculas
-    $query_values['nombre_usuario_edt'] = strtoupper($query_values['nombre_usuario_edt']);
-    $query_values['login_usuario_edt'] = strtoupper($query_values['login_usuario_edt']);
+    $query_values['Nombre_U'] = strtoupper($query_values['Nombre_U']);
+    $query_values['Login'] = strtoupper($query_values['Login']);
 
     //Comprobar que las contraseñas coincidan
-    if($query_values['contrasena_usuario_edt'] != $query_values['contrasena_usuario']){
+    if($query_values['Contrasena'] != $query_values['Contrasena2']){
         //echo "<script>alert('Las contraseñas no coinciden.'); location.href = '../pages/admin_func_form_edition.php?ID=$numero_id'; </script>"; exit;
         echo json_encode("error3"); exit;
     }
 
+    //Actualizar los datos del usuario cuando sea diferente a los datos almacenados en la base de datos
+    foreach ($query_values as $key => $value) {
+        //Actualizar los datos del usuario cuando sea diferente a los datos almacenados en la base de datos
+        if($key!='Contrasena' && $key!='Contrasena2' && $key!='cedula_u'){
+            if($query_values[$key] != $usuario_bd[$key]){
+                $actualizar = "UPDATE usuarios SET $key = '".$query_values[$key]."' WHERE Cedula_U = $numero_id";
+                $sqli1          = $conectar->query($actualizar);
+            }
+        } else if($key=='Contrasena'){
+            if($query_values[$key] != $usuario_bd[$key]){
+                $contrasena_edt = $query_values['Contrasena'];
+                //PASAR CONTRASEÑA A MD5
+                $contrasena_edt = md5($contrasena_edt);
+                $actualizar = "UPDATE usuarios SET $key = '$contrasena_edt' WHERE Cedula_U = $numero_id";
+                $sqli1          = $conectar->query($actualizar);
+            }
+        }
+    }
 
-    if($query_values['nombre_usuario_edt'] != $row['Nombre_U']){
-        $nombre_edt = $query_values['nombre_usuario_edt'];
-        $actualizar = "UPDATE usuarios SET Nombre_U = '$nombre_edt' WHERE Cedula_U = $numero_id";
-        $sqli1          = $conectar->query($actualizar);
-    }
-    if($query_values['correo_usuario_edt'] != $row['Correo']){
-        $correo_edt = $query_values['correo_usuario_edt'];
-        $actualizar = "UPDATE usuarios SET Correo = '$correo_edt' WHERE Cedula_U = $numero_id";
-        $sqli1          = $conectar->query($actualizar);
-    }
-    if($query_values['dependencia_usuario_edt'] != $row['Dependencia']){
-        $depen_edt = $query_values['dependencia_usuario_edt'];
-        $actualizar = "UPDATE usuarios SET Dependencia = '$depen_edt' WHERE Cedula_U = $numero_id";
-        $sqli1          = $conectar->query($actualizar);
-    }
-    //actualizar tipo_usuario
-    if($query_values['tipo_usuario_edt'] != $row['TipoUsuario']){
-        $tipo_edt = $query_values['tipo_usuario_edt'];
-        $actualizar = "UPDATE usuarios SET TipoUsuario = '$tipo_edt' WHERE Cedula_U = $numero_id";
-        $sqli1          = $conectar->query($actualizar);
-    }
-    //actualizar login
-    if($query_values['login_usuario_edt'] != $row['Login']){
-        $login_edt = $query_values['login_usuario_edt'];
-        $actualizar = "UPDATE usuarios SET Login = '$login_edt' WHERE Cedula_U = $numero_id";
-        $sqli1          = $conectar->query($actualizar);
-    }
-    //actualizar contraseña
-    if($query_values['contrasena_usuario_edt'] != $row['Contrasena']){
-        $contrasena_edt = $query_values['contrasena_usuario_edt'];
-        //PASAR CONTRASEÑA A MD5
-        $contrasena_edt = md5($contrasena_edt);
-        $actualizar = "UPDATE usuarios SET Contrasena = '$contrasena_edt' WHERE Cedula_U = $numero_id";
-        $sqli1          = $conectar->query($actualizar);
-    }
-    //actualizar estado
-    if($query_values['estado_usuario_edt'] != $row['Estado']){
-        $estado_edt = $query_values['estado_usuario_edt'];
-        $actualizar = "UPDATE usuarios SET Estado = '$estado_edt' WHERE Cedula_U = $numero_id";
-        $sqli1          = $conectar->query($actualizar);
-    }
-    if($query_values['cedula_usuario_edt'] != $row['Cedula_U']){
-        $cedula_edt = $query_values['cedula_usuario_edt'];
-        $actualizar_nom = "UPDATE usuarios SET Cedula_U = '$cedula_edt' WHERE Cedula_U = $numero_id";
-        $sqli1          = $conectar->query($actualizar_nom);
-    }
 
     //echo "<script>alert('Datos Actualizados Correctamtne');location.href='../pages/admin_edition_client.php';</script>"
-    echo json_encode("success");
+    echo json_encode("success"); exit;
 ?>

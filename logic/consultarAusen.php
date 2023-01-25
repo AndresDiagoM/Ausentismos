@@ -38,6 +38,9 @@
                         $value = strtoupper($value);
                         //change spaces in $value to % for LIKE query
                         $value = str_replace(" ", "%", $value);
+                        //sanitizar codigo html a texto plano
+                        $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+
                         $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
 
                     }elseif($field_name=="Tiempo"){
@@ -183,6 +186,18 @@
             //AND ( Fecha_Inicio > '2019-07-22') LIMIT 0, 100 //que muestre los primeros 100 registros
         }
 
+        //Consultar la tabla de tipos de ausentismos
+        $sqli = "SELECT * FROM tipoausentismo";
+        $tipoausentismos = $conectar->query($sqli);
+
+        //Pasar los datos de la consulta a un array
+        $tipoausentismos_list = [];
+        while($tipoausentismo = $tipoausentismos->fetch_assoc()){
+            //Añadir key y value
+            $tipoausentismos_list[$tipoausentismo["ID"]]=$tipoausentismo['TipoAusentismo'];
+        }
+        //print_r( $tipoausentismos_list); exit;
+
         //Convertir los datos de la cosulta en un array
         $ausen_list = [];
         $data = array();
@@ -190,20 +205,8 @@
             $ausen_list[$ausentismo["ID"]]=$ausentismo;
 
             //Cambiar el numero de tipo ausen por el nombre
-            if($ausentismo["Tipo_Ausentismo"]==1){
-                $replacement = array("Tipo_Ausentismo" => "INCAPACIDAD");
-
-            }elseif($ausentismo["Tipo_Ausentismo"]==2){
-                $replacement = array("Tipo_Ausentismo" => "COMPENSATORIO");
-
-            }elseif($ausentismo["Tipo_Ausentismo"]==3){
-                $replacement = array("Tipo_Ausentismo" => "PERMISO");
-
-            }elseif($ausentismo["Tipo_Ausentismo"]==4){
-                $replacement = array("Tipo_Ausentismo" => "LICENCIA");
-            }
-            elseif($ausentismo["Tipo_Ausentismo"]==5){
-                $replacement = array("Tipo_Ausentismo" => "PERMISO POR HORAS");
+            if($ausentismo["Tipo_Ausentismo"]){
+                $replacement = array("Tipo_Ausentismo" => $tipoausentismos_list[$ausentismo["Tipo_Ausentismo"]]);
             }
 
             $ausen_list[$ausentismo["ID"]] = array_replace($ausen_list[$ausentismo["ID"]], $replacement);

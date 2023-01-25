@@ -12,5 +12,9 @@
         echo    "<script>
                     location.href='../pages/facultad_agregar.php';
                 </script>";
+    }else {
+        echo    "<script>
+                    location.href='../pages/inicio_sesion.php';
+                </script>";
     }
 ?>

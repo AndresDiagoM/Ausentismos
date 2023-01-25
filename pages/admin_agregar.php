@@ -40,7 +40,7 @@
 
                 <!-- INPUT DE NOMBRES DE USUARIO -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="Nombre[]" class="form-control" id="nombre" placeholder="Nombres y apellidos" value="" required>
+                    <input type="text" name="Nombre[]" class="form-control" id="nombre" pattern="[a-zA-Z0-9\s]+" min="4" max="45" placeholder="Nombres y apellidos" value="" required>
                     <label class="col-form-label" for="Nombre[]"> NOMBRE </label>
                 </div>
 
@@ -53,7 +53,7 @@
 
                 <!-- INPUT DEL cargo -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="Cargo[]" class="form-control" id="cargo" value="" placeholder="Cargo del funcionario"  required>
+                    <input type="text" name="Cargo[]" class="form-control" id="cargo" pattern="[a-zA-Z0-9\s]+" min="4" max="45" value="" placeholder="Cargo del funcionario"  required>
                     <label class="col-form-label" for="Cargo[]"> CARGO </label>
                 </div>
 
@@ -112,7 +112,7 @@
 
                 <!-- INPUT DE LA OBSERVACIÓN -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="Observacion[]" class="form-control" id="observacion" placeholder="Observaciones" required>
+                    <input type="text" name="Observacion[]" class="form-control" id="observacion" pattern="[a-zA-Z0-9\s]+" max="60" placeholder="Observaciones" required>
                     <label class="col-form-label" for="Observacion[]"> OBSERVACIÓN </label>
                 </div>
             
@@ -146,7 +146,7 @@
                 <!-- INPUTS INCAPACIDAD -->
                 <div class="form-floating mb-2" id="incapacidadINPUTS">
                     <div class="form-floating mb-2">
-                        <input type="text" name="Codigo[]" class="form-control" id="codigo" placeholder="Escriba el codigo" >
+                        <input type="text" name="Codigo[]" class="form-control" id="codigo" pattern="[a-zA-Z0-9\s]+" placeholder="Escriba el codigo" >
                         <label class="col-form-label" for="Codigo[]"> CODIGO </label>
                     </div>
                     <div class="form-floating mb-2">
@@ -159,7 +159,7 @@
                         <label class="col-form-label" for="Diagnostico[]"> DIAGNOSTICO </label>
                     </div>
                     <div class="form-floating mb-2">
-                        <input type="text" name="Entidad[]" class="form-control" id="entidad" placeholder="Escriba la entidad" >
+                        <input type="text" name="Entidad[]" class="form-control" id="entidad" pattern="[a-zA-Z0-9\s]+" placeholder="Escriba la entidad" >
                         <label class="col-form-label" for="Entidad[]"> ENTIDAD </label>
                     </div>
                 </div>

@@ -1,20 +1,10 @@
 <?php
-    $host = "localhost";
-    $user = "root";//"u715763332_admin";
-    $pw   = "";//"Lab4unicauca";
-    $db   = "ausentismos_v2";// "u715763332_db_biodigester";  "db_biodigester"
-
+    // Declaración de variables para la conexión a la base de datos
+    $host = "localhost"; // Dirección del servidor donde se encuentra la base de datos
+    $user = "root"; // Nombre de usuario con permisos para acceder a la base de datos
+    $pw   = ""; // Contraseña del usuario
+    $db   = "ausentismos_v2"; // Nombre de la base de datos a la que se desea conectar
+    
+    // Establecer conexión a la base de datos utilizando las variables declaradas anteriormente
     $conectar = mysqli_connect($host, $user, $pw, $db);
-
-    //HEROKU: 
-    //mysql://bd5b665eca0324:a57ba49d@us-cdbr-east-06.cleardb.net/heroku_0ede410b33699d1?reconnect=true
-
-    /*
-    $host = "us-cdbr-east-06.cleardb.net";
-    $user = "bd5b665eca0324";//"u715763332_admin";
-    $pw   = "a57ba49d";//"Lab4unicauca";
-    $db   = "heroku_0ede410b33699d1";
-
-    $conectar = mysqli_connect($host, $user, $pw, $db);  */
-    //mysqli_close($conectar);
 ?>

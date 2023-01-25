@@ -44,9 +44,12 @@ $(function()
             //add to the th class list the atribute table-warning to change the color of the th
             document.getElementById("th_nombre").classList.add("table-warning");
             get_ausentismos();
-        }else{
-            //get_ausentismos();
 
+        } else if( valor == "" ){
+            get_ausentismos();
+
+        } else{
+            //get_ausentismos();
             //remove the atribute table-warning to change the color of the th
             document.getElementById("th_nombre").classList.remove("table-warning");
         }

@@ -1,7 +1,15 @@
 <?php
     include "../conexion.php";
     include "../logic/validate_sessionLogic.php";
-    $mysqli = new mysqli($host, $user, $pw, $db);
+
+    //Si el usuario ya inicio sesion, no permitir que vuelva a iniciar sesion
+    if($autentication == 'CONSULTA' || $autentication == 'ADMIN'){
+        //LLEVAR AL USUARIO A LA PÁGINA DE INICIO admin_menu.php
+        header("Location: ./admin_menu.php");
+    } else if( $autentication == 'FACULTAD'){
+        //LLEVAR AL USUARIO A LA PÁGINA DE INICIO admin_menu.php
+        header("Location: ./facultad_agregar.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -39,43 +47,6 @@
         height: 100%;
         }
     }
-
-    /*.overlay-container {
-        position: absolute;
-        top: 29%;
-        left: 55%;
-        width: 40%;
-        height: 12%;
-        overflow: hidden;
-        transition: transform 0.6s ease-in-out;
-        z-index: 100;
-    }
-    .overlay {
-        background: #FF416C;
-        background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-        background: linear-gradient(to right, #FF4B2B, #FF416C);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: 0 0;
-        color: #FFFFFF;
-        position: relative;
-        left: -100%;
-        height: 100%;
-        width: 200%;
-        transform: translateX(0);
-        transition: transform 0.6s ease-in-out;
-    }*/
-    /*
-    <div class="overlay-container">
-                    <div class="overlay">
-                    <div class="overlay-panel overlay-right">
-                        <h1 class="text-center">Bienvenido</h1>
-                        <p class="text-center">Para continuar, inicie sesión</p>
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
-                    </div>
-                    </div>
-                    
-                </div>*/
 </style>
 
 <body>
@@ -114,18 +85,18 @@
                     <!-- <p class="text-center fw-bold mx-3 mb-0">Or</p> -->
                 </div>
 
-                <!-- Email input -->
+                <!-- Username input -->
                 <div class="form-floating mb-3 col-auto"> 
-                    <input type="text" id="form3Example3" name="username" class="form-control"
+                    <input type="text" id="username1"  pattern="[a-zA-Z0-9]+" maxlength="20" name="username" class="form-control"
                     placeholder="Ingrese su usuario" required/>
-                    <label class="col-form-label" for="form3Example3">Usuario</label>
+                    <label class="col-form-label" for="username1">Usuario</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-floating mb-3 col-auto"> 
-                    <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
+                    <input type="password" id="password1" name="password" class="form-control form-control-lg"
                     placeholder="Ingrese la contraseña" required/>
-                    <label class="form-label" for="form3Example4">Contraseña</label>
+                    <label class="form-label" for="password1">Contraseña</label>
                 </div>
 
                 <p class="label_mensaje">
@@ -207,5 +178,45 @@
     </div>
 
 </body>
+
+<script>
+
+    //Funcion que detecte cuando se presiona una tecla en un input
+    document.getElementById("username1").addEventListener("input", function() {
+        var inputValue = document.getElementById("username1").value;
+        var specialChars = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+        //console.log("INPUT1")
+
+        if (specialChars.test(inputValue)) {
+            // Show an error message
+            document.getElementById("username1").setCustomValidity("No se permiten caracteres especiales!");
+        } else {
+            // Clear the error message
+            document.getElementById("username1").setCustomValidity("");
+        }
+    });
+
+    //Funcion que detecte cuando se presiona una tecla en un input
+    document.getElementById("password1").addEventListener("input", function() {
+        var inputValue = document.getElementById("password1").value;
+        var specialChars = /[ !$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+        //console.log("INPUT1")
+
+        if (specialChars.test(inputValue)) {
+            // Show an error message
+            document.getElementById("password1").setCustomValidity("No se permiten caracteres especiales!");
+        } else {
+            // Clear the error message
+            document.getElementById("password1").setCustomValidity("");
+        }
+    });
+
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+</script>
 
 </html>
