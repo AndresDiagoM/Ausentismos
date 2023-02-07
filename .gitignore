@@ -14,3 +14,5 @@ pages/inicio.php
 ausentismos_v1.sql
 
 /vendor/
+
+.htaccess

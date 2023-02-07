@@ -3,7 +3,7 @@
 let var1 = {};
 $.ajax({
     method: "POST",
-    url: "./graficos.php",
+    url: "../logic/graficos.php",
     data: $.param(var1) ,
     success: function (response) {            
         const Data = JSON.parse(response);

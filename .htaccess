@@ -1,4 +1,4 @@
 RewriteEngine On
 Options All -Indexes 
-ErrorDocument 403 /Ausen2/403.php
-ErrorDocument 404 /Ausen2/404.php
+ErrorDocument 403 /403.php
+ErrorDocument 404 /404.php

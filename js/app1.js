@@ -17,7 +17,7 @@ const enableEventHandlers = () => {
 
     $.ajax({
       method: "POST",
-      url: "../pages/graficos.php",
+      url: "../logic/graficos.php",
       data: $.param(var1),
       success: function (response) {
         const Data = JSON.parse(response);
@@ -87,7 +87,7 @@ const enableEventHandlers = () => {
 
     $.ajax({
       method: "POST",
-      url: "../pages/graficos.php",
+      url: "../logic/graficos.php",
       data: $.param(var1),
       success: function (response) {
         //console.table(response);
@@ -125,7 +125,7 @@ const enableEventHandlers = () => {
 
       $.ajax({
         method: "POST",
-        url: "../pages/graficos.php",
+        url: "../logic/graficos.php",
         data: $.param(var1),
         success: function (response) {
           //console.log(response);
@@ -158,7 +158,7 @@ const enableEventHandlers = () => {
 
     $.ajax({
       method: "POST",
-      url: "../pages/graficos.php",
+      url: "../logic/graficos.php",
       data: $.param(var1),
       success: function (response) {
         //console.table(response);
@@ -206,7 +206,7 @@ const enableEventHandlers = () => {
 
     $.ajax({
       method: "POST",
-      url: "../pages/graficos.php",
+      url: "../logic/graficos.php",
       data: $.param(var1),
       success: function (response) {
         //console.table(response);

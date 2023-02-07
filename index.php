@@ -6,7 +6,7 @@
     session_start(); //Inicia una nueva sesión
     error_reporting(0); //Desactiva la reportación de errores
     
-    $autentication  = $_SESSION['TIPO_USUARIO']; //Asigna a la variable 'autentication' el valor del tipo de usuario almacenado en la sesión
+    $autentication  = isset($_SESSION['TIPO_USUARIO'])?$_SESSION['TIPO_USUARIO']:null; //Asigna a la variable 'autentication' el valor del tipo de usuario almacenado en la sesión
     $nombre_cliente = strtoupper($_SESSION['NOM_USUARIO']); //Asigna a la variable 'nombre_cliente' el valor del nombre del usuario convertido a mayúsculas
     $nombre_admin   = strtoupper($_SESSION['NOM_USUARIO']); //Asigna a la variable 'nombre_admin' el valor del nombre del usuario convertido a mayúsculas
     $id_cliente     = strtoupper($_SESSION['ID_USUARIO']); //Asigna a la variable 'id_cliente' el valor del id del usuario convertido a mayúsculas
@@ -74,7 +74,7 @@
 
             <!-- Contenedor del formulario de inicio de sesion -->
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form action="./logic/inicio_sesionLogic.php" method="POST">
+                <form id="form1" action="./logic/inicio_sesionLogic.php" method="POST">
 
                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                     <p class=""></p>
@@ -229,6 +229,10 @@
         e.preventDefault();
     });
 
+    //prevent default to form1
+    document.getElementById("form1").addEventListener("submit", function(e) {
+        //e.preventDefault();
+    });
 </script>
 
 </html>

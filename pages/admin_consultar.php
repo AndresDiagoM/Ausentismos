@@ -242,32 +242,9 @@
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
     
-<!-- Script que hace las consultas SQL -->
-<script src="../js/consultar.js"></script>
+    <!-- Script que hace las consultas SQL -->
+    <script src="../js/consultar.js"></script>
 
-<script>
-    //SCRIPT para colocar en fecha inicial, la fecha con mes actual
-    var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
-
-    var today = year + "-" + month + "-" + day;
-    var tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    var tomorrow_string = tomorrow.toISOString().slice(0,10);
-    //var today =  +year + "-" + month + "-" + (day+1-day) ;  
-    var inicio_año = year + "-" + "01" + "-" + "01";
-    document.getElementById("fecha_inicio").value = inicio_año; 
-    document.getElementById("fecha_fin").value = tomorrow_string;
-
-    //console.log(tomorrow);
-    //convertir fecha tomorrow a string
-    //console.log(tomorrow_string);
-
-</script>
 
 <?php
     include("../template/pie.php");
