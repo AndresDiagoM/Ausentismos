@@ -44,13 +44,13 @@
 
                 <!-- INPUT DEL NOMBRE -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="nombre_func_edt" class="form-control" min="4" max="40" placeholder="Nombre" title="El nombre solo puede tener letras." value="<?php echo $mostrar['Nombre'];?>" required>
+                    <input type="text" name="nombre_func_edt" class="form-control" pattern="[a-zA-Z0-9\s]+" min="4" max="40" placeholder="Nombre" title="El nombre solo puede tener letras." value="<?php echo $mostrar['Nombre'];?>" required>
                     <label class="col-form-label" for="nombre_func_edt"> Nombre </label>
                 </div>
 
                 <!-- INPUT DEL CARGO -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="cargo_func_edt" class="form-control" min="4" max="40" placeholder="Cargo"  value="<?php echo $mostrar['Cargo'];?>" required>
+                    <input type="text" name="cargo_func_edt" class="form-control" pattern="[a-zA-Z0-9\s-]+" min="4" max="40" placeholder="Cargo"  value="<?php echo $mostrar['Cargo'];?>" required>
                     <label class="col-form-label" for="cargo_func_edt"> Cargo </label>
                 </div>
 

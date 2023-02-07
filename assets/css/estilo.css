@@ -14,6 +14,9 @@ body {
     color: var(--primary);
 }
 
+a {
+    text-decoration: none;
+}
 a:hover {
     text-decoration: none;  /* Para que no aparezca las opciones del menu 
     subrayadas */
@@ -40,7 +43,8 @@ a:hover {
     %----------- SIDEBAR -> CONTENEDOR LATERAL -------------%
 */
 #sidebar-container {
-    min-height: 110vh; /* Es el contenedor de todo el menu lateral, el largo*/
+    /* Es el contenedor de todo el menu lateral, el largo. Que ocupe todo el largo de la pantalla*/
+    height: 100vh;
 }
 #sidebar-container .logo {
     padding: .875rem 1.25rem; /* Es la ubicación del Heading del sidebar */
@@ -109,16 +113,15 @@ a:hover {
 
 
 #sidebar-container .logoU {
-    /*width: 18rem; *//* Es el ancho del SideBar*/
-
-    /* set the image size according to the SIDEBAR size */
-    width: 190px;
-    height: 190px;
+    /* set the image size according to the SIDEBAR size    position: relative;  */
+    width: 65%; /* Es el ancho del SideBar*/
+    height: 25%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     /*background-image: url(../images/icon3.png);*/
 
+    /* background-color: #c10de5; */
     /*position:absolute;
     width:100px;
     height:100px;*/
@@ -127,29 +130,56 @@ a:hover {
     top:10%;
     margin-top:10%;
 }
-
-#sidebar-container .sideBar_foot {
+#sidebar-container .logoU img {
     /*width: 18rem; *//* Es el ancho del SideBar*/
 
-    /* ubicar en la parte de abajo, con referencia al inferior de la pnatalla */
-    position:absolute;
-    width:100px;
-    height:100px;
+    /* set the image size according to the SIDEBAR size */
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-image: url(../images/icon3.png);*/
 
-    /* posicion vertical */
-    bottom:0px;
-
-    /* centrado horizontal 
-    left:5%;
-    margin-left:-25px;*/
-
-    /* centrar la imagen */
-    left:5%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* background-color: #24caa6; */
 }
 
+#sidebar-container .social_icons {
+    /*Posición pegada al fondo de la pagina*/
+    position: absolute;
+    width: 18rem;
+    height: 10%;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-image: url(../images/icon3.png);*/
+
+    /* background-color: #0d87e5; */
+
+    /* centrar verticalmente la imagen hacia el fondo del sidebar*/
+    bottom: 0;
+    margin-bottom: 0;
+}
+#sidebar-container .social_icons a {
+    background-color: #CC0000;
+}
+#sidebar-container .social_icons img {
+    width: 12%;
+    height: 30%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-color: #ffffff; */
+    
+    display: inline-block;
+
+    /* centrar verticalmente y horizontalmente la imagen */
+    margin: auto;
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
 
 /* ===========================================
     %----------- NAV BAR - MENU SUPERIOR -------------%
@@ -180,6 +210,15 @@ a:hover {
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: auto;  /* Hide the horizontal scroll */
 }
+#tabla-consultas tr:hover td {
+    font-weight: bold; /* make the text bold on hover */
+    cursor: pointer; /* change the cursor to a pointer on hover */
+    text-decoration: underline;
+}
+#tabla-consultas tbody tr:hover {
+    background-color: #a3dff4;
+}
+
 
 /*Convertir todas letras de los inputs a mayusculas en todos los html form*/
 input[type=text], input[type=email], input[type=number], input[type=tel], input[type=date], input[type=time], input[type=datetime-local], input[type=month], input[type=week], input[type=url], input[type=search], input[type=color], textarea {
@@ -222,3 +261,5 @@ input[type=text], input[type=email], input[type=number], input[type=tel], input[
         border: 0;
     }
 }
+
+/*===========================================================*/

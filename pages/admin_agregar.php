@@ -84,13 +84,13 @@
 
                 <!-- INPUT FECHA INICIO -->
                 <div class="form-floating mb-2">
-                    <input type="date" class="form-control" id="fecha_inicio"  name="Fecha_Inicio[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
+                    <input type="date" class="form-control" id="fecha_inicio"  name="Fecha_Inicio[]"  value="" min="2018-01-01" required> <!-- //value="2019-07-22" -->
                     <label class="col-form-label" for="Fecha_Inicio[]"> FECHA DE INICIO </label>
                 </div>
 
                 <!-- INPUT FECHA FIN -->
                 <div class="form-floating mb-2">
-                    <input type="date" class="form-control" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01" > <!-- //value="2019-07-22" -->
+                    <input type="date" class="form-control" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01" required> <!-- //value="2019-07-22" -->
                     <label class="col-form-label" for="Fecha_Fin[]"> FECHA FIN </label>
                 </div>
 
@@ -106,7 +106,7 @@
 
                 <!-- INPUT DE TIEMPO -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="Tiempo[]" class="form-control" id="tiempo" pattern="[0-9]{1,370}" placeholder="Tiempo del ausentimso" title="Solo debe contener carácteres numéricos." required>
+                    <input type="text" name="Tiempo[]" class="form-control" id="tiempo" pattern="^[0-9,.]{1,370}$" placeholder="Tiempo del ausentimso" title="Solo debe contener carácteres numéricos." required>
                     <label class="col-form-label" for="Tiempo[]"> TIEMPO </label>
                 </div>
 

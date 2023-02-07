@@ -23,19 +23,19 @@ include "../template/cabecera.php";
                     
                     <!-- INPUT DE NOMBRES DE FUNCIONARIO -->
                     <div class="form-floating mb-3">
-                        <input type="text" name="nomb_func" id="nomb_func" class="form-control" placeholder="Digite los nombres y apellidos" required>
+                        <input type="text" name="nomb_func" id="nomb_func" class="form-control" pattern="[a-zA-Z0-9\s]+" placeholder="Digite los nombres y apellidos" required>
                         <label class="col-form-label" for="nomb_func"> Nombres y Apellidos </label>
                     </div>
                     
                     <!-- INPUT DEL CARGO-->
                     <div class="form-floating mb-3">
-                        <input type="text" name="cargo" id="cargo" class="form-control" placeholder="Digite el cargo" required>
+                        <input type="text" name="cargo" id="cargo" class="form-control" pattern="[a-zA-Z0-9\s-]+" placeholder="Digite el cargo" required>
                         <label class="col-form-label" for="cargo"> Cargo </label>
                     </div>
 
                     <!-- INPUT DEL CORREO-->
                     <div class="form-floating mb-3">
-                        <input type="text" name="correo" id="correo" class="form-control" placeholder="Digite el correo" required>
+                        <input type="text" name="correo" id="correo" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" placeholder="Digite el correo" required>
                         <label class="col-form-label" for="correo"> Correo </label>
                     </div>
 

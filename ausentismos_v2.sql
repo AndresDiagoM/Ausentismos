@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 20, 2023 at 03:59 PM
+-- Generation Time: Feb 16, 2023 at 05:07 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -2762,16 +2762,119 @@ INSERT INTO `ausentismos` (`ID`, `Cedula_F`, `Fecha_Inicio`, `Fecha_Fin`, `Tiemp
 (2727, 25274823, '2022-09-27', '2022-09-27', 2, 'horas', 'Cita médica', 5090.02, 34327997, 5),
 (2728, 10526837, '2022-09-27', '2022-09-27', 1, 'horas', 'Unidad de Salud', 2807.63, 34327997, 5),
 (2729, 76316009, '2022-09-28', '2022-09-28', 1, 'horas', 'División de Talento Humano', 4555.59, 34327997, 5),
-(2755, 76315774, '2022-12-23', '2022-12-23', 1, 'dias', 'loquera', 95146.8, 34327997, 3),
-(2756, 1001086246, '2022-12-24', '2022-12-24', 1, 'dias', 'loquera', 124206, 34327997, 4),
-(2757, 1001086246, '2023-01-04', '2023-01-04', 1, 'dias', 'medico', 0, 34327997, 3),
-(2758, 1001086246, '2023-01-10', '2023-01-10', 1, 'dias', 'medico', 0, 34327997, 4),
-(2759, 1001086246, '2023-01-10', '2023-01-10', 1, 'dias', 'medico', 0, 34327997, 2),
-(2760, 1001086246, '2023-01-19', '2023-01-19', 1, 'dias', 'pruebas1', 124206, 34327997, 3),
-(2761, 1001086246, '2023-01-20', '2023-01-21', 2, 'dias', 'pruebas1', 266667, 34327997, 4),
-(2765, 1001086246, '2023-01-20', '2023-01-20', 20, 'horas', 'Viaje a cali - horas', 111111, 45555, 5),
-(2766, 1001086246, '2023-01-20', '2023-01-20', 20, 'horas', 'Viaje a cali - horas55', 111111, 45555, 5),
-(2767, 1001086246, '2023-01-20', '2023-01-20', 18, 'horas', 'Viaje a MEDELLIN- horas', 100000, 45555, 5);
+(2771, 34539966, '2023-01-12', '2023-01-12', 1, '', 'Dias adicionales laborados', 76199.7, 34327997, 2),
+(2772, 34539966, '2023-01-13', '2023-01-13', 1, '', 'Asuntos personales', 76199.7, 34327997, 3),
+(2773, 14877826, '2022-01-12', '2022-01-13', 2, '', 'Dias adicionales laborados', 111003, 34327997, 2),
+(2774, 76324018, '2022-01-12', '2022-01-12', 1, '', 'Dias adicionales laborados', 71453.9, 34327997, 2),
+(2775, 1061726213, '2023-01-13', '2023-01-16', 4, '', 'Dias adicionales laborados', 226869, 34327997, 2),
+(2776, 34551126, '2023-01-11', '2023-01-13', 3, '', 'Dias adicionales laborados', 228599, 34327997, 2),
+(2777, 48600072, '2023-01-12', '2023-01-26', 15, '', 'Dias adicionales laborados', 916203, 34327997, 2),
+(2778, 26566163, '2023-01-12', '2023-01-13', 2, '', 'Dias adicionales laborados', 218668, 34327997, 2),
+(2779, 10539083, '2023-01-11', '2023-01-11', 1, '', 'Asuntos personales', 345994, 34327997, 3),
+(2780, 34547717, '2023-01-10', '2023-01-03', 8, '', 'N.A Incapácidad', 440339, 34327997, 1),
+(2781, 34325194, '2023-01-13', '2023-01-13', 1, '', 'N.A Incapácidad', 76199.7, 34327997, 1),
+(2782, 34538117, '2023-01-10', '2023-01-11', 2, '', 'N.A Incapácidad', 209644, 34327997, 1),
+(2783, 34532750, '2023-01-12', '2023-01-13', 2, '', 'N.A Incapácidad', 127845, 34327997, 1),
+(2784, 67002775, '2023-01-01', '2023-05-06', 126, '', 'N.A Incapácidad', 38124400, 34327997, 1),
+(2785, 34527753, '2023-01-12', '2023-01-13', 2, '', 'N.A Incapácidad', 116960, 34327997, 1),
+(2786, 34330775, '2023-01-16', '2023-01-16', 1, '', 'Asuntos personales', 164958, 34327997, 3),
+(2787, 34330775, '2023-01-17', '2023-01-17', 1, '', 'Asuntos personales', 164958, 34327997, 3),
+(2788, 34556513, '2023-01-12', '2023-02-10', 30, '', 'N.A Incapácidad', 1701510, 34327997, 1),
+(2789, 76332746, '2023-01-10', '2023-01-17', 8, '', 'N.A Incapácidad', 467840, 34327997, 1),
+(2790, 34556088, '2023-01-16', '2023-01-18', 3, '', 'N.A Incapácidad', 202150, 34327997, 1),
+(2791, 79532990, '2023-01-16', '2023-01-18', 3, '', 'N.A Incapácidad', 260761, 34327997, 1),
+(2792, 34559928, '2023-01-17', '2023-01-20', 4, '', 'N.A Incapácidad', 233920, 34327997, 1),
+(2793, 1061542894, '2023-01-03', '2023-01-05', 3, '', 'Dias adicionales laborados', 170151, 34327997, 2),
+(2794, 1085296250, '2023-01-03', '2023-01-05', 3, '', 'Dias adicionales laborados', 170151, 34327997, 2),
+(2795, 1061767700, '2023-01-10', '2023-01-12', 3, '', 'Dias adicionales laborados', 170151, 34327997, 2),
+(2796, 1061767700, '2023-01-05', '2023-01-05', 1, '', 'Dias adicionales laborados', 56717.1, 34327997, 2),
+(2797, 1061726213, '2023-01-12', '2023-01-20', 9, '', 'Dias adicionales laborados', 510454, 34327997, 2),
+(2798, 1061726213, '2023-01-23', '2023-01-27', 5, '', 'Dias adicionales laborados', 283586, 34327997, 2),
+(2799, 12982899, '2023-01-20', '2023-01-20', 1, '', 'Asuntos personales', 249136, 34327997, 3),
+(2800, 25292048, '2023-01-20', '2023-01-20', 1, '', 'Asuntos académicas', 190990, 34327997, 3),
+(2801, 4615890, '2022-01-18', '2022-01-18', 1, '', 'Asuntos personales', 95146.8, 34327997, 3),
+(2802, 76327294, '2023-01-20', '2023-01-20', 1, '', 'Asuntos personales', 149657, 34327997, 3),
+(2803, 34571582, '2023-01-20', '2023-01-20', 1, '', 'Cita médica a Cali', 55042.4, 34327997, 3),
+(2804, 34565754, '2023-01-20', '2023-01-20', 1, '', 'Asuntos personales', 65566, 34327997, 3),
+(2805, 34549438, '2023-01-03', '2023-01-12', 10, '', 'N.A Incapácidad', 2766710, 34327997, 1),
+(2806, 34556315, '2023-01-18', '2023-01-20', 3, '', 'N.A Incapácidad', 165127, 34327997, 1),
+(2807, 25287304, '2023-01-19', '2023-01-20', 2, '', 'N.A Incapácidad', 186534, 34327997, 1),
+(2808, 76310706, '2023-01-24', '2023-02-22', 30, '', 'N.A Incapácidad', 1665040, 34327997, 1),
+(2809, 34567948, '2023-01-23', '2023-01-23', 1, '', 'Asuntos personales', 172766, 34327997, 3),
+(2810, 10537085, '2023-01-23', '2023-01-23', 1, '', 'Asuntos personales', 231263, 34327997, 3),
+(2811, 34320646, '2023-01-24', '2023-01-24', 1, '', 'Asuntos personales', 67719.4, 34327997, 3),
+(2812, 34552140, '2023-01-24', '2023-01-24', 1, '', 'Cirugía', 78983, 34327997, 3),
+(2813, 34554680, '2023-01-24', '2023-01-24', 1, '', 'Asuntos personales', 117825, 34327997, 3),
+(2814, 1061707185, '2023-01-27', '2023-01-27', 1, '', 'Asuntos personales', 55501.3, 34327997, 3),
+(2815, 10536537, '2023-01-20', '2023-02-03', 15, '', 'N.A Incapácidad', 751068, 34327997, 1),
+(2816, 36290976, '2023-01-18', '2023-01-18', 1, '', 'N.A Incapácidad', 91945.2, 34327997, 1),
+(2817, 76316552, '2023-01-24', '2023-01-25', 2, '', 'N.A Incapácidad', 142908, 34327997, 1),
+(2818, 34571582, '2023-01-27', '2023-01-27', 1, '', 'Cita médica a Cali', 55042.4, 34327997, 3),
+(2819, 1061734734, '2023-01-30', '2023-01-30', 1, '', 'Asuntos personales', 89055.4, 34327997, 3),
+(2820, 52007791, '2023-01-30', '2023-01-31', 2, '', 'Res VADM 0068 enero 2023', 142908, 34327997, 3),
+(2821, 1061763708, '2023-01-05', '2023-01-06', 2, '', 'Res VADM 0002 enero 2023', 199714, 34327997, 3),
+(2822, 19446961, '2023-01-10', '2023-01-11', 2, '', 'Res VADM 0005 enero 2023', 479513, 34327997, 3),
+(2823, 66847424, '2023-01-16', '2023-01-18', 3, '', 'Res VADM 0011 enero 2023', 187110, 34327997, 3),
+(2824, 34318243, '2023-01-16', '2023-01-20', 5, '', 'Res VADM 0012 enero 2023', 275212, 34327997, 4),
+(2825, 76308616, '2023-01-16', '2023-01-20', 5, '', 'Res VADM 0013 enero 2023', 327830, 34327997, 4),
+(2826, 10544026, '2023-01-16', '2023-01-20', 5, '', 'Res VADM 5163 enero 2023', 277506, 34327997, 4),
+(2827, 94375040, '2023-01-26', '2023-01-26', 1, '', 'Asuntos personales', 255406, 34327997, 3),
+(2828, 34326281, '2023-01-27', '2023-01-27', 1, '', 'Asuntos personales', 55501.3, 34327997, 3),
+(2829, 25280532, '2023-01-27', '2023-01-27', 1, '', 'Dias adicionales laborados', 82547, 34327997, 2),
+(2830, 76303963, '2023-01-30', '2023-01-30', 1, '', 'Asuntos personales', 71453.9, 34327997, 3),
+(2831, 30720867, '2023-01-14', '2023-01-14', 4, 'horas', 'Dificultad de transporte desde Pasto', 35165.5, 34327997, 5),
+(2832, 12980545, '2023-01-24', '2023-01-24', 3, 'horas', 'Compensatorio por horas adicionales labo', 10865, 34327997, 5),
+(2833, 25588847, '2023-01-18', '2023-01-18', 1, 'horas', 'Asuntos personales', 9175.68, 34327997, 5),
+(2834, 34320823, '2023-01-18', '2023-01-18', 2, 'horas', 'Asuntos personales', 5615.27, 34327997, 5),
+(2835, 34320823, '2023-01-19', '2023-01-19', 4, 'horas', 'Asuntos personales', 11230.5, 34327997, 5),
+(2836, 48600362, '2023-01-24', '2023-01-24', 2, 'horas', 'Asuntos personales', 4873.33, 34327997, 5),
+(2837, 34326281, '2023-01-13', '2023-01-13', 6, 'horas', 'Asuntos personales', 13875.3, 34327997, 5),
+(2838, 10546378, '2023-01-20', '2023-01-20', 2, 'horas', 'Asuntos personales', 4873.33, 34327997, 5),
+(2839, 10546378, '2023-01-24', '2023-01-24', 3, 'horas', 'Asuntos personales', 7310, 34327997, 5),
+(2840, 10533149, '2023-01-17', '2023-01-17', 4, 'horas', 'Asuntos personales', 52687.7, 34327997, 5),
+(2841, 76324018, '2023-01-20', '2023-01-20', 2, 'horas', 'Asuntos personales', 5954.49, 34327997, 5),
+(2842, 1061685975, '2023-01-31', '2023-01-31', 4, 'horas', 'Asuntos personales', 9452.86, 34327997, 5),
+(2843, 76332522, '2023-01-12', '2023-01-12', 1, 'horas', 'Asuntos personales', 3621.68, 34327997, 5),
+(2844, 34557964, '2023-01-25', '2023-01-25', 2, 'horas', 'Cita médica', 6581.92, 34327997, 5),
+(2845, 10546333, '2023-02-01', '2023-02-03', 3, '', 'Curso de vigilancia', 150214, 34327997, 2),
+(2846, 34568215, '2023-02-02', '2023-02-06', 5, '', 'Res VADM 0037 enero 2023', 546670, 34327997, 3),
+(2847, 1061709695, '2023-02-20', '2023-02-22', 3, '', 'Res VADM 0061 enero 2023', 279800, 34327997, 3),
+(2848, 10294423, '2023-02-06', '2023-02-09', 4, '', 'Dias adicionales laborados', 304799, 34327997, 2),
+(2849, 25292048, '2023-02-03', '2023-02-03', 1, '', 'Asuntos académicas', 190990, 34327997, 3),
+(2850, 34571582, '2023-02-03', '2023-02-03', 1, '', 'Cita médica a Cali', 55042.4, 34327997, 3),
+(2851, 66847424, '2023-02-03', '2023-02-03', 1, '', 'Asuntos personales', 62370.1, 34327997, 3),
+(2852, 10548116, '2023-02-01', '2023-02-01', 1, '', 'Cita médica', 62370.1, 34327997, 3),
+(2853, 34323142, '2023-02-03', '2023-02-03', 1, '', 'Asuntos personales', 67383.2, 34327997, 3),
+(2854, 34532839, '2023-02-02', '2023-02-02', 1, '', 'Cita médica a Cali', 62370.1, 34327997, 3),
+(2855, 51898307, '2023-02-01', '2023-02-01', 1, '', 'Dias adicionales laborados', 361879, 34327997, 2),
+(2856, 34571835, '2023-02-03', '2023-02-03', 1, '', 'Procedimiento médico', 150709, 34327997, 3),
+(2857, 76319254, '2023-02-06', '2023-02-06', 1, '', 'Asuntos personales', 55501.3, 34327997, 3),
+(2858, 1061727236, '2023-02-03', '2023-02-03', 1, '', 'Asuntos personales', 117825, 34327997, 3),
+(2859, 34549216, '2023-02-03', '2023-02-03', 1, '', 'Asuntos personales', 204005, 34327997, 3),
+(2860, 10525506, '2023-02-07', '2023-02-07', 1, '', 'Asuntos personales', 50071.2, 34327997, 3),
+(2861, 16785277, '2023-02-03', '2023-02-03', 1, '', 'Asuntos personales', 262950, 34327997, 3),
+(2862, 34561145, '2023-02-07', '2023-02-07', 1, '', 'Cita médica', 67383.2, 34327997, 3),
+(2863, 34324353, '2023-02-06', '2023-02-06', 1, '', 'Asuntos personales', 175919, 34327997, 3),
+(2864, 10295665, '2023-02-07', '2023-02-08', 2, '', 'Dias adicionales laborados', 113434, 34327997, 2),
+(2865, 1061542894, '2023-02-20', '2023-02-20', 1, '', 'Dias adicionales laborados', 56717.1, 34327997, 2),
+(2866, 1061726213, '2023-02-27', '2023-02-27', 1, '', 'Dias adicionales laborados', 56717.1, 34327997, 2),
+(2867, 1061542894, '2023-02-13', '2023-02-13', 1, '', 'Dias adicionales laborados', 56717.1, 34327997, 2),
+(2868, 1061726213, '2023-02-13', '2023-02-13', 1, '', 'Dias adicionales laborados', 56717.1, 34327997, 2),
+(2869, 66784820, '2023-02-09', '2023-02-09', 1, '', 'Cita médica', 67383.2, 34327997, 3),
+(2870, 36290976, '2023-02-10', '2023-02-10', 1, '', 'Cita médica', 91945.2, 34327997, 3),
+(2871, 1061767700, '2023-02-10', '2023-02-10', 1, '', 'Dias adicionales laborados', 56717.1, 34327997, 2),
+(2872, 76303530, '2023-02-08', '2023-02-08', 1, '', 'Cita médica a Cali', 55042.4, 34327997, 3),
+(2873, 10142777, '2023-02-10', '2023-02-10', 1, '', 'Asuntos personales', 192316, 34327997, 3),
+(2874, 48600362, '2023-02-10', '2023-02-10', 1, '', 'Asuntos personales', 58480, 34327997, 3),
+(2875, 36304869, '2023-02-10', '2023-02-10', 1, '', 'Asuntos personales', 124206, 34327997, 3),
+(2876, 1061735012, '2023-02-10', '2023-02-10', 1, '', 'Asuntos personales', 198722, 34327997, 3),
+(2877, 1061772912, '2023-02-08', '2023-02-08', 1, '', 'Asuntos personales', 62370.1, 34327997, 3),
+(2878, 25291188, '2023-02-03', '2023-02-03', 1, '', 'Asuntos personales', 269627, 34327997, 3),
+(2879, 10543386, '2023-02-09', '2023-02-09', 1, '', 'Asuntos personales', 93266.8, 34327997, 3),
+(2880, 10543386, '2023-02-13', '2023-02-13', 1, '', 'Incentivos por pregrado', 93266.8, 34327997, 3),
+(2881, 34326281, '2023-02-01', '2023-02-01', 3, 'horas', 'Asuntos personales', 6937.66, 34327997, 5),
+(2882, 31986406, '2023-02-03', '2023-02-03', 6, 'horas', 'Asuntos personales', 83113.4, 34327997, 5),
+(2883, 12980545, '2023-02-10', '2023-02-10', 2, 'horas', 'Compensatorio', 7243.36, 34327997, 5);
 
 -- --------------------------------------------------------
 
@@ -17174,7 +17277,12 @@ INSERT INTO `funcionarios` (`Cedula`, `Nombre`, `Cargo`, `Correo`, `Dependencia`
 (98393424, 'BRAVO MONCAYO HECTOR ALEXANDER', 'PROFESOR CATEGORIA - A', 'hbravo@unicauca.edu.co', 51, 'MAS', 1972920, 'ACTIVO'),
 (98395386, 'ARCOS RODRIGUEZ MAURICIO ESTEB', 'PROFESOR ASOCIADO', 'marcos@unicauca.edu.co', 36, 'MAS', 6140714, 'ACTIVO'),
 (98396856, 'ORDOÑEZ ERAZO HUGO ARMANDO', 'PROFESOR ASOCIADO', 'hugoordonez@unicauca.edu.co', 96, 'MAS', 10934251, 'ACTIVO'),
-(1001086246, 'ANDRES FELIPE DIAGO M', 'ESTUDIANTE', 'N/A', 93, 'MAS', 4000000, 'ACTIVO'),
+(1001086246, 'ANDRES FELIPE DIAGO M', 'ESTUDIANTE', 'N/A', 93, 'MAS', 6006381, 'ACTIVO'),
+(1001086247, 'ANDRES DIAGO f', 'PROFESOR ASISTENTE', 'ncruz@unicauca.edu.co', 53, 'MAS', 5006381, 'ACTIVO'),
+(1001086248, 'ANDRES DIAGO g', 'PROFESOR ASISTENTE', 'ncruz@unicauca.edu.co', 53, 'MAS', 5006381, 'ACTIVO'),
+(1001086249, 'ANDRES DIAGO g', 'PROFESOR ASISTENTE', 'ncruz@unicauca.edu.co', 53, 'MAS', 5006381, 'ACTIVO'),
+(1001086250, 'depen depen', 'PROFESOR ASISTENTE', 'ncruz@unicauca.edu.co', 34, 'MAS', 5006381, 'ACTIVO'),
+(1001086251, 'Andres', 'PROFESOR1 ASISTENTE', 'ncruz@unicauca.edu.co', 38, 'MAS', 5006381, 'ACTIVO'),
 (1010193089, 'OSORIO SOLARTE DANIEL', 'PROFESOR INSTRUCTOR O AUXILIAR', 'danielosorio@unicauca.edu.co', 60, 'MAS', 1807524, 'ACTIVO'),
 (1014234473, 'CUELLAR SANCHEZ DIANA CAROLINA', 'PROFESOR CATEGORIA - A', 'dccuellar@unicauca.edu.co', 57, 'FEM', 1315280, 'ACTIVO'),
 (1017129541, 'CARDENAS VALENCIA MAURICIO AND', 'PROFESOR INSTRUCTOR O AUXILIAR', 'N/A', 36, 'MAS', 4345685, 'ACTIVO'),
@@ -17219,12 +17327,12 @@ INSERT INTO `funcionarios` (`Cedula`, `Nombre`, `Cargo`, `Correo`, `Dependencia`
 (1061690715, 'SANCHEZ ORTEGA JORGE LUIS', 'PROFESOR INSTRUCTOR O AUXILIAR', 'jlsanchez@unicauca.edu.co', 38, 'MAS', 4821816, 'ACTIVO'),
 (1061690836, 'DUQUE BOTERO ISABEL', 'PROFESOR CATEGORIA - C', 'isabelduque@unicauca.edu.co', 35, 'FEM', 3156672, 'ACTIVO'),
 (1061691289, 'GALINDEZ VALDES TAO ARA', 'PROFESOR CATEGORIA - B', 'tao@unicauca.edu.co', 75, 'MAS', 789168, 'ACTIVO'),
-(1061691637, 'SALAZAR VALENCIA CRISTIAN FERN', 'PROFESOR ASISTENTE', 'fsalazar@unicauca.edu.co', 66, 'MAS', 4758683, 'ACTIVO'),
+(1061691637, 'SALAZAR VALENCIA CRISTIAN FERN', 'PROFESOR ASISTENTE', 'fsalazar@unicauca.edu.co', 66, 'MAS', 4758683, 'ACTIVO');
+INSERT INTO `funcionarios` (`Cedula`, `Nombre`, `Cargo`, `Correo`, `Dependencia`, `Genero`, `Salario`, `Estado`) VALUES
 (1061692027, 'TORRES RAMIREZ ISABELA', 'PROFESOR INSTRUCTOR O AUXILIAR', 'isabelatorres@unicauca.edu.co', 56, 'FEM', 3918877, 'ACTIVO'),
 (1061693067, 'MARTINEZ GALLEGO JORGE ALBERTO', 'PROFESIONAL ESPECIALIZADO', 'jorge@unicauca.edu.co', 19, 'MAS', 4063165, 'ACTIVO'),
 (1061693126, 'ROA ZUÑIGA JESUS ANDRES', 'PROFESOR ASISTENTE', 'jaroa@unicauca.edu.co', 36, 'MAS', 5359766, 'ACTIVO'),
-(1061693173, 'HURTADO MENESES LISSY YOJANA', 'PROFESOR ASISTENTE', 'lissyhurtado@unicauca.edu.co', 72, 'FEM', 5028973, 'ACTIVO');
-INSERT INTO `funcionarios` (`Cedula`, `Nombre`, `Cargo`, `Correo`, `Dependencia`, `Genero`, `Salario`, `Estado`) VALUES
+(1061693173, 'HURTADO MENESES LISSY YOJANA', 'PROFESOR ASISTENTE', 'lissyhurtado@unicauca.edu.co', 72, 'FEM', 5028973, 'ACTIVO'),
 (1061693411, 'TOSE VERGARA PAULA ANDREA', 'PROFESOR ASISTENTE', 'ptose@unicauca.edu.co', 49, 'FEM', 5243528, 'ACTIVO'),
 (1061693825, 'JALLER DIAZ LINA MARCELA', 'PROFESOR ASISTENTE', 'ljaller@unicauca.edu.co', 72, 'FEM', 5177929, 'ACTIVO'),
 (1061693919, 'PABON SALAZAR YUSLEY KATERINE', 'PROFESOR INSTRUCTOR O AUXILIAR', 'yusley@unicauca.edu.co', 49, 'FEM', 4521275, 'ACTIVO'),
@@ -17897,7 +18005,25 @@ INSERT INTO `incapacidad` (`ID`, `Codigo`, `Diagnostico`, `Entidad`, `ID_Ausenti
 (374, 'M797', '', '', 1692),
 (375, 'J209', 'Servicios ambulatori', 'Und de Salud', 1693),
 (376, 'I872', 'Servicios ambulatori', 'Und de Salud', 1694),
-(377, 'S925', '', 'Impacto', 1704);
+(377, 'S925', '', 'Impacto', 1704),
+(383, 'A09X', 'Enfermedad general', 'Und de Salud', 2780),
+(384, 'R101', 'Servicio ambulatorio', 'Und de Salud', 2781),
+(385, 'S934', 'Enfermedad general', 'Und de Salud', 2782),
+(386, 'H588', 'Enfermedad general', 'Und de Salud', 2783),
+(387, 'O342', 'Servicio ambulatorio', 'Fundación Valle del ', 2784),
+(388, 'A099', 'Servicio ambulatorio', 'Und de Salud', 2785),
+(389, 'M545', 'Servicio ambulatorio', 'Fundación Valle del ', 2788),
+(390, 'F411', 'Servicio ambulatorio', 'Und de Salud', 2789),
+(391, 'M255', 'Enfermedad general', 'Und de Salud', 2790),
+(392, 'A09X', 'Enfermedad general', 'Und de Salud', 2791),
+(393, 'J209', 'Enfermedad general', 'Und de Salud', 2792),
+(394, 'S823', 'Servicio ambulatorio', 'Und de Salud', 2805),
+(395, 'J069', 'Servicio ambulatorio', 'Und de Salud', 2806),
+(396, 'M542', 'Servicio ambulatorio', 'Und de Salud', 2807),
+(397, 'S423', 'Prorroga', 'Und de Salud', 2808),
+(398, 'F000', 'Enfermedad general', 'Und de Salud', 2815),
+(399, '', 'Enfermedad general', 'Und de Salud', 2816),
+(400, 'R568', 'Enfermedad general', 'Dumian Medical', 2817);
 
 -- --------------------------------------------------------
 
@@ -18245,12 +18371,14 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`Cedula_U`, `Nombre_U`, `Correo`, `Dependencia`, `TipoUsuario`, `Login`, `Contrasena`, `Estado`) VALUES
-(45555, 'fiet', 'fiet@unicauca.edu', 97, 'FACULTAD', 'fiet', '202cb962ac59075b964b07152d234b70', 'ACTIVO'),
+(45555, 'FIET EE', 'fiet@unicauca.edu.co', 97, 'FACULTAD', 'FIET', '827ccb0eea8a706c4c34a16891f84e7b', 'ACTIVO'),
 (25277884, 'Alejandra Maria Plaza', 'alejandraplaza@unicauca.edu.co', 102, 'CONSULTA', 'consulta', '202cb962ac59075b964b07152d234b70', 'ACTIVO'),
-(34327997, 'ADRIANA PATRICIA BENAVIDES TABARES', 'adrianabenavides@unicauca.edu.co', 102, 'ADMIN', 'admin', '202cb962ac59075b964b07152d234b70', 'ACTIVO'),
+(34327997, 'ADRIANA PATRICIA BENAVIDES TABARES', 'adrianabenavides@unicauca.edu.co', 102, 'ADMIN', 'ADMIN', '202cb962ac59075b964b07152d234b70', 'ACTIVO'),
 (76315774, 'LOPEZ PIEDRAHITA JULIO CESAR', 'JCLOPE@UNICAUCA.EDU.CO', 19, 'FACULTAD', 'JCLOPEZ', '827ccb0eea8a706c4c34a16891f84e7b', 'ACTIVO'),
 (1001086246, 'ANDRES FELIPE DIAGO M', 'N/A', 93, 'ADMIN', 'FELIPE', '827ccb0eea8a706c4c34a16891f84e7b', 'ACTIVO'),
-(1001086247, 'ANDRES FELIPE', 'ANDRESDIAG@UNICAUCA.EDU.CO', 47, 'ADMIN', 'FELIPE12', '202cb962ac59075b964b07152d234b70', 'ACTIVO');
+(1001086247, 'ANDRES FELIPE', 'ANDRESDIAG@UNICAUCA.EDU.CO', 47, 'ADMIN', 'FELIPE12', '202cb962ac59075b964b07152d234b70', 'ACTIVO'),
+(1001086252, 'PRUEBA', 'ANDRESDIAG1@UNICAUCA.EDU.CO', 34, 'ADMIN', 'PRUEBA1', '827ccb0eea8a706c4c34a16891f84e7b', 'ACTIVO'),
+(1001086253, 'ANDRES FELIPE', 'ANDRESDIAG4@UNICAUCA.EDU.CO', 61, 'FACULTAD', 'PRUEBA3', '827ccb0eea8a706c4c34a16891f84e7b', 'ACTIVO');
 
 --
 -- Indexes for dumped tables
@@ -18332,7 +18460,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `ausentismos`
 --
 ALTER TABLE `ausentismos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2768;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2884;
 
 --
 -- AUTO_INCREMENT for table `dependencias`
@@ -18350,7 +18478,7 @@ ALTER TABLE `entidades`
 -- AUTO_INCREMENT for table `incapacidad`
 --
 ALTER TABLE `incapacidad`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=401;
 
 --
 -- AUTO_INCREMENT for table `salarios`

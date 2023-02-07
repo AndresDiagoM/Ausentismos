@@ -2,8 +2,8 @@
     session_set_cookie_params(0);
     session_start();
     $bandera = false;
-    $autentication  = $_SESSION['TIPO_USUARIO'];
-    $tipo_cliente   = $_SESSION['TIPO_USUARIO'];
+    $autentication  = isset($_SESSION['TIPO_USUARIO']) ? $_SESSION['TIPO_USUARIO'] : null;
+    $tipo_cliente   = isset($_SESSION['TIPO_CLIENTE']) ? $_SESSION['TIPO_CLIENTE'] : null;
 
     //
     if (strtoupper($autentication) == 'ADMIN' || strtoupper($autentication) == 'CONSULTA' ){
@@ -51,6 +51,11 @@
 
         if($passw_bd == $password){
 
+            //Si el usuario está inactivo no se le permite el acceso
+            if($row1['Estado'] == 'INACTIVO'){
+                header('Location: ../pages/inicio_sesion.php?message=4');
+                exit;
+            }
 
             $id_usuario     = $row1['Cedula_U'];
             $nom_usuario    = $row1['Nombre_U'];

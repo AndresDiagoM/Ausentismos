@@ -154,18 +154,23 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
             <?php } ?>
         </div>
 
-        <div class="container-fluid">
-            <!-- LOGO DE LA UNIVERSIDAD -->
-            <div class="container logoU" >
-                <img src="../assets/images/icon4.png" class=" img-fluid me-2" alt="Sample image">
-            </div>
-            
-            <!-- logos de icontec y lema 
-            <div class="sideBar_foot" >
-                <img src="../assets/images/lema.png" class="img-fluid me-2" width="40" height="40" alt="Sample image">
-                <img src="../assets/images/logosIcontec2020.png" class="img-fluid" width="100" height="100" alt="Sample image">
-            </div> -->
+        <!-- CONTENIDO DE LOGO DE LA UNIVERSIDAD -->
+        <div class="container logoU">
+            <img src="../assets/images/icon4.png" class=" img-fluid me-2" alt="Sample image">
         </div>
+
+        <!-- logos de redes sociales  -->
+        <div class="container social_icons mt-0 mr-0">
+            <a href="https://www.facebook.com/universidadelcauca/" class="text-white me-4">
+                <img src="../assets/images/face2.png" class="img-fluid"  alt="Sample image">
+            </a>
+            <a href="https://twitter.com/unicauca/" class="text-white me-4">
+                <img src="../assets/images/twitter.png" class="img-fluid"  alt="Sample image">
+            </a>
+            <a href="https://www.linkedin.com/school/universidad-del-cauca/" class="text-white">
+                <img src="../assets/images/linkedin.png" class="img-fluid"  alt="Sample image">
+            </a>
+        </div> 
     </div>
 
     <div class="w-100">

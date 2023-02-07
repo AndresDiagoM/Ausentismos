@@ -40,6 +40,11 @@
                         //$salario = $row['Salario'];
                     }
 
+                } elseif($field_name == "Observacion"){
+
+                    //Guardar el campo en mayusculas 
+                    $query_values['Observacion'][0] = strtoupper($value);
+
                 } elseif ($field_name == "Tipo_Ausentismo") {
 
                     if($value==""){
@@ -48,9 +53,16 @@
                         exit;              
                     }
 
-                }  elseif ($field_name == "Tiempo"){ //pasar tiempo a numero int
+                }  elseif ($field_name == "Tiempo"){ //pasar tiempo a numero float
 
-                    $tiempo = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+                    //si se recibe un numero con coma, se cambia por punto
+                    $value = str_replace(",", ".", $value);
+
+                    //$tiempo = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+                    $tiempo = floatval($value);
+
+                    //modificar query_values
+                    $query_values['Tiempo'][0] = $tiempo;
                     
                 } elseif ($field_name == "Unidad") {  //calcular el costo de seguridad en el trabajo
                     if($value=="dias"){

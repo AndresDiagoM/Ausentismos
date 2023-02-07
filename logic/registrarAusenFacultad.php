@@ -18,7 +18,7 @@
         $row = $result->fetch_assoc();
         $centro_costo = $row['C_costo'];
         //obtener los 3 primeros caracteres del centro de costo
-        //$centro_costo = substr($centro_costo, 0, 3);
+        $centro_costo = substr($centro_costo, 0, 3);
     }else{
         $centro_costo = "N/A";
     }

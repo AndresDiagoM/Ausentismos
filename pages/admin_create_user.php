@@ -22,14 +22,14 @@ include "../template/cabecera.php";
 
                     <!-- INPUT DE NOMBRES DE USUARIO -->
                     <div class="form-floating mb-3">
-                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Digite los nombres y apellidos" required>
+                        <input type="text" name="nombre" id="nombre" class="form-control" pattern="[a-zA-Z0-9\s]+" placeholder="Digite los nombres y apellidos" required>
                         <input type="hidden" name="nombreB" id="nombreB">
                         <label class="col-form-label" for="nombre">Nombres y Apellidos </label>
                     </div>
 
                     <!-- INPUT DEL CORREO-->
                     <div class="form-floating mb-3">
-                        <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo" required>
+                        <input type="email" name="correo" id="correo" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" placeholder="Correo" required>
                         <input type="hidden" name="correoB" id="correoB">
                         <label class="col-form-label" for="correo"> Correo </label>
                     </div>
@@ -68,7 +68,7 @@ include "../template/cabecera.php";
                     
                     <!-- INPUT DEL LOGIN -->
                     <div class="form-floating mb-3">
-                        <input type="text" name="login" class="form-control" placeholder="Digite su login"  required>
+                        <input type="text" name="login" class="form-control" pattern="[a-zA-Z0-9\s]+" placeholder="Digite su login"  required>
                         <label class="col-form-label" for="login"> Login </label>
                     </div>
 
