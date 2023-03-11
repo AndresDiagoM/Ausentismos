@@ -6,20 +6,21 @@ const enableEventHandlers = () => {
   // Slider de años de las estadisticas
   document.querySelector('#statsOptions').onchange = e => {
 
-    //obtener 
+    //obtener los datos del slide escogido
     const {
         value: number,
         text: label
     } = e.target.selectedOptions[0]
     //console.log(number, label)
 
+    //enviar datos del slide con la petición POST
     let var1 = {anio: label, value: number}; //anio como año
 
     $.ajax({
       method: "POST",
       url: "../logic/graficos.php",
       data: $.param(var1),
-      success: function (response) {
+      success: function (response) { //si la peticion es exitosa, se ejecuta esta funcion
         const Data = JSON.parse(response);
         //console.log(Data);
 
@@ -32,7 +33,7 @@ const enableEventHandlers = () => {
         const grafica3 = Data.grafica3;
         const grafica4 = Data.grafica4;
 
-        //Grafica 1
+        //Actualizar datos de Grafica 1
         document.getElementById('tiposChartOptions').innerHTML = grafica1.options;
         //actualizar el slider de meses
         document.getElementById('tiposMonthsOptions').innerHTML = grafica1.optionsTipo;
@@ -53,11 +54,11 @@ const enableEventHandlers = () => {
         updateChartDataAndLabels('tiposChart', newDatos, newLabels)
 
         //Grafica 3
-        const chart3 = Chart.getChart("funcChart");
+        const chart3 = Chart.getChart("dependenciasChart");
         if(chart3 != null){
           chart3.destroy();
         }
-        renderFuncChart(grafica3);
+        renderDepenChart(grafica3);
         
         //Grafica 4
         const chart4 = Chart.getChart("costoChart");
@@ -164,32 +165,24 @@ const enableEventHandlers = () => {
         //console.table(response);
         const grafica3 = JSON.parse(response);
 
-        const funcArray = grafica3.funcArray;
-        const funcValues = funcArray.map(func => func.Numeros)
-        const funcLabels = funcArray.map(func => func.Nombre)   
+        const depenArray = grafica3.depenArray;
+        const depenValues = depenArray.map(depen => depen.Numeros)
+        const depenLabels = depenArray.map(depen => depen.Facultad)   
 
-        var depen = '';
-        if (grafica3.funcArray.length > 0) {	
-            depen = funcArray[0].Departamento + ' - ' + funcArray[0].Facultad
-        }else{
-            depen = 'No hay datos';
-        }
 
         const data = {
-          labels: funcLabels,
+          labels: depenLabels,
           datasets: [{
-              data: funcValues,
-              label: depen,
+              data: depenValues,
               borderColor: getDataColors(),
               backgroundColor: getDataColors(70),
           }]
         }
 
-        updateChartDataArray('funcChart', data)
+        updateChartDataArray('dependenciasChart', data)
       }
     })      
-    //const newData = coasters.map(coaster => coaster[property])
-    //updateChartData('featuresChart', newData, label)
+    
   }
 
   // Slider de tipo ausen de grafico de costo - GRAFICO 4

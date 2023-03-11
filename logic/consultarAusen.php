@@ -47,6 +47,17 @@
 
                         $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
 
+                    }elseif($field_name=="Observacion"){
+
+                        //convert $value to uppercase
+                        $value = strtoupper($value);
+                        //change spaces in $value to % for LIKE query
+                        $value = str_replace(" ", "%", $value);
+                        //sanitizar codigo html a texto plano
+                        $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+
+                        $BUSCAR_CAMPOS[$field_name][] = " {$field_name} LIKE '%".$value."%' ";
+
                     }elseif($field_name=="Codigo"){
                         //convert $value to uppercase
                         //$value = strtoupper($value);
@@ -136,7 +147,7 @@
         //SI LA BANDERA DE BuscarIncapacidad ES true, BSUCAR LA INCAPACIDAD QUE PERTENECE AL AUSENTIMSO
         if($BuscarIncapacidad==true){
             //consultar el número total de datos para el paginador
-            $sqliTotal = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, usuarios.*, incapacidad.ID as ID_in, incapacidad.Codigo as Codigo, incapacidad.Diagnostico as Diagnostico, incapacidad.Entidad as Entidad
+            $sqliTotal = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, dependencias.Facultad as Facultad, usuarios.*, incapacidad.ID as ID_in, incapacidad.Codigo as Codigo, incapacidad.Diagnostico as Diagnostico, incapacidad.Entidad as Entidad
                         FROM incapacidad 
                         INNER JOIN ausentismos ON incapacidad.ID_Ausentismo=ausentismos.ID
                         INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario
@@ -147,7 +158,7 @@
             $total=$busquedaTotal->num_rows;
 
             //Consulta para llenar la tabla de ausentimsos
-            $sqli = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, usuarios.*, incapacidad.ID as ID_in, incapacidad.Codigo as Codigo, incapacidad.Diagnostico as Diagnostico, incapacidad.Entidad as Entidad
+            $sqli = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, dependencias.Facultad as Facultad, usuarios.*, incapacidad.ID as ID_in, incapacidad.Codigo as Codigo, incapacidad.Diagnostico as Diagnostico, incapacidad.Entidad as Entidad
                     FROM incapacidad 
                     INNER JOIN ausentismos ON incapacidad.ID_Ausentismo=ausentismos.ID
                     INNER JOIN usuarios ON usuarios.Cedula_U = ausentismos.ID_Usuario
@@ -159,7 +170,7 @@
             //AND ( Fecha_Inicio > '2019-07-22') LIMIT 0, 100 //que muestre los primeros 100 registros
         }else{
             //consultar el número total de datos para el paginador
-            $sqliTotal = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, usuarios.*, 
+            $sqliTotal = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, dependencias.Facultad as Facultad, usuarios.*, 
                 COALESCE(incapacidad.ID, 'N/A') as ID_In, COALESCE(incapacidad.Codigo, 'N/A') as Codigo, COALESCE(incapacidad.Diagnostico, 'N/A') as Diagnostico, COALESCE(incapacidad.Entidad, 'N/A') as Entidad, COALESCE(incapacidad.ID_Ausentismo, 'N/A') as ID_Ausentismo
                 FROM ausentismos 
                 INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 
@@ -171,7 +182,7 @@
             $total=$busquedaTotal->num_rows;
 
             //$sqli = "SELECT * FROM ausentismos INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula ".$extra_query;
-            $sqli = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, usuarios.*, 
+            $sqli = "SELECT ausentismos.*, funcionarios.*, dependencias.ID as ID_depen, dependencias.C_costo as C_costo, dependencias.Facultad as Facultad, usuarios.*, 
                 COALESCE(incapacidad.ID, 'N/A') as ID_In, COALESCE(incapacidad.Codigo, 'N/A') as Codigo, COALESCE(incapacidad.Diagnostico, 'N/A') as Diagnostico, COALESCE(incapacidad.Entidad, 'N/A') as Entidad, COALESCE(incapacidad.ID_Ausentismo, 'N/A') as ID_Ausentismo
                 FROM ausentismos 
                 INNER JOIN funcionarios ON ausentismos.Cedula_F=funcionarios.Cedula 

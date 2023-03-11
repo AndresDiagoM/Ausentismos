@@ -5,11 +5,14 @@ $.ajax({
     method: "POST",
     url: "../logic/graficos.php",
     data: $.param(var1) ,
-    success: function (response) {            
-        const Data = JSON.parse(response);
-        //console.log(Data);
+    success: function (response) { //si la peticion POST es exitosa, se ejecuta la funcion
+        
+        const Data = JSON.parse(response); //pasar el objeto response a un objeto JSON
+        //console.log(Data); 
         const statsOptions = Data.statsOptions;
         //console.log(statsOptions);
+
+        //llenar el slider con las opciones
         document.getElementById('statsOptions').innerHTML = statsOptions;
 
         const estadisticas = Data.estadisticas;
@@ -31,10 +34,10 @@ $.ajax({
             //console.log(monthsArray)
             renderMonthsChart(grafica1)
             renderTiposChart(grafica2)  //daugnut
-            renderFuncChart(grafica3)
+            renderDepenChart(grafica3)
             renderCostoChart(grafica4)
 
-            //para manejar los eventos de los botones de los charts
+            //para manejar los eventos de los botones de los charts, funcion de app1.js
             enableEventHandlers()
         }
 
@@ -101,12 +104,12 @@ const renderMonthsChart = (grafica1) => {
     })
 }
 
-const renderTiposChart = array1 => {
+const renderTiposChart = grafica2 => {
     
-    const tiposValues = array1.map(tipos => tipos['numeros'])
-    const tiposLabels = array1.map(tipos => tipos.TipoAusentismo)
+    const tiposValues = grafica2.map(tipos => tipos['numeros'])
+    const tiposLabels = grafica2.map(tipos => tipos.TipoAusentismo)
     //console.log(tiposLabels)
-    //console.table(array1)
+    //console.table(grafica2)
 
     const data = {
         labels: tiposLabels, 
@@ -136,37 +139,29 @@ const renderTiposChart = array1 => {
     })
 }
 
-const renderFuncChart = array1 => {
+const renderDepenChart = grafica3 => {
     /* ESTRUCTURA DE LOS DATOS:
-    array1['dependencias'] = (<div class="col-12 col-md-6 col-lg-4">)
-    array1['funcArray'] = (
-        Cedula | Numeros | Nombre      | Dependencia | Departamento | Facultad	
-        252525 | 1       | Juan Perez  | 20          | fiet         | ELECTRONICA
+    grafica3['optionsTipo'] = (<div class="col-12 col-md-6 col-lg-4">)
+    grafica3['depenArray'] = (
+        C_costo | Numeros | Departamento    | Facultad
+        001     |   89    |  Departamento 1 | Facultad 1
+        002     |   159   |  Departamento 2 | Facultad 2   .......
     */
-    //console.table(array1)
+    //console.table(grafica3)
     //obtener dependencias y llenar el select id="tiposDepenOptions"
-    document.getElementById('tiposDepenOptions').innerHTML = array1.dependencias;
+    document.getElementById('tiposDepenOptions').innerHTML = grafica3.optionsTipo;
 
-    //obtener funcArray y llenar el chart
-    const funcArray = array1.funcArray; //console.table(funcArray)
-    const funcValues = funcArray.map(func => func.Numeros)
-    const funcLabels = funcArray.map(func => func.Nombre)
-    //console.log(funcLabels)
-    //console.log(funcValues)
-
-    //if array1.funcArray.length > 0 then create the label 
-    var depen = '';
-    if (array1.funcArray.length > 0) {	
-        depen = funcArray[0].Departamento + ' - ' + funcArray[0].Facultad
-    }else{
-        depen = 'No hay datos';
-    }
+    //obtener depenArray y llenar el chart
+    const depenArray = grafica3.depenArray; //console.table(depenArray)
+    const depenValues = depenArray.map(depen => depen.Numeros)
+    const depenLabels = depenArray.map(depen => depen.Facultad)
+    //console.log(depenLabels)
+    //console.log(depenValues)
 
     const data = {
-        labels: funcLabels,
+        labels: depenLabels,
         datasets: [{
-            data: funcValues,
-            label: depen,
+            data: depenValues,
             borderColor: getDataColors(),
             backgroundColor: getDataColors(70),
         }]
@@ -175,7 +170,7 @@ const renderFuncChart = array1 => {
     const options = {
         plugins: {
             legend: {
-                display: true,
+                display: false,
             },
             datalabels: {
                 display: false,
@@ -185,14 +180,14 @@ const renderFuncChart = array1 => {
         responsive: true,
     }
 
-    new Chart('funcChart', {
+    new Chart('dependenciasChart', {
         type: 'bar',
         data,
         options
     })
 }
 
-const renderCostoChart = array => {
+const renderCostoChart = grafica4 => {
     /* ESTRUCTURA DE LOS DATOS:
         Mes	      Costo	
         1         36330410.05859375
@@ -200,9 +195,9 @@ const renderCostoChart = array => {
     */
 
         //lenar slider de la grafica de costo
-    document.getElementById('costoChartOptions').innerHTML = array.optionsCosto;
+    document.getElementById('costoChartOptions').innerHTML = grafica4.optionsCosto;
 
-    const array1 = array.costoArray;
+    const array1 = grafica4.costoArray;
     const costoLabels = array1.map(valor => valor.Mes) //['1', '2', '3', '4', '5', '6', '7', '8', '9']
         var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
         //cambiar numeros de los meses por los nombres usando el arreglo meses

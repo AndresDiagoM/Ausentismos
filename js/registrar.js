@@ -64,7 +64,7 @@ $(function()
         //get_funcionario();
     });
 
-    //add event to calculate the time of ausentismo when input tiempo is changed and unidad dias is selected. Calculate the tiempo in days with the dates
+    //Evento para verificar fechas y tiempo
     $(document).on('change', '#tiempo', function() 
     {
         let tiempo = document.getElementById("tiempo").value;
@@ -81,10 +81,10 @@ $(function()
             let diffTime = Math.abs(date2 - date1);
             let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))+1; 
 
-            //if tiempo is different to diffDays, then change the tiempo
-            if(tiempo != diffDays){
+            //si el tiempo es mayor al rango de fechas entonces mostrar alerta
+            if(tiempo > diffDays){
                 document.getElementById("tiempo").value = diffDays;
-                show_alert('error', 'El tiempo de las fechas no es igual al tiempo digitado!');
+                show_alert('error', 'El tiempo de las fechas es MAYOR al tiempo digitado!');
             }
         }
     });

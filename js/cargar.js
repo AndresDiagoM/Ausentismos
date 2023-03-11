@@ -22,12 +22,12 @@ $(document).ready(function(){
     //alert("Hola");
     //$("#formulario").submit(function(e){
     $("form[name=formulario]").submit(function(e){
-        e.preventDefault();
+        e.preventDefault(); //para que el formulario no se envie
 
-        //get the file from the form
+        //obtener el archivo cargado en el formulario
         var file = $("#excelFile")[0].files[0];
 
-        //send the file to the server with ajax 
+        //enviar el archivo al servidor con una peticion ajax
         var formData = new FormData();
         formData.append("excelFile", file);
 
@@ -38,10 +38,10 @@ $(document).ready(function(){
             data: formData,
             contentType: false,
             processData: false,
-            success: function(response){
+            success: function(response){ //si la peticion es exitosa, se ejecuta esta funcion
                 //alert(response);
 
-                //convert the response from json to an object
+                //convertir el objeto de respuesta a un objeto JSON
                 var obj = JSON.parse(response);
                 //console.log(obj);
                 //console.log(obj.alert);

@@ -8,9 +8,11 @@
 
         require("../conexion.php");
 
+        //Obtener la lista de ausentismos
         session_start();
         $sqli = $_SESSION['ausen_list'];
 
+        //Obtener el nombre del administrador
         $nombre_admin   = $_SESSION['NOM_USUARIO'];
         $id_admin       = $_SESSION['ID_USUARIO'];
         $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
@@ -49,11 +51,16 @@
         $hojaActiva->getColumnDimension('L')->setWidth(25);
         $hojaActiva->setCellValue('M1', 'Entidad');
         $hojaActiva->getColumnDimension('M')->setWidth(25);
+        $hojaActiva->setCellValue('N1', 'Facultad');
+        $hojaActiva->getColumnDimension('N')->setWidth(35);
+        $hojaActiva->setCellValue('O1', 'Creado_en');
+        $hojaActiva->getColumnDimension('O')->setWidth(35);
 
 
-
+        //TRAER DATOS DE LAS CONSULTAS SQL:
         $ausentismos = $conectar->query($sqli);
-        //TRAER INFORMACIÓN DE LAS CONSULTAS SQL:
+        
+        //Añadir informacion al archivo EXCEL, DATOS:
         $fila = 2; //empezar en fila 2. La fila 1 es cabecera
         while ($ausentismo = $ausentismos->fetch_assoc()) {
                 $hojaActiva->setCellValue('A' . $fila, $ausentismo['Cedula_F']);
@@ -81,6 +88,8 @@
                 $hojaActiva->setCellValue('K' . $fila, $ausentismo['Codigo']);
                 $hojaActiva->setCellValue('L' . $fila, $ausentismo['Diagnostico']);
                 $hojaActiva->setCellValue('M' . $fila, $ausentismo['Entidad']);
+                $hojaActiva->setCellValue('N' . $fila, $ausentismo['Facultad']);
+                $hojaActiva->setCellValue('O' . $fila, $ausentismo['Creado_en']);
 
                 $fila++;
         }

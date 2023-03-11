@@ -68,7 +68,15 @@
                         //$salario = $row['Salario'];
                     }
 
-                } elseif ($field_name == "Tipo_Ausentismo") {
+                }  elseif($field_name == "Observacion"){
+
+                    //Sanitizar el campo, eliminar caracteres especiales
+                    $value = filter_var($value, FILTER_SANITIZE_STRING);
+
+                    //Guardar el campo en mayusculas 
+                    $query_values['Observacion'][0] = strtoupper($value);
+
+                }  elseif ($field_name == "Tipo_Ausentismo") {
 
                     if($value==""){
                         //echo "<script> alert('Debe seleccionar el tipo de ausentismo'); location.href = '../pages/facultad_agregar.php';  </script>";          
@@ -78,11 +86,18 @@
 
                 }  elseif ($field_name == "Tiempo"){ //pasar tiempo a numero int
 
-                    $tiempo = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+                    //si se recibe un numero con coma, se cambia por punto
+                    $value = str_replace(",", ".", $value);
 
-                    //si el tiempo es mayor a 24 horas no se puede registrar
+                    //$tiempo = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+                    $tiempo = floatval($value);
+
+                    //modificar query_values
+                    $query_values['Tiempo'][0] = $tiempo;
+
+                    //si el tiempo es mayor a 8 horas no se puede registrar
                     if($tiempo>8){
-                        //echo "<script> alert('El tiempo no puede ser mayor a 24 horas'); location.href = '../pages/facultad_agregar.php';  </script>";          
+                        //echo "<script> alert('El tiempo no puede ser mayor a 8 horas'); location.href = '../pages/facultad_agregar.php';  </script>";          
                         echo json_encode("error3"); exit;
                     }
                     
@@ -102,33 +117,23 @@
     $costo = ($salario/30)/24 * $tiempo;
 
     //================================================================================================
-    //=========  comprobar que el tiempo de las fechas sea igual a la variable $tiempo
+    //=========  comprobar que las fechas sean del mismo dia  =========================================
     //================================================================================================
     $fecha_inicio = $query_values['Fecha_Inicio'][0];
     $fecha_fin = $query_values['Fecha_Fin'][0];     
     $fecha1 = new DateTime($fecha_inicio);
     $fecha2 = new DateTime($fecha_fin);
-    if($query_values['Unidad'][0]=="dias"){
-        $dias = $fecha1->diff($fecha2);
-        $dias = $dias->days + 1; //sumar el dia de inicio
+    
+    //calcular la diferencia entre las fechas
+    $dias = $fecha1->diff($fecha2);
+    $dias = $dias->days + 1; //sumar el dia de inicio
+
+    if($dias != 1){
+        //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
         //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
-        if($dias != $tiempo){
-            //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
-            //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
-            //echo "<script> alert('El tiempo de las fechas no es igual al tiempo de la ausencia'); location.href = '../pages/facultad_agregar.php';  </script>";          
-            echo json_encode("error4"); exit;
-            exit; 
-        }
-    }else{
-        $dias = $fecha1->diff($fecha2);
-        $dias = $dias->days + 1; //sumar el dia de inicio
-        if($dias != 1){
-            //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
-            //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
-            //echo "<script> alert('Las horas deben estar en el mismo día'); location.href = '../pages/facultad_agregar.php';  </script>";          
-            echo json_encode("error5"); exit;
-            exit; 
-        }
+        //echo "<script> alert('Las horas deben estar en el mismo día'); location.href = '../pages/facultad_agregar.php';  </script>";          
+        echo json_encode("error5"); exit;
+        exit; 
     }
 
     //================================================================================================

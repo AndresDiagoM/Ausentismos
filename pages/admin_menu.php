@@ -115,7 +115,7 @@
                             </div>
 
                             <div class="card-body">
-                                <canvas id="funcChart"  height="440"></canvas>
+                                <canvas id="dependenciasChart"  height="440"></canvas>
                             </div>
 
                         </div>

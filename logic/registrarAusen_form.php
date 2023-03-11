@@ -42,6 +42,9 @@
 
                 } elseif($field_name == "Observacion"){
 
+                    //Sanitizar el campo, eliminar caracteres especiales
+                    $value = filter_var($value, FILTER_SANITIZE_STRING);
+
                     //Guardar el campo en mayusculas 
                     $query_values['Observacion'][0] = strtoupper($value);
 
@@ -88,17 +91,26 @@
 
 
     //================================================================================================
-    //=========  comprobar que el tiempo de las fechas sea igual a la variable $tiempo
+    //=========  comprobar que el tiempo de las fechas sea igual o menor a la variable $tiempo
     //================================================================================================
     $fecha_inicio = $query_values['Fecha_Inicio'][0];
     $fecha_fin = $query_values['Fecha_Fin'][0];     
     $fecha1 = new DateTime($fecha_inicio);
     $fecha2 = new DateTime($fecha_fin);
+
+    //calcular los dias entre las fechas
+    $dias = $fecha1->diff($fecha2);
+    $dias = $dias->days + 1; //sumar el dia de inicio
+
+    //si fecha2 es menor a fecha1, devolver error
+    if($fecha2 < $fecha1){
+        echo json_encode("errorTiempo");       
+        exit; 
+    }
+
     if($query_values['Unidad'][0]=="dias"){
-        $dias = $fecha1->diff($fecha2);
-        $dias = $dias->days + 1; //sumar el dia de inicio
         //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
-        if($dias != $tiempo){
+        if($tiempo > $dias || $tiempo==0){
             //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
             //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;
             //echo "<script> alert('El tiempo de las fechas no es igual al tiempo de la ausencia'); location.href = '../pages/admin_agregar.php';  </script>";   
@@ -106,8 +118,6 @@
             exit; 
         }
     }else{
-        $dias = $fecha1->diff($fecha2);
-        $dias = $dias->days + 1; //sumar el dia de inicio
         if($dias != 1){
             //echo 'NO IGUALES: dias:'.$dias.' tiempo:'.$tiempo.'<br>';
             //echo 'Fecha Inicio: '.$fecha1->format("d-m-Y") .'<br>'.'Fecha Fin: '.$fecha2->format("d-m-Y").'<br>'.'DIAS: '.$dias.'<br>'; exit;

@@ -17,11 +17,12 @@
     if(isset($_FILES['excelFile']['name'])){ //comprobar si se ha cargado el archivo excel desde el formulario de la página admin_cargar.php
         //echo $_FILES['excelFile']['name'];
 
-        $excelFile=(isset($_FILES['excelFile']['name']))?$_FILES['excelFile']['name']:"";
+        $excelFile=(isset($_FILES['excelFile']['name']))?$_FILES['excelFile']['name']:""; //si se cargó el archivo excel, se guarda el nombre del archivo
 
         $fecha = new DateTime();
         $nombreArchivo = ($excelFile!="")?$fecha->format("d-m-Y")."_".$_FILES["excelFile"]["name"]:"excel.xlsx"; //añadir fecha y hora al nombre del excel
 
+        //guardar archivo temporalmente
         $tmpFile=$_FILES["excelFile"]["tmp_name"];
 
         //echo $nombreArchivo;
@@ -34,20 +35,8 @@
             //echo "<script>//alert('El archivo no es un archivo de Excel');window.location= '../pages/admin_cargar.php?ALERT=errorExcel';</script>";
             echo json_encode("error1");
             exit;
-        }/*else{
-            $destino = "../excel/".$nombreArchivo;
-            if(move_uploaded_file($tmpFile,$destino)){
-                //echo "Archivo Cargado";
-                //show alert that the file was uploaded
-                //echo "<script>alert('Archivo Cargado');</script>";
-            }else{
-                echo "<script>alert('Error al Cargar el Archivo');
-                            window.location.href='../pages/admin_cargar.php';
-                    </script>";
-                //header("Location: ../pages/admin_cargar.php");
-                exit;
-            }
-        }*/
+        }
+
     }elseif(isset($_POST['aceptar'])){
         
         insertarDatos($conectar);
@@ -62,8 +51,8 @@
         //exit;
     }
 
-    //cargar archivo de la carpeta excel
-    $documento = IOFactory::load($tmpFile); //'../excel/'.$nombreArchivo
+    //cargar archivo temporal excel
+    $documento = IOFactory::load($tmpFile); 
     $totalHojas = $documento->getSheetCount();
     
     $hojaActual = $documento->getSheet(0); //cambiar 0 por $indiceHoja

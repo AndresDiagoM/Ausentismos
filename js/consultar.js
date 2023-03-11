@@ -129,6 +129,24 @@ $(function()
         }
     });
 
+    //OBSERVACION
+    $(document).on('keyup', '#observacion', function() 
+    {
+        var valor = $(this).val();
+
+        if(valor != "" && isNaN(valor) ){
+            //add to the th class list the atribute table-warning to change the color of the th
+            document.getElementById("th_observacion").classList.add("table-warning");
+            get_ausentismos();
+        }else{
+            get_ausentismos();
+
+            //remove the atribute table-warning to change the color of the th
+            document.getElementById("th_observacion").classList.remove("table-warning");
+        }
+        //get_ausentismos();
+    });
+
     //se necesita hacer algo cuando se utilice los checkboxes de TIPO AUSENTISMOS
     $(".tipo_ausen").on("click", function ()  //la funcion onClick de JQUERY, todos los checkbox inputs en el HTML tienen la clase "form-check-input"
     {

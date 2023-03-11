@@ -103,7 +103,18 @@
                     </li>
                 </ul>
             </th>
-            <th scope="col" id="th_observar" class="">OBSERVACIÓN</th>
+            <th scope="col" id="th_observacion" class="">
+                    <ul class="navbar-nav ml-auto">                    
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            OBSERVACIÓN
+                            </a>
+                            <div class="dropdown-menu">
+                                <input type="text" class="form-input" id="observacion" name="Observacion[]" size="20" placeholder="Ingrese la observación">
+                            </div>
+                        </li>
+                    </ul>
+            </th>
             <th scope="col" id="th_costo" class="">COSTO</th>
             <th scope="col" id="th_usuario" class="">USUARIO</th>
             <th scope="col" id="th_tipo" class="">

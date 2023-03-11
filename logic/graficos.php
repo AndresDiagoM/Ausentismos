@@ -75,7 +75,7 @@
         $mesSQL=$grafica1['monthsArray'][0]['Mes'];
 
         $grafica2 = getDatosGrafico2($conectar, $mesSQL, $Year);
-        $grafica3 = getDatosGrafico3($conectar, $mesSQL, $Year);
+        $grafica3 = getDatosGrafico3($conectar, '%', $Year);
         $grafica4 = getDatosGrafico4($conectar, $Year, '%');
         echo json_encode(array(
             'estadisticas' => $estadisticas, 
@@ -123,25 +123,29 @@
         //echo $sqli; exit;
         //$sqli = "SELECT Tipo_Ausentismo, COUNT(*) FROM ausentismos GROUP BY Tipo_Ausentismo ORDER BY COUNT(*) DESC;";
         $result = $conectar->query($sqli);
-            $suma = 0;
-            $data = array();
-            while($row = mysqli_fetch_array($result)){
-                $suma = $suma + $row['numeros'];
-                $data[] = $row;
-            }
-            $div ="";
-            foreach($data as $row){
-                $div .= "
-                        <div class='col-lg-2 col-md-4 d-flex stat my-2'>
-                            <div class='mx-auto'>
-                                <!-- para centrar el texto junto con d-flex-->";
-                $div .= "       <h6 class='text-muted'>" .$row['TipoAusentismo']. "</h6>";
-                $div .= "       <h3 class='font-wight-bold'>".  $row['numeros'] ."</h3>";
-                $div .= "       <h6 class='text-success'><i class='icon ion-md-arrow-dropup-circle'></i>".  round(($row['numeros']/$suma)*100, 2) ."%</h6>";
-                $div .= "
-                            </div>
-                        </div>";
-            }
+
+        //Pasar los datos de la consulta a un arreglo
+        $suma = 0;
+        $data = array();
+        while($row = mysqli_fetch_array($result)){
+            $suma = $suma + $row['numeros']; //Para mostrar el porcentaje de cada tipo de ausentismo
+            $data[] = $row;
+        }
+
+        //Generar el componente HTML para cada tipo de ausentismo
+        $div ="";
+        foreach($data as $row){
+            $div .= "
+                    <div class='col-lg-2 col-md-4 d-flex stat my-2'>
+                        <div class='mx-auto'>
+                            <!-- para centrar el texto junto con d-flex-->";
+            $div .= "       <h6 class='text-muted'>" .$row['TipoAusentismo']. "</h6>";
+            $div .= "       <h3 class='font-wight-bold'>".  $row['numeros'] ."</h3>";
+            $div .= "       <h6 class='text-success'><i class='icon ion-md-arrow-dropup-circle'></i>".  round(($row['numeros']/$suma)*100, 2) ."%</h6>";
+            $div .= "
+                        </div>
+                    </div>";
+        }
         //echo $div;
         //print_r($datos);
         //echo $datos[0]['numeros']; exit;
@@ -252,17 +256,23 @@
     }
 
     // =======================   GRAFICO 3   =======================
-    // 3.GRAFICO 3 : Obtener ausentismos de los funcionarios para una dependencia, para el año actual
-    function getDatosGrafico3($conectar, $dependencia, $todayYear){
-        $consultaSQL = "SELECT Cedula, COUNT(*) as Numeros, Nombre, Dependencia, Departamento, Facultad
-                    FROM ausentismos 
-                    INNER JOIN funcionarios ON ausentismos.Cedula_F = funcionarios.Cedula
-                    INNER JOIN dependencias ON funcionarios.Dependencia = dependencias.ID
-                    WHERE funcionarios.Dependencia = $dependencia AND YEAR(Fecha_Inicio) = $todayYear
-                    GROUP BY Cedula
-                    ORDER BY numeros DESC;"; //YEAR(CURDATE())
+    // 3.GRAFICO 3 : Obtener ausentismos de las dependencias para el año actual
+    function getDatosGrafico3($conectar, $tipoAusen, $todayYear){
+        //EJECUTAR LA CONSULTA EN LA BASE DE DATOS, contar numero de ausentismos por dependencia
+        $consultaSQL = "SELECT LEFT(d.C_costo, 3) AS C_costo, COUNT(*) AS Numeros, Departamento, Facultad
+                    FROM ausentismos a
+                    JOIN funcionarios f ON a.Cedula_F = f.Cedula
+                    JOIN dependencias d ON f.dependencia = d.ID
+                    WHERE YEAR(Fecha_Inicio) = $todayYear AND Tipo_Ausentismo LIKE '%".$tipoAusen."%'
+                    GROUP BY LEFT(d.C_costo, 3);"; //YEAR(CURDATE())
+        
         //echo $consultaSQL; exit;
         $resultadoSQL = $conectar->query($consultaSQL);  //print_r($resultadoSQL);
+
+        //RESULTADO:
+        // C_costo | Numeros | Departamento    | Facultad
+        //  001    |   89    |  Departamento 1 | Facultad 1
+        //  002    |   159   |  Departamento 2 | Facultad 2   .......
         
         //PASAR LOS DATOS DE LA CONSULTA SQL A UN ARREGLO PARA ENVIAR POR JSON,
         $datos4 = array();
@@ -272,17 +282,19 @@
         //print_r($datos4); exit;
         //echo $datos[0]['numeros']; exit;
 
-        //CONSULTA PARA LLENAR EL SLIDE CON LAS DEPENDENCIAS DEL GRAFICO 3
-        $sql = "SELECT * FROM dependencias ORDER BY Departamento";
-        $result = $conectar->query($sql);
-        $dependencias = "<option class='small'  value='%'> SELECCIONE </option>";
-        foreach ($result as $row) {
-            //mostrar option con departemnto
-            //$dependencias .= "<option class='small' value='".$row['ID']."'>  ".$row['Departamento']." </option>";
-            $dependencias .= "<option value='".$row['ID']."'>  ".$row['Departamento']." - ".$row['Facultad']." </option>";
+        //CONSULTA PARA LLENAR EL SLIDE CON LOS TIPOS DE AUSENTISMO DEL GRAFICO 3
+        $sqli3 = "SELECT DISTINCT Tipo_Ausentismo, TipoAusentismo FROM ausentismos 
+                    INNER JOIN tipoausentismo ON ausentismos.Tipo_Ausentismo = tipoausentismo.ID
+                    WHERE YEAR(Fecha_Inicio) = $todayYear AND Tipo_Ausentismo=tipoausentismo.ID
+                    ORDER BY Tipo_Ausentismo ASC;";
+        $numeros3 = $conectar->query($sqli3);  //print_r($numeros2);
+        $optionsTipo = "<option value='%'> TODOS </option>";   //para id="tiposMonthsOptions"
+        while ($numero3 = $numeros3->fetch_assoc()) {
+            //echo "['".$numero['Tipo_Ausentismo']."',".$numero['COUNT(*)']."],";
+            $optionsTipo .= "<option value='".$numero3['Tipo_Ausentismo']."'>  ".$numero3['TipoAusentismo']." </option>"; 
         }
 
-        return (array("funcArray"=>$datos4, "dependencias"=>$dependencias));
+        return (array("depenArray"=>$datos4, "optionsTipo"=>$optionsTipo));
     }
 
     // =======================   GRAFICO 4   =======================

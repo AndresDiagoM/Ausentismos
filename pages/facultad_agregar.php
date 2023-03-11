@@ -98,19 +98,19 @@
 
                 <!-- INPUT FECHA INICIO -->
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="fecha_inicio"  name="Fecha_Inicio[]"  value="" min="2018-01-01"> <!-- //value="2019-07-22" -->
+                    <input type="date" class="form-control" id="fecha_inicio"  name="Fecha_Inicio[]"  value="" min="2018-01-01" required> <!-- //value="2019-07-22" -->
                     <label class="col-form-label" for="Fecha_Inicio[]"> FECHA DE INICIO </label>
                 </div>
 
                 <!-- INPUT FECHA FIN -->
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01" > <!-- //value="2019-07-22" -->
+                    <input type="date" class="form-control" id="fecha_fin"  name="Fecha_Fin[]"  value="" min="2018-01-01" required> <!-- //value="2019-07-22" -->
                     <label class="col-form-label" for="Fecha_Fin[]"> FECHA FIN </label>
                 </div>
 
                 <!-- INPUT DE TIEMPO -->
                 <div class="form-floating mb-3">
-                    <input type="number" name="Tiempo[]" class="form-control" id="tiempo" placeholder="Tiempo del ausentimso" min="1" max="8" required>
+                    <input type="number" name="Tiempo[]" class="form-control" id="tiempo" pattern="^[0-9,.]{1,370}$" placeholder="Tiempo del ausentimso" min="1" max="8" required>
                     <label class="col-form-label" for="Tiempo[]"> TIEMPO </label>
                 </div>
 
@@ -126,7 +126,7 @@
 
                 <!-- INPUT DE LA OBSERVACIÓN -->
                 <div class="form-floating mb-3">
-                    <input type="text" name="Observacion[]" class="form-control" id="observacion" placeholder="Observaciones" required>
+                    <input type="text" name="Observacion[]" class="form-control" id="observacion" pattern="[a-zA-Z0-9\s]+" placeholder="Observaciones" required>
                     <label class="col-form-label" for="Observacion[]"> OBSERVACIÓN </label>
                 </div>
             
