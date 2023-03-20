@@ -1,4 +1,7 @@
-// When the user type the cedula, the ajax request is sent to the server. Fill the inputs with the response
+/** BUSCAR USUARIO POR CEDULA 
+ * Funcion que se ejecuta cuando el usuario escribe en el input de cedula
+ * @param {string} cedula
+ */
 $("#cedula").keyup(function(){
     //alert("Hola");
     var cedula = $(this).val();
@@ -7,7 +10,7 @@ $("#cedula").keyup(function(){
     $.ajax({
         type: "POST",
         url: "../logic/admin_create_userLogic.php",
-        data: {cedula:cedula},
+        data: {BuscarCedula:cedula},
         success: function (response) {
             //console.log(response);
             var datos = JSON.parse(response);
@@ -41,13 +44,14 @@ $("#cedula").keyup(function(){
                 $("#nombre").prop("disabled", false);
                 //$("#dependencia").prop("disabled", false);
             }
-
         }
     });
 
 });
 
-//enviar datos del formulario por ajax a ../logic/admin_create_userLogic.php, cuando se envie el formulario
+/**
+ * Funcion que se ejecuta cuando se envia el formulario
+ */
 $(document).ready(function(){
     $("form[name=formulario]").submit(function(e){
         e.preventDefault();
@@ -88,8 +92,10 @@ $(document).ready(function(){
 
                 }else if(response == "error5"){
                     show_alert('error', 'Registro incorrecto');
+
                 }else if(response == "error6"){
                     show_alert('error', 'El ID no se encuentra registrado en la tabla funcionarios');
+                
                 }else{
                     show_alert('error', 'Error en registro de usuario');
                 }
@@ -97,9 +103,4 @@ $(document).ready(function(){
             }
         });
     });
-});
-
-//evitar que el usuario abra el inspeccionar elemento
-document.addEventListener('contextmenu', function(e) {
-    //e.preventDefault();
 });

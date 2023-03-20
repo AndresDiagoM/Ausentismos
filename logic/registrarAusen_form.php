@@ -159,6 +159,21 @@
     }
 
     // ===========================================
+    //              COMPROBAR QUE NO EXISTA UN REGISTRO DUPLICADO
+    // ===========================================
+    $sql = "SELECT * FROM ausentismos WHERE Cedula_F='".$query_values['Cedula_F'][0]."' AND Fecha_Inicio='".$query_values['Fecha_Inicio'][0]."' AND Fecha_Fin='".$query_values['Fecha_Fin'][0]."' AND Tiempo='".$query_values['Tiempo'][0]."' AND Unidad='".$query_values['Unidad'][0]."' AND Tipo_Ausentismo='".$query_values['Tipo_Ausentismo'][0]."' ";
+    $resultado = $conectar->query($sql);  //print_r($sql); exit;
+
+    //si el resultado es mayor a 0, es porque ya existe un registro con los mismos datos
+    if(mysqli_num_rows($resultado)>0){
+        //echo "<script> alert('El registro ya existe'); location.href = '../pages/admin_agregar.php';  </script>";
+        echo json_encode("error8"); 
+        exit; 
+    }
+
+
+
+    // ===========================================
     //              REGISTRO MySQL
     // ===========================================
 

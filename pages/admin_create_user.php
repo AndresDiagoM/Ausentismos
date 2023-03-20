@@ -16,8 +16,8 @@ include "../template/cabecera.php";
 
                     <!-- INPUT DEL NUMERO DE IDENTIFICACION -->
                     <div class="form-floating mb-3">
-                        <input type="text" name="numero_id" id="cedula" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 a 15 dígitos." required>
-                        <label class="col-form-label" for="numero_id"> Número de identificación </label>
+                        <input type="text" name="cedula" id="cedula" class="form-control" placeholder="Número de identificación" pattern="[0-9]{5,15}" title="La identifiación solo debe contener carácteres numéricos. Entre 5 a 15 dígitos." required>
+                        <label class="col-form-label" for="cedula"> Número de identificación </label>
                     </div>
 
                     <!-- INPUT DE NOMBRES DE USUARIO -->
@@ -34,6 +34,18 @@ include "../template/cabecera.php";
                         <label class="col-form-label" for="correo"> Correo </label>
                     </div>
 
+                    <!-- SELECT DEL TIPO DE USUARIO -->
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="tipo_us" id="tipo_us">
+                            <option value="">Seleccione</option>
+                            <option value="CONSULTA">CONSULTA</option>
+                            <option value="ADMIN">ADMINISTRADOR</option>
+                            <option value="FACULTAD">FACULTAD</option>
+                        </select>
+                        <label class="col-form-label" for="tipo_us"> Tipo de usuario</label>
+                    </div>
+
+                    
                     <!-- INPUT DE LA DEPENDENCIA -->
                     <div class="form-floating mb-3">
                         <select class="form-select" name="dependencia" id="dependencia">
@@ -55,16 +67,6 @@ include "../template/cabecera.php";
                         <label class="col-form-label" for="dependencia"> Dependencia a consultar </label>
                     </div>
 
-                    <!-- SELECT DEL TIPO DE USUARIO -->
-                    <div class="form-floating mb-3">
-                        <select class="form-select" name="tipo_us" id="tipo_us">
-                            <option value="">Seleccione</option>
-                            <option value="CONSULTA">CONSULTA</option>
-                            <option value="ADMIN">ADMINISTRADOR</option>
-                            <option value="FACULTAD">FACULTAD</option>
-                        </select>
-                        <label class="col-form-label" for="tipo_us"> Tipo de usuario</label>
-                    </div>
                     
                     <!-- INPUT DEL LOGIN -->
                     <div class="form-floating mb-3">
@@ -144,6 +146,24 @@ include "../template/cabecera.php";
             //return false;
         }
     }
+
+    // EVENTO DESPLIEGUE LISTA DE DEPENDENCIAS ....
+    $("#dependencia").hide();
+    document.querySelector('#tipo_us').onchange = e => {
+        
+        const {
+            value: number,
+            text: label
+        } = e.target.selectedOptions[0]
+        //console.log(number, label)
+
+        if (number =='ADMIN' || number =='CONSULTA'){
+            $("#dependencia").hide();
+        }
+        else{
+            $("#dependencia").show();
+        }
+    }    
 
 </script>
 

@@ -9,8 +9,8 @@
     //====================================================================
     //=====================  BUSCAR CEDULA  ==============================
     //if $_POST have cedula, then consult the database for the funcionario
-    if(isset($_POST['cedula'])){
-        $cedula = $_POST['cedula'];
+    if(isset($_POST['BuscarCedula'])){
+        $cedula = $_POST['BuscarCedula'];
         $consulta = "SELECT * FROM funcionarios WHERE Cedula='$cedula'";
         $resultado = $conectar->query($consulta);
         if(mysqli_num_rows($resultado)>0){
@@ -39,31 +39,31 @@
     //convert all values to uppercase
     $query_values = array_map('strtoupper', $query_values);
 
-    //if there´s not a fiel named nombre in the array, then asign the value of nombreB
+    //Si el usuario existe en la tabla de funcionarios, asignar el nombre y correo
     if(!isset($query_values['nombre'])){
         $query_values['nombre'] = $query_values['nombreB'];
-    }
-    //if there´s not a fiel named correo in the array, then asign the value of correoB
+    }    
     if(!isset($query_values['correo'])){
         $query_values['correo'] = $query_values['correoB'];
     }
-    $nombre_usuario     =   $query_values['nombre'];
-    $numero_id          =       $query_values['numero_id'];
-    $correo       =     $query_values['correo'];
-    $dependencia          =     $query_values['dependencia'];
-    $tipo_us       =    $query_values['tipo_us'];
-    $login          =       $query_values['login'];
-    $pasw           =       $query_values['pasw'];
 
-    //ENCRIPTAR CONTRASEÑA CON MD5
-    $pasw = md5($pasw);
+    //Guardar valores del formulario en variables
+    $nombre_usuario  =   $query_values['nombre'];
+    $numero_id       =   $query_values['cedula'];
+    $correo        =     $query_values['correo'];
+    $dependencia   =     $query_values['dependencia'];
+    $tipo_us       =     $query_values['tipo_us'];
+    $login         =     $query_values['login'];
+    $pasw          =     $query_values['pasw'];
 
-    //print_r($query_values); exit;
-
+    // Verificacion de campos vacios
     if($numero_id==''){
-        //header('Location: ../pages/admin_create_user.php');
         echo json_encode("error1");
-    }
+    } else if($dependencia==''){
+        //SI EL USUARIO A REGISTRAR ES UN ADMIN/COMSULTA, SE ASIGNA LA DEPENDENCIA 13
+        $dependencia = '13';
+        //echo $dependencia; exit();
+    } 
 
     // Verificacion de ID NO repetido
     $consulta_id = "SELECT * FROM usuarios WHERE Cedula_U='$numero_id'";
@@ -73,6 +73,10 @@
         echo json_encode("error2");
         exit();
     }
+
+    //ENCRIPTAR CONTRASEÑA CON MD5
+    $pasw = md5($pasw);
+    //print_r($query_values); exit;
 
     //verificar que ese id exista en la tabla funcionarios
     /*$consulta_id = "SELECT * FROM funcionarios WHERE Cedula='$numero_id'";
@@ -98,8 +102,6 @@
     $consulta_login = "SELECT * FROM usuarios WHERE Login='$login'";
     $verificar_login = $conectar->query($consulta_login);
     if(mysqli_num_rows($verificar_login)>0){
-
-        //echo "<script>alert('Registro Incorrecto. El login ya se encuentra registrado');location.href = '../pages/admin_create_user.php';</script>";
         echo json_encode("error4");
         // Cierre de conexion
         exit();
@@ -109,23 +111,24 @@
     // ===========================================
     //              REGISTRO EXITOSO
     // ===========================================
-
-    $registrar = "INSERT INTO usuarios (Cedula_U, Nombre_U, Correo, Dependencia, TipoUsuario, Login, Contrasena, Estado) 
-                        VALUES ('$numero_id','$nombre_usuario', '$correo', '$dependencia', '$tipo_us', '$login', '$pasw', 'ACTIVO')";
-    //echo $registrar; exit;
-    $prueba = $conectar->query($registrar);
-    if($prueba){
-        //echo "<script> alert('Registro existoso');location.href = '../pages/admin_create_user.php';</script>";
-        echo json_encode("success");
+    try {
+        $registrar = "INSERT INTO usuarios (Cedula_U, Nombre_U, Correo, Dependencia, TipoUsuario, Login, Contrasena, Estado) 
+                            VALUES ('$numero_id','$nombre_usuario', '$correo', '$dependencia', '$tipo_us', '$login', '$pasw', 'ACTIVO')";
+        $prueba = $conectar->query($registrar);
+        
+        if($prueba){
+            //echo "<script> alert('Registro existoso');location.href = '../pages/admin_create_user.php';</script>";
+            echo json_encode("success");
+            exit();
+        } else{
+            //echo "<script> alert('Registro incorrecto');location.href = '../pages/admin_create_user.php';</script>";
+            echo json_encode("error5");
+            exit();
+        }
+    } catch (mysqli_sql_exception $e) {
+        $error_message = $e->getMessage();
+        // handle the error, such as displaying an error message to the user
+        echo json_encode("error".$error_message);
         exit();
     }
-    else{
-        //echo "<script> alert('Registro incorrecto');location.href = '../pages/admin_create_user.php';</script>";
-        echo json_encode("error5");
-        exit();
-    }
-    echo json_encode("success"); 
-    // Cierre de conexion
-    //mysqli_close($conectar);
-    exit();
 ?>

@@ -251,6 +251,9 @@ $(document).ready(function(){
                 }else if(obj=="error7"){
                     show_alert('error', 'Error al registrar incapacidad.');
 
+                }else if(obj=="error8"){
+                    show_alert('error', 'El registro ya existe.');
+
                 }else{
                     show_alert('error', 'Error al registrar ausentismo.');
                 }
