@@ -3,7 +3,7 @@
     include "../logic/validate_sessionLogic.php";
 
     //Si el usuario ya inicio sesion, no permitir que vuelva a iniciar sesion
-    if($autentication == 'CONSULTA' || $autentication == 'ADMIN'){
+    if($autentication == 'CONSULTA' || $autentication == 'ADMIN' || $autentication=='ROOT'){
         //LLEVAR AL USUARIO A LA PÁGINA DE INICIO admin_menu.php
         header("Location: ./admin_menu.php");
     } else if( $autentication == 'FACULTAD'){

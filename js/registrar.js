@@ -98,14 +98,6 @@ $(function()
         //console.log(number, label)
 
         if(number==1){
-            //console.log("IFFF")
-            //let form = $("#form_register"); 
-            //form.serialize()
-            //console.log(form)
-            //CreateFormInput("Codigo[]", "codigo","Escriba el código", "CODIGO");
-            //CreateFormInput("Diagnostico[]", "diagnostico","Escriba el diagnóstico", "DIAGNOSTICO");
-            //CreateFormInput("Entidad[]", "entidad","Escriba la entidad", "ENTIDAD");
-
             $("#incapacidadINPUTS").show();
         }else{
             $("#incapacidadINPUTS").hide();

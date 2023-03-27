@@ -1,6 +1,10 @@
 <?php
+/**
+ * Gestion de Usuarios
+ * Archivo para hacer la busqueda de los usuarios y mostrarlos en la tabla de la interfaz
+ * en admin_edition_client.php
+ */
     include "../conexion.php";
-    //$mysqli = new mysqli("localhost", "root", "","db_biodigester");
     $mysqli=$conectar;
 
     session_start();
@@ -8,7 +12,8 @@
     $autentication  = $_SESSION['TIPO_USUARIO'];
     $tipo_cliente   = $_SESSION['TIPO_USUARIO'];
 
-    if (strtoupper($autentication) == 'ADMIN' || strtoupper($autentication) == 'CONSULTA' ){
+    //Verificar que la consulta la realice un usuario con permisos
+    if (strtoupper($autentication) == 'ADMIN' || strtoupper($autentication) == 'CONSULTA' || strtoupper($autentication) == 'ROOT' ){
         $bandera = true;
     }
     else{
@@ -16,20 +21,20 @@
     }
 
 
-    $salida     = "";
+    // Sentencia para hacer la búsqueda de usuarios
     $query      = "SELECT * FROM usuarios 
                     INNER JOIN dependencias ON usuarios.Dependencia=dependencias.ID
                     ORDER BY Cedula_U";
-    //$query      = "SELECT * FROM usuarios EXCEPT SELECT * FROM usuarios  WHERE TipoUsuario = '%' ORDER BY Cedula_U";
 
+    // Si se ha enviado el formulario de búsqueda de cédula
     if (isset($_POST['consulta'])){
-
-        $q      = $mysqli->real_escape_string($_POST['consulta']);
+        $buscarCedula = $mysqli->real_escape_string($_POST['consulta']);
         $query  =  "SELECT * FROM usuarios 
                     INNER JOIN dependencias ON usuarios.Dependencia=dependencias.ID
-                    WHERE Cedula_U LIKE '%".$q."%' ORDER BY ID ";
+                    WHERE Cedula_U LIKE '%".$buscarCedula."%' ORDER BY ID ";
     }
     $resultado = $mysqli->query($query);
+    $salida     = "";  
     if($resultado->num_rows > 0){
 
             $salida.="<table class='table table-striped table-bordered table-hover table-condensed'>

@@ -88,6 +88,7 @@ include "../template/cabecera.php";
 
                     <div class="container">
                         <button type="submit" class="btn btn-success">REGISTRAR</button>
+                        <!-- Se llama al evento de enviar en registrarUser.js -->
                     </div>
 
                 </form>

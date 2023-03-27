@@ -139,7 +139,7 @@
                     <div class='col-lg-2 col-md-4 d-flex stat my-2'>
                         <div class='mx-auto'>
                             <!-- para centrar el texto junto con d-flex-->";
-            $div .= "       <h6 class='text-muted'>" .$row['TipoAusentismo']. "</h6>";
+            $div .= "       <span class='text-muted' style='font-size: 15px;'>" .$row['TipoAusentismo']. "</span>";
             $div .= "       <h3 class='font-wight-bold'>".  $row['numeros'] ."</h3>";
             $div .= "       <h6 class='text-success'><i class='icon ion-md-arrow-dropup-circle'></i>".  round(($row['numeros']/$suma)*100, 2) ."%</h6>";
             $div .= "
@@ -159,10 +159,10 @@
         }
         foreach($data as $row){
             $div .= "
-                    <div class='col-lg-1 col-md-4 d-flex stat my-2'>
+                    <div class='col-lg-2 col-md-4 d-flex stat my-2'>
                         <div class='mx-auto'>
                             <!-- para centrar el texto junto con d-flex-->";
-            $div .= "       <h6 class='text-muted'>". $row['Genero'] ."</h6>";
+            $div .= "       <span class='text-muted' style='font-size: 15px;'>". $row['Genero'] ."</span>";
             $div .= "       <h3 class='font-wight-bold'>".  $row['numeros'] ."</h3>";
             $div .= "       <h6 class='text-success'><i class='icon ion-md-arrow-dropup-circle'></i>".  round(($row['numeros']/$suma)*100, 2) ."%</h6>";
             $div .= "

@@ -102,7 +102,7 @@
     $dias = $fecha1->diff($fecha2);
     $dias = $dias->days + 1; //sumar el dia de inicio
 
-    //si fecha2 es menor a fecha1, devolver error
+    //si fecha2 (fechaFin) es menor a fecha1, devolver error
     if($fecha2 < $fecha1){
         echo json_encode("errorTiempo");       
         exit; 

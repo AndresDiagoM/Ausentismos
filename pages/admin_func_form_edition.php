@@ -144,7 +144,6 @@
             var datos = $(this).serialize();
             //console.log(datos);
 
-
             $.ajax({
                 type: "POST",
                 url: "../logic/form_func_editLogic.php",

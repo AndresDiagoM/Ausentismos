@@ -3,7 +3,7 @@ include "../logic/admin_securityLogic.php"; // Verifica que el usuario sea admin
 include "../template/cabecera.php";
 
 //si el tipo de usuario no es ADMIN, se redirecciona a la página de menu
-if($_SESSION['TIPO_USUARIO'] != 'ADMIN'){
+if($_SESSION['TIPO_USUARIO'] != 'ADMIN' && $_SESSION['TIPO_USUARIO'] != 'ROOT' ){
     echo "<script> location.href = '../pages/admin_menu.php';  </script>";
 }
 ?>

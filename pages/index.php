@@ -4,7 +4,7 @@
     
     $autentication = $_SESSION['TIPO_USUARIO'];
 
-    if ($autentication == 'CONSULTA' || $autentication == 'ADMIN'){
+    if ($autentication == 'CONSULTA' || $autentication == 'ADMIN' || $autentication=='ROOT'){
         echo    "<script>
                     location.href='../pages/admin_menu.php';
                 </script>";

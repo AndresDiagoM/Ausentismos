@@ -63,7 +63,6 @@ function busqueda(consulta, param){
     })
     .fail(function(){
         console.log("Fail");
-
     })
 
 }

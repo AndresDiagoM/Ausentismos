@@ -1,4 +1,9 @@
 <?php
+/**
+ * Gestion de Funcionarios
+ * Archivo para hacer la busqueda de los funcionarios y mostrarlos en la tabla de la interfaz con paginación
+ * en admin_edit_func.php
+ */
     include "../conexion.php";
 
     session_start();
@@ -6,14 +11,15 @@
     $autentication  = $_SESSION['TIPO_USUARIO'];
     $tipo_cliente   = $_SESSION['TIPO_USUARIO'];
 
-    if (strtoupper($autentication) == 'ADMIN' || strtoupper($autentication) == 'CONSULTA' ){
+    //Verificar que la consulta la realice un usuario con permisos
+    if (strtoupper($autentication) == 'ADMIN' || strtoupper($autentication) == 'CONSULTA' || strtoupper($autentication) == 'ROOT' ){
         $bandera = true;
     }
     else{
         header('Location: ../pages/inicio_sesion.php?message=3');
     }
 
-
+    // Recibir los datos de la peticion AJAX 
     $query_values = $_POST;
     $extra_query = " WHERE 1 "; //"WHERE Cancelled = 0";
     $pag=1;

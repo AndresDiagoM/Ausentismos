@@ -5,7 +5,7 @@
     $query_values = $_POST;
     //print_r($query_values); exit;
 
-    $numero_id = $_GET['ID']; //obtener el numero de ID del ausentismo
+    $numero_id = $_POST['ID']; //obtener el numero de ID del ausentismo
     //print_r($numero_id); exit;
     //verify anti sql injection 
     $numero_id =  $conectar->real_escape_string($numero_id);
@@ -27,15 +27,13 @@
     // verificar que ningun campo de $query_values esté vacio
     foreach($query_values as $key => $value){
         if(empty($value)){
-            echo "<script>alert('Complete todos los campos.'); location.href = '../pages/admin_edit_ausen.php?ID=$numero_id'; </script>"; exit;
+            echo json_encode("error1"); exit;
         }
     }
 
     // verificar que el campo de fecha de inicio no sea mayor a la fecha de fin
     if($query_values['fechaI_ausen_edt'] > $query_values['fechaF_ausen_edt'] ){
-        echo "<script>alert('La fecha de inicio no puede ser mayor a la fecha de fin.'); 
-                location.href = '../pages/admin_edit_ausen.php?ID=$numero_id'; 
-            </script>"; 
+        echo json_encode("error2");
         exit;
     }
     // verificar que el campo de tiempo sea igual a la diferencia de fechas
@@ -45,24 +43,18 @@
         $dias = $fecha1->diff($fecha2);
         $dias = $dias->days + 1;
         if($query_values['tiempo_ausen_edt'] != $dias){
-            echo "<script>alert('El tiempo no coincide con la diferencia de fechas.'); 
-                    location.href = '../pages/admin_edit_ausen.php?ID=$numero_id'; 
-                </script>"; 
+            echo json_encode("error3");
             exit;
         }
     }elseif($query_values['unidad_ausen_edt']=='horas'){
         //comprobar que las fechas sean iguales, si no entonces redirigir a la pagina de edicion
         if($query_values['fechaI_ausen_edt'] != $query_values['fechaF_ausen_edt']){
-            echo "<script>alert('Las fechas de inicio y fin deben ser iguales para calcular el tiempo en horas.'); 
-                    location.href = '../pages/admin_edit_ausen.php?ID=$numero_id'; 
-                </script>"; 
+            echo json_encode("error4");
             exit;
         }
         //comprobar que el tipo sea un ausentismos de PERMISO POR HORAS
         if($query_values['tipo_ausen_edt'] != 5){
-            echo "<script>alert('El tipo de ausentismo debe ser PERMISO POR HORAS para calcular el tiempo en horas.'); 
-                    location.href = '../pages/admin_edit_ausen.php?ID=$numero_id'; 
-                </script>"; 
+            echo json_encode("error5");
             exit;
         }
     }
@@ -136,9 +128,7 @@
             $consulta = "SELECT * FROM codigos WHERE Codigo = '$codigo_edt'";
             $sqli1          = $conectar->query($consulta);
             if($sqli1->num_rows == 0){
-                echo "<script>alert('El codigo ingresado $codigo_edt no existe en la base de datos.'); 
-                        location.href = '../pages/admin_edit_ausen.php?ID=$numero_id'; 
-                    </script>"; 
+                echo json_encode("error6");
                 exit;
             }
 
@@ -161,9 +151,6 @@
         }
     }
 
-    echo "<script>
-        alert('Datos Actualizados Correctamente');
-        location.href='../pages/admin_consultar.php';
-    </script>"
+    echo json_encode("success"); exit();
 
 ?>

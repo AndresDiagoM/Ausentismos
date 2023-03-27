@@ -26,9 +26,6 @@
         }
         $mostrar = $data[0];
         //print_r($mostrar);
-
-
-
         
     }else{
         die("<script>location.href='admin_edition_client.php';</script>");
@@ -132,6 +129,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-success">Modificar</button> 
+                <!-- Se llamam al evento de enviar formulario declarado en script  -->
             </form>
 
         </div>
@@ -149,9 +147,6 @@
     <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
     <script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
 
-    <!-- APP JS CONTIENE  FUNCIONES PARA LOS GRÁFICOS 
-    <script src="../js/app1.js"></script> -->
-
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
 
@@ -159,7 +154,7 @@
     <script src="../js/sweet_alert.js"></script>
 
 <script>
-    //enviar formulario por ajax a '../logic/form_editLogic.php', cuando se presiona el boton Modificar
+    //Evento de enviar formulario por ajax a '../logic/form_editLogic.php', cuando se presiona el boton Modificar
     $(document).ready(function(){       //../logic/form_editLogic.php?ID=<php echo $Id_editar 
         $('#form_edit').submit(function(e){
             e.preventDefault();
@@ -206,10 +201,6 @@
 
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
-
-    document.addEventListener('contextmenu', function(e) {
-        //e.preventDefault();
-    });
 
 </script> 
 

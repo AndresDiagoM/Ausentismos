@@ -78,6 +78,7 @@ include "../template/cabecera.php";
 
                     <div class="container">
                         <button type="submit" class="btn btn-success">REGISTRAR</button>
+                        <!-- Se llama al evento de registrar en registrarFunc.js -->
                     </div>
 
                 </form>
@@ -96,8 +97,6 @@ include "../template/cabecera.php";
     <!-- <script src="../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
     <script src="../assets/bootstrap-5.2.2-dist/js/popper.min.js"></script>
 
-    <!-- APP JS CONTIENE  FUNCIONES PARA LOS GRÁFICOS 
-    <script src="../js/app1.js"></script> -->
     <!-- INSTALACION DE JQUERY -->
     <script src="../js/jquery.min.js"></script> 
     <!-- INSTALACION DE SWEETALERT2 -->

@@ -40,7 +40,7 @@ $tipo_usuario   = $_SESSION['TIPO_USUARIO'];
         </div>
 
         <div class="menu">
-            <?php if($tipo_usuario == 'ADMIN'){ ?>
+            <?php if($tipo_usuario == 'ADMIN' || $tipo_usuario == 'ROOT'){ ?>
                 <ul>
                     <li class="list" id="admin_menu">
                         <a href="../pages/admin_menu.php" class="p-2 text-light d-block text-decoration-none">

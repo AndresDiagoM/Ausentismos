@@ -29,22 +29,17 @@ include "../template/cabecera.php";
 
         <!-- Contenedor de la tabla de funcionarios -->
         <div class="container py-4" style="overflow-x: auto; overflow-y: auto; height:65vh; font-size:14px" id="datos">
-
+            <!-- Se inserta los datos encontrados desde search_func_edit.js -->
         </div>
 
-        <!-- Contener de paginador y boton de reporte -->
+        <!-- Contener de paginador -->
         <div class="container offset-md-0 col-md-7">
             <section>
                 <!-- Contenedor de los botones del paginador de las consultas -->
                 <div class="offset-md-8 col-md-6 text-center py-1">
                     <ul class="pagination pagination-lg pager" id="myPager">
-
+                        <!-- Se inserta los botones del paginador desde search_func_edit.js -->
                     </ul>
-                    <!-- <ul class="pagination pg-dark justify-content-center pb-5 pt-5 mb-0" style="float: none;" id="myPager">
-                            <li class="page-item">
-
-                            </li>
-                    </ul> -->
                 </div>
             </section>
 

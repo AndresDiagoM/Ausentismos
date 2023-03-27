@@ -30,17 +30,14 @@
         $allowed =  array('xls','xlsx','XLSX','XLS');
         $ext = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
         if(!in_array($ext,$allowed) ) {
-            //echo 'error';
-            //show alert that the file is not an excel file
-            //echo "<script>//alert('El archivo no es un archivo de Excel');window.location= '../pages/admin_cargar.php?ALERT=errorExcel';</script>";
+            //Error: El archivo no es un archivo de Excel
             echo json_encode("error1");
             exit;
         }
 
-    }elseif(isset($_POST['aceptar'])){
+    }elseif(isset($_POST['aceptar'])){ //Cuando se da click en el boton de aceptar en la página admin_cargar.php
         
-        insertarDatos($conectar);
-        //echo "<script> window.location.href='./admin_cargar.php'; </script>";
+        insertarDatos($conectar); //función para insertar los datos en la base de datos
         exit;
 
     }else{

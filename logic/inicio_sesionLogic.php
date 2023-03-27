@@ -69,7 +69,7 @@
 
 
             // VALIDACION SI EL USUARIO ES ADMINISTRADOR
-            if(strtoupper($tipo_usuario) == 'ADMIN'){
+            if(strtoupper($tipo_usuario) == 'ADMIN' || strtoupper($tipo_usuario) == 'ROOT'){
                 header('Location: ../pages/admin_menu.php');
             }
             // VALIDACION SI EL USUARIO ES CONSULTA

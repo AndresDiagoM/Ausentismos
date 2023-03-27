@@ -288,7 +288,7 @@ function get_ausentismos(pagina)
                 
                 //SI EL TIPO DE USUARIO (data.tipo_user) ES IGUAL A "ADMIN", SE AÑADE EL EVENTO A LAS FILAS DE LA TABLA
                 //console.log(data.tipo_usuario);
-                if(data.tipo_usuario == "ADMIN"){
+                if(data.tipo_usuario == "ADMIN" || data.tipo_usuario == "ROOT"){
                     //evento click para cada fila de la tabla
                     $('.fila_tabla').click(function(){
                         //console.log(e);

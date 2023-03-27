@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row" id="estadisticas">
+                        <div class="row justify-content-center text-center" id="estadisticas">
                         
                         </div>
                         

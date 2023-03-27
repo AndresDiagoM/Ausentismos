@@ -112,7 +112,7 @@
 
                 <!-- INPUT DE LA OBSERVACIÓN -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="Observacion[]" class="form-control" id="observacion" pattern="[a-zA-Z0-9\s]+" max="60" placeholder="Observaciones" required>
+                    <input type="text" name="Observacion[]" class="form-control" id="observacion" pattern="[a-zA-Z0-9.\s]+" max="60" placeholder="Observaciones" required>
                     <label class="col-form-label" for="Observacion[]"> OBSERVACIÓN </label>
                 </div>
             

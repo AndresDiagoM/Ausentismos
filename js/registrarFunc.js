@@ -1,4 +1,6 @@
-// When the user type the cedula, the ajax request is sent to the server. Fill the inputs with the response
+/**
+ * Cuando el usuario utiliza el cuadro de busqueda por cedula, se realiza una busqueda por ajax
+ */
 $("#cedula").keyup(function(){
     //alert("Hola");
     var cedula = $(this).val();
@@ -31,8 +33,9 @@ $("#cedula").keyup(function(){
 
 });
 
-//1. when the document is ready, the function is executed
-//2. when the form is submitted, the function is executed   
+/**
+ * Cuando el usuario da click en el boton de registrar funcionario, se realiza una petición por ajax
+ */ 
 $(document).ready(function(){
     //alert("Hola");
     //$("#formulario").submit(function(e){
@@ -108,9 +111,4 @@ $(document).ready(function(){
             }
         });
     });
-});
-
-//evitar que el usuario abra el inspeccionar elemento
-document.addEventListener('contextmenu', function(e) {
-    //e.preventDefault();
 });
