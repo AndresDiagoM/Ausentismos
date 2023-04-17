@@ -16,11 +16,12 @@
     $tmpFile = '';
     if(isset($_FILES['excelFile']['name'])){ //comprobar si se ha cargado el archivo excel desde el formulario de la página admin_cargar.php
         //echo $_FILES['excelFile']['name'];
+        //si se cargó el archivo excel, se guarda el nombre del archivo y el archivo temporalmente
+        $excelFile=(isset($_FILES['excelFile']['name']))?$_FILES['excelFile']['name']:""; 
 
-        $excelFile=(isset($_FILES['excelFile']['name']))?$_FILES['excelFile']['name']:""; //si se cargó el archivo excel, se guarda el nombre del archivo
-
+        //añadir fecha y hora al nombre del excel
         $fecha = new DateTime();
-        $nombreArchivo = ($excelFile!="")?$fecha->format("d-m-Y")."_".$_FILES["excelFile"]["name"]:"excel.xlsx"; //añadir fecha y hora al nombre del excel
+        $nombreArchivo = ($excelFile!="")?$fecha->format("d-m-Y")."_".$_FILES["excelFile"]["name"]:"excel.xlsx"; 
 
         //guardar archivo temporalmente
         $tmpFile=$_FILES["excelFile"]["tmp_name"];
@@ -41,11 +42,9 @@
         exit;
 
     }else{
-        //echo "No se ha cargado el archivo";
-        //show alert that the file was not uploaded
-        //echo "<script>alert('No se ha cargado el archivo');</script>";
+        //No se ha cargado el archivo excel
         echo json_encode("error");
-        //exit;
+        exit;
     }
 
     //cargar archivo temporal excel
@@ -68,15 +67,17 @@
 
     //Leer los encabezados de la hoja de excel
     if(!isset($sheetData[0])){
+        //Error: El archivo no tiene encabezados
         echo json_encode("error2");
         exit;
     }
 
+    //Verificar encabezados: CEDULA, NOMBRE, GENERO, NOMBRE_DEL_CARGO, C_COSTO, DEPARTAMENTO, FACULTAD, salario y estado, eps, arp
     $headers = $sheetData[0];   
-    //Si no tiene los encabeczados de CODIGO, CEDULA, NOMBRE, GENERO, NOMBRE_DEL_CARGO, C_COSTO, DEPARTAMENTO, FACULTAD, salario y estado, entonces es error
-    $requiredHeaders = array("CEDULA", "NOMBRE", "EMAIL", "GENERO", "NOMBRE_DEL_CARGO", "C_COSTO", "DEPARTAMENTO", "FACULTAD", "SALARIO", "ESTADO");
+    $requiredHeaders = array("CEDULA", "NOMBRE", "EMAIL", "GENERO", "NOMBRE_DEL_CARGO", "C_COSTO", "DEPARTAMENTO", "FACULTAD", "SALARIO", "ESTADO", "EPS", "ARP");
     $missingHeaders = array_diff($requiredHeaders, $headers);
     if (!empty($missingHeaders)) {
+        //Error: El archivo no tiene los encabezados requeridos
         echo json_encode("error2");
         exit;
     }
@@ -84,7 +85,7 @@
     //print_r($headers); exit;
     //print_r($sheetData);exit;
 
-    //for each array in $sheetData, change the keys for the values in $headers
+    //orgaizar los datos en un array con los encabezados como KEYS y los datos como VALUES
     $data = array();
     foreach ($sheetData as $t) {
         // process element here;
@@ -118,18 +119,10 @@
     //==========================================================================
     //=================== COMPROBAR QUE LOS DATOS SEAN CONSISTENTES ============
     function validateField($fieldValue) {
-        return !preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $fieldValue);
+        return !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬]/', $fieldValue);
     }
     foreach($data as $key => $value){
         //echo $value['CEDULA']."<br>";
-        //echo $value['NOMBRE']."<br>";
-        //echo $value['GENERO']."<br>";
-        //echo $value['NOMBRE_DEL_CARGO']."<br>";
-        //echo $value['C_COSTO']."<br>";
-        //echo $value['DEPARTAMENTO']."<br>";
-        //echo $value['FACULTAD']."<br>";
-        //echo $value['SALARIO']."<br>";
-        //echo $value['ESTADO']."<br>";
         $data[$key]['DEPENDENCIA'] = "N/A";
         $data[$key]['ERROR'] = "";
 
@@ -184,7 +177,7 @@
         }
 
         //comprobar que el campo estado sea ACTIVO o INACTIVO
-        if($value['ESTADO']!="ACTIVO" && $value['ESTADO']!="INACTIVO" || !validateField($value['ESTADO'])){
+        if($value['ESTADO']!="ACTIVO" && $value['ESTADO']!="INACTIVO" && $value['ESTADO']!="VACACIONES" || !validateField($value['ESTADO'])){
             //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
             if(empty($data[$key]['ERROR'])){
                 $data[$key]['ERROR'] = "Estado"; // Estado ACTIVO o INACTIVO
@@ -204,12 +197,36 @@
         }
 
         //si el correo no tiene "@" o no tiene "." entonces ERROR es "Correo con formato incorrecto"
-        if(!strpos($value['EMAIL'], "@") || !strpos($value['EMAIL'], ".") || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $value['EMAIL'])){
+        if(!strpos($value['EMAIL'], "@") || !strpos($value['EMAIL'], ".") || preg_match('/[\'^£$%&*()}{#~?><>,|=+¬]/', $value['EMAIL'])){
             //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if($value['EMAIL'] == "" || empty($value['EMAIL'])) {
+                $value['EMAIL'] = "N/A";
+                continue;
+            }
             if(empty($data[$key]['ERROR'])){
                 $data[$key]['ERROR'] = "Correo"; // Correo con formato incorrecto
             }else{
                 $data[$key]['ERROR'] .= ",Correo";
+            }
+        }
+
+        //Comprobar que la eps y arp sea string y sin caracteres especiales
+        if(!validateField($value['EPS']) || !is_string($value['EPS'])){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "EPS"; 
+            }else{
+                $data[$key]['ERROR'] .= ",EPS";
+            }
+        }
+
+        //Comprobar que la arp sea string y sin caracteres especiales, y que no este vacio
+        if(!validateField($value['ARP']) || !is_string($value['ARP']) || empty($value['ARP']) || $value['ARP']==""){
+            //comprobar si el campo Error ya tiene un error, si ya tienen entonces agregar otro y separarlo con comas
+            if(empty($data[$key]['ERROR'])){
+                $data[$key]['ERROR'] = "ARP"; 
+            }else{
+                $data[$key]['ERROR'] .= ",ARP";
             }
         }
 
@@ -230,7 +247,7 @@
         $sql = "SELECT * FROM dependencias WHERE C_costo = '".$value['C_COSTO']."'";
         $result = $conectar->query($sql);
 
-        //if the query returns a row, then add the id to the array
+        //Si se encuentra el c_costo en la base de datos, se agrega el id
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
             $data[$key]['DEPENDENCIA'] = $row['ID'];
@@ -248,8 +265,9 @@
 
     //===============================================================================
     //insertar todos los datos del array $data en la base de datos, en la tabla func_auxiliar
+
     foreach($data as $key => $value){
-        //consultar si el funcionario ya existe en la base de datos, si existe, no insertar
+        //consultar si el funcionario ya está en la tabla, si existe, no insertar
         $sql = "SELECT * FROM func_auxiliar WHERE Cedula = '".$value['CEDULA']."'";
         $result = $conectar->query($sql);
         //numero de filas que devuelve la consulta
@@ -257,13 +275,11 @@
         if($numRows>0){
             continue;
         }else{
-            $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado, Error) 
-            VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['EMAIL']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['ERROR']."')";
+            $sql1 = "INSERT INTO func_auxiliar (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado, EPS, ARP, Error) 
+            VALUES ('".$value['CEDULA']."', '".$value['NOMBRE']."', '".$value['NOMBRE_DEL_CARGO']."', '".$value['EMAIL']."', '".$value['DEPENDENCIA']."', '".$value['GENERO']."', '".$value['SALARIO']."', '".$value['ESTADO']."', '".$value['EPS']."' , '".$value['ARP']."' , '".$value['ERROR']."')";
             $result = $conectar->query($sql1);
             //echo $sql1."<br>";
-            //IF RESULT IS TRUE, THEN INSERT WAS SUCCESSFUL
-            //convert Object of class mysqli_result into string
-            //$result = json_encode($result);
+            
             //echo $result."<br>";
             if($result){
                 //echo json_encode("error2");
@@ -273,7 +289,7 @@
         }
     }
 
-    //json encode the array $data and return it to the ajax call, with the success message
+    //Envuar mensaje de exito al cargar datos
     $json = array();
     $json['alert'] = "success_aux";
     //$json['table'] = $tablaAux;
@@ -281,8 +297,6 @@
     echo json_encode($json);
     exit;
 
-
-    //$tabla_auxiliar= array_merge($data,$funcionariosNoInsertados);
 
 
     //==========================================================================
@@ -323,10 +337,16 @@
                     $result = $conectar->query($sql1);
                 }
 
+                //Actulizar los datos de un funcionario de eps y arp
+                if($value['EPS']!=$result['EPS'] || $value['ARP']!=$result['ARP']){
+                    $sql1 = "UPDATE funcionarios SET EPS = '".$value['EPS']."', ARP = '".$value['ARP']."' WHERE Cedula = '".$value['Cedula']."'";
+                    $result = $conectar->query($sql1);
+                }
+
             }else{ //si el funcionario no existe en la base de datos, insertar NUEVO funcionario
-                $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado) 
-                    VALUES ('".$value['Cedula']."', '".$value['Nombre']."', '".$value['Cargo']."', '".$value['Correo']."', '".$value['Dependencia']."', '".$value['Genero']."', '".$value['Salario']."', 'ACTIVO')";
-                $result = $conectar->query($sql1);
+                $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado, EPS, ARP) 
+                    VALUES ('".$value['Cedula']."', '".$value['Nombre']."', '".$value['Cargo']."', '".$value['Correo']."', '".$value['Dependencia']."', '".$value['Genero']."', '".$value['Salario']."', 'ACTIVO', '".$value['EPS']."' , '".$value['ARP']."')";
+               $result = $conectar->query($sql1);
                 //echo $sql1."<br>";
             }
         }

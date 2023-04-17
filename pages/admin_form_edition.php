@@ -61,8 +61,8 @@
 
                 <!-- INPUT DEL Correo -->
                 <div class="form-floating mb-2">
-                <input type="email" name="Correo" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" value="<?php echo $mostrar['Correo'];?>" placeholder="Digite su correo"  required>
-                    <label class="col-form-label" for="Correo"> Correo </label>
+                <input type="email" name="Correo_U" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" value="<?php echo $mostrar['Correo_U'];?>" placeholder="Digite su correo"  required>
+                    <label class="col-form-label" for="Correo_U"> Correo </label>
                 </div>
 
                 <!-- INPUT DE LA DEPENDENCIA -->

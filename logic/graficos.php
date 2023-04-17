@@ -300,12 +300,18 @@
     // =======================   GRAFICO 4   =======================
     // 4.GRAFICO 4 : Obtener costo de ausentismo de los funcionarios en cada mes del año actual, el costo con 2 decimales
     function getDatosGrafico4($conectar, $todayYear, $tipo){
-        $consultaSQL = "SELECT MONTH(Fecha_Inicio) AS Mes, SUM(ausentismos.Seguridad_Trabajo) AS Costo FROM ausentismos 
-                WHERE YEAR(Fecha_Inicio) = $todayYear AND ausentismos.Tipo_Ausentismo LIKE '%".$tipo."%'
+        $consultaSQL = "SELECT MONTH(Fecha_Inicio) AS Mes, SUM(ausentismos.Seguridad_Trabajo) AS Costo 
+                FROM ausentismos 
+                WHERE YEAR(Fecha_Inicio) = $todayYear AND Tipo_Ausentismo <> 2 AND ausentismos.Tipo_Ausentismo LIKE '%".$tipo."%'
                 GROUP BY MONTH(Fecha_Inicio) 
                 ORDER BY MONTH(Fecha_Inicio) ASC;";
         //echo $consultaSQL; exit;
         $resultadoSQL = $conectar->query($consultaSQL);  //print_r($resultadoSQL);
+        /* ESTRUCTURA DE LOS DATOS:
+            Mes	     Costo	
+            1        36330410.1     
+            2        83219591.3     
+        */
 
         //PASAR LOS DATOS DE LA CONSULTA SQL A UN ARREGLO PARA ENVIAR POR JSON,
         $datos5 = array();
@@ -319,22 +325,17 @@
             return $item;
         }, $datos5);
         //print_r($datos5); exit;
-        /* ESTRUCTURA DE LOS DATOS:
-            Mes	     Costo	
-            1        36330410.1     
-            2        83219591.3     
-        */
 
         //consulta para llenar slide con los tipos de ausentismo, que estan en la tabla ausentismos para el año $todayYear
         $sqli3 = "SELECT DISTINCT Tipo_Ausentismo, TipoAusentismo FROM ausentismos 
             INNER JOIN tipoausentismo ON ausentismos.Tipo_Ausentismo = tipoausentismo.ID
-            WHERE YEAR(Fecha_Inicio) = $todayYear AND Tipo_Ausentismo=tipoausentismo.ID
+            WHERE YEAR(Fecha_Inicio) = $todayYear AND Tipo_Ausentismo <> 2 AND Tipo_Ausentismo = tipoausentismo.ID
             ORDER BY Tipo_Ausentismo ASC;";
         $numeros3 = $conectar->query($sqli3);  //print_r($numeros2);
         $optionsCosto = "<option value='%'> TODOS </option>";   //para id="tiposMonthsOptions"
         while ($numero3 = $numeros3->fetch_assoc()) {
-        //echo "['".$numero['Costo_Ausentismo']."',".$numero['COUNT(*)']."],";
-        $optionsCosto .= "<option value='".$numero3['Tipo_Ausentismo']."'>  ".$numero3['TipoAusentismo']." </option>"; 
+            //echo "['".$numero['Costo_Ausentismo']."',".$numero['COUNT(*)']."],";
+            $optionsCosto .= "<option value='".$numero3['Tipo_Ausentismo']."'>  ".$numero3['TipoAusentismo']." </option>"; 
         }
 
         return (array("costoArray"=>$datos5, "optionsCosto"=>$optionsCosto));

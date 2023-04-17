@@ -76,6 +76,18 @@ include "../template/cabecera.php";
                         <label class="col-form-label" for="salario"> Salario </label>
                     </div>
 
+                    <!-- INPUT DE EPS -->
+                    <div class="form-floating mb-3">
+                        <input type="text" name="eps_func" id="eps_func" class="form-control" pattern="[a-zA-Z0-9\s]+" placeholder="Digite la eps" required>
+                        <label class="col-form-label" for="eps_func"> EPS </label>
+                    </div>
+
+                    <!-- INPUT DE ARP -->
+                    <div class="form-floating mb-3">
+                        <input type="text" name="arp_func" id="arp_func" class="form-control" pattern="[a-zA-Z0-9\s]+" placeholder="Digite la arp" required>
+                        <label class="col-form-label" for="arp_func"> ARP </label>
+                    </div>
+
                     <div class="container">
                         <button type="submit" class="btn btn-success">REGISTRAR</button>
                         <!-- Se llama al evento de registrar en registrarFunc.js -->

@@ -25,7 +25,7 @@
 <!-- INICIO DE CONTENEDOR DE FUNCIONARIO SELECCIONADO -->
 <div class="container py-2">
 
-    <div class="card mx-auto" style="width: 30rem; overflow-y: auto; height:auto;">
+    <div class="card mx-auto" style="width: 30rem; overflow-y: scroll; height:90vh;">
         <div class="card-header">
             MODIFICACIÓN DE DATOS
         </div>
@@ -105,6 +105,18 @@
                             <option value="INACTIVO" <?php if($mostrar['Estado'] == 'INACTIVO'){echo 'selected';}?> > INACTIVO </option>
                     </select>
                     <label class="col-form-label" for="estado_func_edt"> Estado </label>
+                </div>
+
+                <!-- INPUT DE EPS -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="eps_func_edt" class="form-control" pattern="[a-zA-Z0-9\s]+" min="4" max="40" placeholder="EPS" title="Solo puede tener letras." value="<?php echo $mostrar['EPS'];?>" required>
+                    <label class="col-form-label" for="eps_func_edt"> EPS </label>
+                </div>
+
+                <!-- INPUT DE ARP -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="arp_func_edt" class="form-control" pattern="[a-zA-Z0-9\s]+" min="4" max="40" placeholder="ARP" title="Solo puede tener letras." value="<?php echo $mostrar['ARP'];?>" required>
+                    <label class="col-form-label" for="arp_func_edt"> ARP </label>
                 </div>
 
                 <!-- Boton de enviar formulario para modificar funcionario -->

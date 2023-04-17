@@ -194,7 +194,7 @@ const renderCostoChart = grafica4 => {
         2         83219591.328125
     */
 
-        //lenar slider de la grafica de costo
+    //lenar slider de la grafica de costo
     document.getElementById('costoChartOptions').innerHTML = grafica4.optionsCosto;
 
     const array1 = grafica4.costoArray;

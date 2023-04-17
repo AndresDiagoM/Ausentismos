@@ -102,7 +102,7 @@
     $dias = $fecha1->diff($fecha2);
     $dias = $dias->days + 1; //sumar el dia de inicio
 
-    //si fecha2 (fechaFin) es menor a fecha1, devolver error
+    //si fecha2 es menor a fecha1, devolver error
     if($fecha2 < $fecha1){
         echo json_encode("errorTiempo");       
         exit; 
@@ -128,12 +128,11 @@
     }
 
     //================================================================================================
-    //=========  comprobar que si se escoge Unidad:horas, el tipo sea "permiso por horas"
+    //=========  comprobar que si se escoge Unidad:horas, el tipo sea "permiso por horas" o "compensatorio"
     //================================================================================================
     $unidad = $query_values['Unidad'][0];
     $tipo = $query_values['Tipo_Ausentismo'][0];
-    if($unidad=="horas" && $tipo!=5){
-        //echo "<script> alert('Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso por horas'); location.href = '../pages/admin_agregar.php';  </script>";    
+    if($unidad=="horas" && !in_array($tipo,[5,10])){
         echo json_encode("error4");        
         exit; 
     }

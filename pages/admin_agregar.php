@@ -69,6 +69,18 @@
                     <label class="col-form-label" for="Facultad[]"> FACULTAD </label>
                 </div>
 
+                <!-- INPUT DE EPS -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="EPS[]" class="form-control" id="eps" pattern="[a-zA-Z0-9\s]+" min="4" max="45" placeholder="EPS" value="" required>
+                    <label class="col-form-label" for="EPS[]"> EPS </label>
+                </div>
+
+                <!-- INPUT DE ARP -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="ARP[]" class="form-control" id="arp" pattern="[a-zA-Z0-9\s]+" min="4" max="45" placeholder="ARP" value="" required>
+                    <label class="col-form-label" for="ARP[]"> ARP </label>
+                </div>
+
             </div> 
 
         </div> <!-- fin de la clase card-body -->
@@ -112,7 +124,7 @@
 
                 <!-- INPUT DE LA OBSERVACIÓN -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="Observacion[]" class="form-control" id="observacion" pattern="[a-zA-Z0-9.\s]+" max="60" placeholder="Observaciones" required>
+                    <input type="text" name="Observacion[]" class="form-control" id="observacion" pattern="[a-zA-ZñÑ0-9.\s]+" max="90" placeholder="Observaciones" required>
                     <label class="col-form-label" for="Observacion[]"> OBSERVACIÓN </label>
                 </div>
             
@@ -153,7 +165,7 @@
                         <select class="form-select form-select-sm" name="Diagnostico[]" id="diagnostico" >
                             <option value="">Seleccione</option>
                             <option value="Enfermedad general"> ENFERMEDAD GENERAL </option>
-                            <option value="Enfermedad laboral"> ENFERMEDAD LABORAL </option>
+                            <option value="Enfermedad laboral"> ENFERMEDAD LABORAL Y/O PROFESIONAL </option>
                             <option value="Accidente de trabajo"> ACCIDENTE DE TRABAJO </option>
                         </select>
                         <label class="col-form-label" for="Diagnostico[]"> DIAGNOSTICO </label>

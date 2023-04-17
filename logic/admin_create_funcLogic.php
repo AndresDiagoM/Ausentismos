@@ -19,7 +19,9 @@
                     'cargo' => $row['Cargo'],
                     'dependencia' => $row['Dependencia'],
                     'genero' => $row['Genero'],
-                    'salario' => $row['Salario']
+                    'salario' => $row['Salario'],
+                    'eps' => $row['EPS'],
+                    'arp' => $row['ARP'],
                 );
             }
             $jsonstring = json_encode($json[0]);
@@ -38,9 +40,11 @@
     $dependencia          =   strtoupper($_POST['dependencia']);
     $genero       =   strtoupper($_POST['genero']);
     $salario          =   strtoupper($_POST['salario']);
+    $EPS      =   strtoupper($_POST['eps_func']);
+    $ARP       =   strtoupper($_POST['arp_func']);
 
     //comprobar que ningun campo este vacio
-    if(empty($nombre_func) || empty($numero_id) || empty($cargo) || empty($correo) || empty($dependencia) || empty($genero) || empty($salario)){
+    if(empty($nombre_func) || empty($numero_id) || empty($cargo) || empty($correo) || empty($dependencia) || empty($genero) || empty($salario) || empty($EPS) || empty($ARP)){
         //echo "<script> alert('Complete todos los campos');  location.href = '../pages/admin_create_func.php'; </script>";
         echo json_encode("error1");
         exit;
@@ -54,7 +58,8 @@
     $dependencia =  $conectar->real_escape_string($dependencia);
     $genero =  $conectar->real_escape_string($genero);
     $salario =  $conectar->real_escape_string($salario);
-    
+    $EPS =  $conectar->real_escape_string($EPS);
+    $ARP =  $conectar->real_escape_string($ARP);
 
     // Verificacion de ID NO repetido
     $consulta_id = "SELECT * FROM funcionarios WHERE Cedula='$numero_id'";
@@ -72,8 +77,8 @@
     //              REGISTRO EXITOSO
     // ===========================================
 
-    $registrar = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado) 
-                        VALUES ('$numero_id', '$nombre_func', '$cargo', '$correo', '$dependencia', '$genero', '$salario', 'ACTIVO')";
+    $registrar = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado, EPS, ARP)) 
+                        VALUES ('$numero_id', '$nombre_func', '$cargo', '$correo', '$dependencia', '$genero', '$salario', 'ACTIVO', '$EPS', '$ARP')";
     $prueba = mysqli_query($conectar, $registrar);
     if($prueba){
         //echo "<script> alert('Registro existoso'); location.href = '../pages/admin_create_func.php'; </script>";

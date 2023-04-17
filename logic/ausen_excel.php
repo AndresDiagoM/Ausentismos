@@ -8,7 +8,7 @@
 
         require("../conexion.php");
 
-        //Obtener la lista de ausentismos
+        //Obtener la consulta SQL que se va a exportar 
         session_start();
         $sqli = $_SESSION['ausen_list'];
 
@@ -53,8 +53,10 @@
         $hojaActiva->getColumnDimension('M')->setWidth(25);
         $hojaActiva->setCellValue('N1', 'Facultad');
         $hojaActiva->getColumnDimension('N')->setWidth(35);
-        $hojaActiva->setCellValue('O1', 'Creado_en');
-        $hojaActiva->getColumnDimension('O')->setWidth(35);
+        $hojaActiva->setCellValue('O1', 'Correo');
+        $hojaActiva->getColumnDimension('O')->setWidth(35);        
+        $hojaActiva->setCellValue('P1', 'Creado_en');
+        $hojaActiva->getColumnDimension('P')->setWidth(35);
 
 
         //TRAER DATOS DE LAS CONSULTAS SQL:
@@ -89,7 +91,8 @@
                 $hojaActiva->setCellValue('L' . $fila, $ausentismo['Diagnostico']);
                 $hojaActiva->setCellValue('M' . $fila, $ausentismo['Entidad']);
                 $hojaActiva->setCellValue('N' . $fila, $ausentismo['Facultad']);
-                $hojaActiva->setCellValue('O' . $fila, $ausentismo['Creado_en']);
+                $hojaActiva->setCellValue('O' . $fila, $ausentismo['Correo']);
+                $hojaActiva->setCellValue('P' . $fila, $ausentismo['Creado_en']);
 
                 $fila++;
         }

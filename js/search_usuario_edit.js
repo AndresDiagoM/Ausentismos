@@ -23,21 +23,18 @@ $(function()
  * @param {*} consulta 
  */
 function busqueda(consulta){
-
     $.ajax({
         url:        '../logic/searchUsuarioLogic.php',
         type:       'POST',
         dataType:   'html',
         data:       {consulta: consulta},
-
     })
     .done(function(respuesta){
-        $("#datos").html(respuesta);
+        $("#datos").html(respuesta); //#datos es el id de la tabla donde se muestran los usuarios
     })
     .fail(function(){
         console.log("Fail");
     })
-
 }
 
 

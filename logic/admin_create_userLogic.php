@@ -88,7 +88,7 @@
     }*/
 
     // Verificacion de correo
-    $consulta_correo = "SELECT * FROM usuarios WHERE Correo='$correo'";
+    $consulta_correo = "SELECT * FROM usuarios WHERE Correo_U='$correo'";
     $verificar_correo = $conectar->query($consulta_correo);
     if(mysqli_num_rows($verificar_correo)>0){
 
@@ -112,7 +112,7 @@
     //              REGISTRO EXITOSO
     // ===========================================
     try {
-        $registrar = "INSERT INTO usuarios (Cedula_U, Nombre_U, Correo, Dependencia, TipoUsuario, Login, Contrasena, Estado) 
+        $registrar = "INSERT INTO usuarios (Cedula_U, Nombre_U, Correo_U, Dependencia, TipoUsuario, Login, Contrasena, Estado) 
                             VALUES ('$numero_id','$nombre_usuario', '$correo', '$dependencia', '$tipo_us', '$login', '$pasw', 'ACTIVO')";
         $prueba = $conectar->query($registrar);
         

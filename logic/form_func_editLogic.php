@@ -74,6 +74,18 @@
         $actualizar = "UPDATE funcionarios SET Estado = '$estado_edt' WHERE Cedula = $numero_id";
         $sqli1          = $conectar->query($actualizar);
     }
+    //actualizar eps
+    if($query_values['eps_func_edt'] != $row['EPS']){
+        $eps_edt = $query_values['eps_func_edt'];
+        $actualizar = "UPDATE funcionarios SET EPS = '$eps_edt' WHERE Cedula = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
+    }
+    //actualizar arp
+    if($query_values['arp_func_edt'] != $row['ARP']){
+        $arp_edt = $query_values['arp_func_edt'];
+        $actualizar = "UPDATE funcionarios SET ARP = '$arp_edt' WHERE Cedula = $numero_id";
+        $sqli1          = $conectar->query($actualizar);
+    }
 
     if($query_values['cedula_func_edt'] != $row['Cedula']){
         $cedula_edt = $query_values['cedula_func_edt'];

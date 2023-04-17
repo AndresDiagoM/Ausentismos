@@ -36,7 +36,9 @@
                 //Para cada campo del arreglo $mostrar se crea un label y un input
                 foreach($mostrar as $key => $value){
 
-                    if($key != 'ID' && $key != 'Error' && $key != 'Dependencia' && $key != 'Departamento' && $key != 'Facultad' && $key != 'C_costo'){
+                    //Arreglo de campos a excluir, se excluyen los campos que no se muestran en la interfaz de edicion
+                    $excludeKeys = array('ID', 'Error', 'Dependencia', 'Departamento', 'Facultad', 'C_costo');
+                    if(!in_array($key, $excludeKeys)){
 
                         //añadir color si el campo error lo indica
                         if(in_array($key, $errores)){
@@ -60,9 +62,9 @@
                         if(in_array($key, $errores)){
                             $color = 'bg-warning';
                             echo "<div class='form-floating mb-2'>
-                                            <input type='text' readonly disabled  class='form-control $color ' value='SIN DEPENDENCIA'>
-                                            <label class='col-form-label' for='$key'> $key </label>
-                                        </div>";
+                                    <input type='text' readonly disabled  class='form-control $color' value='SIN DEPENDENCIA'>
+                                    <label class='col-form-label' for='$key'> $key </label>
+                                </div>";
                         }else{
                             //Si hay dependencias se muestran en un input con el nombre de la dependencia
                             if($result->num_rows > 0){
@@ -178,6 +180,17 @@
                     <label for="Estado" class="col-form-label">Estado</label>
                 </div>
 
+                <!-- INPUT DE EPS -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="EPS" class="form-control" placeholder="EPS"  value="<?php echo $mostrar['EPS'];?>" required <?= !in_array("EPS", $errores)?"readonly disabled":"";?> >
+                    <label class="col-form-label" for="EPS"> EPS </label>
+                </div>
+
+                <!-- INPUT DE ARP -->
+                <div class="form-floating mb-2">
+                    <input type="text" name="ARP" class="form-control" placeholder="ARP"  value="<?php echo $mostrar['ARP'];?>" required <?= !in_array("ARP", $errores)?"readonly disabled":"";?> >
+                    <label class="col-form-label" for="ARP"> ARP </label>
+                </div>
 
                 <button type="submit" class="btn btn-success">Modificar</button> 
             </form>

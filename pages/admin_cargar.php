@@ -69,6 +69,12 @@ include "../template/cabecera.php";
                     if($error == "Dependencia"){
                         $erroresString .= "Dependencia inválida, ";
                     }
+                    if($error == "EPS"){
+                        $erroresString .= "EPS inválida, ";
+                    }
+                    if($error == "ARP"){
+                        $erroresString .= "ARP inválida, ";
+                    }
                 }
 
                 

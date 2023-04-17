@@ -30,6 +30,8 @@ $(function()
             document.getElementById("cargo").disabled = false;
             document.getElementById("departamento").disabled = false;
             document.getElementById("facultad").disabled = false;
+            document.getElementById("eps").disabled = false;
+            document.getElementById("arp").disabled = false;
         }
         //get_funcionario();
     });
@@ -57,6 +59,8 @@ $(function()
             document.getElementById("cargo").disabled = false;
             document.getElementById("departamento").disabled = false;
             document.getElementById("facultad").disabled = false;
+            document.getElementById("eps").disabled = false;
+            document.getElementById("arp").disabled = false;
 
             //get_funcionario();
             //$("#form_register").reset();
@@ -102,14 +106,34 @@ $(function()
         }else{
             $("#incapacidadINPUTS").hide();
         }
-
     }
+
+    //Evento para seleccionar entidad, segun el diagnostico
+    $(document).on('change', '#diagnostico', function(){
+        const entidadInput = document.getElementById("entidad");
+        let diagnostico = document.getElementById("diagnostico").value;
+
+        if(diagnostico == "Enfermedad general"){
+            entidadInput.value = document.getElementById("eps").value;
+        }else if(diagnostico == "Accidente de trabajo"){
+            entidadInput.value = document.getElementById("arp").value;
+        }else if(diagnostico == "Enfermedad laboral"){
+            entidadInput.value = document.getElementById("arp").value;
+        }
+        
+        entidadInput.validity.valid = true;
+        //console.log(entidadInput.reportValidity());
+    });
 
     // Colocar fechas de inicio y fin de ausentismo en el mismo dia
     DateNow();
 });
 
-//funcion para buscar el funcionario
+/**
+ * funcion para buscar el funcionario en la base de datos
+ * @params form: formulario HTML que contiene los inputs de busqueda (cedula, nombre)
+ * @returns 
+ */
 function get_funcionario()
 {
     let form = $("#auto_llenar");  //el id del formulario HTML es "auto-llenar"
@@ -122,16 +146,8 @@ function get_funcionario()
             success: function (data)
             {
 
-                //$("#filters-result").html(""); //limpiar la tabla que se muestra en HTML para borrar las busqeudas anteriores
-                //$(document).getElementById(".cedula").html("");
-                
-
                 $.each(JSON.parse(data), function(key,funcionario)
                 {
-                    
-                    //$("#filters-result").append(row);
-                    //$("cargo").value(funcionario.Cedula);
-                    
 
                     //if funcionario is equal to N/A, then show a button to add a new funcionario 
                     if(funcionario == "N/A"){
@@ -148,6 +164,8 @@ function get_funcionario()
                         document.getElementById("cargo").disabled = false;
                         document.getElementById("departamento").disabled = false;
                         document.getElementById("facultad").disabled = false;
+                        document.getElementById("eps").disabled = false;
+                        document.getElementById("arp").disabled = false;
 
                     }else{
                         $("#agregar_func").hide();
@@ -157,6 +175,9 @@ function get_funcionario()
                         document.getElementById("cargo").value = funcionario.Cargo; 
                         document.getElementById("departamento").value = funcionario.Departamento; 
                         document.getElementById("facultad").value = funcionario.Facultad; 
+                        document.getElementById("eps").value = funcionario.EPS;
+                        document.getElementById("arp").value = funcionario.ARP;
+
 
                         //dont let the user write in the inputs
                         document.getElementById("nombre").disabled = true ;
@@ -164,6 +185,8 @@ function get_funcionario()
                         document.getElementById("cargo").disabled = true;
                         document.getElementById("departamento").disabled = true;
                         document.getElementById("facultad").disabled = true;
+                        document.getElementById("eps").disabled = true;
+                        document.getElementById("arp").disabled = true;
                     }
                 });
 
@@ -172,7 +195,10 @@ function get_funcionario()
     )
 }
 
-//Funcion para colocar en fecha inicial, la fecha con mes actual
+/**
+ * Funcion para colocar en fecha inicial, la fecha con mes actual
+ * 
+ */
 function DateNow()
 {        
     var date = new Date();
@@ -218,6 +244,8 @@ $(document).ready(function(){
                     document.getElementById("cargo").disabled = false;
                     document.getElementById("departamento").disabled = false;
                     document.getElementById("facultad").disabled = false;
+                    document.getElementById("eps").disabled = false;
+                    document.getElementById("arp").disabled = false;
 
                 }else if(obj=="error1"){
                     show_alert_reset_form('error', 'No existe la cedula del funcionario!', "form_register");
@@ -232,7 +260,7 @@ $(document).ready(function(){
                     show_alert('error', 'Las horas deben estar en el mismo día!');
 
                 }else if(obj=="error4"){
-                    show_alert('error', 'Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso por horas.');
+                    show_alert('error', 'Si escoge Unidad: horas, el tipo de ausentismo debe ser permiso/compensatorio por horas.');
 
                 }else if(obj=="error5"){
                     show_alert('error', 'Si escoge el tipo de ausentismo: incapacidad, debe ingresar el codigo de incapacidad.');

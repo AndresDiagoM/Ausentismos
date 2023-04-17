@@ -59,7 +59,7 @@
             $salida.="<tr>
                         <td scope='row'>".$fila['Cedula_U']."      </td>
                         <td>".$fila['Nombre_U']."      </td>
-                        <td>".$fila['Correo']."      </td>
+                        <td>".$fila['Correo_U']."      </td>
                         <td>".$fila['Departamento']." - ". $fila['Facultad']  ."       </td>
                         <td>".$fila['TipoUsuario']."       </td>
                         <td>".$fila['Login']."        </td>

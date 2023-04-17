@@ -96,6 +96,8 @@
                                     <th scope='col'>GENERO  </th>
                                     <th scope='col'>SALARIO         </th>
                                     <th scope='col'>ESTADO         </th>
+                                    <th scope='col'>EPS         </th>
+                                    <th scope='col'>ARP         </th>
                                     <th scope='col'>EDITAR    </th>
                                 </tr>
                             </thead>";
@@ -111,6 +113,8 @@
                         <td>".$fila['Genero']."       </td>
                         <td>".$fila['Salario']."        </td>
                         <td>".$fila['Estado']."        </td>
+                        <td>".$fila['EPS']."        </td>
+                        <td>".$fila['ARP']."        </td>
                         <td><a href='../pages/admin_func_form_edition.php?ID=$Id_fila' class='btn-edit'><img src='../assets/images/edit2.png' class='img-edit'  style='width: 2rem;'></a></td>
                     </tr>";
         }

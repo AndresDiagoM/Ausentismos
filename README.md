@@ -1,13 +1,59 @@
-# Ausentismos
-Proyecto de gestión de ausentismos, en la División de Gestión del Talento Humano. Este se desarrolla con PHP, Javascript. Práctica de Estado Joven 2022-2.
+# SIGA (SISTEMA DE GESTION DE AUSENTISMOS)
 
-Este utiliza un entorno de desarrollo local, con XAMPP, y una base de datos en MySQL.
-Las versiones de PHP, Apache y MySQL son las siguientes:
- * PHP  8.1.6
- * MySQL  10.4.24 MariaDB
- * Apache 2.4.53
+Proyecto de gestión de ausentismos, en la División de Gestión del Talento Humano. Este se desarrolla con PHP, JavaScript. Práctica de Estado Joven 2022-2.
 
-DigitalOcean: http://137.184.203.51/
+Este proyecto proporciona una interfaz web para gestionar y visualizar datos de ausentismos en forma gráfica y tabular, con la capacidad de filtrar y descargar resultados en formato Excel. Utiliza un entorno de desarrollo local con XAMPP y una base de datos MySQL.
+
+## Características
+
+- Registro y gestión de ausentismos en un entorno web.
+- Visualización de datos en forma gráfica para un análisis intuitivo.
+- Búsqueda de registros utilizando filtros como fecha, tipo de ausentismo, y más.
+- Descarga de resultados de búsqueda en formato Excel para un procesamiento adicional.
+- Integración con PHP, JavaScript, MySQL y Apache.
+- Interfaz de usuario intuitiva y fácil de usar.
+
+<div align="center">
+  <img src="assets/dashboard.png" alt="Dashboard" width="700px" height="auto">
+</div>
+
+
+
+## Requisitos del sistema
+
+- PHP 8.1.6
+- MySQL 10.4.24 MariaDB
+- Apache 2.4.53
+- XAMPP o similar para el entorno de desarrollo local
+
+## Cómo comenzar
+
+1. Clonar este repositorio en tu entorno local.
+2. Configurar el entorno de desarrollo local con XAMPP o similar.
+3. Importar la base de datos proporcionada en MySQL.
+4. Configurar la conexión a la base de datos en el código fuente.
+5. Acceder a la interfaz web del proyecto en tu navegador.
+6. Utilizar las funcionalidades de registro, visualización y búsqueda de ausentismos.
+7. Descargar los resultados de búsqueda en formato Excel según sea necesario.
+
+<!--## Contribuciones
+
+Las contribuciones son bienvenidas! Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
+
+1. Haz un fork de este repositorio.
+2. Crea una rama con un nombre descriptivo.
+3. Realiza tus modificaciones y mejoras.
+4. Haz un pull request a la rama principal de desarrollo.
+5. Tu contribución será revisada y fusionada si es apropiada. -->
+
+## Licencia
+
+Este proyecto se encuentra bajo la Licencia [MIT](LICENSE), lo cual significa que puedes usar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar y/o vender copias del software, bajo ciertas condiciones. Consulta el archivo de licencia para más detalles.
+
+<!-- Espero que esto te ayude a mejorar tu README.md para tu proyecto SIGA. ¡Buena suerte con tu proyecto! -->
+
+
+<!-- DigitalOcean: http://137.184.203.51/  -->
 
 
 <div align="center">
