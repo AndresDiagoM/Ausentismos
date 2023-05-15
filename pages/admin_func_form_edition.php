@@ -54,6 +54,12 @@
                     <label class="col-form-label" for="cargo_func_edt"> Cargo </label>
                 </div>
 
+                <!-- INPUT DEL CORREO -->
+                <div class="form-floating mb-2">
+                <input type="email" name="correo_func_edt" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" value="<?php echo $mostrar['Correo'];?>" placeholder="Digite su correo"  required>
+                    <label class="col-form-label" for="correo_func_edt"> Correo </label>
+                </div>
+
                 <!-- INPUT DE LA DEPENDENCIA -->
                 <div class="form-floating mb-2">
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="dependencia_ausen_edt" required>
@@ -109,13 +115,13 @@
 
                 <!-- INPUT DE EPS -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="eps_func_edt" class="form-control" pattern="[a-zA-Z0-9\s]+" min="4" max="40" placeholder="EPS" title="Solo puede tener letras." value="<?php echo $mostrar['EPS'];?>" required>
+                    <input type="text" name="eps_func_edt" class="form-control" pattern="[a-zA-Z0-9\s]+" min="4" max="120" placeholder="EPS" title="Solo puede tener letras." value="<?php echo $mostrar['EPS'];?>" required>
                     <label class="col-form-label" for="eps_func_edt"> EPS </label>
                 </div>
 
                 <!-- INPUT DE ARP -->
                 <div class="form-floating mb-2">
-                    <input type="text" name="arp_func_edt" class="form-control" pattern="[a-zA-Z0-9\s]+" min="4" max="40" placeholder="ARP" title="Solo puede tener letras." value="<?php echo $mostrar['ARP'];?>" required>
+                    <input type="text" name="arp_func_edt" class="form-control" pattern="[a-zA-Z0-9\u00F1\u00D1\s]+" min="4" max="120" placeholder="ARP" title="Solo puede tener letras." value="<?php echo $mostrar['ARP'];?>" required>
                     <label class="col-form-label" for="arp_func_edt"> ARP </label>
                 </div>
 

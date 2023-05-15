@@ -133,7 +133,7 @@
                         <select class="form-select form-select-sm" required name="Tipo_Ausentismo[]" id="tipo_ausen">
                             <option value="">Seleccione</option>
                                 <?php
-                                    $sqli = "SELECT * FROM tipoausentismo";
+                                    $sqli = "SELECT * FROM tipoausentismo ORDER BY TipoAusentismo ASC";
                                     $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
                             
                                     $ausen_list = [];
@@ -143,12 +143,8 @@
                                         $ID = $tipo["ID"];
                                         $Nombre=$tipo["TipoAusentismo"];
                                         /*<?php echo "\""."type_".$ID."\""; ?> --> "type_1"  */
-                                        if($ID == 1){
-                                            echo "<option value=\"$ID\">$Nombre</option>";
-                                        }else{
-                                            echo "<option value=\"$ID\">$Nombre</option>";
-                                        }
-                                
+                                        
+                                        echo "<option value=\"$ID\">$Nombre</option>";
                                     }
                                 ?>
                         </select>

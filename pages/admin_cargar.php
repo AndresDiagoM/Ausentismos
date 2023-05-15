@@ -95,15 +95,25 @@ include "../template/cabecera.php";
                 </table>";
     }
 
-    $buttonAcept =  "<section class='py-3'>
-                    <div class='container'>
-                        <div class='col-lg-4 d-flex'>
-                            <!-- <form action='' method='POST' enctype='multipart/form-data'> -->
-                                <button type='button' name='aceptar' onclick = 'Aceptar()'  value='ACEPTAR' class='btn btn-success'>ACEPTAR CAMBIOS</button>
-                            <!-- </form> -->
+    $buttonAccept =  "<section class='py-3'>
+                        <div class='container'>
+                            <div class='col-lg-4 d-flex'>
+                                <!-- <form action='' method='POST' enctype='multipart/form-data'> -->
+                                    <button type='button' name='aceptar' onclick = 'Aceptar()'  value='ACEPTAR' class='btn btn-success'>ACEPTAR CAMBIOS</button>
+                                <!-- </form> -->
+                            </div>
                         </div>
-                    </div>
                     </section>";
+
+    $buttonCancelar = "<section class='py-3'>
+                            <div class='container'>
+                                <div class='col-lg-4 d-flex'>
+                                    <!-- <form action='' method='POST' enctype='multipart/form-data'> -->
+                                        <button type='button' name='cencelar' onclick = 'Cancelar()'  value='CENCELAR' class='btn btn-success'>CANCELAR CARGA</button>
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                        </section>";
 
     //CONSULTAR SI NO HAY FUNCIONARIOS CON ERRORES EN EL CAMPO Error es decir, Error != 'N/A'
     $query = "SELECT * FROM func_auxiliar WHERE Error != 'N/A'"; //WHERE Error != 'N/A' ORDER BY Error ASC
@@ -154,9 +164,12 @@ include "../template/cabecera.php";
                 echo "      </div>
                     </section>";
 
+                //Mostrar boton para cancelar la carga de datos
+                echo $buttonCancelar;
+                
                 //SI NO HAY ERRORES EN NINGUUN FUNCIONARIO DEL ARREGLO SE MUESTRA EL BOTON DE ACEPTAR. 
                 if($funcionariosConError == 0){
-                    echo $buttonAcept;
+                    echo $buttonAccept;
                 }
                 
             }

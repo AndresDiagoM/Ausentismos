@@ -126,7 +126,7 @@
                             </a>
                             <div class="dropdown-menu">
                                 <?php
-                                    $sqli = "SELECT * FROM tipoausentismo";
+                                    $sqli = "SELECT * FROM tipoausentismo ORDER BY TipoAusentismo ASC";
                                     $tipoAusentismos = $conectar->query($sqli);  //print_r($ausentismos);
                             
                                     $ausen_list = [];

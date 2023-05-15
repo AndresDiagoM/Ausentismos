@@ -11,7 +11,9 @@ pages/inicio.php
 #fun.xlsx
 ~$fun.xlsx
 
+#Excluir archivos de pruebas y copias de seguridad
 ausentismos_v1.sql
+siga.sql
 
 /vendor/
 

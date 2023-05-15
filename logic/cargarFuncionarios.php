@@ -41,6 +41,11 @@
         insertarDatos($conectar); //función para insertar los datos en la base de datos
         exit;
 
+    }elseif(isset($_POST['cancelar'])){ //Cuando se da click en el boton de cancelar en la página admin_cargar.php
+        
+        cancelarCarga($conectar); //función para eliminar la tabla de func_aux
+        exit;
+
     }else{
         //No se ha cargado el archivo excel
         echo json_encode("error");
@@ -346,7 +351,7 @@
             }else{ //si el funcionario no existe en la base de datos, insertar NUEVO funcionario
                 $sql1 = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado, EPS, ARP) 
                     VALUES ('".$value['Cedula']."', '".$value['Nombre']."', '".$value['Cargo']."', '".$value['Correo']."', '".$value['Dependencia']."', '".$value['Genero']."', '".$value['Salario']."', 'ACTIVO', '".$value['EPS']."' , '".$value['ARP']."')";
-               $result = $conectar->query($sql1);
+                $result = $conectar->query($sql1);
                 //echo $sql1."<br>";
             }
         }
@@ -368,6 +373,21 @@
         //echo "<script>//alert('Datos cargados correctamente'); window.location.href='../pages/admin_cargar.php?ALERT=success';</script>";
         echo json_encode("success1");
         exit;
+    }
+
+    //=========================================================================
+    //======================== VACIAR TABLA DE FUNC_AUX =======================
+    //=========================================================================
+    function cancelarCarga($conectar){
+        $sql = "TRUNCATE TABLE func_auxiliar";
+        $result = $conectar->query($sql);
+        if($result){
+            echo json_encode("success-cancelar");
+            exit;
+        }else{
+            echo json_encode("error-cancelar");
+            exit;
+        }
     }
     //eliminar el archivo de la carpeta excel
     //unlink('../excel/'.$nombreArchivo);

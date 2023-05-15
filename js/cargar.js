@@ -93,7 +93,7 @@ function Aceptar(){
 
             //convert the response from json to an object
             var obj = JSON.parse(response);
-            console.log(obj);
+            //console.log(obj);
             //console.log(obj.alert);
 
             if(obj == "success1"){
@@ -106,6 +106,39 @@ function Aceptar(){
                 //reload the page
                 //location.reload();
             
+            }
+        }
+    });
+}
+
+/**
+ * Funcion para cancelar la carga de datos, cuanod se presiona el boton "CANCELAR CARGA"
+ */
+function Cancelar(){
+    //alert("Hola");
+    $.ajax({
+        url: "../logic/cargarFuncionarios.php",
+        type: "POST",
+        data: {cancelar: "cancelar"},
+        success: function(response){
+            //alert(response);
+
+            //convert the response from json to an object
+            var obj = JSON.parse(response);
+            //console.log(obj);
+            //console.log(obj.alert);
+
+            if(obj == "success-cancelar"){
+
+                show_alert_reload('success', 'Se cancelo la carga de datos.');
+
+                //clean the form
+                $("form[name=formulario]").trigger("reset");
+
+                //reload the page
+                //location.reload();
+            }else if(obj == "error-cancelar"){
+                show_alert('error', 'Error al cancelar la carga de datos.');
             }
         }
     });

@@ -40,17 +40,18 @@
         }
     }
 
-
+    // Actualizar nombre
     if($query_values['nombre_func_edt'] != $row['Nombre']){
         $nombre_edt = $query_values['nombre_func_edt'];
         $actualizar = "UPDATE funcionarios SET Nombre = '$nombre_edt' WHERE Cedula = $numero_id";
         $sqli1          = $conectar->query($actualizar);
     }
-    /*if($query_values['cargo_func_edt'] != $row['Correo']){
-        $cargo_edt = $query_values['cargo_func_edt'];
-        $actualizar = "UPDATE funcionarios SET Cargo = '$cargo_edt' WHERE Cedula = $numero_id";
+    //actualizar correo
+    if($query_values['correo_func_edt'] != $row['Correo']){
+        $correo_edt = $query_values['correo_func_edt'];
+        $actualizar = "UPDATE funcionarios SET Correo = '$correo_edt' WHERE Cedula = $numero_id";
         $sqli1          = $conectar->query($actualizar);
-    }*/
+    }
     if($row2['ID'] != $row['Dependencia']){
         $depen_edt = $row2['ID'];
         $actualizar = "UPDATE funcionarios SET Dependencia = '$depen_edt' WHERE Cedula = $numero_id";
