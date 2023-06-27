@@ -77,7 +77,7 @@
     //              REGISTRO EXITOSO
     // ===========================================
 
-    $registrar = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado, EPS, ARP)) 
+    $registrar = "INSERT INTO funcionarios (Cedula, Nombre, Cargo, Correo, Dependencia, Genero, Salario, Estado, EPS, ARP) 
                         VALUES ('$numero_id', '$nombre_func', '$cargo', '$correo', '$dependencia', '$genero', '$salario', 'ACTIVO', '$EPS', '$ARP')";
     $prueba = mysqli_query($conectar, $registrar);
     if($prueba){

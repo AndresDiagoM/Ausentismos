@@ -105,7 +105,10 @@
                         $BUSCAR_CAMPOS[$field_name][] = " {$field_name} > '{$value}'";
 
                     }elseif($field_name=="Fecha_Fin"){
-                        $BUSCAR_CAMPOS[$field_name][] = " {$field_name} <= '{$value}'";
+                        // Si esta vacio el campo de fecha fin, entonces no se agrega a la consulta
+                        if($value!="" || !empty($value)){
+                            $BUSCAR_CAMPOS[$field_name][] = " {$field_name} < '{$value}'";                        
+                        }
 
                     }elseif($field_name=="Pagina"){
                         if($value=="" || $value=="<<"){

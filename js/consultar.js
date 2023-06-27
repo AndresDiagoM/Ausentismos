@@ -331,7 +331,7 @@ function fechas(){
     //var today =  +year + "-" + month + "-" + (day+1-day) ;  
     var inicio_año = year + "-" + "01" + "-" + "01";
     document.getElementById("fecha_inicio").value = inicio_año; 
-    document.getElementById("fecha_fin").value = tomorrow_string;
+    //document.getElementById("fecha_fin").value = tomorrow_string;
 
     //console.log(tomorrow);
     //convertir fecha tomorrow a string
